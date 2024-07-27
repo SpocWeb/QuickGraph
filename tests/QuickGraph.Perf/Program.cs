@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using QuickGraph.Algorithms.ShortestPath;
-using QuickGraph.Tests.Algorithms;
-using QuickGraph.Tests.Algorithms.MinimumSpanningTree;
 using QuickGraph.Serialization;
 using QuickGraph.Algorithms.Observers;
-using QuickGraph.Collections;
 using QuickGraph.Algorithms;
 using QuickGraph.Algorithms.Search;
 
@@ -24,7 +19,7 @@ namespace QuickGraph.Perf
             var distances = new Dictionary<Edge<string>, double>(g.EdgeCount);
             foreach (var e in g.Edges)
                 distances[e] = g.OutDegree(e.Source) + 1;
-            var root = Enumerable.First(g.Vertices);
+            var root = g.Vertices.First();
             foreach (var v in g.Vertices)
             {
                 FrontierDijkstra(g, distances, root, v);

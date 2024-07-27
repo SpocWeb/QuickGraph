@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>QuickGraphFS</RootNamespace>
     <AssemblyName>YC.QuickGraphFS</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <Name>QuickGraphFS</Name>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>

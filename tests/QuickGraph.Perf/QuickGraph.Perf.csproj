@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QuickGraph.Perf</RootNamespace>
     <AssemblyName>YC.QuickGraph.Perf</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -93,6 +93,9 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FSharp.Core.8.0.301\lib\netstandard2.0\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -109,16 +112,6 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\QuickGraph\QuickGraph.csproj">
-      <Project>{a9a5c115-0680-44b3-a87e-5ecf4c93814e}</Project>
-      <Name>QuickGraph</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\tests\QuickGraph.Tests\QuickGraph.Tests.csproj">
-      <Project>{61df76e1-de2b-4df1-ad5f-89939ab06693}</Project>
-      <Name>QuickGraph.Tests</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\QuickGraph.Tests\GraphML\g.10.0.graphml">
@@ -5240,6 +5233,7 @@
     <None Include="GraphML\DCT8.graphml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\QuickGraph.Tests\GraphML\repro12273.xml">
@@ -5268,6 +5262,16 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\QuickGraph\QuickGraph.csproj">
+      <Project>{A9A5C115-0680-44B3-A87E-5ECF4C93814E}</Project>
+      <Name>QuickGraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuickGraph.Tests\QuickGraph.Tests.csproj">
+      <Project>{61DF76E1-DE2B-4DF1-AD5F-89939AB06693}</Project>
+      <Name>QuickGraph.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

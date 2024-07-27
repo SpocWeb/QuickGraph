@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.FSharp.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Algorithms;
 
 namespace QuickGraph.Tests.Algorithms
@@ -48,7 +48,7 @@ namespace QuickGraph.Tests.Algorithms
             var g2 = new BidirectionalGraph<int, Edge<int>>();
 
             g1.AddVerticesAndEdgeRange(new[]
-            {new Edge<int>(1, 2), new Edge<int>(1, 3), new Edge<int>(2, 4), new Edge<int>(2, 5)});
+                {new Edge<int>(1, 2), new Edge<int>(1, 3), new Edge<int>(2, 4), new Edge<int>(2, 5)});
 
             g2.AddVerticesAndEdgeRange(new[] {new Edge<int>(1, 2), new Edge<int>(2, 3), new Edge<int>(2, 4)});
 
@@ -73,11 +73,11 @@ namespace QuickGraph.Tests.Algorithms
 
             var correctResult =
                 SetModule.Empty<Tuple<int, int>>()
-                .Add(Tuple.Create(1, 1))
-                .Add(Tuple.Create(2, 2))
-                .Add(Tuple.Create(3, 2))
-                .Add(Tuple.Create(4, 3))
-                .Add(Tuple.Create(5, 4));
+                    .Add(Tuple.Create(1, 1))
+                    .Add(Tuple.Create(2, 2))
+                    .Add(Tuple.Create(3, 2))
+                    .Add(Tuple.Create(4, 3))
+                    .Add(Tuple.Create(5, 4));
 
             Assert.AreEqual(res, correctResult);
         }

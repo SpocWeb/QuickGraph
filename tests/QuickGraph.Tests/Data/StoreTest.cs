@@ -13,7 +13,7 @@ namespace QuickGraph.Tests.Data
     public class StoreTest
     {
         [TestMethod]
-        public void DataSetTopologicalSortofTables()
+        public void DataSetTopologicalSortOfTables()
         {
             // typed dataset
             var store = new Store();

@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Algorithms;
-using System.Linq;
-using Microsoft.FSharp.Core;
-using System;
 
 namespace QuickGraph.Tests.Algorithms
 {
