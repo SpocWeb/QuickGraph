@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
-using QuickGraph.Contracts;
 using QuickGraph.Collections;
 
 namespace QuickGraph
@@ -111,7 +110,13 @@ namespace QuickGraph
         [Pure]
         public bool ContainsVertex(TVertex v)
         {
-            return this.vertexEdges.ContainsKey(v);
+            return TryGetEdges(v) != null;
+        }
+
+        public IEdgeList<TVertex, TEdge> TryGetEdges(TVertex v)
+        {
+            vertexEdges.TryGetValue(v, out var edges);
+            return edges;
         }
 
         public bool IsOutEdgesEmpty(TVertex v)
@@ -242,8 +247,7 @@ namespace QuickGraph
             TVertex target,
             out IEnumerable<TEdge> edges)
         {
-            IEdgeList<TVertex, TEdge> outEdges;
-            if (this.vertexEdges.TryGetValue(source, out outEdges))
+            if (this.vertexEdges.TryGetValue(source, out var outEdges))
             {
                 List<TEdge> list = new List<TEdge>(outEdges.Count);
                 foreach (var edge in outEdges)
@@ -264,13 +268,26 @@ namespace QuickGraph
         {
             if (this.ContainsVertex(v))
                 return false;
-
-            if (this.EdgeCapacity>0)
-                this.vertexEdges.Add(v, new EdgeList<TVertex,TEdge>(this.EdgeCapacity));
-            else
-                this.vertexEdges.Add(v, new EdgeList<TVertex, TEdge>());
-            this.OnVertexAdded(v);
+            AddEdges(v);
             return true;
+        }
+
+        protected IEdgeList<TVertex, TEdge> GetEdges(TVertex v)
+        {
+            var edges = this.TryGetEdges(v);
+            if (edges != null)
+                return edges;
+            return AddEdges(v);
+        }
+
+        protected EdgeList<TVertex, TEdge> AddEdges(TVertex v)
+        {
+            var edges = (this.EdgeCapacity > 0)
+                ? new EdgeList<TVertex,TEdge>(this.EdgeCapacity)
+                : new EdgeList<TVertex, TEdge>();
+            this.vertexEdges.Add(v, edges);
+            this.OnVertexAdded(v);
+            return edges;
         }
 
         public virtual int AddVertexRange(IEnumerable<TVertex> vertices)
@@ -393,7 +410,9 @@ namespace QuickGraph
                 if (this.ContainsEdge(e.Source, e.Target))
                     return false;
             }
-            this.vertexEdges[e.Source].Add(e);
+
+            var edges = GetEdges(e.Source);
+            edges.Add(e);
             this.edgeCount++;
 
             this.OnEdgeAdded(e);

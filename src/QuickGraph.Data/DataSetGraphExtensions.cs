@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
+﻿using System.Data;
 using System.Diagnostics.Contracts;
-using QuickGraph.Graphviz;
 
 namespace QuickGraph.Data
 {

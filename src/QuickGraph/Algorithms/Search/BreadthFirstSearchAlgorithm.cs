@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using QuickGraph.Collections;
-using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
 using System.Diagnostics.Contracts;
 

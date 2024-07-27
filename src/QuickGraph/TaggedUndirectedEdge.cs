@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Collections.Generic;
 
 namespace QuickGraph
 {
@@ -68,7 +66,7 @@ namespace QuickGraph
         /// </returns>
         public override string ToString()
         {
-            return String.Format(
+            return string.Format(
                 EdgeExtensions.TaggedUndirectedEdgeFormatString,
                 this.Source,
                 this.Target,

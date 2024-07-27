@@ -66,9 +66,9 @@ namespace QuickGraph.Petri
 		public override string ToString()
 		{
 			if (this.IsInputArc)
-				return String.Format("{0} -> {1}",this.place,this.transition);
+				return string.Format("{0} -> {1}",this.place,this.transition);
 			else
-				return String.Format("{0} -> {1}",this.transition,this.place);
+				return string.Format("{0} -> {1}",this.transition,this.place);
 		}
 	}
 }

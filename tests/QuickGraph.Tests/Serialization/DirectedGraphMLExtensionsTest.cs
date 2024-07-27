@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
-using QuickGraph.Serialization.DirectedGraphML;
-using System.Xml;
-using QuickGraph.Algorithms;
 using System.Diagnostics;
 
 namespace QuickGraph.Tests.Serialization

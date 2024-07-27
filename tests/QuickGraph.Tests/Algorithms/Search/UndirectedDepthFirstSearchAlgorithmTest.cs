@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
-using Microsoft.Pex.Framework;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Search
 {
@@ -36,8 +33,8 @@ namespace QuickGraph.Algorithms.Search
                 this.UndirectedDepthFirstSearch(g);
         }
 
-        [PexMethod]
-        public void UndirectedDepthFirstSearch<TVertex,TEdge>([PexAssumeNotNull]IUndirectedGraph<TVertex, TEdge> g)
+        
+        public void UndirectedDepthFirstSearch<TVertex,TEdge>(IUndirectedGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var parents = new Dictionary<TVertex, TVertex>();

@@ -1,14 +1,12 @@
-﻿using System;
-using Microsoft.Pex.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace QuickGraph
 {
-    [TestClass, PexClass(MaxRuns = 50)]
+    [TestClass]
     public partial class MutableVertexAndEdgeListGraphTest
     {
-        [PexMethod]
-        public void AddVertexOnly([PexAssumeNotNull]IMutableVertexAndEdgeListGraph<string, Edge<string>> g, string v)
+        
+        public void AddVertexOnly(IMutableVertexAndEdgeListGraph<string, Edge<string>> g, string v)
         {
             int vertexCount = g.VertexCount;
             g.AddVertex(v);
@@ -17,8 +15,8 @@ namespace QuickGraph
             VerifyCounts(g);
         }
 
-        [PexMethod]
-        public void AddAndRemoveVertex([PexAssumeNotNull]IMutableVertexAndEdgeListGraph<int, Edge<int>> g, int v)
+        
+        public void AddAndRemoveVertex(IMutableVertexAndEdgeListGraph<int, Edge<int>> g, int v)
         {
             int vertexCount = g.VertexCount;
             g.AddVertex(v);
@@ -30,8 +28,8 @@ namespace QuickGraph
             //VerifyCounts(g);
         }
 
-        [PexMethod]
-        public void AddVertexAddEdgesAndRemoveTargetVertex([PexAssumeNotNull]IMutableVertexAndEdgeListGraph<string, Edge<string>> g, string v1, string v2)
+        
+        public void AddVertexAddEdgesAndRemoveTargetVertex(IMutableVertexAndEdgeListGraph<string, Edge<string>> g, string v1, string v2)
         {
             int vertexCount = g.VertexCount;
             int edgeCount = g.EdgeCount;
@@ -53,8 +51,8 @@ namespace QuickGraph
             VerifyCounts(g);
         }
 
-        [PexMethod]
-        public void AddVertexAddEdgesAndRemoveSourceVertex([PexAssumeNotNull]IMutableVertexAndEdgeListGraph<string, Edge<string>> g, string v1, string v2)
+        
+        public void AddVertexAddEdgesAndRemoveSourceVertex(IMutableVertexAndEdgeListGraph<string, Edge<string>> g, string v1, string v2)
         {
             int vertexCount = g.VertexCount;
             int edgeCount = g.EdgeCount;

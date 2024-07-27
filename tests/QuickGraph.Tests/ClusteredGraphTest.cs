@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using QuickGraph;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace QuickGraph.Tests

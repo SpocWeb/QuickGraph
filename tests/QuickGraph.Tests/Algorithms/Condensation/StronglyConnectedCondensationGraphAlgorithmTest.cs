@@ -1,14 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using QuickGraph.Algorithms.Condensation;
-using Microsoft.Pex.Framework;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
 
 namespace QuickGraph.Algorithms.Condensation
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class StronglyConnectedCondensationGraphAlgorithmTest
     {
         [TestMethod]
@@ -18,9 +14,9 @@ namespace QuickGraph.Algorithms.Condensation
                 this.StronglyConnectedCondensate(g);
         }
 
-        [PexMethod]
+        
         public void StronglyConnectedCondensate<TVertex, TEdge>(
-            [PexAssumeNotNull]IVertexAndEdgeListGraph<TVertex, TEdge> g)
+            IVertexAndEdgeListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var cg = g.CondensateStronglyConnected<TVertex, TEdge, AdjacencyGraph<TVertex,TEdge>>();

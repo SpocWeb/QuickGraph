@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
-using QuickGraph.Collections;
-using QuickGraph.Predicates;
 using QuickGraph.Algorithms.Observers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

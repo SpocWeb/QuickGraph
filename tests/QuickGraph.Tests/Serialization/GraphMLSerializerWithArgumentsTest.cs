@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 using System.Xml;
-using Microsoft.Pex.Framework;
+
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace QuickGraph.Serialization
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class GraphMLSerializerWithArgumentsTest
     {
         public sealed class TestGraph

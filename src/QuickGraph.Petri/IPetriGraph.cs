@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QuickGraph.Petri
+﻿namespace QuickGraph.Petri
 {
     public interface IPetriGraph<Token> : IMutableBidirectionalGraph<IPetriVertex, IArc<Token>>
     {}

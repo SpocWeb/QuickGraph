@@ -1,5 +1,3 @@
-using System;
-
 namespace QuickGraph.Petri
 {
 	public interface IMutablePetriNet<Token> : IPetriNet<Token>

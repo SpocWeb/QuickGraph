@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using QuickGraph.Algorithms.ShortestPath;
 
 namespace QuickGraph.Algorithms.Observers
 {

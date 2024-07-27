@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Search;
-using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
 using System.Diagnostics.Contracts;
-using System.Diagnostics;
 using System.Linq;
 
 namespace QuickGraph.Algorithms.ConnectedComponents

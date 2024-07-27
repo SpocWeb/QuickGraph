@@ -30,7 +30,7 @@ namespace QuickGraph.Petri
 
 		public override string ToString()
 		{
-			return String.Format("T({0})",this.name);
+			return string.Format("T({0})",this.name);
 		}
 	}
 }

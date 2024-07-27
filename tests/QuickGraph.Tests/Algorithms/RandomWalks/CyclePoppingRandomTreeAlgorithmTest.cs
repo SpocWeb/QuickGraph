@@ -1,8 +1,6 @@
 ﻿using System;
-using QuickGraph.Algorithms.RandomWalks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
-using QuickGraph.Collections;
 
 namespace QuickGraph.Algorithms.RandomWalks
 {

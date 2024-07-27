@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using QuickGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace QuickGraph.Tests

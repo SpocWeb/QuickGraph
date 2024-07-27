@@ -61,7 +61,7 @@ namespace QuickGraph
         [Pure]
         public override string ToString()
         {
-            return String.Format("R({0})", this.OriginalEdge);
+            return string.Format("R({0})", this.OriginalEdge);
         }
 
         [Pure]

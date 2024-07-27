@@ -232,7 +232,7 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                string name = String.Empty;
+                string name = string.Empty;
                 if (!string.IsNullOrEmpty(this.firstName))
                 {
                     name += this.firstName;
@@ -255,7 +255,7 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                string fullName = String.Empty;
+                string fullName = string.Empty;
                 if (!string.IsNullOrEmpty(this.firstName))
                 {
                     fullName += this.firstName;
@@ -781,7 +781,7 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                string result = String.Empty;
+                string result = string.Empty;
 
                 if (columnName == "BirthDate")
                 {

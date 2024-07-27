@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
-using Microsoft.Pex.Framework;
+
 using QuickGraph.Algorithms.RankedShortestPath;
-using System.IO;
 using QuickGraph.Algorithms;
-using QuickGraph.Collections;
+using Shouldly;
 
 namespace QuickGraph.Tests.Algorithms.RankedShortestPath
 {
@@ -99,10 +97,10 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
             this.HoffmanPavleyRankedShortestPath(g, weights, 9, 1, 10);
         }
 
-        [PexMethod]
+        
         public IEnumerable<IEnumerable<TEdge>> HoffmanPavleyRankedShortestPath<TVertex,TEdge>(
-            [PexAssumeNotNull]IBidirectionalGraph<TVertex, TEdge> g,
-            [PexAssumeNotNull]Dictionary<TEdge, double> edgeWeights,
+            IBidirectionalGraph<TVertex, TEdge> g,
+            Dictionary<TEdge, double> edgeWeights,
             TVertex rootVertex,
             TVertex goalVertex,
             int pathCount
@@ -111,10 +109,12 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
         {
             //GraphConsoleSerializer.DisplayGraph((IEdgeListGraph<TVertex, TEdge>)g);
 
-            PexAssert.TrueForAll(g.Edges, edgeWeights.ContainsKey);
+            g.Edges.ShouldAllBe(edge => edgeWeights.ContainsKey(edge));
 
-            var target = new HoffmanPavleyRankedShortestPathAlgorithm<TVertex, TEdge>(g, e => edgeWeights[e]);
-            target.ShortestPathCount = pathCount;
+            var target = new HoffmanPavleyRankedShortestPathAlgorithm<TVertex, TEdge>(g, e => edgeWeights[e])
+                {
+                    ShortestPathCount = pathCount
+                };
             target.Compute(rootVertex, goalVertex);
 
             double lastWeight = double.MinValue;
@@ -135,7 +135,8 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
 
         [TestMethod]
         [WorkItem(12288)]
-        [Ignore]
+        [Ignore("Serializer is deprecated!")]
+        [Obsolete("Serializer is deprecated!", true)]
         [Description("binary data outdated")]
         public void Repro12288()
         {

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using QuickGraph.Algorithms.ShortestPath;
-using QuickGraph.Collections;
-using QuickGraph.Algorithms;
 using QuickGraph.Serialization;
 using QuickGraph.Algorithms.Observers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

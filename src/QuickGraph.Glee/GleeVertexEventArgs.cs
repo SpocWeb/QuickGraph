@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Glee.Drawing;
 using System.Diagnostics.Contracts;
 

@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Glee
 {
@@ -19,7 +16,7 @@ namespace QuickGraph.Glee
             :base(visitedGraph)
         {
             this.formatProvider = formatProvider;
-            if (String.IsNullOrEmpty(format))
+            if (string.IsNullOrEmpty(format))
                 this.format = "{0}";
             else
                 this.format = format;
@@ -37,7 +34,7 @@ namespace QuickGraph.Glee
 
         protected override string GetVertexId(TVertex v)
         {
-            return String.Format(this.formatProvider, this.format, v);
+            return string.Format(this.formatProvider, this.format, v);
         }
     }
 }

@@ -1,17 +1,14 @@
 using System;
-using System.Collections.Generic;
-using Microsoft.Pex.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QuickGraph.Serialization;
 using QuickGraph.Algorithms.TopologicalSort;
 
 namespace QuickGraph.Algorithms
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class UndirectedTopologicalSortAlgorithmTest
     {
-        [PexMethod]
-        public void Compute([PexAssumeNotNull]IUndirectedGraph<string, Edge<string>> g)
+        
+        public void Compute(IUndirectedGraph<string, Edge<string>> g)
         {
             UndirectedTopologicalSortAlgorithm<string, Edge<string>> topo =
                 new UndirectedTopologicalSortAlgorithm<string, Edge<string>>(g);

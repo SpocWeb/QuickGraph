@@ -1,13 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using System.IO;
-using System.Text;
-using System.Linq;
 using System.Reflection;
-using System.Xml.Serialization;
 using System.Reflection.Emit;
-using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.ComponentModel;
 
@@ -15,34 +10,34 @@ namespace QuickGraph.Serialization
 {
     public static class XmlWriterExtensions
     {
-        public static void WriteBooleanArray(XmlWriter xmlWriter, IList<Boolean> value)
+        public static void WriteBooleanArray(XmlWriter xmlWriter, IList<bool> value)
         {
-            WriteArray<Boolean>(xmlWriter, value);
+            WriteArray<bool>(xmlWriter, value);
         }
 
-        public static void WriteInt32Array(XmlWriter xmlWriter, IList<Int32> value)
+        public static void WriteInt32Array(XmlWriter xmlWriter, IList<int> value)
         {
-            WriteArray<Int32>(xmlWriter, value);
+            WriteArray<int>(xmlWriter, value);
         }
 
-        public static void WriteInt64Array(XmlWriter xmlWriter, IList<Int64> value)
+        public static void WriteInt64Array(XmlWriter xmlWriter, IList<long> value)
         {
-            WriteArray<Int64>(xmlWriter, value);
+            WriteArray<long>(xmlWriter, value);
         }
         
-        public static void WriteSingleArray(XmlWriter xmlWriter, IList<Single> value)
+        public static void WriteSingleArray(XmlWriter xmlWriter, IList<float> value)
         {
-            WriteArray<Single>(xmlWriter, value);
+            WriteArray<float>(xmlWriter, value);
         }
 
-        public static void WriteDoubleArray(XmlWriter xmlWriter, IList<Double> value)
+        public static void WriteDoubleArray(XmlWriter xmlWriter, IList<double> value)
         {
-            WriteArray<Double>(xmlWriter, value);
+            WriteArray<double>(xmlWriter, value);
         }
         
-        public static void WriteStringArray(XmlWriter xmlWriter, IList<String> value)
+        public static void WriteStringArray(XmlWriter xmlWriter, IList<string> value)
         {
-            WriteArray<String>(xmlWriter, value);
+            WriteArray<string>(xmlWriter, value);
         }
 
         /// <summary>
@@ -66,7 +61,7 @@ namespace QuickGraph.Serialization
             {
                 strArray[i] = value[i].ToString();
             }
-            var str = String.Join(" ", strArray);
+            var str = string.Join(" ", strArray);
             str += " ";
             xmlWriter.WriteString(str);
         }
@@ -117,7 +112,7 @@ namespace QuickGraph.Serialization
             return
                 reader.NodeType == XmlNodeType.Element &&
                 reader.Name == "data" &&
-                reader.NamespaceURI == GraphMLXmlResolver.GraphMLNamespace;
+                reader.NamespaceURI == GraphMlXmlResolver.GraphMlNamespace;
         }
 
         static class WriteDelegateCompiler
@@ -201,19 +196,19 @@ namespace QuickGraph.Serialization
                     WriteValueMethods.Add(typeof(string), writer.GetMethod("WriteString", new Type[] { typeof(string) }));
 
                     var writerExtensions = typeof(XmlWriterExtensions);
-                    WriteValueMethods.Add(typeof(Boolean[]), writerExtensions.GetMethod("WriteBooleanArray"));
-                    WriteValueMethods.Add(typeof(Int32[]), writerExtensions.GetMethod("WriteInt32Array"));
-                    WriteValueMethods.Add(typeof(Int64[]), writerExtensions.GetMethod("WriteInt64Array"));
-                    WriteValueMethods.Add(typeof(Single[]), writerExtensions.GetMethod("WriteSingleArray"));
-                    WriteValueMethods.Add(typeof(Double[]), writerExtensions.GetMethod("WriteDoubleArray"));
-                    WriteValueMethods.Add(typeof(String[]), writerExtensions.GetMethod("WriteStringArray"));
+                    WriteValueMethods.Add(typeof(bool[]), writerExtensions.GetMethod("WriteBooleanArray"));
+                    WriteValueMethods.Add(typeof(int[]), writerExtensions.GetMethod("WriteInt32Array"));
+                    WriteValueMethods.Add(typeof(long[]), writerExtensions.GetMethod("WriteInt64Array"));
+                    WriteValueMethods.Add(typeof(float[]), writerExtensions.GetMethod("WriteSingleArray"));
+                    WriteValueMethods.Add(typeof(double[]), writerExtensions.GetMethod("WriteDoubleArray"));
+                    WriteValueMethods.Add(typeof(string[]), writerExtensions.GetMethod("WriteStringArray"));
 
-                    WriteValueMethods.Add(typeof(IList<Boolean>), writerExtensions.GetMethod("WriteBooleanArray"));
-                    WriteValueMethods.Add(typeof(IList<Int32>), writerExtensions.GetMethod("WriteInt32Array"));
-                    WriteValueMethods.Add(typeof(IList<Int64>), writerExtensions.GetMethod("WriteInt64Array"));
-                    WriteValueMethods.Add(typeof(IList<Single>), writerExtensions.GetMethod("WriteSingleArray"));
-                    WriteValueMethods.Add(typeof(IList<Double>), writerExtensions.GetMethod("WriteDoubleArray"));
-                    WriteValueMethods.Add(typeof(IList<String>), writerExtensions.GetMethod("WriteStringArray"));
+                    WriteValueMethods.Add(typeof(IList<bool>), writerExtensions.GetMethod("WriteBooleanArray"));
+                    WriteValueMethods.Add(typeof(IList<int>), writerExtensions.GetMethod("WriteInt32Array"));
+                    WriteValueMethods.Add(typeof(IList<long>), writerExtensions.GetMethod("WriteInt64Array"));
+                    WriteValueMethods.Add(typeof(IList<float>), writerExtensions.GetMethod("WriteSingleArray"));
+                    WriteValueMethods.Add(typeof(IList<double>), writerExtensions.GetMethod("WriteDoubleArray"));
+                    WriteValueMethods.Add(typeof(IList<string>), writerExtensions.GetMethod("WriteStringArray"));
 
                 }
 
@@ -246,10 +241,10 @@ namespace QuickGraph.Serialization
 
                     var getMethod = property.GetGetMethod();
                     if (getMethod == null)
-                        throw new NotSupportedException(String.Format("Property {0}.{1} has not getter", property.DeclaringType, property.Name));
+                        throw new NotSupportedException(string.Format("Property {0}.{1} has not getter", property.DeclaringType, property.Name));
                     MethodInfo writeValueMethod;
                     if (!Metadata.TryGetWriteValueMethod(property.PropertyType, out writeValueMethod))
-                        throw new NotSupportedException(String.Format("Property {0}.{1} type is not supported", property.DeclaringType, property.Name));
+                        throw new NotSupportedException(string.Format("Property {0}.{1} type is not supported", property.DeclaringType, property.Name));
 
                     var defaultValueAttribute =
                         Attribute.GetCustomAttribute(property, typeof(DefaultValueAttribute)) 
@@ -296,7 +291,7 @@ namespace QuickGraph.Serialization
                     // writer.WriteStartElement("data")
                     gen.Emit(OpCodes.Ldarg_0);
                     gen.Emit(OpCodes.Ldstr, "data");
-                    gen.Emit(OpCodes.Ldstr, GraphMLXmlResolver.GraphMLNamespace);
+                    gen.Emit(OpCodes.Ldstr, GraphMlXmlResolver.GraphMlNamespace);
                     gen.EmitCall(OpCodes.Callvirt, Metadata.WriteStartElementMethod, null);
 
                     // writer.WriteStartAttribute("key");
@@ -409,7 +404,7 @@ namespace QuickGraph.Serialization
             {
                 if (this.Serializer.EmitDocumentDeclaration)
                     this.Writer.WriteStartDocument();
-                this.Writer.WriteStartElement("", "graphml", GraphMLXmlResolver.GraphMLNamespace);
+                this.Writer.WriteStartElement("", "graphml", GraphMlXmlResolver.GraphMlNamespace);
             }
 
             private void WriteFooter()
@@ -420,7 +415,7 @@ namespace QuickGraph.Serialization
 
             private void WriteGraphHeader()
             {
-                this.Writer.WriteStartElement("graph", GraphMLXmlResolver.GraphMLNamespace);
+                this.Writer.WriteStartElement("graph", GraphMlXmlResolver.GraphMlNamespace);
                 this.Writer.WriteAttributeString("id", "G");
                 this.Writer.WriteAttributeString("edgedefault",
                     (this.VisitedGraph.IsDirected) ? "directed" : "undirected"
@@ -567,7 +562,7 @@ namespace QuickGraph.Serialization
 
                     {
                         //<key id="d1" for="edge" attr.name="weight" attr.type="double"/>
-                        this.Writer.WriteStartElement("key", GraphMLXmlResolver.GraphMLNamespace);
+                        this.Writer.WriteStartElement("key", GraphMlXmlResolver.GraphMlNamespace);
                         this.Writer.WriteAttributeString("id", name);
                         this.Writer.WriteAttributeString("for", forNode);
                         this.Writer.WriteAttributeString("attr.name", name);
@@ -580,7 +575,7 @@ namespace QuickGraph.Serialization
                         }
                         catch (NotSupportedException)
                         {
-                            throw new NotSupportedException(String.Format("Property type {0}.{1} not supported by the GraphML schema", property.DeclaringType, property.Name));
+                            throw new NotSupportedException(string.Format("Property type {0}.{1} not supported by the GraphML schema", property.DeclaringType, property.Name));
                         }
 
                         this.Writer.WriteAttributeString("attr.type", typeCodeStr);
@@ -617,9 +612,9 @@ namespace QuickGraph.Serialization
                                 {
                                     throw new NotImplementedException("Default values for array types are not implemented");
                                 }
-                                throw new NotSupportedException(String.Format("Property type {0}.{1} not supported by the GraphML schema", property.DeclaringType, property.Name));
+                                throw new NotSupportedException(string.Format("Property type {0}.{1} not supported by the GraphML schema", property.DeclaringType, property.Name));
                             default:
-                                throw new NotSupportedException(String.Format("Property type {0}.{1} not supported by the GraphML schema", property.DeclaringType, property.Name));
+                                throw new NotSupportedException(string.Format("Property type {0}.{1} not supported by the GraphML schema", property.DeclaringType, property.Name));
                         }
                         this.Writer.WriteEndElement();
                     }
@@ -632,7 +627,7 @@ namespace QuickGraph.Serialization
             {
                 foreach (var v in this.VisitedGraph.Vertices)
                 {
-                    this.Writer.WriteStartElement("node", GraphMLXmlResolver.GraphMLNamespace);
+                    this.Writer.WriteStartElement("node", GraphMlXmlResolver.GraphMlNamespace);
                     this.Writer.WriteAttributeString("id", this.vertexIdentities(v));
                     GraphMLSerializer<TVertex, TEdge,TGraph>.WriteDelegateCompiler.VertexAttributesWriter(this.Writer, v);
                     this.Writer.WriteEndElement();
@@ -643,7 +638,7 @@ namespace QuickGraph.Serialization
             {
                 foreach (var e in this.VisitedGraph.Edges)
                 {
-                    this.Writer.WriteStartElement("edge", GraphMLXmlResolver.GraphMLNamespace);
+                    this.Writer.WriteStartElement("edge", GraphMlXmlResolver.GraphMlNamespace);
                     this.Writer.WriteAttributeString("id", this.edgeIdentities(e));
                     this.Writer.WriteAttributeString("source", this.vertexIdentities(e.Source));
                     this.Writer.WriteAttributeString("target", this.vertexIdentities(e.Target));

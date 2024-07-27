@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace QuickGraph.Algorithms.Search
+﻿namespace QuickGraph.Algorithms.Search
 {
 #if PARALLEL
     using System.Threading.Tasks;

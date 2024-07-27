@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using Microsoft.Pex.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
-using System.Diagnostics.Contracts;
-using System.Diagnostics;
-using QuickGraph.Algorithms.ConnectedComponents;
 
 namespace QuickGraph.Algorithms.ConnectedComponents
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class WeaklyConnectedComponentsAlgorithmTest
     {
         [TestMethod]
@@ -19,8 +13,8 @@ namespace QuickGraph.Algorithms.ConnectedComponents
                 this.Compute(g);
         }
 
-        [PexMethod]
-        public void Compute<TVertex,TEdge>([PexAssumeNotNull]IVertexListGraph<TVertex, TEdge> g)
+        
+        public void Compute<TVertex,TEdge>(IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var dfs = 

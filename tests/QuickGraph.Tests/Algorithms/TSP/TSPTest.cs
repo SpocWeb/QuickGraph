@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Pex.Framework;
-using QuickGraph.Serialization;
 using QuickGraph.Algorithms.TSP;
-using System.IO;
-using QuickGraph;
 using QuickGraph.Algorithms;
 using System.Diagnostics;
 
@@ -36,7 +32,7 @@ namespace QuickGraph.Tests.Algorithms.TSP
                 .AddUndirectedEdge("n3", "n5", 2)
                 .AddUndirectedEdge("n4", "n5", 1);
 
-            var tcp = new TSP<String, EquatableEdge<String>, BidirectionalGraph<String, EquatableEdge<String>>>(testCase.Graph, testCase.GetFuncWeights());
+            var tcp = new TSP<string, EquatableEdge<string>, BidirectionalGraph<string, EquatableEdge<string>>>(testCase.Graph, testCase.GetFuncWeights());
 
             tcp.Compute();
             Assert.AreEqual(tcp.BestCost, 25);
@@ -63,7 +59,7 @@ namespace QuickGraph.Tests.Algorithms.TSP
                 .AddUndirectedEdge("n3", "n6", 18)
                 .AddUndirectedEdge("n3", "n5", 21);
 
-            var tcp = new TSP<String, EquatableEdge<String>, BidirectionalGraph<String, EquatableEdge<String>>>(testCase.Graph, testCase.GetFuncWeights());
+            var tcp = new TSP<string, EquatableEdge<string>, BidirectionalGraph<string, EquatableEdge<string>>>(testCase.Graph, testCase.GetFuncWeights());
             tcp.Compute();
 
             Assert.AreEqual(tcp.BestCost, 47);
@@ -90,10 +86,10 @@ namespace QuickGraph.Tests.Algorithms.TSP
                 .AddDirectedEdge("n3", "n6", 18)
                 .AddDirectedEdge("n3", "n5", 21);
 
-            var tcp = new TSP<String, EquatableEdge<String>, BidirectionalGraph<String, EquatableEdge<String>>>(testCase.Graph, testCase.GetFuncWeights());
+            var tcp = new TSP<string, EquatableEdge<string>, BidirectionalGraph<string, EquatableEdge<string>>>(testCase.Graph, testCase.GetFuncWeights());
             tcp.Compute();
 
-            Assert.AreEqual(tcp.BestCost, Double.PositiveInfinity);
+            Assert.AreEqual(tcp.BestCost, double.PositiveInfinity);
             Assert.IsTrue(tcp.ResultPath == null);
         }
         [TestMethod]
@@ -118,7 +114,7 @@ namespace QuickGraph.Tests.Algorithms.TSP
                 .AddDirectedEdge("n3", "n5", 21)
                 .AddDirectedEdge("n6", "n1", 1);
 
-            var tcp = new TSP<String, EquatableEdge<String>, BidirectionalGraph<String, EquatableEdge<String>>>(testCase.Graph, testCase.GetFuncWeights());
+            var tcp = new TSP<string, EquatableEdge<string>, BidirectionalGraph<string, EquatableEdge<string>>>(testCase.Graph, testCase.GetFuncWeights());
             tcp.Compute();
 
             Assert.AreEqual(tcp.BestCost, 45);
@@ -135,7 +131,7 @@ namespace QuickGraph.Tests.Algorithms.TSP
                 for (int j = 0; j < repeat; ++j)
                 {
                     TestCase testCase = TestCase.completeGraphTestCase((i + 1) * 5, 100000000);
-                    var tcp = new TSP<String, EquatableEdge<String>, BidirectionalGraph<String, EquatableEdge<String>>>(testCase.Graph, testCase.GetFuncWeights());
+                    var tcp = new TSP<string, EquatableEdge<string>, BidirectionalGraph<string, EquatableEdge<string>>>(testCase.Graph, testCase.GetFuncWeights());
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
                     tcp.Compute();
@@ -149,17 +145,17 @@ namespace QuickGraph.Tests.Algorithms.TSP
 
     public class TestCase
     {
-        public BidirectionalGraph<String, EquatableEdge<String>> Graph = new BidirectionalGraph<String, EquatableEdge<String>>();
-        public Dictionary<EquatableEdge<String>, double> WeightsDict = new Dictionary<EquatableEdge<String>, double>();
+        public BidirectionalGraph<string, EquatableEdge<string>> Graph = new BidirectionalGraph<string, EquatableEdge<string>>();
+        public Dictionary<EquatableEdge<string>, double> WeightsDict = new Dictionary<EquatableEdge<string>, double>();
 
-        public TestCase AddVertex(String vertex)
+        public TestCase AddVertex(string vertex)
         {
             Graph.AddVertex(vertex);
 
             return this;
         }
 
-        public TestCase AddUndirectedEdge(String source, String target, double weight)
+        public TestCase AddUndirectedEdge(string source, string target, double weight)
         {
             AddDirectedEdge(source, target, weight);
             AddDirectedEdge(target, source, weight);
@@ -167,16 +163,16 @@ namespace QuickGraph.Tests.Algorithms.TSP
             return this;
         }
 
-        public TestCase AddDirectedEdge(String source, String target, double weight)
+        public TestCase AddDirectedEdge(string source, string target, double weight)
         {
-            var e = new EquatableEdge<String>(source, target);
+            var e = new EquatableEdge<string>(source, target);
             Graph.AddEdge(e);
             WeightsDict.Add(e, weight);
 
             return this;
         }
 
-        public Func<EquatableEdge<String>, double> GetFuncWeights()
+        public Func<EquatableEdge<string>, double> GetFuncWeights()
         {
             return (edge => WeightsDict[edge]);
         }

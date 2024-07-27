@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using QuickGraph.Algorithms.ShortestPath;
-using QuickGraph.Serialization;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms;
 using QuickGraph.Algorithms.Search;
+using QuickGraph.Serialization;
 
 namespace QuickGraph.Perf
 {

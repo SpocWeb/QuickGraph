@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using Microsoft.Pex.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
 using QuickGraph.Algorithms.ConnectedComponents;
 
 namespace QuickGraph.Algorithms
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class StronglyConnectedComponentAlgorithmTest
     {
         [TestMethod]
         public void EmptyGraph()
         {
             var g = new AdjacencyGraph<string, Edge<string>>(true);
-            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<String>>(g);
+            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<string>>(g);
             strong.Compute();
             Assert.AreEqual(0, strong.ComponentCount);
             checkStrong(strong);
@@ -25,7 +23,7 @@ namespace QuickGraph.Algorithms
         {
             AdjacencyGraph<string, Edge<string>> g = new AdjacencyGraph<string, Edge<string>>(true);
             g.AddVertex("test");
-            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<String>>(g);
+            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<string>>(g);
             strong.Compute();
             Assert.AreEqual(1, strong.ComponentCount);
 
@@ -38,7 +36,7 @@ namespace QuickGraph.Algorithms
             AdjacencyGraph<string, Edge<string>> g = new AdjacencyGraph<string, Edge<string>>(true);
             g.AddVertex("v1");
             g.AddVertex("v2");
-            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<String>>(g);
+            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<string>>(g);
             strong.Compute();
             Assert.AreEqual(2, strong.ComponentCount);
 
@@ -52,7 +50,7 @@ namespace QuickGraph.Algorithms
             g.AddVertex("v1");
             g.AddVertex("v2");
             g.AddEdge(new Edge<string>("v1", "v2"));
-            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<String>>(g);
+            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<string>>(g);
             strong.Compute();
             Assert.AreEqual(2, strong.ComponentCount);
 
@@ -68,7 +66,7 @@ namespace QuickGraph.Algorithms
             g.AddVertex("v2");
             g.AddEdge(new Edge<string>("v1", "v2"));
             g.AddEdge(new Edge<string>("v2", "v1"));
-            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<String>>(g);
+            var strong = new StronglyConnectedComponentsAlgorithm<string, Edge<string>>(g);
             strong.Compute();
             Assert.AreEqual(1, strong.ComponentCount);
 
@@ -82,8 +80,8 @@ namespace QuickGraph.Algorithms
                 this.Compute(g);
         }
 
-        [PexMethod]
-        public void Compute<TVertex,TEdge>([PexAssumeNotNull]AdjacencyGraph<TVertex, TEdge> g)
+        
+        public void Compute<TVertex,TEdge>(AdjacencyGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var strong = new StronglyConnectedComponentsAlgorithm<TVertex, TEdge>(g);

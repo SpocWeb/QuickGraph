@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using QuickGraph.Algorithms.ShortestPath;
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -60,7 +59,7 @@ namespace QuickGraph.Algorithms.Observers
             return new DisposableAction(() => algorithm.TreeEdge -= this.TreeEdge);
         }
 
-        private void TreeEdge(Object sender, UndirectedEdgeEventArgs<TVertex,TEdge> args)
+        private void TreeEdge(object sender, UndirectedEdgeEventArgs<TVertex,TEdge> args)
         {
             double sourceDistance;
             if (!this.distances.TryGetValue(args.Source, out sourceDistance))

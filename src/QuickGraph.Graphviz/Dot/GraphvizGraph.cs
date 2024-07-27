@@ -5,7 +5,6 @@ namespace QuickGraph.Graphviz.Dot
     using System.Collections.Generic;
     using System.Drawing;
     using System.Globalization;
-    using System.IO;
 
     public class GraphvizGraph
     {
@@ -51,35 +50,35 @@ namespace QuickGraph.Graphviz.Dot
             {
                 if (entry.Value is string)
                 {
-                    entries.Add(String.Format("{0}=\"{1}\"", entry.Key.ToString(), entry.Value.ToString()));
+                    entries.Add(string.Format("{0}=\"{1}\"", entry.Key.ToString(), entry.Value.ToString()));
                     continue;
                 }
                 if (entry.Value is float)
                 {
                     float floatValue = (float)entry.Value;
-                    entries.Add(String.Format("{0}={1}", entry.Key.ToString(), floatValue.ToString(CultureInfo.InvariantCulture)));
+                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), floatValue.ToString(CultureInfo.InvariantCulture)));
                     continue;
                 }
                 if (entry.Value is double)
                 {
                     double doubleValue = (double)entry.Value;
-                    entries.Add(String.Format("{0}={1}", entry.Key.ToString(), doubleValue.ToString(CultureInfo.InvariantCulture)));
+                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), doubleValue.ToString(CultureInfo.InvariantCulture)));
                     continue;
                 }
                 if (entry.Value is Color)
                 {
                     Color color = (Color) entry.Value;
-                    entries.Add(String.Format("{0}=\"#{1}{2}{3}{4}\"", new object[] { entry.Key.ToString(), color.R.ToString("x2").ToUpper(), color.G.ToString("x2").ToUpper(), color.B.ToString("x2").ToUpper(), color.A.ToString("x2").ToUpper() }));
+                    entries.Add(string.Format("{0}=\"#{1}{2}{3}{4}\"", new object[] { entry.Key.ToString(), color.R.ToString("x2").ToUpper(), color.G.ToString("x2").ToUpper(), color.B.ToString("x2").ToUpper(), color.A.ToString("x2").ToUpper() }));
                     continue;
                 }
                 if ((entry.Value is GraphvizRankDirection) || (entry.Value is GraphvizPageDirection))
                 {
-                    entries.Add(String.Format("{0}={1}", entry.Key.ToString(), entry.Value.ToString()));
+                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), entry.Value.ToString()));
                     continue;
                 }
-                entries.Add(String.Format(" {0}={1}", entry.Key.ToString(), entry.Value.ToString().ToLower()));
+                entries.Add(string.Format(" {0}={1}", entry.Key.ToString(), entry.Value.ToString().ToLower()));
             }
-            string result = String.Join(";", entries);
+            string result = string.Join(";", entries);
             result = entries.Count > 1 ? result + ";" : result;
 
             return result;

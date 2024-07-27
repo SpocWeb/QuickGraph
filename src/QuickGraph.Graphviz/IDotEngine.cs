@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using QuickGraph.Graphviz.Dot;
 using System.Diagnostics.Contracts;
 
@@ -22,9 +20,9 @@ namespace QuickGraph.Graphviz
         #region IDotEngine Members
         string IDotEngine.Run(GraphvizImageType imageType, string dot, string outputFileName)
         {
-            Contract.Requires(!String.IsNullOrEmpty(dot));
-            Contract.Requires(!String.IsNullOrEmpty(outputFileName));
-            Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<string>()));
+            Contract.Requires(!string.IsNullOrEmpty(dot));
+            Contract.Requires(!string.IsNullOrEmpty(outputFileName));
+            Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
 
             return null;
         }

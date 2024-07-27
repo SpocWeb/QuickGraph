@@ -1,7 +1,6 @@
 namespace QuickGraph.Graphviz.Dot
 {
     using System;
-    using System.Collections;
     using System.Drawing;
     using System.IO;
     using System.Collections.Generic;
@@ -179,7 +178,7 @@ namespace QuickGraph.Graphviz.Dot
             if (this.position.HasValue)
             {
                 var p = this.position.Value;
-                pairs["pos"] = String.Format("{0},{1}!", p.X, p.Y);
+                pairs["pos"] = string.Format("{0},{1}!", p.X, p.Y);
             }
             if (((this.Style == GraphvizVertexStyle.Diagonals) || (this.Shape == GraphvizVertexShape.MCircle)) || ((this.Shape == GraphvizVertexShape.MDiamond) || (this.Shape == GraphvizVertexShape.MSquare)))
             {

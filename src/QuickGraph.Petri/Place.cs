@@ -23,7 +23,7 @@ namespace QuickGraph.Petri
 			}
 		}
 
-		public String Name
+		public string Name
 		{
 			get
 			{
@@ -43,7 +43,7 @@ namespace QuickGraph.Petri
 		}
 		public override string ToString()
 		{
-			return String.Format("P({0}|{1})",this.name,this.marking.Count);
+			return string.Format("P({0}|{1})",this.name,this.marking.Count);
 		}
 	}
 }

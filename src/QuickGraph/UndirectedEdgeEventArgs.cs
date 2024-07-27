@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace QuickGraph
 {
@@ -36,7 +34,7 @@ namespace QuickGraph
     }
 
     public delegate void UndirectedEdgeAction<TVertex, TEdge>(
-        Object sender,
+        object sender,
         UndirectedEdgeEventArgs<TVertex, TEdge> e)
         where TEdge : IEdge<TVertex>;
 }

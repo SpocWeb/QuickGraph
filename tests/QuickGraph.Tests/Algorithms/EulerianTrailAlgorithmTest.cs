@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Pex.Framework;
+
 using QuickGraph.Serialization;
-using QuickGraph.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace QuickGraph.Algorithms
 {
@@ -11,7 +10,7 @@ namespace QuickGraph.Algorithms
     public class EulerianTrailAlgorithmTest
     {
         [TestMethod]
-        [Ignore]
+        //[Ignore]
         public void EulerianTrailAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
@@ -20,7 +19,7 @@ namespace QuickGraph.Algorithms
             }
         }
 
-        [PexMethod]
+        
         public void ComputeTrail<TVertex,TEdge>(
             IMutableVertexAndEdgeListGraph<TVertex,TEdge> g,
             Func<TVertex, TVertex, TEdge> edgeCreator)

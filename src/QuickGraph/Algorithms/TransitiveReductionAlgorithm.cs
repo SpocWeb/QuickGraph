@@ -6,8 +6,6 @@
 
 namespace QuickGraph.Algorithms
 {
-    using System.Collections.Generic;
-
     public class TransitiveReductionAlgorithm<TVertex, TEdge> : AlgorithmBase<BidirectionalGraph<TVertex, TEdge>> where TEdge : IEdge<TVertex>
     {
         public TransitiveReductionAlgorithm(

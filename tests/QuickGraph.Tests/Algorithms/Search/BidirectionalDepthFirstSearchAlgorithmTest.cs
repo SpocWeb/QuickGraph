@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Pex.Framework;
+
 using QuickGraph.Serialization;
 
 namespace QuickGraph.Algorithms.Search
@@ -16,7 +14,7 @@ namespace QuickGraph.Algorithms.Search
                 this.Compute(g);
         }
 
-        [PexMethod]
+        
         public void Compute<TVertex,TEdge>(IBidirectionalGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {

@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using QuickGraph.Unit;
-using QuickGraph.Heap;
 
 namespace QuickGraph.Tests.Heap
 {

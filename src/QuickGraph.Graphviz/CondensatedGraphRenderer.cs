@@ -22,7 +22,7 @@ namespace QuickGraph.Graphviz
         }
 
 
-        void Graphviz_FormatVertex(Object sender, FormatVertexEventArgs<TGraph> e)
+        void Graphviz_FormatVertex(object sender, FormatVertexEventArgs<TGraph> e)
         {
             StringWriter sw = new StringWriter();
             sw.WriteLine("{0}-{1}", e.Vertex.VertexCount, e.Vertex.EdgeCount);

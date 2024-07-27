@@ -345,6 +345,7 @@
     <Compile Include="IClusteredGraph.cs" />
     <Compile Include="ITermBidirectionalGraph.cs" />
     <Compile Include="NoPathFoundException.cs" />
+    <Compile Include="Serialization\XmlSchemaSetX.cs" />
     <Compile Include="TermBidirectionalGraph.cs" />
     <Compile Include="TermEdge.cs" />
     <Compile Include="DelegateBidirectionalIncidenceGraph.cs" />
@@ -476,7 +477,7 @@
     <Compile Include="QuickGraphResourceManager.cs" />
     <Compile Include="SReversedEdge.cs" />
     <Compile Include="ReversedBidirectionalListGraph.cs" />
-    <Compile Include="Serialization\GraphMLExtensions.cs" />
+    <Compile Include="Serialization\GraphMlExtensions.cs" />
     <Compile Include="Serialization\GraphMLSerializer.cs" />
     <Compile Include="Serialization\SerializationHelper.cs" />
     <Compile Include="Serialization\SerializerBase.cs" />

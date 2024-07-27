@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Pex.Framework;
+
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms;
 using QuickGraph.Serialization;
@@ -12,7 +11,7 @@ using QuickGraph.Algorithms.ShortestPath;
 
 namespace QuickGraph.Tests.Algorithms.Search
 {
-    [TestClass, PexClass(typeof(BestFirstFrontierSearchAlgorithm<,>))]
+    [TestClass]
     public partial class BestFirstFrontierSearchAlgorithmTest
     {
         [TestMethod]
@@ -36,9 +35,9 @@ namespace QuickGraph.Tests.Algorithms.Search
                 RunSearch(g);
         }
 
-        [PexMethod]
+        
         public void RunSearch<TVertex, TEdge>(
-            [PexAssumeNotNull]IBidirectionalGraph<TVertex, TEdge> g)
+            IBidirectionalGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             if (g.VertexCount == 0) return;
@@ -83,9 +82,9 @@ namespace QuickGraph.Tests.Algorithms.Search
             }
         }
         
-        [PexMethod]
+        
         public void CompareSearch<TVertex, TEdge>(
-            [PexAssumeNotNull]IBidirectionalGraph<TVertex, TEdge> g,
+            IBidirectionalGraph<TVertex, TEdge> g,
             TVertex root, TVertex target)
             where TEdge: IEdge<TVertex>
         {

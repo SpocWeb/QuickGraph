@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
@@ -9,7 +7,7 @@ using QuickGraph.Algorithms;
 
 namespace QuickGraph.Serialization
 {
-    public static class GraphMLExtensions
+    public static class GraphMlExtensions
     {
 
 #if !SILVERLIGHT
@@ -70,9 +68,6 @@ namespace QuickGraph.Serialization
             where TEdge : IEdge<TVertex>
             where TGraph : IEdgeListGraph<TVertex, TEdge>
         {
-            Contract.Requires(graph != null);
-            Contract.Requires(writer != null);
-
             var serializer = new GraphMLSerializer<TVertex, TEdge,TGraph>();
             serializer.Serialize(writer, graph, vertexIdentities, edgeIdentities);
         }
@@ -138,14 +133,16 @@ this
             Contract.Requires(vertexFactory != null);
             Contract.Requires(edgeFactory != null);
 
-            var settings = new XmlReaderSettings();
+            var settings = new XmlReaderSettings
+            {
+                DtdProcessing = DtdProcessing.Ignore, // settings.ProhibitDtd = false;
+                XmlResolver = GraphMlXmlResolver.GraphMlStructureXsdResolver,
 #if !SILVERLIGHT
-            //settings.DtdProcessing = DtdProcessing.Prohibit;// settings.ProhibitDtd = false;
-            settings.ValidationFlags = XmlSchemaValidationFlags.None;
+                ValidationFlags = XmlSchemaValidationFlags.None
 #endif
-            settings.XmlResolver = new GraphMLXmlResolver();
+            };
 
-            using(var xreader = XmlReader.Create(reader, settings))
+            using (var xreader = XmlReader.Create(reader, settings))
                 DeserializeFromGraphML<TVertex, TEdge,TGraph>(graph, xreader, vertexFactory, edgeFactory);
         }
 
@@ -188,10 +185,12 @@ this
             Contract.Requires(edgeFactory != null);
 
             var serializer = new GraphMLDeserializer<TVertex, TEdge,TGraph>();
-            var settings = new XmlReaderSettings();
-            // add graphxml schema
-            settings.ValidationType = ValidationType.Schema;
-            settings.XmlResolver = new GraphMLXmlResolver();
+            var settings = new XmlReaderSettings
+            {
+                ValidationType = ValidationType.None, //Schema,
+                XmlResolver = GraphMlXmlResolver.GraphMlStructureXsdResolver, 
+                Schemas = GraphMlXmlResolver.XmlSchemaSet,
+            };
             AddGraphMLSchema<TVertex, TEdge, TGraph>(settings);
 
             try
@@ -199,8 +198,8 @@ this
                 settings.ValidationEventHandler += ValidationEventHandler;
 
                 // reader and validating
-                using (var xreader = XmlReader.Create(reader, settings))
-                    serializer.Deserialize(xreader, graph, vertexFactory, edgeFactory);
+                using (var xReader = XmlReader.Create(reader, settings))
+                    serializer.Deserialize(xReader, graph, vertexFactory, edgeFactory);
             }
             finally
             {
@@ -212,9 +211,9 @@ this
             where TEdge : IEdge<TVertex>
             where TGraph : IEdgeListGraph<TVertex, TEdge>
         {
-            using (var xsdStream = typeof(GraphMLExtensions).Assembly.GetManifestResourceStream(typeof(GraphMLExtensions), "graphml.xsd"))
+            using (var xsdStream = typeof(GraphMlExtensions).Assembly.GetManifestResourceStream(typeof(GraphMlExtensions), "graphml.xsd"))
             using (var xsdReader = XmlReader.Create(xsdStream, settings))
-                settings.Schemas.Add(GraphMLXmlResolver.GraphMLNamespace, xsdReader);
+                settings.Schemas.Add(GraphMlXmlResolver.GraphMlNamespace, xsdReader);
         }
 
         static void ValidationEventHandler(object sender, System.Xml.Schema.ValidationEventArgs e)

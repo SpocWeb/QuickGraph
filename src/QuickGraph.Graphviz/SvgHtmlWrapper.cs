@@ -43,7 +43,7 @@ namespace QuickGraph.Graphviz
 
        public static string DumpHtml(Size size, string svgFileName)
        {
-           string outputFile = String.Format("{0}.html",svgFileName);
+           string outputFile = string.Format("{0}.html",svgFileName);
            using (StreamWriter html = new StreamWriter(outputFile))
            {
                html.WriteLine("<html>");

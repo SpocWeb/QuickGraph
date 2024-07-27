@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Drawing;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Graphviz;
-using System.Drawing;
 using System.Globalization;
 using System.Threading;
 

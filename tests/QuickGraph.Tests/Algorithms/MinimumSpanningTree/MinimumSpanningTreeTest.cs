@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Algorithms.MinimumSpanningTree;
 using QuickGraph.Algorithms.Observers;
-using Microsoft.Pex.Framework;
+
 using QuickGraph.Serialization;
-using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms;
-using System.Xml.Serialization;
-using System.IO;
-using System.Xml.XPath;
 using System.Xml;
-using QuickGraph;
 using QuickGraph.Collections;
 
 namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
@@ -180,8 +174,8 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
                 Kruskal(g);
         }
 
-        [PexMethod]
-        public void Kruskal<TVertex, TEdge>([PexAssumeNotNull]IUndirectedGraph<TVertex, TEdge> g)
+        
+        public void Kruskal<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>();
@@ -192,8 +186,8 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             AssertMinimumSpanningTree<TVertex, TEdge>(g, kruskal);
         }
 
-        [PexMethod]
-        public void MyPrim<TVertex, TEdge>([PexAssumeNotNull]IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
+        
+        public void MyPrim<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
             where TEdge : IEdge<TVertex>
         {
             var ed = g.Edges.ToList();
@@ -204,8 +198,8 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             var prim = new PrimMinimumSpanningTreeAlgorithm<TVertex, TEdge>(g, e => distances[e]);
             AssertMinimumSpanningTree<TVertex, TEdge>(g, prim);
         }
-        [PexMethod]
-        public void MyKruskal<TVertex, TEdge>([PexAssumeNotNull]IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
+        
+        public void MyKruskal<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
             where TEdge : IEdge<TVertex>
         {
             var ed = g.Edges.ToList();
@@ -224,8 +218,8 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
                 Prim(g);
         }
 
-        [PexMethod]
-        public void Prim<TVertex, TEdge>([PexAssumeNotNull]IUndirectedGraph<TVertex, TEdge> g)
+        
+        public void Prim<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
              where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>();
@@ -309,7 +303,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
                 this.CompareRoot(g);
         }
 
-        [PexMethod]
+        
         public double CompareRoot<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
@@ -327,8 +321,8 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             if (primCost != kruskalCost)
             {
                 GraphConsoleSerializer.DisplayGraph(g);
-                Console.WriteLine("prim: {0}", String.Join(", ", Array.ConvertAll(prim.ToArray(), e => e.ToString() + ':' + distances[e])));
-                Console.WriteLine("krus: {0}", String.Join(", ", Array.ConvertAll(kruskal.ToArray(), e => e.ToString() + ':' + distances[e])));
+                Console.WriteLine("prim: {0}", string.Join(", ", Array.ConvertAll(prim.ToArray(), e => e.ToString() + ':' + distances[e])));
+                Console.WriteLine("krus: {0}", string.Join(", ", Array.ConvertAll(kruskal.ToArray(), e => e.ToString() + ':' + distances[e])));
                 System.Console.Write("cost do not match");
             }
 

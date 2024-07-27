@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Diagnostics.Contracts;
@@ -22,7 +20,7 @@ namespace QuickGraph
         private static Image GetImage(string name)
         {
             Contract.Requires(name != null);
-            using (Stream stream = typeof(QuickGraphResourceManager).Assembly.GetManifestResourceStream(String.Format("QuickGraph.{0}.png", name)))
+            using (Stream stream = typeof(QuickGraphResourceManager).Assembly.GetManifestResourceStream(string.Format("QuickGraph.{0}.png", name)))
                 return Image.FromStream(stream);
         }
 

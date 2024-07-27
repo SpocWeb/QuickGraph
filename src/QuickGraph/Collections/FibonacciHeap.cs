@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 
@@ -248,7 +247,7 @@ namespace QuickGraph.Collections
                 var currentcell = stack.Pop();
                 lineNum = currentcell.Level;
                 if (lines.Count <= lineNum)
-                    lines.Add(String.Empty);
+                    lines.Add(string.Empty);
                 var currentLine = lines[lineNum];
                 currentLine = currentLine.PadRight(columnPosition, ' ');
                 var nodeString = currentcell.Node.Priority.ToString() + (currentcell.Node.Marked ? "*" : "") + " ";
@@ -265,7 +264,7 @@ namespace QuickGraph.Collections
                 }
                 lines[lineNum] = currentLine;
             }
-            return String.Join(Environment.NewLine, lines.ToArray());
+            return string.Join(Environment.NewLine, lines.ToArray());
         }
 
         public FibonacciHeapCell<TPriority, TValue> Enqueue(TPriority Priority, TValue Value)

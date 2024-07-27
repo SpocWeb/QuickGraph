@@ -13,6 +13,6 @@ namespace QuickGraph.Petri
 		/// <value>
 		/// A <see cref="String"/> representing the name of the node.
 		/// </value>
-		String Name {get;}
+		string Name {get;}
     }
 }

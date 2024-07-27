@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace QuickGraph.Glee
 {
     public sealed class GleeEdgeEventArgs<TVertex, TEdge> : EdgeEventArgs<TVertex, TEdge>

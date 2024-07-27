@@ -70,7 +70,7 @@ namespace QuickGraph
         /// </returns>
         public override string ToString()
         {
-            return String.Format(
+            return string.Format(
                 EdgeExtensions.TaggedUndirectedEdgeFormatString,
                 this.Source,
                 this.Target,

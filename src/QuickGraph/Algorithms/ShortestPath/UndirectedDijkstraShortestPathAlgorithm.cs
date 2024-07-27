@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using QuickGraph.Algorithms.Search;
-using QuickGraph.Algorithms.Observers;
 using QuickGraph.Collections;
 using QuickGraph.Algorithms.Services;
 using System.Diagnostics.Contracts;
@@ -66,7 +64,7 @@ namespace QuickGraph.Algorithms.ShortestPath
                 eh(this, new UndirectedEdgeEventArgs<TVertex, TEdge>(e, reversed));
         }
 
-        private void InternalTreeEdge(Object sender, UndirectedEdgeEventArgs<TVertex, TEdge> args)
+        private void InternalTreeEdge(object sender, UndirectedEdgeEventArgs<TVertex, TEdge> args)
         {
             Contract.Requires(args != null);
 
@@ -77,7 +75,7 @@ namespace QuickGraph.Algorithms.ShortestPath
                 this.OnEdgeNotRelaxed(args.Edge, args.Reversed);
         }
 
-        private void InternalGrayTarget(Object sender, UndirectedEdgeEventArgs<TVertex, TEdge> args)
+        private void InternalGrayTarget(object sender, UndirectedEdgeEventArgs<TVertex, TEdge> args)
         {
             Contract.Requires(args != null);
 

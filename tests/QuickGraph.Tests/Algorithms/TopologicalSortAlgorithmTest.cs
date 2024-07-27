@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.Pex.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
 using QuickGraph.Algorithms.TopologicalSort;
 using System.Text;
@@ -8,7 +6,7 @@ using System.Collections.Generic;
 
 namespace QuickGraph.Algorithms
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class TopologicalSortAlgorithmTest
     {
         [TestMethod]
@@ -18,9 +16,9 @@ namespace QuickGraph.Algorithms
                 this.SortCyclic(g);
         }
 
-        [PexMethod]
+        
         public void SortCyclic<TVertex,TEdge>(
-            [PexAssumeNotNull]IVertexListGraph<TVertex, TEdge> g)
+            IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var topo = new TopologicalSortAlgorithm<TVertex, TEdge>(g);

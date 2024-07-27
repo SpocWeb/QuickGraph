@@ -42,7 +42,7 @@ namespace QuickGraph.Glee
 
         protected virtual string GetVertexLabel(string id, TVertex v)
         {
-            return String.Format("{0}: {1}", id, v.ToString());
+            return string.Format("{0}: {1}", id, v.ToString());
         }
 
         protected override Microsoft.Glee.Drawing.Edge AddEdge(TEdge e)

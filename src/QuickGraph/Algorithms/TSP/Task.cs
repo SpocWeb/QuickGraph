@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickGraph.Algorithms.TSP
 {
@@ -14,13 +12,13 @@ namespace QuickGraph.Algorithms.TSP
 
         public double MinCost;
         public BidirectionalGraph<TVertex, TEdge> Path;
-        public String TaskName;
+        public string TaskName;
         public TaskPriority Priority;
 
         public Task(BidirectionalGraph<TVertex, TEdge> graph, Dictionary<EquatableEdge<TVertex>, double> weights, BidirectionalGraph<TVertex, TEdge> path, double cost) : this(graph, weights, path, cost, "Init")
         { }
 
-        public Task(BidirectionalGraph<TVertex, TEdge> graph, Dictionary<EquatableEdge<TVertex>, double> weights, BidirectionalGraph<TVertex, TEdge> path, double cost, String taskName)
+        public Task(BidirectionalGraph<TVertex, TEdge> graph, Dictionary<EquatableEdge<TVertex>, double> weights, BidirectionalGraph<TVertex, TEdge> path, double cost, string taskName)
         {
             TaskName = taskName;
             _graph = new BidirectionalGraph<TVertex, TEdge>(graph);
@@ -77,7 +75,7 @@ namespace QuickGraph.Algorithms.TSP
 
             if (_graph.IsEdgesEmpty)
             {
-                MinCost = Double.PositiveInfinity;
+                MinCost = double.PositiveInfinity;
                 return;
             }
 
@@ -136,7 +134,7 @@ namespace QuickGraph.Algorithms.TSP
             }
 
             TEdge edgeForSplit = null;
-            double max = Double.NegativeInfinity;
+            double max = double.NegativeInfinity;
             foreach (var edge in zeros)
             {
                 var v1 = edge.Source;
@@ -150,8 +148,8 @@ namespace QuickGraph.Algorithms.TSP
                 if (_graph.TryGetOutEdges(v1, out row) && _graph.TryGetInEdges(v2, out column))
                 {
                     maxCandidate = row.Where(e => !e.Target.Equals(v2)).DefaultIfEmpty(null).
-                        Min(e => e == null ? Double.PositiveInfinity : _weight[e])
-                        + column.Where(e => !e.Source.Equals(v1)).DefaultIfEmpty(null).Min(e => e == null ? Double.PositiveInfinity : _weight[e]);
+                        Min(e => e == null ? double.PositiveInfinity : _weight[e])
+                        + column.Where(e => !e.Source.Equals(v1)).DefaultIfEmpty(null).Min(e => e == null ? double.PositiveInfinity : _weight[e]);
 
                     if (maxCandidate > max)
                     {
@@ -164,7 +162,7 @@ namespace QuickGraph.Algorithms.TSP
         }
         private bool canSplit()
         {
-            return MinCost < Double.PositiveInfinity;
+            return MinCost < double.PositiveInfinity;
         }
         public bool Split(out Task<TVertex, TEdge> taskTake, out Task<TVertex, TEdge> taskDrop)
         {

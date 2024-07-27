@@ -31,12 +31,12 @@ namespace QuickGraph.Graphviz
 
         public GraphvizAlgorithm(
             IEdgeListGraph<TVertex, TEdge> g,
-            String path,
+            string path,
             GraphvizImageType imageType
             )
         {
             Contract.Requires(g != null);
-            Contract.Requires(!String.IsNullOrEmpty(path));
+            Contract.Requires(!string.IsNullOrEmpty(path));
 
             this.clusterCount = 0;
             this.visitedGraph = g;
@@ -187,13 +187,13 @@ namespace QuickGraph.Graphviz
             this.Output.Write(this.GraphFormat.Name);
             this.Output.WriteLine(" {");
 
-            String gf = GraphFormat.ToDot();
+            string gf = GraphFormat.ToDot();
             if (gf.Length > 0)
                 Output.WriteLine(gf);
-            String vf = CommonVertexFormat.ToDot();
+            string vf = CommonVertexFormat.ToDot();
             if (vf.Length > 0)
                 Output.WriteLine("node [{0}];", vf);
-            String ef = CommonEdgeFormat.ToDot();
+            string ef = CommonEdgeFormat.ToDot();
             if (ef.Length > 0)
                 Output.WriteLine("edge [{0}];", ef);
 
@@ -218,7 +218,7 @@ namespace QuickGraph.Graphviz
         public string Generate(IDotEngine dot, string outputFileName)
         {
             Contract.Requires(dot != null);
-            Contract.Requires(!String.IsNullOrEmpty(outputFileName));
+            Contract.Requires(!string.IsNullOrEmpty(outputFileName));
 
             var output = this.Generate();
             return dot.Run(ImageType, Output.ToString(), outputFileName);

@@ -9,7 +9,7 @@ namespace QuickGraph.Graphviz.Dot
 
         public GraphvizLayer(string name)
         {
-            Contract.Requires(!String.IsNullOrEmpty(name));
+            Contract.Requires(!string.IsNullOrEmpty(name));
             
             this.name = name;
         }
@@ -22,7 +22,7 @@ namespace QuickGraph.Graphviz.Dot
             }
             set
             {
-                Contract.Requires(!String.IsNullOrEmpty(value));
+                Contract.Requires(!string.IsNullOrEmpty(value));
                 this.name = value;
             }
         }

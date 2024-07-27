@@ -12,7 +12,7 @@ namespace QuickGraph.Algorithms.TSP
         private TasksManager<TVertex, TEdge> taskManager = new TasksManager<TVertex, TEdge>();
 
         public BidirectionalGraph<TVertex, TEdge> ResultPath;
-        public double BestCost = Double.PositiveInfinity;
+        public double BestCost = double.PositiveInfinity;
 
         public TSP(TGraph visitedGraph, Func<TEdge, double> weights)
             : base(null, visitedGraph, weights, DistanceRelaxers.ShortestDistance)

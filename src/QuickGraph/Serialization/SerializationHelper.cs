@@ -83,7 +83,7 @@ namespace QuickGraph.Serialization
             }
             else
             {
-                if (String.IsNullOrEmpty(attribute.AttributeName))
+                if (string.IsNullOrEmpty(attribute.AttributeName))
                     name = property.Name;
                 else
                     name = attribute.AttributeName;

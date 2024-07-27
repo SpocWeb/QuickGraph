@@ -44,7 +44,7 @@ namespace QuickGraph.Algorithms.Observers
             return new DisposableAction(() => algorithm.TreeEdge -= TreeEdge);
         }
 
-        void TreeEdge(Object sender, UndirectedEdgeEventArgs<TVertex,TEdge> e)
+        void TreeEdge(object sender, UndirectedEdgeEventArgs<TVertex,TEdge> e)
         {
             this.vertexPredecessors[e.Target] = e.Edge;
         }

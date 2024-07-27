@@ -2,7 +2,6 @@ namespace QuickGraph.Graphviz.Dot
 {
     using System;
     using System.IO;
-    using System.Reflection;
     using System.Collections.ObjectModel;
     using System.Diagnostics.Contracts;
 
@@ -57,7 +56,7 @@ namespace QuickGraph.Graphviz.Dot
             }
             set
             {
-                Contract.Requires(!String.IsNullOrEmpty(value));
+                Contract.Requires(!string.IsNullOrEmpty(value));
 
                 this.m_Separators = value;
             }

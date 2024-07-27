@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QuickGraph.Algorithms.GraphColoring.VertexColoring;
 using QuickGraph.Algorithms.ShortestPath.Yen;
 
 namespace QuickGraph.Tests.Algorithms.ShortestPath

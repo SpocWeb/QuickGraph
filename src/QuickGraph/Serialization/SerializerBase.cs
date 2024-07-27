@@ -1,6 +1,3 @@
-using System;
-using System.Xml;
-
 namespace QuickGraph.Serialization
 {
     public abstract class SerializerBase<TVertex,TEdge>

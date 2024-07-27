@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using QuickGraph.Collections;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Predicates;
 using QuickGraph.Algorithms.Search;

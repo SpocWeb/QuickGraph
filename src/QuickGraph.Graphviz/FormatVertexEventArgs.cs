@@ -1,6 +1,5 @@
 ﻿using System;
 using QuickGraph.Graphviz.Dot;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Graphviz
 {
@@ -28,6 +27,6 @@ namespace QuickGraph.Graphviz
     }
 
     public delegate void FormatVertexEventHandler<TVertex>(
-        Object sender,
+        object sender,
         FormatVertexEventArgs<TVertex> e);
 }

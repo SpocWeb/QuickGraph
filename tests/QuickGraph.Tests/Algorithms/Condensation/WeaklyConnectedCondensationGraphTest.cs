@@ -1,15 +1,12 @@
-using System;
-using System.IO;
 using System.Collections.Generic;
-using QuickGraph.Algorithms.Condensation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Pex.Framework;
+
 using QuickGraph.Serialization;
 
 namespace QuickGraph.Algorithms.Condensation
 {
     [TestClass]
-    [PexClass]
+    
     public class WeaklyConnectedCondensationGraphAlgorithmTest
     {
         [TestMethod]
@@ -19,7 +16,7 @@ namespace QuickGraph.Algorithms.Condensation
                 this.WeaklyConnectedCondensate(g);
         }
 
-        [PexMethod]
+        
         public void WeaklyConnectedCondensate<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {

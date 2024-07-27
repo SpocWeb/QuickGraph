@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Pex.Framework;
-using QuickGraph.Collections;
 using QuickGraph.Algorithms;
 using QuickGraph.Serialization;
 using QuickGraph.Algorithms.Observers;
@@ -40,11 +35,11 @@ namespace QuickGraph.Tests.Algorithms
             }
         }
 
-        [PexMethod]
+        
         public void TarjanOfflineLeastCommonAncestorAlgorithm<TVertex, TEdge>(
-            [PexAssumeNotNull]IVertexListGraph<TVertex, TEdge> g,
-            [PexAssumeNotNull]TVertex root,
-            [PexAssumeNotNull]SEquatableEdge<TVertex>[] pairs
+            IVertexListGraph<TVertex, TEdge> g,
+            TVertex root,
+            SEquatableEdge<TVertex>[] pairs
             )
             where TEdge : IEdge<TVertex>
         {

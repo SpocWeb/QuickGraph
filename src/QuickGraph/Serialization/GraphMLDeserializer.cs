@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using System.IO;
-using System.Text;
 using System.Reflection;
-using System.Xml.Serialization;
 using System.Reflection.Emit;
-using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.ComponentModel;
 
@@ -14,32 +10,32 @@ namespace QuickGraph.Serialization
 {
     public static class XmlReaderExtensions
     {
-        public static Boolean[] ReadElementContentAsBooleanArray(XmlReader xmlReader, string localName, string namespaceURI)
+        public static bool[] ReadElementContentAsBooleanArray(XmlReader xmlReader, string localName, string namespaceURI)
         {
             return ReadElementContentAsArray(xmlReader, localName, namespaceURI, s => Convert.ToBoolean(s));
         }
 
-        public static Int32[] ReadElementContentAsInt32Array(XmlReader xmlReader, string localName, string namespaceURI)
+        public static int[] ReadElementContentAsInt32Array(XmlReader xmlReader, string localName, string namespaceURI)
         {
             return ReadElementContentAsArray(xmlReader, localName, namespaceURI, s => Convert.ToInt32(s));
         }
 
-        public static Int64[] ReadElementContentAsInt64Array(XmlReader xmlReader, string localName, string namespaceURI)
+        public static long[] ReadElementContentAsInt64Array(XmlReader xmlReader, string localName, string namespaceURI)
         {
             return ReadElementContentAsArray(xmlReader, localName, namespaceURI, s => Convert.ToInt64(s));
         }
 
-        public static Single[] ReadElementContentAsSingleArray(XmlReader xmlReader, string localName, string namespaceURI)
+        public static float[] ReadElementContentAsSingleArray(XmlReader xmlReader, string localName, string namespaceURI)
         {
             return ReadElementContentAsArray(xmlReader, localName, namespaceURI, s => Convert.ToSingle(s));
         }
 
-        public static Double[] ReadElementContentAsDoubleArray(XmlReader xmlReader, string localName, string namespaceURI)
+        public static double[] ReadElementContentAsDoubleArray(XmlReader xmlReader, string localName, string namespaceURI)
         {
             return ReadElementContentAsArray(xmlReader, localName, namespaceURI, s => Convert.ToDouble(s));
         }
 
-        public static String[] ReadElementContentAsStringArray(XmlReader xmlReader, string localName, string namespaceURI)
+        public static string[] ReadElementContentAsStringArray(XmlReader xmlReader, string localName, string namespaceURI)
         {
             return ReadElementContentAsArray(xmlReader, localName, namespaceURI, s => s);
         }
@@ -207,19 +203,19 @@ namespace QuickGraph.Serialization
                     ReadContentMethods.Add(typeof(string), typeof(XmlReader).GetMethod("ReadElementContentAsString", new Type[] { typeof(string), typeof(string) }));
 
                     var readerExtensions = typeof(XmlReaderExtensions);
-                    ReadContentMethods.Add(typeof(Boolean[]), readerExtensions.GetMethod("ReadElementContentAsBooleanArray"));
-                    ReadContentMethods.Add(typeof(Int32[]), readerExtensions.GetMethod("ReadElementContentAsInt32Array"));
-                    ReadContentMethods.Add(typeof(Int64[]), readerExtensions.GetMethod("ReadElementContentAsInt64Array"));
-                    ReadContentMethods.Add(typeof(Single[]), readerExtensions.GetMethod("ReadElementContentAsSingleArray"));
-                    ReadContentMethods.Add(typeof(Double[]), readerExtensions.GetMethod("ReadElementContentAsDoubleArray"));
-                    ReadContentMethods.Add(typeof(String[]), readerExtensions.GetMethod("ReadElementContentAsStringArray"));
+                    ReadContentMethods.Add(typeof(bool[]), readerExtensions.GetMethod("ReadElementContentAsBooleanArray"));
+                    ReadContentMethods.Add(typeof(int[]), readerExtensions.GetMethod("ReadElementContentAsInt32Array"));
+                    ReadContentMethods.Add(typeof(long[]), readerExtensions.GetMethod("ReadElementContentAsInt64Array"));
+                    ReadContentMethods.Add(typeof(float[]), readerExtensions.GetMethod("ReadElementContentAsSingleArray"));
+                    ReadContentMethods.Add(typeof(double[]), readerExtensions.GetMethod("ReadElementContentAsDoubleArray"));
+                    ReadContentMethods.Add(typeof(string[]), readerExtensions.GetMethod("ReadElementContentAsStringArray"));
 
-                    ReadContentMethods.Add(typeof(IList<Boolean>), readerExtensions.GetMethod("ReadElementContentAsBooleanArray"));
-                    ReadContentMethods.Add(typeof(IList<Int32>), readerExtensions.GetMethod("ReadElementContentAsInt32Array"));
-                    ReadContentMethods.Add(typeof(IList<Int64>), readerExtensions.GetMethod("ReadElementContentAsInt64Array"));
-                    ReadContentMethods.Add(typeof(IList<Single>), readerExtensions.GetMethod("ReadElementContentAsSingleArray"));
-                    ReadContentMethods.Add(typeof(IList<Double>), readerExtensions.GetMethod("ReadElementContentAsDoubleArray"));
-                    ReadContentMethods.Add(typeof(IList<String>), readerExtensions.GetMethod("ReadElementContentAsStringArray"));
+                    ReadContentMethods.Add(typeof(IList<bool>), readerExtensions.GetMethod("ReadElementContentAsBooleanArray"));
+                    ReadContentMethods.Add(typeof(IList<int>), readerExtensions.GetMethod("ReadElementContentAsInt32Array"));
+                    ReadContentMethods.Add(typeof(IList<long>), readerExtensions.GetMethod("ReadElementContentAsInt64Array"));
+                    ReadContentMethods.Add(typeof(IList<float>), readerExtensions.GetMethod("ReadElementContentAsSingleArray"));
+                    ReadContentMethods.Add(typeof(IList<double>), readerExtensions.GetMethod("ReadElementContentAsDoubleArray"));
+                    ReadContentMethods.Add(typeof(IList<string>), readerExtensions.GetMethod("ReadElementContentAsStringArray"));
                 }
 
                 public static bool TryGetReadContentMethod(Type type, out MethodInfo method)
@@ -358,12 +354,12 @@ namespace QuickGraph.Serialization
                     // do our stuff
                     MethodInfo readMethod = null;
                     if (!Metadata.TryGetReadContentMethod(property.PropertyType, out readMethod))
-                        throw new ArgumentException(String.Format("Property {0} has a non-supported type", property.Name));
+                        throw new ArgumentException(string.Format("Property {0} has a non-supported type", property.Name));
 
                     // do we have a set method ?
                     var setMethod = property.GetSetMethod();
                     if (setMethod == null)
-                        throw new ArgumentException(String.Format("Property {0}.{1} has not set method", property.DeclaringType, property.Name));
+                        throw new ArgumentException(string.Format("Property {0}.{1} has not set method", property.DeclaringType, property.Name));
                     // reader.ReadXXX
                     gen.Emit(OpCodes.Ldarg_2); // element
                     gen.Emit(OpCodes.Ldarg_0); // reader
@@ -518,7 +514,7 @@ namespace QuickGraph.Serialization
                                 GraphMLDeserializer<TVertex, TEdge, TGraph>.ReadDelegateCompiler.GraphAttributesReader(this.Reader, this.graphMLNamespace, this.VisitedGraph);
                                 break;
                             default:
-                                throw new InvalidOperationException(String.Format("invalid reader position {0}:{1}", this.Reader.NamespaceURI, this.Reader.Name));
+                                throw new InvalidOperationException(string.Format("invalid reader position {0}:{1}", this.Reader.NamespaceURI, this.Reader.Name));
                         }
                     }
                 }

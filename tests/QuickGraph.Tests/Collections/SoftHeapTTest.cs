@@ -1,24 +1,21 @@
 ﻿// <copyright file="SoftHeapTKeyTValueTest.cs" company="MSIT">Copyright © MSIT 2008</copyright>
 using System;
-using System.Collections.Generic;
-using Microsoft.Pex.Framework;
-using Microsoft.Pex.Framework.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shouldly;
 
 namespace QuickGraph.Collections
 {
     /// <summary>This class contains parameterized unit tests for SoftHeap`2</summary>
     [TestClass]
-    [PexClass(typeof(SoftHeap<,>))]
-    [PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentException), AcceptExceptionSubtypes = true)]
-    [PexAllowedExceptionFromTypeUnderTest(typeof(InvalidOperationException))]
+    //[PexClass(typeof(SoftHeap<,>))]
+    //[PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentException), AcceptExceptionSubtypes = true)]
+    //[PexAllowedExceptionFromTypeUnderTest(typeof(InvalidOperationException))]
     public partial class SoftHeapTKeyTValueTest
     {
-        [PexMethod(MaxBranches = 160000)]
-        public void Add([PexAssumeNotNull]int[] keys)
+        public void Add(int[] keys)
         {
-            PexAssume.TrueForAll(keys, k => k < int.MaxValue);
-            PexAssume.IsTrue(keys.Length > 0);
+            keys.ShouldAllBe(k => k < int.MaxValue);
+            Assert.IsTrue(keys.Length > 0);
 
             var target = new SoftHeap<int, int>(1/4.0, int.MaxValue);
             Console.WriteLine("expected error rate: {0}", target.ErrorRate);

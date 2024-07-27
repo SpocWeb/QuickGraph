@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Algorithms;
-using Microsoft.Pex.Framework;
+
 using QuickGraph.Serialization;
 
 namespace QuickGraph.Tests.Algorithms
 {
-    [TestClass, PexClass(typeof(AlgorithmExtensions))]
+    [TestClass]
     public partial class AlgorithmExtensionsTest
     {
         [TestMethod]
@@ -35,7 +33,7 @@ namespace QuickGraph.Tests.Algorithms
                 Roots(g);
         }
 
-        [PexMethod]
+        
         public void Roots<T>(IVertexAndEdgeListGraph<T, Edge<T>> g)
         {
             var roots = new HashSet<T>(g.Roots());

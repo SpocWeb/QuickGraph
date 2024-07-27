@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using System.Diagnostics.Contracts;
 using QuickGraph.Algorithms;
@@ -44,7 +41,7 @@ this
             string fileName)
         {
             Contract.Requires(graph != null); 
-            Contract.Requires(!String.IsNullOrEmpty(fileName));
+            Contract.Requires(!string.IsNullOrEmpty(fileName));
             using (var stream = File.CreateText(fileName))
                 WriteXml(graph, stream);
         }

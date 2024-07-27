@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Pex.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using QuickGraph.Serialization;
-using QuickGraph.Collections;
 
 namespace QuickGraph.Algorithms.MaximumFlow
 {
@@ -16,7 +14,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
                 this.Augment(g);
         }
 
-        [PexMethod]
+        
         public void Augment(
             IMutableVertexAndEdgeListGraph<string, Edge<string>> g)
         {

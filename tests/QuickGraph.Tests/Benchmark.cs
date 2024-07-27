@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
@@ -100,7 +97,7 @@ namespace QuickGraph.Tests
 
         public Benchmark(string name)
         {
-            Contract.Requires(!String.IsNullOrEmpty(name));
+            Contract.Requires(!string.IsNullOrEmpty(name));
             this.name = name;
         }
 
@@ -121,7 +118,7 @@ namespace QuickGraph.Tests
 
         public override string ToString()
         {
-            return String.Format("{0}: {1}s, {2} samples", this.Name, this.Seconds, this.samples);
+            return string.Format("{0}: {1}s, {2} samples", this.Name, this.Seconds, this.samples);
         }
 
         public void Run(Action action)

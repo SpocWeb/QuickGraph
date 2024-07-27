@@ -1,33 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace QuickGraph
 {
     static class HashCodeHelper
     {
-        const Int32 FNV1_prime_32 = 16777619;
-        const Int32 FNV1_basis_32 = unchecked((int)2166136261);
-        const Int64 FNV1_prime_64 = 1099511628211;
-        const Int64 FNV1_basis_64 = unchecked((int)14695981039346656037);
+        const int FNV1_prime_32 = 16777619;
+        const int FNV1_basis_32 = unchecked((int)2166136261);
+        const long FNV1_prime_64 = 1099511628211;
+        const long FNV1_basis_64 = unchecked((int)14695981039346656037);
 
-        public static Int32 GetHashCode(Int64 x)
+        public static int GetHashCode(long x)
         {
-            return Combine((Int32)x, (Int32)(((UInt64)x) >> 32));
+            return Combine((int)x, (int)(((ulong)x) >> 32));
         }
 
-        private static Int32 Fold(Int32 hash, byte value)
+        private static int Fold(int hash, byte value)
         {
-            return (hash * FNV1_prime_32) ^ (Int32)value;
+            return (hash * FNV1_prime_32) ^ (int)value;
         }
 
-        private static Int32 Fold(Int32 hash, Int32 value)
+        private static int Fold(int hash, int value)
         {
             return Fold(Fold(Fold(Fold(hash,
                 (byte)value),
-                (byte)(((UInt32)value) >> 8)),
-                (byte)(((UInt32)value) >> 16)),
-                (byte)(((UInt32)value) >> 24));
+                (byte)(((uint)value) >> 8)),
+                (byte)(((uint)value) >> 16)),
+                (byte)(((uint)value) >> 24));
         }
 
         /// <summary>
@@ -36,7 +34,7 @@ namespace QuickGraph
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static Int32 Combine(Int32 x, Int32 y)
+        public static int Combine(int x, int y)
         {
             return Fold(Fold(FNV1_basis_32, x), y);
         }
@@ -48,7 +46,7 @@ namespace QuickGraph
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        public static Int32 Combine(Int32 x, Int32 y, Int32 z)
+        public static int Combine(int x, int y, int z)
         {
             return Fold(Fold(Fold(FNV1_basis_32, x), y), z);
         }
@@ -61,7 +59,7 @@ namespace QuickGraph
         /// <param name="z"></param>
         /// <param name="w"></param>
         /// <returns></returns>
-        public static Int32 Combine(Int32 x, Int32 y, Int32 z, Int32 w)
+        public static int Combine(int x, int y, int z, int w)
         {
             return Fold(Fold(Fold(Fold(FNV1_basis_32, x), y), z), w);
         }

@@ -1,5 +1,3 @@
-using System;
-
 namespace  QuickGraph.Petri
 {
 	/// <summary>

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using QuickGraph.Algorithms.Search;
-using QuickGraph.Algorithms.Observers;
-using QuickGraph.Collections;
 using QuickGraph.Algorithms.Services;
 using System.Diagnostics.Contracts;
 

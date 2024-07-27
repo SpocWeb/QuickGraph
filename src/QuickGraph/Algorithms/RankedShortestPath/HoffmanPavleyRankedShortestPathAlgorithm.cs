@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics.Contracts;
 using QuickGraph.Algorithms.Services;
 using QuickGraph.Algorithms.Observers;
@@ -340,7 +339,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
 
             public override string ToString()
             {
-                return String.Format("{0} at {1} {2}", this.Weight, this.DeviationEdge);
+                return string.Format("{0} at {1} {2}", this.Weight, this.DeviationEdge);
             }
         }
     }

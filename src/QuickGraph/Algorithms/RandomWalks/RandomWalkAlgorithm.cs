@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using QuickGraph.Algorithms.Observers;
 using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.RandomWalks

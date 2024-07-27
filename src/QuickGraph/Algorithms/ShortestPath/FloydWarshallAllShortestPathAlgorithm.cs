@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using QuickGraph.Algorithms.Services;
 using System.Diagnostics.Contracts;
 using QuickGraph.Collections;
@@ -68,9 +67,9 @@ namespace QuickGraph.Algorithms.ShortestPath
             public override string ToString()
             {
                 if (this.edgeStored)
-                    return String.Format("e:{0}-{1}", this.Distance, this._edge);
+                    return string.Format("e:{0}-{1}", this.Distance, this._edge);
                 else
-                    return String.Format("p:{0}-{1}", this.Distance, this._predecessor);
+                    return string.Format("p:{0}-{1}", this.Distance, this._predecessor);
             }
         }
 

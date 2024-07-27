@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Diagnostics.Contracts;
 using System.Xml;
 #if !SILVERLIGHT
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.XPath;
-using System.Xml.Serialization;
 #endif
 
 namespace QuickGraph.Serialization
@@ -18,10 +15,7 @@ namespace QuickGraph.Serialization
         /// <summary>
         /// Serializes the graph to the stream using the .Net serialization binary format.
         /// </summary>
-        /// <typeparam name="TVertex">type of the vertices</typeparam>
-        /// <typeparam name="TEdge">type of the edges</typeparam>
-        /// <param name="graph"></param>
-        /// <param name="stream"></param>
+        [Obsolete("Serializer is deprecated!", true)]
         public static void SerializeToBinary<TVertex, TEdge>(
 #if !NET20
             this 
@@ -43,11 +37,7 @@ namespace QuickGraph.Serialization
         /// <summary>
         /// Deserializes a graph instance from a stream that was serialized using the .Net serialization binary format.
         /// </summary>
-        /// <typeparam name="TVertex">type of the vertices</typeparam>
-        /// <typeparam name="TEdge">type of the edges</typeparam>
-        /// <typeparam name="TGraph"></typeparam>
-        /// <param name="stream"></param>
-        /// <returns></returns>
+        [Obsolete("Serializer is deprecated!", true)]
         public static TGraph DeserializeFromBinary<TVertex, TEdge, TGraph>(
 #if !NET20
             this 
@@ -331,9 +321,9 @@ this
             Contract.Requires(writer != null);
             Contract.Requires(vertexIdentity != null);
             Contract.Requires(edgeIdentity != null);
-            Contract.Requires(!String.IsNullOrEmpty(graphElementName));
-            Contract.Requires(!String.IsNullOrEmpty(vertexElementName));
-            Contract.Requires(!String.IsNullOrEmpty(edgeElementName));
+            Contract.Requires(!string.IsNullOrEmpty(graphElementName));
+            Contract.Requires(!string.IsNullOrEmpty(vertexElementName));
+            Contract.Requires(!string.IsNullOrEmpty(edgeElementName));
 
             writer.WriteStartElement(graphElementName, namespaceUri);
             if (writeGraphAttributes != null)

@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Observers;
-using Microsoft.Pex.Framework;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
 
 namespace QuickGraph.Algorithms.ShortestPath
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class UndirectedDijkstraShortestPathAlgorithmTest2
     {
         [TestMethod]
@@ -25,8 +24,8 @@ namespace QuickGraph.Algorithms.ShortestPath
             }
         }
 
-        [PexMethod]
-        public void UndirectedDijkstra<TVertex, TEdge>([PexAssumeNotNull]IUndirectedGraph<TVertex, TEdge> g, TVertex root)
+        
+        public void UndirectedDijkstra<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, TVertex root)
             where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>();

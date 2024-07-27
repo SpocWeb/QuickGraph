@@ -45,7 +45,7 @@ namespace QuickGraph.Algorithms
             get { return this.services; }
         }
 
-        public Object SyncRoot
+        public object SyncRoot
         {
             get { return this.syncRoot; }
         }

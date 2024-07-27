@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Pex.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
-using Microsoft.Pex.Framework.Settings;
 
 namespace QuickGraph.Tests
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class DegreeTest
     {
         [TestMethod]
@@ -18,9 +13,9 @@ namespace QuickGraph.Tests
                 this.DegreeSumEqualsTwiceEdgeCount(g);
         }
 
-        [PexMethod]
+        
         public void DegreeSumEqualsTwiceEdgeCount<TVertex, TEdge>(
-            [PexAssumeNotNull]IBidirectionalGraph<TVertex, TEdge> graph)
+            IBidirectionalGraph<TVertex, TEdge> graph)
             where TEdge : IEdge<TVertex>
         {
             int edgeCount = graph.EdgeCount;
@@ -38,9 +33,9 @@ namespace QuickGraph.Tests
                 this.InDegreeSumEqualsEdgeCount(g);
         }
 
-        [PexMethod]
+        
         public void InDegreeSumEqualsEdgeCount<TVertex,TEdge>(
-            [PexAssumeNotNull] IBidirectionalGraph<TVertex, TEdge> graph)
+             IBidirectionalGraph<TVertex, TEdge> graph)
             where TEdge : IEdge<TVertex>
         {
             int edgeCount = graph.EdgeCount;
@@ -58,9 +53,9 @@ namespace QuickGraph.Tests
                 this.OutDegreeSumEqualsEdgeCount(g);
         }
 
-        [PexMethod]
+        
         public void OutDegreeSumEqualsEdgeCount<TVertex,TEdge>(
-            [PexAssumeNotNull] IBidirectionalGraph<TVertex, TEdge> graph)
+             IBidirectionalGraph<TVertex, TEdge> graph)
             where TEdge : IEdge<TVertex>
         {
             int edgeCount = graph.EdgeCount;

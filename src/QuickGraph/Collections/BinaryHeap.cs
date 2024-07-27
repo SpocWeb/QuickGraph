@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Diagnostics.Contracts;
-using System.Linq;
 
 namespace QuickGraph.Collections
 {

@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using QuickGraph.Serialization;
+﻿using QuickGraph.Serialization;
 using System.IO;
 using QuickGraph.Contracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace QuickGraph.Tests.Serialization
 {
     [TestClass]
+    [Ignore("Serializer is deprecated!")]
     public class SystemSerializationTest
     {
         [TestMethod]
+        [Ignore("Serializer is deprecated!")]
+        [Obsolete("Serializer is deprecated!", true)]
         public void AdjacencyList()
         {
             var g = new AdjacencyGraph<int, Edge<int>>();
@@ -26,6 +26,8 @@ namespace QuickGraph.Tests.Serialization
         }
 
         [TestMethod]
+        [Ignore("Serializer is deprecated!")]
+        [Obsolete("Serializer is deprecated!", true)]
         public void BidirectionalList()
         {
             var g = new BidirectionalGraph<int, Edge<int>>();
@@ -39,6 +41,8 @@ namespace QuickGraph.Tests.Serialization
         }
 
         [TestMethod]
+        [Ignore("Serializer is deprecated!")]
+        [Obsolete("Serializer is deprecated!", true)]
         public void UndirectedGraph()
         {
             var g = new UndirectedGraph<int, Edge<int>>();
@@ -51,6 +55,7 @@ namespace QuickGraph.Tests.Serialization
             AssertGraphsEqual(g, result);
         }
 
+        [Obsolete("Serializer is deprecated!", true)]
         private static TGraph SerializeDeserialize<TVertex, TEdge, TGraph>(TGraph g)
             where TGraph : IGraph<TVertex, TEdge>
             where TEdge : IEdge<TVertex>

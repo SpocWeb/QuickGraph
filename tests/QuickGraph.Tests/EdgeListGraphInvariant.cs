@@ -1,14 +1,12 @@
-﻿using System;
-using Microsoft.Pex.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace QuickGraph
 {
-    [TestClass, PexClass]
+    [TestClass]
     public static class EdgeListGraphTest
     {
-        [PexMethod]
-        public static void Iteration<T,E>([PexAssumeUnderTest]IEdgeListGraph<T, E> g)
+        
+        public static void Iteration<T,E>(IEdgeListGraph<T, E> g)
             where E : IEdge<T>
         {
             int n = g.EdgeCount;
@@ -17,8 +15,8 @@ namespace QuickGraph
                 ++i;
         }
 
-        [PexMethod]
-        public static void Count<T,E>([PexAssumeUnderTest]IEdgeListGraph<T, E> g)
+        
+        public static void Count<T,E>(IEdgeListGraph<T, E> g)
             where E : IEdge<T>
         {
             int n = g.EdgeCount;

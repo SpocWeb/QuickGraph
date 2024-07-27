@@ -1,9 +1,5 @@
-﻿using QuickGraph.Algorithms.TSP;
-using QuickGraph.Collections;
+﻿using QuickGraph.Collections;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace QuickGraph.Algorithms.TSP
 {
@@ -20,7 +16,7 @@ namespace QuickGraph.Algorithms.TSP
 
         public void AddTask(Task<TVertex, TEdge> task)
         {
-            if (task.MinCost < Double.PositiveInfinity)
+            if (task.MinCost < double.PositiveInfinity)
             {
                 _tasksQueue.Add(task.Priority, task);
             }

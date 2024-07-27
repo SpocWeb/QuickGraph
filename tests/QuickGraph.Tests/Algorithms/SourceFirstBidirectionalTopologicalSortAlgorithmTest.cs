@@ -1,12 +1,10 @@
-﻿using System;
-using Microsoft.Pex.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
 using QuickGraph.Algorithms.TopologicalSort;
 
 namespace QuickGraph.Algorithms
 {
-    [TestClass, PexClass]
+    [TestClass]
     public partial class SourceFirstBidirectionalTopologicalSortAlgorithmTest
     {
         [TestMethod]
@@ -19,8 +17,8 @@ namespace QuickGraph.Algorithms
             }
         }
 
-        [PexMethod]
-        public void Sort<TVertex, TEdge>([PexAssumeNotNull]IBidirectionalGraph<TVertex, TEdge> g, TopologicalSortDirection direction)
+        
+        public void Sort<TVertex, TEdge>(IBidirectionalGraph<TVertex, TEdge> g, TopologicalSortDirection direction)
             where TEdge : IEdge<TVertex>
         {
             var topo = new SourceFirstBidirectionalTopologicalSortAlgorithm<TVertex, TEdge>(g, direction);

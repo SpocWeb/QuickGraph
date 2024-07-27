@@ -15,7 +15,7 @@ namespace QuickGraph
         public TaggedEdge(TVertex source, TVertex target, TTag tag)
             :base(source,target)
         {
-            Contract.Ensures(Object.Equals(this.Tag,tag));
+            Contract.Ensures(object.Equals(this.Tag,tag));
 
             this.tag = tag;
         }

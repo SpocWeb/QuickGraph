@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics.Contracts;
-using QuickGraph.Collections;
-using QuickGraph.Algorithms;
 using System.Linq;
 
 namespace QuickGraph

@@ -1,7 +1,5 @@
 ﻿using System;
-using QuickGraph;
 using QuickGraph.Graphviz.Dot;
-using System.Diagnostics.Contracts;
 
 
 namespace QuickGraph.Graphviz
@@ -40,7 +38,7 @@ namespace QuickGraph.Graphviz
     }
 
     public delegate void FormatClusterEventHandler<TVertex, TEdge>(
-        Object sender,
+        object sender,
         FormatClusterEventArgs<TVertex,TEdge> e)
         where TEdge: IEdge<TVertex>;
 

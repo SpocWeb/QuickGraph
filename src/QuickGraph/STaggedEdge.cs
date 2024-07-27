@@ -74,7 +74,7 @@ namespace QuickGraph
         /// </returns>
         public override string ToString()
         {
-            return String.Format("{0}->{1}:{2}", this.Source, this.Target, this.Tag);
+            return string.Format("{0}->{1}:{2}", this.Source, this.Target, this.Tag);
         }
 
     }

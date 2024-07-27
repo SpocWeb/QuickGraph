@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Glee.Drawing;
 using System.Diagnostics.Contracts;
 
