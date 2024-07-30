@@ -22,11 +22,14 @@ namespace QuickGraph.Serialization
         public static Stream Graphml_Structure_Xsd() => typeof(GraphExtensions).Assembly.GetManifestResourceStream(typeof(GraphMlExtensions), "graphml-structure.xsd");
         // ReSharper restore InconsistentNaming
 
-        public static readonly GraphMlXmlResolver GraphMlStructureXsdResolver
+        public static readonly GraphMlXmlResolver GraphMlStructureXsdResolver1
             = new GraphMlXmlResolver(new Uri(GraphmlStructureXsd), Graphml_Structure_Xsd);
 
-        public static readonly GraphMlXmlResolver GraphMlXsdResolver
-            = new GraphMlXmlResolver(new Uri(GraphmlXsdNs), Graphml_Xsd, GraphMlStructureXsdResolver);
+        public static readonly GraphMlXmlResolver GraphMlXsdResolver1
+            = new GraphMlXmlResolver(new Uri(GraphmlXsdNs), Graphml_Xsd, GraphMlStructureXsdResolver1);
+
+        public static readonly GraphMlXmlResolver GraphMlDtdResolver
+            = new GraphMlXmlResolver(new Uri(GraphMlDtdNs), GraphMl_Dtd, GraphMlXsdResolver1);
 
         public Uri Uri { get; }
         public Func<Stream> Stream { get; }
@@ -52,7 +55,7 @@ namespace QuickGraph.Serialization
 
         public static XmlSchemaSet XmlSchemaSet = new XmlSchemaSet
         {
-            XmlResolver = GraphMlXsdResolver
+            XmlResolver = GraphMlDtdResolver
         };// StreamsByName.AsXmlSchemaSet();
 
         static GraphMlXmlResolver()

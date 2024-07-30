@@ -3,23 +3,32 @@ using System.Collections.Generic;
 
 using QuickGraph.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using Shouldly;
 
 namespace QuickGraph.Algorithms
 {
     [TestClass]
     public class EulerianTrailAlgorithmTest
     {
-        [TestMethod]
+        //[TestMethod]
         //[Ignore]
         public void EulerianTrailAll()
         {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
+            IEnumerable<AdjacencyGraph<string, Edge<string>>> graphs = TestGraphFactory.GetAdjacencyGraphs();
+            foreach (var g in graphs)
             {
-                this.ComputeTrail(g, (s, t) => new Edge<string>(s, t));
+                ComputeTrail(g, (s, t) => new Edge<string>(s, t));
             }
         }
 
-        
+        [TestCaseSource(typeof(TestGraphFactory), nameof(TestGraphFactory.GetAdjacencyGraphs))]
+        public void EulerianTrail(AdjacencyGraph<string, Edge<string>> g)
+        {
+            Console.WriteLine(g.ToString());
+            ComputeTrail(g, (s, t) => new Edge<string>(s, t));
+        }
+
         public void ComputeTrail<TVertex,TEdge>(
             IMutableVertexAndEdgeListGraph<TVertex,TEdge> g,
             Func<TVertex, TVertex, TEdge> edgeCreator)
@@ -43,12 +52,12 @@ namespace QuickGraph.Algorithms
             var trails = trail.Trails();
             trail.RemoveTemporaryEdges();
 
-            //Console.WriteLine("trails: {0}", trails.Count);
+            Console.WriteLine("trails: {0}", trails.Count);
             //int index = 0;
             //foreach (var t in trails)
             //{
             //    Console.WriteLine("trail {0}", index++);
-            //    foreach (Edge<string> edge in t)
+            //    foreach (TEdge edge in t)
             //        Console.WriteLine("\t{0}", t);
             //}
 
@@ -58,7 +67,7 @@ namespace QuickGraph.Algorithms
                 edgeColors.Add(edge, GraphColor.White);
             foreach (var t in trails)
                 foreach (var edge in t)
-                    Assert.IsTrue(edgeColors.ContainsKey(edge));
+                    edgeColors.ContainsKey(edge).ShouldBeTrue();
 
         }
     }

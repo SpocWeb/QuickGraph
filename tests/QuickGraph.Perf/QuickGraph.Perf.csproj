@@ -2661,10 +2661,6 @@
       <Link>GraphML\g.25.0.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.25.1.graphml">
-      <Link>GraphML\g.25.1.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.25.12.graphml">
       <Link>GraphML\g.25.12.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -3031,10 +3027,6 @@
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.29.14.graphml">
       <Link>GraphML\g.29.14.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.29.15.graphml">
-      <Link>GraphML\g.29.15.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.29.16.graphml">
@@ -4449,10 +4441,6 @@
       <Link>GraphML\g.56.7.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.56.9.graphml">
-      <Link>GraphML\g.56.9.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.57.0.graphml">
       <Link>GraphML\g.57.0.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -4485,14 +4473,6 @@
       <Link>GraphML\g.57.23.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.57.26.graphml">
-      <Link>GraphML\g.57.26.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.57.27.graphml">
-      <Link>GraphML\g.57.27.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.57.28.graphml">
       <Link>GraphML\g.57.28.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -4511,10 +4491,6 @@
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.57.8.graphml">
       <Link>GraphML\g.57.8.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.57.9.graphml">
-      <Link>GraphML\g.57.9.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.58.0.graphml">
@@ -4689,10 +4665,6 @@
       <Link>GraphML\g.63.18.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.63.22.graphml">
-      <Link>GraphML\g.63.22.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.63.8.graphml">
       <Link>GraphML\g.63.8.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -4735,10 +4707,6 @@
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.65.1.graphml">
       <Link>GraphML\g.65.1.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.66.3.graphml">
-      <Link>GraphML\g.66.3.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.66.6.graphml">
@@ -4949,10 +4917,6 @@
       <Link>GraphML\g.80.4.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.80.5.graphml">
-      <Link>GraphML\g.80.5.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.80.6.graphml">
       <Link>GraphML\g.80.6.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -5041,10 +5005,6 @@
       <Link>GraphML\g.86.4.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.86.5.graphml">
-      <Link>GraphML\g.86.5.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.87.0.graphml">
       <Link>GraphML\g.87.0.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -5101,10 +5061,6 @@
       <Link>GraphML\g.91.1.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.92.0.graphml">
-      <Link>GraphML\g.92.0.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.92.1.graphml">
       <Link>GraphML\g.92.1.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -5131,14 +5087,6 @@
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.94.3.graphml">
       <Link>GraphML\g.94.3.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.95.0.graphml">
-      <Link>GraphML\g.95.0.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.95.1.graphml">
-      <Link>GraphML\g.95.1.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.95.2.graphml">
@@ -5173,10 +5121,6 @@
       <Link>GraphML\g.97.1.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\QuickGraph.Tests\GraphML\g.99.0.graphml">
-      <Link>GraphML\g.99.0.graphml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\QuickGraph.Tests\GraphML\g.99.1.graphml">
       <Link>GraphML\g.99.1.graphml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -5187,10 +5131,6 @@
     </None>
     <None Include="..\QuickGraph.Tests\GraphML\Graph.log">
       <Link>GraphML\Graph.log</Link>
-    </None>
-    <None Include="..\QuickGraph.Tests\GraphML\repro12359.graphml">
-      <Link>GraphML\repro12359.graphml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="GraphML\DCT8.graphml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -136,7 +136,7 @@ this
             var settings = new XmlReaderSettings
             {
                 DtdProcessing = DtdProcessing.Ignore, // settings.ProhibitDtd = false;
-                XmlResolver = GraphMlXmlResolver.GraphMlStructureXsdResolver,
+                XmlResolver = GraphMlXmlResolver.GraphMlDtdResolver,
 #if !SILVERLIGHT
                 ValidationFlags = XmlSchemaValidationFlags.None
 #endif
@@ -188,7 +188,7 @@ this
             var settings = new XmlReaderSettings
             {
                 ValidationType = ValidationType.None, //Schema,
-                XmlResolver = GraphMlXmlResolver.GraphMlStructureXsdResolver, 
+                XmlResolver = GraphMlXmlResolver.GraphMlDtdResolver, 
                 Schemas = GraphMlXmlResolver.XmlSchemaSet,
             };
             AddGraphMLSchema<TVertex, TEdge, TGraph>(settings);

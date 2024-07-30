@@ -4,7 +4,8 @@ using System.IO;
 using System.Xml;
 
 using System.Xml.XPath;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace QuickGraph.Serialization
 {
@@ -90,13 +91,11 @@ namespace QuickGraph.Serialization
         }
     }
 
-    [TestClass]
     public partial class GraphMLSerializerIntegrationTest
     {
-        [TestMethod]
-        public void DeserializeFromGraphMLNorth()
+        [TestCaseSource(typeof(TestGraphFactory), nameof(TestGraphFactory.GetFileNames))]
+        public void DeserializeFromGraphMLNorth(string graphmlFile)
         {
-            foreach (var graphmlFile in TestGraphFactory.GetFileNames())
             {
                 Console.Write(graphmlFile);
                 var g = new AdjacencyGraph<string, Edge<string>>();
@@ -116,7 +115,7 @@ namespace QuickGraph.Serialization
 
                 // check all nodes are loaded
                 var settings = new XmlReaderSettings();
-                settings.XmlResolver = GraphMlXmlResolver.GraphMlStructureXsdResolver;
+                settings.XmlResolver = GraphMlXmlResolver.GraphMlDtdResolver;
                 settings.ProhibitDtd = false;
                 settings.ValidationFlags = System.Xml.Schema.XmlSchemaValidationFlags.None;
                 using(var xreader = XmlReader.Create(graphmlFile, settings))
