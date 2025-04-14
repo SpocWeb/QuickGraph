@@ -46,10 +46,10 @@ namespace QuickGraph
         [Pure]
         public override bool Equals(object obj)
         {
-            if (!(obj is SReversedEdge<TVertex, TEdge>))
+            if (!(obj is SReversedEdge<TVertex, TEdge> edge))
                 return false;
 
-            return Equals((SReversedEdge<TVertex, TEdge>)obj);
+            return Equals(edge);
         }
 
         [Pure]

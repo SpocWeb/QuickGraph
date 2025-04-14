@@ -11,10 +11,10 @@ namespace QuickGraph.Graphviz.Dot
         {
             Contract.Requires(text != null);
 
-            return this.escapeRegExp.Replace(text, new System.Text.RegularExpressions.MatchEvaluator(this.MatchEvaluator));
+            return this.escapeRegExp.Replace(text, new System.Text.RegularExpressions.MatchEvaluator(MatchEvaluator));
         }
 
-        public string MatchEvaluator(Match m)
+        public static string MatchEvaluator(Match m)
         {
             if (m.Groups["Common"] != null)
             {

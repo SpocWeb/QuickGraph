@@ -42,7 +42,7 @@ namespace QuickGraph.Tests.Algorithms.GraphColoring
             Assert.AreEqual(1, result[4]); // 4 vertex = 1 color
         }
 
-        private InputModel<char, Edge<char>> GenerateInputSimple()
+        private static InputModel<char, Edge<char>> GenerateInputSimple()
         {
             var g = new UndirectedGraph<char, Edge<char>>(true);
 
@@ -100,7 +100,7 @@ namespace QuickGraph.Tests.Algorithms.GraphColoring
             Assert.AreEqual(0, result[4]); // 4 vertex = 0 color 
         }
 
-        private InputModel<char, Edge<char>> GenerateInputEmpty()
+        private static InputModel<char, Edge<char>> GenerateInputEmpty()
         {
             var g = new UndirectedGraph<char, Edge<char>>(true);
 
@@ -152,7 +152,7 @@ namespace QuickGraph.Tests.Algorithms.GraphColoring
             Assert.AreEqual(5, result[5]); // 5 vertex = 5 color
         }
 
-        private InputModel<char, Edge<char>> GenerateInputFull()
+        private static InputModel<char, Edge<char>> GenerateInputFull()
         {
             var g = new UndirectedGraph<char, Edge<char>>(true);
 
@@ -226,7 +226,7 @@ namespace QuickGraph.Tests.Algorithms.GraphColoring
             Assert.AreEqual(1, result[6]); // 6 vertex = 1 color
         }
 
-        private InputModel<char, Edge<char>> GenerateInputBipartite()
+        private static InputModel<char, Edge<char>> GenerateInputBipartite()
         {
             var g = new UndirectedGraph<char, Edge<char>>(true);
 
@@ -294,7 +294,7 @@ namespace QuickGraph.Tests.Algorithms.GraphColoring
             Assert.AreEqual(1, result[7]); // 7 vertex = 1 color
         }
 
-        private InputModel<char, Edge<char>> GenerateInputTest()
+        private static InputModel<char, Edge<char>> GenerateInputTest()
         {
             var g = new UndirectedGraph<char, Edge<char>>(true);
 

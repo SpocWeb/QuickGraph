@@ -627,7 +627,7 @@ namespace QuickGraph.Serialization
             Assert.IsTrue(v.IntIList.Equals1(sv.IntIList));
         }
 
-        private TestGraph VerifySerialization(TestGraph g)
+        private static TestGraph VerifySerialization(TestGraph g)
         {
             string xml;
             using (var writer = new StringWriter())

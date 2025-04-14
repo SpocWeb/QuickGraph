@@ -9,7 +9,7 @@ namespace QuickGraph.Tests.Algorithms
     [TestClass]
     public class DomaticPartitionTest
     {
-        public HashSet<HashSet<int>> GetMaxDomaticPartition(int[] vertices, Tuple<int, int>[] edges)
+        public static HashSet<HashSet<int>> GetMaxDomaticPartition(int[] vertices, Tuple<int, int>[] edges)
         {
             var graph = new UndirectedGraph<int, Edge<int>>();
             graph.AddVertexRange(vertices);
@@ -31,7 +31,7 @@ namespace QuickGraph.Tests.Algorithms
             return hashsetPartition;
         }
 
-        public bool SetOfSetsCheckEqual(HashSet<HashSet<int>> set, List<HashSet<int>> tocompare)
+        public static bool SetOfSetsCheckEqual(HashSet<HashSet<int>> set, List<HashSet<int>> tocompare)
         {
             foreach (var subset in set)
             {
@@ -53,7 +53,7 @@ namespace QuickGraph.Tests.Algorithms
             return tocompare.Count == 0;
         }
 
-        public Tuple<int[], Tuple<int, int>[]> GenerateGraph(int vertexCount)
+        public static Tuple<int[], Tuple<int, int>[]> GenerateGraph(int vertexCount)
         {
             int[] vertices = Enumerable.Range(1, vertexCount + 1).ToArray();
 

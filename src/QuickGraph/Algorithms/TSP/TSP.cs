@@ -22,7 +22,7 @@ namespace QuickGraph.Algorithms.TSP
             taskManager.AddTask(new Task<TVertex, TEdge>(visitedGraph, buildWeightsDict(visitedGraph, weights), path, 0));
         }
 
-        private Dictionary<EquatableEdge<TVertex>, double> buildWeightsDict(TGraph visitedGraph, Func<TEdge, double> weights)
+        private static Dictionary<EquatableEdge<TVertex>, double> buildWeightsDict(TGraph visitedGraph, Func<TEdge, double> weights)
         {
             var dict = new Dictionary<EquatableEdge<TVertex>, double>();
             foreach (var edge in visitedGraph.Edges) {

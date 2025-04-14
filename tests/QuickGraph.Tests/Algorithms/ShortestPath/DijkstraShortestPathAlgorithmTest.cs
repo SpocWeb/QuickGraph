@@ -27,11 +27,11 @@ namespace QuickGraph.Algorithms.ShortestPath
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
                 foreach (var root in g.Vertices)
-                    this.Dijkstra(g, root);
+                    Dijkstra(g, root);
         }
 
         
-        public void Dijkstra<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g, TVertex root)
+        public static void Dijkstra<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g, TVertex root)
             where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>(g.EdgeCount);

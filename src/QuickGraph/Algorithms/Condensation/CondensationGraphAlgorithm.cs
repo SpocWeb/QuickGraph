@@ -138,7 +138,7 @@ namespace QuickGraph.Algorithms.Condensation
 
             public override bool Equals(object obj)
             {
-                return obj is EdgeKey && Equals((EdgeKey)obj);
+                return obj is EdgeKey key && Equals(key);
             }
 
             public override int GetHashCode()

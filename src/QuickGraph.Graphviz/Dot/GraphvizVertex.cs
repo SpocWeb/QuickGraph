@@ -6,6 +6,63 @@ namespace QuickGraph.Graphviz.Dot
     using System.Collections.Generic;
     using System.Globalization;
 
+    public static class GraphvizVertexX
+    {
+        public static string GenerateDotForVertex(this Dictionary<string, object> pairs)
+        {
+            bool flag = false;
+            var writer = new StringWriter();
+            foreach (var entry in pairs)
+            {
+                if (flag)
+                {
+                    writer.Write(", ");
+                }
+                else
+                {
+                    flag = true;
+                }
+                if (entry.Value is string)
+                {
+                    writer.Write("{0}=\"{1}\"", entry.Key, entry.Value.ToString());
+                    continue;
+                }
+                if (entry.Value is float floatValue)
+                {
+                    writer.Write("{0}={1}", entry.Key, floatValue.ToString(CultureInfo.InvariantCulture));
+                    continue;
+                }
+                if (entry.Value is double doubleValue)
+                {
+                    writer.Write("{0}={1}", entry.Key, doubleValue.ToString(CultureInfo.InvariantCulture));
+                    continue;
+                }
+                if (entry.Value is GraphvizVertexShape vertexShape)
+                {
+                    writer.Write("{0}={1}", entry.Key, vertexShape.ToString().ToLower());
+                    continue;
+                }
+                if (entry.Value is GraphvizVertexStyle vertexStyle)
+                {
+                    writer.Write("{0}={1}", entry.Key, vertexStyle.ToString().ToLower());
+                    continue;
+                }
+                if (entry.Value is Color color)
+                {
+                    writer.Write("{0}=\"#{1}{2}{3}{4}\"", entry.Key, color.R.ToString("x2").ToUpper(), color.G.ToString("x2").ToUpper(), color.B.ToString("x2").ToUpper(), color.A.ToString("x2").ToUpper());
+                    continue;
+                }
+                if (entry.Value is GraphvizRecord graphvizRecord)
+                {
+                    writer.WriteLine("{0}=\"{1}\"", entry.Key, graphvizRecord.ToDot());
+                    continue;
+                }
+                writer.Write(" {0}={1}", entry.Key, entry.Value.ToString().ToLower());
+            }
+            return writer.ToString();
+        }
+    }
+
     public class GraphvizVertex
     {
         private string bottomLabel = null;
@@ -33,63 +90,6 @@ namespace QuickGraph.Graphviz.Dot
         private string url = null;
         private double z = -1;
         private System.Drawing.Point? position;
-
-        internal string GenerateDot(Dictionary<string, object> pairs)
-        {
-            bool flag = false;
-            var writer = new StringWriter();
-            foreach (var entry in pairs)
-            {
-                if (flag)
-                {
-                    writer.Write(", ");
-                }
-                else
-                {
-                    flag = true;
-                }
-                if (entry.Value is string)
-                {
-                    writer.Write("{0}=\"{1}\"", entry.Key, entry.Value.ToString());
-                    continue;
-                }
-                if (entry.Value is float)
-                {
-                    float floatValue = (float)entry.Value;
-                    writer.Write("{0}={1}", entry.Key, floatValue.ToString(CultureInfo.InvariantCulture));
-                    continue;
-                }
-                if (entry.Value is double)
-                {
-                    double doubleValue = (double)entry.Value;
-                    writer.Write("{0}={1}", entry.Key, doubleValue.ToString(CultureInfo.InvariantCulture));
-                    continue;
-                }
-                if (entry.Value is GraphvizVertexShape)
-                {
-                    writer.Write("{0}={1}", entry.Key, ((GraphvizVertexShape) entry.Value).ToString().ToLower());
-                    continue;
-                }
-                if (entry.Value is GraphvizVertexStyle)
-                {
-                    writer.Write("{0}={1}", entry.Key, ((GraphvizVertexStyle) entry.Value).ToString().ToLower());
-                    continue;
-                }
-                if (entry.Value is Color)
-                {
-                    Color color = (Color) entry.Value;
-                    writer.Write("{0}=\"#{1}{2}{3}{4}\"", entry.Key, color.R.ToString("x2").ToUpper(), color.G.ToString("x2").ToUpper(), color.B.ToString("x2").ToUpper(), color.A.ToString("x2").ToUpper());
-                    continue;
-                }
-                if (entry.Value is GraphvizRecord)
-                {
-                    writer.WriteLine("{0}=\"{1}\"", entry.Key, ((GraphvizRecord) entry.Value).ToDot());
-                    continue;
-                }
-                writer.Write(" {0}={1}", entry.Key, entry.Value.ToString().ToLower());
-            }
-            return writer.ToString();
-        }
 
         public string ToDot()
         {
@@ -207,7 +207,7 @@ namespace QuickGraph.Graphviz.Dot
                 }
             }
 
-            return this.GenerateDot(pairs);
+            return pairs.GenerateDotForVertex();
         }
 
         public override string ToString()

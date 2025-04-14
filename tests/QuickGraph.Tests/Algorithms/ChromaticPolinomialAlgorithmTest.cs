@@ -33,7 +33,7 @@ namespace QuickGraph.Tests.Algorithms
         }
 
 
-        private UndirectedGraph<int, UndirectedEdge<int>> BuildGraph(int[] verticies, int[] edges)
+        private static UndirectedGraph<int, UndirectedEdge<int>> BuildGraph(int[] verticies, int[] edges)
         {
             var graph = new UndirectedGraph<int, UndirectedEdge<int>>();
             graph.AddVertexRange(verticies);

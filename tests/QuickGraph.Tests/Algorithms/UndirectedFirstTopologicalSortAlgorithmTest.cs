@@ -11,11 +11,11 @@ namespace QuickGraph.Algorithms
         public void UndirectedFirstTopologicalSortAll()
         {
             foreach (var g in TestGraphFactory.GetUndirectedGraphs())
-                this.Compute(g);
+                Compute(g);
         }
 
         
-        public void Compute<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
+        public static void Compute<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var topo =

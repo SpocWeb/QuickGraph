@@ -15,11 +15,11 @@ namespace QuickGraph.Algorithms.ShortestPath
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
                 foreach (var root in g.Vertices)
-                    this.AStar(g, root);
+                    AStar(g, root);
         }
 
         
-        public void AStar<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g, TVertex root)
+        public static void AStar<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g, TVertex root)
             where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>();

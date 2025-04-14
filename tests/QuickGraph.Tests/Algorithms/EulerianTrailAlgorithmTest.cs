@@ -29,7 +29,7 @@ namespace QuickGraph.Algorithms
             ComputeTrail(g, (s, t) => new Edge<string>(s, t));
         }
 
-        public void ComputeTrail<TVertex,TEdge>(
+        public static void ComputeTrail<TVertex,TEdge>(
             IMutableVertexAndEdgeListGraph<TVertex,TEdge> g,
             Func<TVertex, TVertex, TEdge> edgeCreator)
             where TEdge : IEdge<TVertex>

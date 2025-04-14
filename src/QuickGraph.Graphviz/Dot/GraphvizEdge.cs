@@ -5,6 +5,58 @@ namespace QuickGraph.Graphviz.Dot
     using System.Globalization;
     using System.IO;
 
+    public static class GraphvizEdgeX
+    {
+        public static string GenerateDotForEdge(this Hashtable pairs)
+        {
+            bool flag = false;
+            StringWriter writer = new StringWriter();
+            foreach (DictionaryEntry entry in pairs)
+            {
+                if (flag)
+                {
+                    writer.Write(", ");
+                }
+                else
+                {
+                    flag = true;
+                }
+                if (entry.Value is string)
+                {
+                    writer.Write("{0}=\"{1}\"", entry.Key.ToString(), entry.Value.ToString());
+                    continue;
+                }
+                if (entry.Value is float floatValue)
+                {
+                    writer.Write("{0}={1}", entry.Key.ToString(), floatValue.ToString(CultureInfo.InvariantCulture));
+                    continue;
+                }
+                if (entry.Value is double doubleValue)
+                {
+                    writer.Write("{0}={1}", entry.Key.ToString(), doubleValue.ToString(CultureInfo.InvariantCulture));
+                    continue;
+                }
+                if (entry.Value is GraphvizEdgeDirection direction)
+                {
+                    writer.Write("{0}={1}", entry.Key.ToString(), direction.ToString().ToLower());
+                    continue;
+                }
+                if (entry.Value is GraphvizEdgeStyle style)
+                {
+                    writer.Write("{0}={1}", entry.Key.ToString(), style.ToString().ToLower());
+                    continue;
+                }
+                if (entry.Value is Color color)
+                {
+                    writer.Write("{0}=\"#{1}{2}{3}{4}\"", new object[] { entry.Key.ToString(), color.R.ToString("x2").ToUpper(), color.G.ToString("x2").ToUpper(), color.B.ToString("x2").ToUpper(), color.A.ToString("x2").ToUpper() });
+                    continue;
+                }
+                writer.Write(" {0}={1}", entry.Key.ToString(), entry.Value.ToString().ToLower());
+            }
+            return writer.ToString();
+        }
+    }
+
     public class GraphvizEdge
     {
         private string comment = null;
@@ -26,58 +78,6 @@ namespace QuickGraph.Graphviz.Dot
         private string url = null;
         private double weight = 1;
         private int length = 1;
-
-        internal string GenerateDot(Hashtable pairs)
-        {
-            bool flag = false;
-            StringWriter writer = new StringWriter();
-            foreach (DictionaryEntry entry in pairs)
-            {
-                if (flag)
-                {
-                    writer.Write(", ");
-                }
-                else
-                {
-                    flag = true;
-                }
-                if (entry.Value is string)
-                {
-                    writer.Write("{0}=\"{1}\"", entry.Key.ToString(), entry.Value.ToString());
-                    continue;
-                }
-                if (entry.Value is float)
-                {
-                    float floatValue = (float)entry.Value;
-                    writer.Write("{0}={1}", entry.Key.ToString(), floatValue.ToString(CultureInfo.InvariantCulture));
-                    continue;
-                }
-                if (entry.Value is double)
-                {
-                    double doubleValue = (double)entry.Value;
-                    writer.Write("{0}={1}", entry.Key.ToString(), doubleValue.ToString(CultureInfo.InvariantCulture));
-                    continue;
-                }
-                if (entry.Value is GraphvizEdgeDirection)
-                {
-                    writer.Write("{0}={1}", entry.Key.ToString(), ((GraphvizEdgeDirection) entry.Value).ToString().ToLower());
-                    continue;
-                }
-                if (entry.Value is GraphvizEdgeStyle)
-                {
-                    writer.Write("{0}={1}", entry.Key.ToString(), ((GraphvizEdgeStyle) entry.Value).ToString().ToLower());
-                    continue;
-                }
-                if (entry.Value is Color)
-                {
-                    Color color = (Color) entry.Value;
-                    writer.Write("{0}=\"#{1}{2}{3}{4}\"", new object[] { entry.Key.ToString(), color.R.ToString("x2").ToUpper(), color.G.ToString("x2").ToUpper(), color.B.ToString("x2").ToUpper(), color.A.ToString("x2").ToUpper() });
-                    continue;
-                }
-                writer.Write(" {0}={1}", entry.Key.ToString(), entry.Value.ToString().ToLower());
-            }
-            return writer.ToString();
-        }
 
         public string ToDot()
         {
@@ -152,7 +152,7 @@ namespace QuickGraph.Graphviz.Dot
                 dic["tailport"] = this.TailPort;
             if (this.length != 1)
                 dic["len"] = this.length;
-            return this.GenerateDot(dic);
+            return dic.GenerateDotForEdge();
         }
 
         public override string ToString()

@@ -12,11 +12,11 @@ namespace QuickGraph.Algorithms.RandomWalks
         public void RoundRobinAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.RoundRobinTest(g);
+                RoundRobinTest(g);
         }
 
         
-        public void RoundRobinTest<TVertex, TEdge>(IVertexListGraph<TVertex, TEdge> g)
+        public static void RoundRobinTest<TVertex, TEdge>(IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             if (g.VertexCount == 0)

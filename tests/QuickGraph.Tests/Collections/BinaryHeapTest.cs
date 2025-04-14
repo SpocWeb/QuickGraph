@@ -229,7 +229,7 @@ namespace QuickGraph.Collections
         }
 
         
-        public void Constructor<TPriority, TValue>(int capacity)
+        public static void Constructor<TPriority, TValue>(int capacity)
         {
             var target = new BinaryHeap<TPriority, TValue>(capacity, Comparer<TPriority>.Default.Compare);
             Assert.AreEqual(target.Capacity, capacity);
@@ -237,7 +237,7 @@ namespace QuickGraph.Collections
         }
 
         
-        public void Operations<TPriority, TValue>(
+        public static void Operations<TPriority, TValue>(
             BinaryHeap<TPriority, TValue> target,
             KeyValuePair<bool, TPriority>[] values)
         {
@@ -253,7 +253,7 @@ namespace QuickGraph.Collections
             }
         }
 
-        public void Insert<TPriority, TValue>(
+        public static void Insert<TPriority, TValue>(
             BinaryHeap<TPriority, TValue> target,
              KeyValuePair<TPriority, TValue>[] kvs)
         {
@@ -266,7 +266,7 @@ namespace QuickGraph.Collections
             Assert.IsTrue(count + kvs.Length == target.Count);
         }
 
-        public void InsertAndIndexOf<TPriority, TValue>(
+        public static void InsertAndIndexOf<TPriority, TValue>(
             BinaryHeap<TPriority, TValue> target,
              KeyValuePair<TPriority, TValue>[] kvs)
         {
@@ -276,7 +276,7 @@ namespace QuickGraph.Collections
                 Assert.IsTrue(target.IndexOf(kv.Value) > -1, "target.IndexOf(kv.Value) > -1");
         }
 
-        public void InsertAndRemoveAt<TPriority, TValue>(
+        public static void InsertAndRemoveAt<TPriority, TValue>(
             BinaryHeap<TPriority, TValue> target,
              KeyValuePair<TPriority, TValue>[] kvs,
             int removeAtIndex)
@@ -289,7 +289,7 @@ namespace QuickGraph.Collections
             AssertInvariant<TPriority, TValue>(target);
         }
 
-        public void InsertAndEnumerate<TPriority, TValue>(
+        public static void InsertAndEnumerate<TPriority, TValue>(
             BinaryHeap<TPriority, TValue> target,
              KeyValuePair<TPriority, TValue>[] kvs)
         {
@@ -302,7 +302,7 @@ namespace QuickGraph.Collections
             target.ShouldAllBe(kv => dic.ContainsKey(kv.Key));
         }
 
-        public void InsertAndRemoveMinimum<TPriority, TValue>(
+        public static void InsertAndRemoveMinimum<TPriority, TValue>(
             BinaryHeap<TPriority, TValue> target,
              KeyValuePair<TPriority, TValue>[] kvs)
         {
@@ -334,7 +334,7 @@ namespace QuickGraph.Collections
             new BinaryHeap<int, int>().RemoveMinimum();
         }
 
-        public void InsertAndMinimum<TPriority, TValue>(
+        public static void InsertAndMinimum<TPriority, TValue>(
             BinaryHeap<TPriority, TValue> target,
              KeyValuePair<TPriority, TValue>[] kvs)
         {

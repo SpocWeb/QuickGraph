@@ -26,7 +26,7 @@ namespace QuickGraph.Tests.Algorithms
                 int count = 0;
                 foreach (var root in g.Vertices)
                 {
-                    this.TarjanOfflineLeastCommonAncestorAlgorithm(
+                    TarjanOfflineLeastCommonAncestorAlgorithm(
                         g,
                         root,
                         pairs.ToArray());
@@ -36,7 +36,7 @@ namespace QuickGraph.Tests.Algorithms
         }
 
         
-        public void TarjanOfflineLeastCommonAncestorAlgorithm<TVertex, TEdge>(
+        public static void TarjanOfflineLeastCommonAncestorAlgorithm<TVertex, TEdge>(
             IVertexListGraph<TVertex, TEdge> g,
             TVertex root,
             SEquatableEdge<TVertex>[] pairs

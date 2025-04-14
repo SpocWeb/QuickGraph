@@ -36,7 +36,7 @@ namespace QuickGraph.Tests.Algorithms.Search
         }
 
         
-        public void RunSearch<TVertex, TEdge>(
+        public static void RunSearch<TVertex, TEdge>(
             IBidirectionalGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
@@ -83,7 +83,7 @@ namespace QuickGraph.Tests.Algorithms.Search
         }
         
         
-        public void CompareSearch<TVertex, TEdge>(
+        public static void CompareSearch<TVertex, TEdge>(
             IBidirectionalGraph<TVertex, TEdge> g,
             TVertex root, TVertex target)
             where TEdge: IEdge<TVertex>

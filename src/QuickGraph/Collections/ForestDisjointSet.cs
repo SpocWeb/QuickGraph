@@ -85,7 +85,7 @@ namespace QuickGraph.Collections
 
         public T FindSet(T value)
         {
-            return this.Find(this.elements[value]).Value;
+            return Find(this.elements[value]).Value;
         }
 
         public bool AreInSameSet(T left, T right)
@@ -94,7 +94,7 @@ namespace QuickGraph.Collections
         }
 
         [Pure]
-        private Element FindNoCompression(Element element)
+        private static Element FindNoCompression(Element element)
         {
             Contract.Requires(element != null);
             Contract.Ensures(Contract.Result<Element>() != null);
@@ -112,12 +112,12 @@ namespace QuickGraph.Collections
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        private Element Find(Element element)
+        private static Element Find(Element element)
         {
             Contract.Requires(element != null);
             Contract.Ensures(Contract.Result<Element>() != null);
 
-            var root = this.FindNoCompression(element);            
+            var root = FindNoCompression(element);            
             CompressPath(element, root);
             return root;
         }
@@ -145,7 +145,7 @@ namespace QuickGraph.Collections
                 Contract.Result<bool>() 
                 ? Contract.OldValue(this.SetCount) - 1 == this.SetCount             
                 : Contract.OldValue(this.SetCount) == this.SetCount);
-            Contract.Ensures(this.FindNoCompression(left) == this.FindNoCompression(right));
+            Contract.Ensures(FindNoCompression(left) == FindNoCompression(right));
 
             // shortcut when already unioned,
             if (left == right) return false;

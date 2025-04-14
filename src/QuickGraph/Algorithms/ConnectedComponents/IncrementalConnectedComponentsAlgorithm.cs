@@ -87,12 +87,12 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             this.ds.Union(e.Source, e.Target);
         }
 
-        void VisitedGraph_VertexRemoved(TVertex e)
+        static void VisitedGraph_VertexRemoved(TVertex e)
         {
             throw new InvalidOperationException("vertex removal not supported for incremental connected components");
         }
 
-        void VisitedGraph_EdgeRemoved(TEdge e)
+        static void VisitedGraph_EdgeRemoved(TEdge e)
         {
             throw new InvalidOperationException("edge removal not supported for incremental connected components");
         }

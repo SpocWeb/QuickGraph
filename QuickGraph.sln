@@ -1,7 +1,6 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectScaffold", "ProjectScaffold", "{FAAD5B1C-1217-48D6-B1EF-7CAC0440D6A4}"
 	ProjectSection(SolutionItems) = preProject
@@ -194,6 +193,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{22937B93-4129-4F68-AB14-F7AFE020BA8F} = {FAAD5B1C-1217-48D6-B1EF-7CAC0440D6A4}
 		{A9A5C115-0680-44B3-A87E-5ECF4C93814E} = {7A2A3C07-B652-4759-AFC4-49378D764784}
 		{960C14D1-EDBD-40E5-8AE6-25E311551B87} = {7A2A3C07-B652-4759-AFC4-49378D764784}
 		{8836CFAC-D2B0-47A5-9A91-03A2218BF6FD} = {7A2A3C07-B652-4759-AFC4-49378D764784}

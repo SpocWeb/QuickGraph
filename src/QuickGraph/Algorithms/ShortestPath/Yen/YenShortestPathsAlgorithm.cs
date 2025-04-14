@@ -53,16 +53,11 @@ namespace QuickGraph.Algorithms.ShortestPath.Yen
       }
     }
 
-    private IEnumerable<IEnumerable<TaggedEquatableEdge<TVertex, double>>> DefaultFilter(
-      IEnumerable<IEnumerable<TaggedEquatableEdge<TVertex, double>>> paths)
-    {
-      return paths;
-    }
+    private static IEnumerable<IEnumerable<TaggedEquatableEdge<TVertex, double>>> DefaultFilter(
+      IEnumerable<IEnumerable<TaggedEquatableEdge<TVertex, double>>> paths) =>
+        paths;
 
-    private double DefaultGetWeights(TaggedEquatableEdge<TVertex, double> edge)
-    {
-      return edge.Tag;
-    }
+    private static double DefaultGetWeights(TaggedEquatableEdge<TVertex, double> edge) => edge.Tag;
 
     public IEnumerable<IEnumerable<TaggedEquatableEdge<TVertex, double>>> Execute()
     {

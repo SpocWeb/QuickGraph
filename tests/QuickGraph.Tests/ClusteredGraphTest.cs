@@ -6,13 +6,13 @@ namespace QuickGraph.Tests
     [TestClass()]
     public class ClusteredGraphTest
     {
-        public bool ContainsVertexParent(ClusteredAdjacencyGraph<int, IEdge<int>> clus,int v)
+        public static bool ContainsVertexParent(ClusteredAdjacencyGraph<int, IEdge<int>> clus,int v)
         {
             return (clus.ContainsVertex(v) && clus.Parent!=null && ContainsVertexParent(clus.Parent,v) 
                    || clus.Parent == null);
         }
 
-        public bool ContainsEdgeParent(ClusteredAdjacencyGraph<int, IEdge<int>> clus, IEdge<int> e)
+        public static bool ContainsEdgeParent(ClusteredAdjacencyGraph<int, IEdge<int>> clus, IEdge<int> e)
         {
             return (clus.ContainsEdge(e) && clus.Parent != null && ContainsEdgeParent(clus.Parent, e) 
                    || clus.Parent == null);

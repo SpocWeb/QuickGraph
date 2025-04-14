@@ -111,8 +111,8 @@ namespace QuickGraph
         public override bool Equals(object obj)
         {
             return
-                obj is STaggedEquatableEdge<TVertex,TTag> &&
-                this.Equals((STaggedEquatableEdge<TVertex, TTag>)obj);
+                obj is STaggedEquatableEdge<TVertex,TTag> edge &&
+                this.Equals(edge);
         }
 
         /// <summary>

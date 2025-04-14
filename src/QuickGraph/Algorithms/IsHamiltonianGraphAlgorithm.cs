@@ -3,17 +3,20 @@ using System.Collections.Generic;
 
 namespace QuickGraph.Algorithms
 {
-    public class IsHamiltonianGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
+    public static class Swapper
     {
-        private UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph;
-        private double threshold;
-
-        private void Swap(IList<TVertex> list, int indexA, int indexB)
+        public static void Swap<TVertex>(this IList<TVertex> list, int indexA, int indexB)
         {
             TVertex tmp = list[indexA];
             list[indexA] = list[indexB];
             list[indexB] = tmp;
         }
+    }
+
+    public class IsHamiltonianGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
+    {
+        private UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph;
+        private double threshold;
 
         public List<List<TVertex>> GetPermutations()
         {
@@ -34,9 +37,9 @@ namespace QuickGraph.Algorithms
             else
                 for (int i = recursionDepth; i <= maxDepth; i++)
                 {
-                    Swap(list, recursionDepth, i);
+                    list.Swap(recursionDepth, i);
                     GetPermutations(list, recursionDepth + 1, maxDepth, permutations);
-                    Swap(list, recursionDepth, i);
+                    list.Swap(recursionDepth, i);
                 }
         }
 

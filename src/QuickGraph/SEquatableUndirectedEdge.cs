@@ -104,8 +104,8 @@ namespace QuickGraph
         public override bool Equals(object obj)
         {
             return
-                obj is SEquatableUndirectedEdge<TVertex> &&
-                this.Equals((SEquatableUndirectedEdge<TVertex>)obj);
+                obj is SEquatableUndirectedEdge<TVertex> edge &&
+                this.Equals(edge);
         }
 
         /// <summary>

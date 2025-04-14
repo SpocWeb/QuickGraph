@@ -24,7 +24,7 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
                 foreach (var e in g.Edges)
                     weights.Add(e, g.OutDegree(e.Source) + 1);
 
-                this.HoffmanPavleyRankedShortestPath(
+                HoffmanPavleyRankedShortestPath(
                     g, 
                     weights,
                     Enumerable.First(g.Vertices),
@@ -94,11 +94,11 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
             }
             Assert.AreEqual(data.Length, i);
 
-            this.HoffmanPavleyRankedShortestPath(g, weights, 9, 1, 10);
+            HoffmanPavleyRankedShortestPath(g, weights, 9, 1, 10);
         }
 
         
-        public IEnumerable<IEnumerable<TEdge>> HoffmanPavleyRankedShortestPath<TVertex,TEdge>(
+        public static IEnumerable<IEnumerable<TEdge>> HoffmanPavleyRankedShortestPath<TVertex,TEdge>(
             IBidirectionalGraph<TVertex, TEdge> g,
             Dictionary<TEdge, double> edgeWeights,
             TVertex rootVertex,

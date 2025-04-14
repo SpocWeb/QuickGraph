@@ -6,7 +6,7 @@ namespace QuickGraph.Tests.Algorithms
     [TestClass]
     public class EulerianGraphTest
     {
-        private UndirectedGraph<int, UndirectedEdge<int>> constructGraph(Tuple<int, int>[] vertices)
+        private static UndirectedGraph<int, UndirectedEdge<int>> constructGraph(Tuple<int, int>[] vertices)
         {
             var g = new UndirectedGraph<int, UndirectedEdge<int>>();
             foreach (var pair in vertices)

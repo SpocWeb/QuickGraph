@@ -8,7 +8,7 @@ namespace QuickGraph.Tests.Algorithms
     [TestClass]
     public class IsHamiltonianGraphAlgorithmTest
     {
-        private UndirectedGraph<int, UndirectedEdge<int>> constructGraph(Tuple<int, int>[] vertices)
+        private static UndirectedGraph<int, UndirectedEdge<int>> constructGraph(Tuple<int, int>[] vertices)
         {
             var g = new UndirectedGraph<int, UndirectedEdge<int>>();
             foreach (var pair in vertices)
@@ -142,7 +142,7 @@ namespace QuickGraph.Tests.Algorithms
             }
         }
 
-        private int Factorial(int i)
+        private static int Factorial(int i)
         {
             if (i <= 1)
                 return 1;

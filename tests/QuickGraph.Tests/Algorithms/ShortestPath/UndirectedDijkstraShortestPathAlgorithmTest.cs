@@ -19,13 +19,13 @@ namespace QuickGraph.Algorithms.ShortestPath
                 {
                     if (cut++ > 10)
                         break;
-                    this.UndirectedDijkstra(g, root);
+                    UndirectedDijkstra(g, root);
                 }
             }
         }
 
         
-        public void UndirectedDijkstra<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, TVertex root)
+        public static void UndirectedDijkstra<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, TVertex root)
             where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>();

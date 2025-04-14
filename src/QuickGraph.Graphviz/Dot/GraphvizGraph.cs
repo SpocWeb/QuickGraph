@@ -1,10 +1,50 @@
 namespace QuickGraph.Graphviz.Dot
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Globalization;
+
+    public static class GraphvizGraphX
+    {
+        public static string GenerateDotForGraph(this Hashtable pairs)
+        {
+            List<string> entries = new List<string>(pairs.Count);
+            foreach (DictionaryEntry entry in pairs)
+            {
+                if (entry.Value is string)
+                {
+                    entries.Add(string.Format("{0}=\"{1}\"", entry.Key.ToString(), entry.Value.ToString()));
+                    continue;
+                }
+                if (entry.Value is float floatValue)
+                {
+                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), floatValue.ToString(CultureInfo.InvariantCulture)));
+                    continue;
+                }
+                if (entry.Value is double doubleValue)
+                {
+                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), doubleValue.ToString(CultureInfo.InvariantCulture)));
+                    continue;
+                }
+                if (entry.Value is Color color)
+                {
+                    entries.Add(string.Format("{0}=\"#{1}{2}{3}{4}\"", new object[] { entry.Key.ToString(), color.R.ToString("x2").ToUpper(), color.G.ToString("x2").ToUpper(), color.B.ToString("x2").ToUpper(), color.A.ToString("x2").ToUpper() }));
+                    continue;
+                }
+                if ((entry.Value is GraphvizRankDirection) || (entry.Value is GraphvizPageDirection))
+                {
+                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), entry.Value.ToString()));
+                    continue;
+                }
+                entries.Add(string.Format(" {0}={1}", entry.Key.ToString(), entry.Value.ToString().ToLower()));
+            }
+            string result = string.Join(";", entries);
+            result = entries.Count > 1 ? result + ";" : result;
+
+            return result;
+        }
+    }
 
     public class GraphvizGraph
     {
@@ -42,47 +82,6 @@ namespace QuickGraph.Graphviz.Dot
         private System.Drawing.SizeF size = new System.Drawing.SizeF(0, 0);
         private string styleSheet = null;
         private string url = null;
-
-        internal string GenerateDot(Hashtable pairs)
-        {
-            List<string> entries = new List<string>(pairs.Count);
-            foreach (DictionaryEntry entry in pairs)
-            {
-                if (entry.Value is string)
-                {
-                    entries.Add(string.Format("{0}=\"{1}\"", entry.Key.ToString(), entry.Value.ToString()));
-                    continue;
-                }
-                if (entry.Value is float)
-                {
-                    float floatValue = (float)entry.Value;
-                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), floatValue.ToString(CultureInfo.InvariantCulture)));
-                    continue;
-                }
-                if (entry.Value is double)
-                {
-                    double doubleValue = (double)entry.Value;
-                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), doubleValue.ToString(CultureInfo.InvariantCulture)));
-                    continue;
-                }
-                if (entry.Value is Color)
-                {
-                    Color color = (Color) entry.Value;
-                    entries.Add(string.Format("{0}=\"#{1}{2}{3}{4}\"", new object[] { entry.Key.ToString(), color.R.ToString("x2").ToUpper(), color.G.ToString("x2").ToUpper(), color.B.ToString("x2").ToUpper(), color.A.ToString("x2").ToUpper() }));
-                    continue;
-                }
-                if ((entry.Value is GraphvizRankDirection) || (entry.Value is GraphvizPageDirection))
-                {
-                    entries.Add(string.Format("{0}={1}", entry.Key.ToString(), entry.Value.ToString()));
-                    continue;
-                }
-                entries.Add(string.Format(" {0}={1}", entry.Key.ToString(), entry.Value.ToString().ToLower()));
-            }
-            string result = string.Join(";", entries);
-            result = entries.Count > 1 ? result + ";" : result;
-
-            return result;
-        }
 
         public string ToDot()
         {
@@ -220,7 +219,7 @@ namespace QuickGraph.Graphviz.Dot
             {
                 pairs["rankdir"] = this.RankDirection;
             }
-            return this.GenerateDot(pairs);
+            return pairs.GenerateDotForGraph();
         }
 
         public override string ToString()

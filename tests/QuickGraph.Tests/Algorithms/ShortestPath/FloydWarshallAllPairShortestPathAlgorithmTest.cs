@@ -92,7 +92,7 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
         {
             var distances = new Dictionary<Edge<char>, double>();
             var g = BoostFloydWarshallTest.CreateGraph(distances);
-            this.Compare(g, e => distances[e],
+            Compare(g, e => distances[e],
                 (G, d) => new DijkstraShortestPathAlgorithm<char, Edge<char>>(G, d)
                 );
         }
@@ -102,7 +102,7 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
         {
             Func<Edge<string>, double> distances = e => 1;
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.Compare<string, Edge<string>, IVertexAndEdgeListGraph<string, Edge<string>>>(
+                Compare(
                     g,
                     distances,
                     (G, d) => new BellmanFordShortestPathAlgorithm<string, Edge<string>>(G, d)
@@ -114,14 +114,14 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
         {
             Func<Edge<string>, double> distances = e => 1;
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.Compare<string, Edge<string>, IVertexListGraph<string, Edge<string>>>(
+                Compare(
                     g, 
                     distances,
                     (G, d) => new DijkstraShortestPathAlgorithm<string, Edge<string>>(G, d)
                     );
         }
 
-        void Compare<TVertex, TEdge, TGraph>(
+        static void Compare<TVertex, TEdge, TGraph>(
             AdjacencyGraph<TVertex, TEdge> g, 
             Func<TEdge, double> distances,
             Func<AdjacencyGraph<TVertex, TEdge>, Func<TEdge, double>, ShortestPathAlgorithmBase<TVertex, TEdge, TGraph>> shortestPathAlgorithmFactory

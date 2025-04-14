@@ -30,11 +30,11 @@ namespace QuickGraph.Algorithms.Search
         public void DepthFirstSearchAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.DepthFirstSearch(g);
+                DepthFirstSearch(g);
         }
 
         
-        public void DepthFirstSearch<TVertex,TEdge>(IVertexListGraph<TVertex, TEdge> g)
+        public static void DepthFirstSearch<TVertex,TEdge>(IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var parents = new Dictionary<TVertex, TVertex>();

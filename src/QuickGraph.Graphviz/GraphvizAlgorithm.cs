@@ -235,8 +235,8 @@ namespace QuickGraph.Graphviz
                 Output.Write("subgraph cluster{0}", ClusterCount.ToString());
                 Output.WriteLine(" {");
                 OnFormatCluster(g);
-                if (g is IClusteredGraph)
-                    WriteClusters(colors, edgeColors, g as IClusteredGraph);
+                if (g is IClusteredGraph graph)
+                    WriteClusters(colors, edgeColors, graph);
                 if (parent.Colapsed)
                 {
                     foreach (TVertex v in g.Vertices)

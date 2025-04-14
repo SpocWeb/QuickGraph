@@ -11,11 +11,11 @@ namespace QuickGraph.Algorithms.MaximumFlow
         public void AugmentAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.Augment(g);
+                Augment(g);
         }
 
         
-        public void Augment(
+        public static void Augment(
             IMutableVertexAndEdgeListGraph<string, Edge<string>> g)
         {
             int vertexCount = g.VertexCount;

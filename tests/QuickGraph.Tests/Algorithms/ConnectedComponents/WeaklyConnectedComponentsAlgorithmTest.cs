@@ -10,11 +10,11 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         public void WeaklyConnectedComponentsAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.Compute(g);
+                Compute(g);
         }
 
         
-        public void Compute<TVertex,TEdge>(IVertexListGraph<TVertex, TEdge> g)
+        public static void Compute<TVertex,TEdge>(IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var dfs = 

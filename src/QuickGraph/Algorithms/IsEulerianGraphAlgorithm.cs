@@ -20,7 +20,7 @@ namespace QuickGraph.Algorithms
             this.graph = newGraph;
         }
 
-        private Tuple<int?, int?> firstAndSecondIndexOfTrue(bool[] data)
+        private static Tuple<int?, int?> firstAndSecondIndexOfTrue(bool[] data)
         {
             // if no true elements returns (null, null)
             // if only one true element, returns (indexOfTrue, null)

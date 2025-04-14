@@ -74,7 +74,8 @@ namespace QuickGraph
             VerifyCounts(g);
         }
 
-        private void VerifyCounts(IMutableVertexAndEdgeListGraph<string, Edge<string>> g)
+        private static void 
+            VerifyCounts(IMutableVertexAndEdgeListGraph<string, Edge<string>> g)
         {
             int i = 0;
             foreach (string v in g.Vertices)

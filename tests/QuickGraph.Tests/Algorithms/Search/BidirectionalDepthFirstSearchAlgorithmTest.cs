@@ -11,11 +11,11 @@ namespace QuickGraph.Algorithms.Search
         public void ComputeAll()
         {
             foreach (var g in TestGraphFactory.GetBidirectionalGraphs())
-                this.Compute(g);
+                Compute(g);
         }
 
         
-        public void Compute<TVertex,TEdge>(IBidirectionalGraph<TVertex, TEdge> g)
+        public static void Compute<TVertex,TEdge>(IBidirectionalGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var dfs = new BidirectionalDepthFirstSearchAlgorithm<TVertex, TEdge>(g);

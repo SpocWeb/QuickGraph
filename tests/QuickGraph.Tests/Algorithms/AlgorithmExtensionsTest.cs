@@ -34,7 +34,7 @@ namespace QuickGraph.Tests.Algorithms
         }
 
         
-        public void Roots<T>(IVertexAndEdgeListGraph<T, Edge<T>> g)
+        public static void Roots<T>(IVertexAndEdgeListGraph<T, Edge<T>> g)
         {
             var roots = new HashSet<T>(g.Roots());
             foreach (var edge in g.Edges)

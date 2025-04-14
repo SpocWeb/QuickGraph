@@ -77,11 +77,11 @@ namespace QuickGraph.Algorithms
         public void StronglyConnectedComponentAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.Compute(g);
+                Compute(g);
         }
 
         
-        public void Compute<TVertex,TEdge>(AdjacencyGraph<TVertex, TEdge> g)
+        public static void Compute<TVertex,TEdge>(AdjacencyGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var strong = new StronglyConnectedComponentsAlgorithm<TVertex, TEdge>(g);
@@ -90,7 +90,7 @@ namespace QuickGraph.Algorithms
             checkStrong(strong);
         }
 
-        private void checkStrong<TVertex,TEdge>(StronglyConnectedComponentsAlgorithm<TVertex, TEdge> strong)
+        private static void checkStrong<TVertex,TEdge>(StronglyConnectedComponentsAlgorithm<TVertex, TEdge> strong)
             where TEdge : IEdge<TVertex>
         {
             Assert.AreEqual(strong.VisitedGraph.VertexCount, strong.Components.Count);

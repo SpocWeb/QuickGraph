@@ -16,13 +16,13 @@ namespace QuickGraph.Tests.Algorithms.MaximumFlow
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
             {
                 if (g.VertexCount > 0)
-                    this.EdmondsKarpMaxFlow(g, (source, target) => new Edge<string>(source, target));
+                    EdmondsKarpMaxFlow(g, (source, target) => new Edge<string>(source, target));
             }
         }
 
 
         
-        public void EdmondsKarpMaxFlow<TVertex, TEdge>(IMutableVertexAndEdgeListGraph<TVertex, TEdge> g, 
+        public static void EdmondsKarpMaxFlow<TVertex, TEdge>(IMutableVertexAndEdgeListGraph<TVertex, TEdge> g, 
             EdgeFactory<TVertex, TEdge> edgeFactory)
             where TEdge : IEdge<TVertex>
         {

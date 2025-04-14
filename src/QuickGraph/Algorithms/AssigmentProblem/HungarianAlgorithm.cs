@@ -148,7 +148,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
             return Steps.End;
         }
 
-        private Steps RunStep1(byte[,] masks, bool[] colsCovered, int w, int h)
+        private static Steps RunStep1(byte[,] masks, bool[] colsCovered, int w, int h)
         {
             for (var i = 0; i < h; i++)
             {
@@ -168,7 +168,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
         }
 
 
-        private Steps RunStep2(int[,] costs, byte[,] masks, bool[] rowsCovered, bool[] colsCovered, int w, int h,
+        private static Steps RunStep2(int[,] costs, byte[,] masks, bool[] rowsCovered, bool[] colsCovered, int w, int h,
             ref Location pathStart)
         {
             // Search for another assigment
@@ -194,7 +194,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
         }
 
 
-        private Steps RunStep3(byte[,] masks, bool[] rowsCovered, bool[] colsCovered, int w, int h,
+        private static Steps RunStep3(byte[,] masks, bool[] rowsCovered, bool[] colsCovered, int w, int h,
             Location[] path, Location pathStart)
         {
             var pathIndex = 0;
@@ -215,7 +215,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
             return Steps.Step1;
         }
 
-        private Steps RunStep4(int[,] costs, bool[] rowsCovered, bool[] colsCovered, int w, int h)
+        private static Steps RunStep4(int[,] costs, bool[] rowsCovered, bool[] colsCovered, int w, int h)
         {
             var minValue = FindMinimum(costs, rowsCovered, colsCovered, w, h);
             for (var i = 0; i < h; i++)
@@ -231,7 +231,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
             return Steps.Step2;
         }
 
-        private void ConvertPath(byte[,] masks, Location[] path, int pathLength)
+        private static void ConvertPath(byte[,] masks, Location[] path, int pathLength)
         {
             for (var i = 0; i < pathLength; i++)
             {
@@ -247,7 +247,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
             }
         }
 
-        private Location FindZero(int[,] costs, bool[] rowsCovered, bool[] colsCovered,
+        private static Location FindZero(int[,] costs, bool[] rowsCovered, bool[] colsCovered,
             int w, int h)
         {
             for (var i = 0; i < h; i++)
@@ -261,7 +261,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
             return new Location(-1, -1);
         }
 
-        private int FindMinimum(int[,] costs, bool[] rowsCovered, bool[] colsCovered, int w, int h)
+        private static int FindMinimum(int[,] costs, bool[] rowsCovered, bool[] colsCovered, int w, int h)
         {
             var minValue = int.MaxValue;
             for (var i = 0; i < h; i++)
@@ -275,7 +275,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
             return minValue;
         }
 
-        private int FindStarInRow(byte[,] masks, int w, int row)
+        private static int FindStarInRow(byte[,] masks, int w, int row)
         {
             for (var j = 0; j < w; j++)
             {
@@ -285,7 +285,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
             return -1;
         }
 
-        private int FindStarInColumn(byte[,] masks, int h, int col)
+        private static int FindStarInColumn(byte[,] masks, int h, int col)
         {
             for (var i = 0; i < h; i++)
             {
@@ -295,7 +295,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
             return -1;
         }
 
-        private int FindPrimeInRow(byte[,] masks, int w, int row)
+        private static int FindPrimeInRow(byte[,] masks, int w, int row)
         {
             for (var j = 0; j < w; j++)
             {
@@ -306,7 +306,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
         }
 
 
-        private void ClearCovers(bool[] rowsCovered, bool[] colsCovered, int w, int h)
+        private static void ClearCovers(bool[] rowsCovered, bool[] colsCovered, int w, int h)
         {
             for (var i = 0; i < h; i++)
                 rowsCovered[i] = false;
@@ -314,7 +314,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
                 colsCovered[j] = false;
         }
 
-        private void ClearPrimes(byte[,] masks, int w, int h)
+        private static void ClearPrimes(byte[,] masks, int w, int h)
         {
             for (var i = 0; i < h; i++)
             {

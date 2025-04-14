@@ -29,7 +29,7 @@ namespace QuickGraph.Graphviz
             e.EdgeFormatter.Label.Value = this.Graphviz.Escape(sw.ToString());
         }
 
-        void Graphviz_FormatVertex(object sender, FormatVertexEventArgs<TVertex> e)
+        static void Graphviz_FormatVertex(object sender, FormatVertexEventArgs<TVertex> e)
         {
             e.VertexFormatter.Label = e.Vertex.ToString();
         }

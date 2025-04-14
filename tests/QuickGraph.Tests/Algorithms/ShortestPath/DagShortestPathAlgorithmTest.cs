@@ -11,7 +11,7 @@ namespace QuickGraph.Algorithms.ShortestPath
     public partial class DagShortestPathAlgorithmTest
     {
         
-        public void Compute<TVertex, TEdge>(IVertexListGraph<TVertex, TEdge> g)
+        public static void Compute<TVertex, TEdge>(IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             // is this a dag ?
@@ -42,13 +42,13 @@ namespace QuickGraph.Algorithms.ShortestPath
         {
             foreach(var g in TestGraphFactory.GetAdjacencyGraphs())
             {
-                this.Compute(g);
-                this.ComputeCriticalPath(g);
+                Compute(g);
+                ComputeCriticalPath(g);
             }
         }
 
         
-        public void ComputeCriticalPath<TVertex, TEdge>(
+        public static void ComputeCriticalPath<TVertex, TEdge>(
             IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
@@ -76,7 +76,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             }
         }
 
-        private void Search<TVertex, TEdge>(
+        private static void Search<TVertex, TEdge>(
             IVertexListGraph<TVertex, TEdge> g, 
             TVertex root, IDistanceRelaxer relaxer)
             where TEdge : IEdge<TVertex>

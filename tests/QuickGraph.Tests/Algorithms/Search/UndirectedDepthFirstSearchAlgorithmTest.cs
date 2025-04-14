@@ -30,11 +30,11 @@ namespace QuickGraph.Algorithms.Search
         public void UndirectedDepthFirstSearchAll()
         {
             foreach (var g in TestGraphFactory.GetUndirectedGraphs())
-                this.UndirectedDepthFirstSearch(g);
+                UndirectedDepthFirstSearch(g);
         }
 
         
-        public void UndirectedDepthFirstSearch<TVertex,TEdge>(IUndirectedGraph<TVertex, TEdge> g)
+        public static void UndirectedDepthFirstSearch<TVertex,TEdge>(IUndirectedGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var parents = new Dictionary<TVertex, TVertex>();

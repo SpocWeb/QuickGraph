@@ -108,7 +108,7 @@ namespace QuickGraph.Tests.Algorithms
 
         }
 
-        private void RunBipartiteMatch(List<Edge<string>> edges, IEnumerable<string> setA, 
+        private static void RunBipartiteMatch(List<Edge<string>> edges, IEnumerable<string> setA, 
             IEnumerable<string> setB, int expectedMatchSize)
         {
             var graph = edges.ToAdjacencyGraph<string, Edge<string>>();
@@ -116,7 +116,7 @@ namespace QuickGraph.Tests.Algorithms
             var vertexFactory = new StringVertexFactory();
 
             if (graph.VertexCount > 0)
-                this.MaxBipartiteMatch<string, Edge<string>>(graph, setA, setB,
+                MaxBipartiteMatch(graph, setA, setB,
                     () => (vertexFactory.CreateVertex()),
                     (source, target) => new Edge<string>(source, target),
                     expectedMatchSize
@@ -124,7 +124,7 @@ namespace QuickGraph.Tests.Algorithms
         }
 
         
-        public MaximumBipartiteMatchingAlgorithm<TVertex, TEdge> MaxBipartiteMatch<TVertex, TEdge>(
+        public static MaximumBipartiteMatchingAlgorithm<TVertex, TEdge> MaxBipartiteMatch<TVertex, TEdge>(
             IMutableVertexAndEdgeListGraph<TVertex, TEdge> g,
             IEnumerable<TVertex> vertexSetA,
             IEnumerable<TVertex> vertexSetB,

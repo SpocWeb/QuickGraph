@@ -15,7 +15,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
     [TestClass]
     public partial class MinimumSpanningTreeTest
     {
-        private UndirectedGraph<string, TaggedEdge<string, double>> GetUndirectedFullGraph(int vert)
+        private static UndirectedGraph<string, TaggedEdge<string, double>> GetUndirectedFullGraph(int vert)
         {
             Console.WriteLine("Start");
             var usedEdge = new List<KeyValuePair<int, int>>();
@@ -175,7 +175,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
         }
 
         
-        public void Kruskal<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
+        public static void Kruskal<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>();
@@ -187,7 +187,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
         }
 
         
-        public void MyPrim<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
+        public static void MyPrim<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
             where TEdge : IEdge<TVertex>
         {
             var ed = g.Edges.ToList();
@@ -199,7 +199,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             AssertMinimumSpanningTree<TVertex, TEdge>(g, prim);
         }
         
-        public void MyKruskal<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
+        public static void MyKruskal<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
             where TEdge : IEdge<TVertex>
         {
             var ed = g.Edges.ToList();
@@ -219,7 +219,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
         }
 
         
-        public void Prim<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
+        public static void Prim<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
              where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>();
@@ -300,11 +300,11 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
         public void PrimKruskalMinimumSpanningTreeAll()
         {
             foreach (var g in TestGraphFactory.GetUndirectedGraphs())
-                this.CompareRoot(g);
+                CompareRoot(g);
         }
 
         
-        public double CompareRoot<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
+        public static double CompareRoot<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var distances = new Dictionary<TEdge, double>();

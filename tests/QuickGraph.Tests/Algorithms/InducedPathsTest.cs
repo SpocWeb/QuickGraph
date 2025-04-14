@@ -8,7 +8,7 @@ namespace QuickGraph.Tests.Algorithms
     [TestClass]
     public class InducedPathsAlgorithmTests
     {
-        private List<List<int>> InducedPaths(int[] verticies, int[] edges)
+        private static List<List<int>> InducedPaths(int[] verticies, int[] edges)
         {
             var graph = new UndirectedGraph<int, IEdge<int>>();
 
@@ -24,7 +24,7 @@ namespace QuickGraph.Tests.Algorithms
             return InducedPathAlgorithm.findInducedPaths(graph);
         }
         
-        private List<List<int>> ToListPaths(int[] paths, int len)
+        private static List<List<int>> ToListPaths(int[] paths, int len)
         {
             var res = new List<List<int>> { };
 
@@ -43,14 +43,14 @@ namespace QuickGraph.Tests.Algorithms
             return res;
         }
 
-        private List<List<int>> ListSort(List<List<int>> paths)
+        private static List<List<int>> ListSort(List<List<int>> paths)
         {
             var res = paths.Select(x => x.OrderBy(y => y).ToList()).ToList();
             res.Sort(CompareTwoLists);
             return res;
         }
 
-        private int CompareTwoLists(List<int> list1, List<int> list2)
+        private static int CompareTwoLists(List<int> list1, List<int> list2)
         {
             int i = 0;
             while (i < list1.Count)
@@ -68,7 +68,7 @@ namespace QuickGraph.Tests.Algorithms
             return 0;
         }
 
-        private bool CompareLists(List<List<int>> list1, List<List<int>> list2)
+        private static bool CompareLists(List<List<int>> list1, List<List<int>> list2)
         {
             list1 = ListSort(list1);
             list2 = ListSort(list2);

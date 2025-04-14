@@ -15,13 +15,13 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             {
                 while (g.EdgeCount > 0)
                 {
-                    this.Compute(g);
+                    Compute(g);
                     g.RemoveEdge(Enumerable.First(g.Edges));
                 }
             }
         }
 
-        public void Compute<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
+        public static void Compute<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g)
              where TEdge : IEdge<TVertex>
         {
             var dfs = new ConnectedComponentsAlgorithm<TVertex, TEdge>(g);

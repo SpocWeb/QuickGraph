@@ -12,11 +12,11 @@ namespace QuickGraph.Algorithms.RandomWalks
         public void GenerateAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.Generate(g);
+                Generate(g);
         }
 
         
-        public void Generate<TVertex, TEdge>(IVertexListGraph<TVertex, TEdge> g)
+        public static void Generate<TVertex, TEdge>(IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
 

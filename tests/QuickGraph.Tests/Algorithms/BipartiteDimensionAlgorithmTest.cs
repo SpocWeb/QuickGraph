@@ -54,7 +54,7 @@ namespace QuickGraph.Tests.Algorithms
                 new int[] { 1, 3,  2, 3,  1, 4,  2, 4,  2, 5,  4, 5 });
         }
 
-        private int CalcBicliqueCount(int[] verticies, int[] edges)
+        private static int CalcBicliqueCount(int[] verticies, int[] edges)
         {
             var g = new UndirectedGraph<int, IEdge<int>>();
             g.AddVertexRange(verticies);

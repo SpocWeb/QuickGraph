@@ -8,7 +8,7 @@ namespace QuickGraph.Tests.Algorithms.GraphPartitioning
     [TestClass]
     public class KernighanLinAlgoritmTest
     {
-        private UndirectedGraph<int, TaggedUndirectedEdge<int, double>> createGraph(List<TaggedUndirectedEdge<int, double>> edges)
+        private static UndirectedGraph<int, TaggedUndirectedEdge<int, double>> createGraph(List<TaggedUndirectedEdge<int, double>> edges)
         {
             var g = new UndirectedGraph<int, TaggedUndirectedEdge<int, double>>(true);
             foreach (TaggedUndirectedEdge<int, double> edge in edges)
@@ -18,10 +18,8 @@ namespace QuickGraph.Tests.Algorithms.GraphPartitioning
             return g;
         }
 
-        private bool isEqual(Partition<int> p1, Partition<int> p2){
-
-            return p1.A.SetEquals(p2.A) && p1.B.SetEquals(p2.B) || p1.A.SetEquals(p2.B) && p1.B.SetEquals(p2.A);
-        }
+        private static bool isEqual(Partition<int> p1, Partition<int> p2)
+            => p1.A.SetEquals(p2.A) && p1.B.SetEquals(p2.B) || p1.A.SetEquals(p2.B) && p1.B.SetEquals(p2.A);
 
 
         [TestMethod]

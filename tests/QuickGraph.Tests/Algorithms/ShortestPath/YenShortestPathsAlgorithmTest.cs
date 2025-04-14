@@ -99,7 +99,7 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
       YenNormalCaseTestBody(yen, input);
     }
 
-    private void YenNormalCaseTestBody(YenShortestPathsAlgorithm<char> yen,
+    private static void YenNormalCaseTestBody(YenShortestPathsAlgorithm<char> yen,
       AdjacencyGraph<char, TaggedEquatableEdge<char, double>> input)
     {
       /*  generate simple graph
@@ -131,7 +131,7 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
       Assert.AreEqual(result[2].ToArray()[3], input.Edges.ToArray()[7]);
     }
 
-    private AdjacencyGraph<char, TaggedEquatableEdge<char, double>> GenerateNormalInput()
+    private static AdjacencyGraph<char, TaggedEquatableEdge<char, double>> GenerateNormalInput()
     {
       var graph = new AdjacencyGraph<char, TaggedEquatableEdge<char,double>>(true);
       graph.AddVertexRange("123456");

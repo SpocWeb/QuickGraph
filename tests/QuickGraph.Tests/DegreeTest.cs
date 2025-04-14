@@ -10,11 +10,11 @@ namespace QuickGraph.Tests
         public void DegreeSumEqualsTwiceEdgeCountAll()
         {
             foreach (var g in TestGraphFactory.GetBidirectionalGraphs())
-                this.DegreeSumEqualsTwiceEdgeCount(g);
+                DegreeSumEqualsTwiceEdgeCount(g);
         }
 
         
-        public void DegreeSumEqualsTwiceEdgeCount<TVertex, TEdge>(
+        public static void DegreeSumEqualsTwiceEdgeCount<TVertex, TEdge>(
             IBidirectionalGraph<TVertex, TEdge> graph)
             where TEdge : IEdge<TVertex>
         {
@@ -30,11 +30,11 @@ namespace QuickGraph.Tests
         public void InDegreeSumEqualsEdgeCountAll()
         {
             foreach (var g in TestGraphFactory.GetBidirectionalGraphs())
-                this.InDegreeSumEqualsEdgeCount(g);
+                InDegreeSumEqualsEdgeCount(g);
         }
 
         
-        public void InDegreeSumEqualsEdgeCount<TVertex,TEdge>(
+        public static void InDegreeSumEqualsEdgeCount<TVertex,TEdge>(
              IBidirectionalGraph<TVertex, TEdge> graph)
             where TEdge : IEdge<TVertex>
         {
@@ -50,11 +50,11 @@ namespace QuickGraph.Tests
         public void OutDegreeSumEqualsEdgeCountAll()
         {
             foreach (var g in TestGraphFactory.GetBidirectionalGraphs())
-                this.OutDegreeSumEqualsEdgeCount(g);
+                OutDegreeSumEqualsEdgeCount(g);
         }
 
         
-        public void OutDegreeSumEqualsEdgeCount<TVertex,TEdge>(
+        public static void OutDegreeSumEqualsEdgeCount<TVertex,TEdge>(
              IBidirectionalGraph<TVertex, TEdge> graph)
             where TEdge : IEdge<TVertex>
         {

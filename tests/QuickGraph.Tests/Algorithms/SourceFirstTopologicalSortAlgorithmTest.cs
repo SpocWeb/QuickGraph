@@ -11,11 +11,11 @@ namespace QuickGraph.Algorithms
         public void SortAll()
         {
             foreach(var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.Sort(g);
+                Sort(g);
         }
 
         
-        public void Sort<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g)
+        public static void Sort<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var topo = new SourceFirstTopologicalSortAlgorithm<TVertex, TEdge>(g);

@@ -481,7 +481,7 @@ namespace QuickGraph.Serialization
                 }
             }
 
-            private string ConstructTypeCode(Type t)
+            private static string ConstructTypeCode(Type t)
             {
                 var code = ConstructTypeCodeForSimpleType(t);
 

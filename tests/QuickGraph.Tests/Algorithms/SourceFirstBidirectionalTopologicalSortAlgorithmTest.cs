@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickGraph.Serialization;
 using QuickGraph.Algorithms.TopologicalSort;
+using System;
 
 namespace QuickGraph.Algorithms
 {
@@ -8,26 +9,30 @@ namespace QuickGraph.Algorithms
     public partial class SourceFirstBidirectionalTopologicalSortAlgorithmTest
     {
         [TestMethod]
+
         public void SortAll()
         {
             foreach (var g in TestGraphFactory.GetBidirectionalGraphs())
             {
-                this.Sort(g, TopologicalSortDirection.Forward);
-                this.Sort(g, TopologicalSortDirection.Backward);
+                Sort(g, TopologicalSortDirection.Forward);
+                Sort(g, TopologicalSortDirection.Backward);
             }
         }
 
         
-        public void Sort<TVertex, TEdge>(IBidirectionalGraph<TVertex, TEdge> g, TopologicalSortDirection direction)
+        public static void Sort<TVertex, TEdge>(IBidirectionalGraph<TVertex, TEdge> g, TopologicalSortDirection direction)
             where TEdge : IEdge<TVertex>
         {
             var topo = new SourceFirstBidirectionalTopologicalSortAlgorithm<TVertex, TEdge>(g, direction);
             try
             {
                 topo.Compute();
+                //How to 
             }
-            catch (NonAcyclicGraphException)
-            { }
+            catch (NonAcyclicGraphException x)
+            {
+                Console.WriteLine("Cyclic Graph: " + x);
+            }
         }
 
         [TestMethod]

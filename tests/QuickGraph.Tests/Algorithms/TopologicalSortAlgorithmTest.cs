@@ -13,11 +13,11 @@ namespace QuickGraph.Algorithms
         public void TopologicalSortAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.SortCyclic(g);
+                SortCyclic(g);
         }
 
         
-        public void SortCyclic<TVertex,TEdge>(
+        public static void SortCyclic<TVertex,TEdge>(
             IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
