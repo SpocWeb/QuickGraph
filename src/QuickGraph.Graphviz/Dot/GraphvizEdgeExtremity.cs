@@ -65,82 +65,40 @@ namespace QuickGraph.Graphviz.Dot
 
         public bool IsClipped
         {
-            get
-            {
-                return isClipped;
-            }
-            set
-            {
-                isClipped = value;
-            }
+            get => isClipped;
+            set => isClipped = value;
         }
 
-        public bool IsHead
-        {
-            get
-            {
-                return isHead;
-            }
-        }
+        public bool IsHead => isHead;
 
         public string Label
         {
-            get
-            {
-                return label;
-            }
-            set
-            {
-                label = value;
-            }
+            get => label;
+            set => label = value;
         }
 
         public string Logical
         {
-            get
-            {
-                return logical;
-            }
-            set
-            {
-                logical = value;
-            }
+            get => logical;
+            set => logical = value;
         }
 
         public string Same
         {
-            get
-            {
-                return same;
-            }
-            set
-            {
-                same = value;
-            }
+            get => same;
+            set => same = value;
         }
 
         public string ToolTip
         {
-            get
-            {
-                return tooltip;
-            }
-            set
-            {
-                tooltip = value;
-            }
+            get => tooltip;
+            set => tooltip = value;
         }
 
         public string Url
         {
-            get
-            {
-                return url;
-            }
-            set
-            {
-                url = value;
-            }
+            get => url;
+            set => url = value;
         }
     }
 }

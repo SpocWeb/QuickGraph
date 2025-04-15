@@ -62,14 +62,8 @@ namespace QuickGraph.Collections
 
         public TEdge this[int index]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
 
         public void Add(TEdge item)
@@ -92,15 +86,9 @@ namespace QuickGraph.Collections
             throw new NotImplementedException();
         }
 
-        public int Count
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public int Count => throw new NotImplementedException();
 
-        public bool IsReadOnly
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public bool IsReadOnly => throw new NotImplementedException();
 
         public bool Remove(TEdge item)
         {

@@ -39,74 +39,38 @@ namespace QuickGraph.Graphviz.Dot
 
         public double Angle
         {
-            get
-            {
-                return angle;
-            }
-            set
-            {
-                angle = value;
-            }
+            get => angle;
+            set => angle = value;
         }
 
         public double Distance
         {
-            get
-            {
-                return distance;
-            }
-            set
-            {
-                distance = value;
-            }
+            get => distance;
+            set => distance = value;
         }
 
         public bool Float
         {
-            get
-            {
-                return @float;
-            }
-            set
-            {
-                @float = value;
-            }
+            get => @float;
+            set => @float = value;
         }
 
         public Font Font
         {
-            get
-            {
-                return font;
-            }
-            set
-            {
-                font = value;
-            }
+            get => font;
+            set => font = value;
         }
 
         public Color FontColor
         {
-            get
-            {
-                return fontColor;
-            }
-            set
-            {
-                fontColor = value;
-            }
+            get => fontColor;
+            set => fontColor = value;
         }
 
         public string Value
         {
-            get
-            {
-                return value;
-            }
-            set
-            {
-                this.value = value;
-            }
+            get => value;
+            set => this.value = value;
         }
     }
 }

@@ -70,42 +70,27 @@ namespace QuickGraph
             this.edgeCapacity = edgeCapacity;
         }
 
-        public bool IsDirected
-        {
-            get { return isDirected; }
-        }
+        public bool IsDirected => isDirected;
 
         public bool AllowParallelEdges
         {
             [Pure]
-            get { return allowParallelEdges; }
+            get => allowParallelEdges;
         }
 
         public int EdgeCapacity
         {
-            get { return edgeCapacity; }
-            set { edgeCapacity = value; }
+            get => edgeCapacity;
+            set => edgeCapacity = value;
         }
 
-        public static Type EdgeType
-        {
-            get { return typeof(TEdge); }
-        }
+        public static Type EdgeType => typeof(TEdge);
 
-        public bool IsVerticesEmpty
-        {
-            get { return vertexEdges.Count == 0; }
-        }
+        public bool IsVerticesEmpty => vertexEdges.Count == 0;
 
-        public int VertexCount
-        {
-            get { return vertexEdges.Count; }
-        }
+        public int VertexCount => vertexEdges.Count;
 
-        public virtual IEnumerable<TVertex> Vertices
-        {
-            get { return vertexEdges.Keys; }
-        }
+        public virtual IEnumerable<TVertex> Vertices => vertexEdges.Keys;
 
         [Pure]
         public bool ContainsVertex(TVertex v)
@@ -161,20 +146,14 @@ namespace QuickGraph
         public bool IsEdgesEmpty
         {
             [Pure]
-            get { return edgeCount == 0; }
+            get => edgeCount == 0;
         }
 
         /// <summary>
         /// Gets the edge count.
         /// </summary>
         /// <value>The edge count.</value>
-        public int EdgeCount
-        {
-            get 
-            {
-                return edgeCount; 
-            }
-        }
+        public int EdgeCount => edgeCount;
 
         [ContractInvariantMethod]
         void ObjectInvariant()

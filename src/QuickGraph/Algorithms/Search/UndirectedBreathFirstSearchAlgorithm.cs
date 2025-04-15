@@ -55,13 +55,7 @@ namespace QuickGraph.Algorithms.Search
             this.vertexQueue = vertexQueue;
         }
 
-        public IDictionary<TVertex, GraphColor> VertexColors
-        {
-            get
-            {
-                return vertexColors;
-            }
-        }
+        public IDictionary<TVertex, GraphColor> VertexColors => vertexColors;
 
         public GraphColor GetVertexColor(TVertex vertex)
         {

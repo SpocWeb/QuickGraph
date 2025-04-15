@@ -229,400 +229,202 @@ namespace QuickGraph.Graphviz.Dot
 
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get => name;
+            set => name = value;
         }
 
         public Color BackgroundColor
         {
-            get
-            {
-                return backgroundColor;
-            }
-            set
-            {
-                backgroundColor = value;
-            }
+            get => backgroundColor;
+            set => backgroundColor = value;
         }
 
         public GraphvizClusterMode ClusterRank
         {
-            get
-            {
-                return clusterRank;
-            }
-            set
-            {
-                clusterRank = value;
-            }
+            get => clusterRank;
+            set => clusterRank = value;
         }
 
         public string Comment
         {
-            get
-            {
-                return comment;
-            }
-            set
-            {
-                comment = value;
-            }
+            get => comment;
+            set => comment = value;
         }
 
         public Font Font
         {
-            get
-            {
-                return font;
-            }
-            set
-            {
-                font = value;
-            }
+            get => font;
+            set => font = value;
         }
 
         public Color FontColor
         {
-            get
-            {
-                return fontColor;
-            }
-            set
-            {
-                fontColor = value;
-            }
+            get => fontColor;
+            set => fontColor = value;
         }
 
         public bool IsCentered
         {
-            get
-            {
-                return isCentered;
-            }
-            set
-            {
-                isCentered = value;
-            }
+            get => isCentered;
+            set => isCentered = value;
         }
 
         public bool IsCompounded
         {
-            get
-            {
-                return isCompounded;
-            }
-            set
-            {
-                isCompounded = value;
-            }
+            get => isCompounded;
+            set => isCompounded = value;
         }
 
         public bool IsConcentrated
         {
-            get
-            {
-                return isConcentrated;
-            }
-            set
-            {
-                isConcentrated = value;
-            }
+            get => isConcentrated;
+            set => isConcentrated = value;
         }
 
         public bool IsLandscape
         {
-            get
-            {
-                return isLandscape;
-            }
-            set
-            {
-                isLandscape = value;
-            }
+            get => isLandscape;
+            set => isLandscape = value;
         }
 
         public bool IsNormalized
         {
-            get
-            {
-                return isNormalized;
-            }
-            set
-            {
-                isNormalized = value;
-            }
+            get => isNormalized;
+            set => isNormalized = value;
         }
 
         public bool IsReMinCross
         {
-            get
-            {
-                return isReMinCross;
-            }
-            set
-            {
-                isReMinCross = value;
-            }
+            get => isReMinCross;
+            set => isReMinCross = value;
         }
 
         public string Label
         {
-            get
-            {
-                return label;
-            }
-            set
-            {
-                label = value;
-            }
+            get => label;
+            set => label = value;
         }
 
         public GraphvizLabelJustification LabelJustification
         {
-            get
-            {
-                return labelJustification;
-            }
-            set
-            {
-                labelJustification = value;
-            }
+            get => labelJustification;
+            set => labelJustification = value;
         }
 
         public GraphvizLabelLocation LabelLocation
         {
-            get
-            {
-                return labelLocation;
-            }
-            set
-            {
-                labelLocation = value;
-            }
+            get => labelLocation;
+            set => labelLocation = value;
         }
 
-        public GraphvizLayerCollection Layers
-        {
-            get
-            {
-                return layers;
-            }
-        }
+        public GraphvizLayerCollection Layers => layers;
 
         public double McLimit
         {
-            get
-            {
-                return mcLimit;
-            }
-            set
-            {
-                mcLimit = value;
-            }
+            get => mcLimit;
+            set => mcLimit = value;
         }
 
         public double NodeSeparation
         {
-            get
-            {
-                return nodeSeparation;
-            }
-            set
-            {
-                nodeSeparation = value;
-            }
+            get => nodeSeparation;
+            set => nodeSeparation = value;
         }
 
         public int NsLimit
         {
-            get
-            {
-                return nsLimit;
-            }
-            set
-            {
-                nsLimit = value;
-            }
+            get => nsLimit;
+            set => nsLimit = value;
         }
 
         public int NsLimit1
         {
-            get
-            {
-                return nsLimit1;
-            }
-            set
-            {
-                nsLimit1 = value;
-            }
+            get => nsLimit1;
+            set => nsLimit1 = value;
         }
 
         public GraphvizOutputMode OutputOrder
         {
-            get
-            {
-                return outputOrder;
-            }
-            set
-            {
-                outputOrder = value;
-            }
+            get => outputOrder;
+            set => outputOrder = value;
         }
 
         public GraphvizPageDirection PageDirection
         {
-            get
-            {
-                return pageDirection;
-            }
-            set
-            {
-                pageDirection = value;
-            }
+            get => pageDirection;
+            set => pageDirection = value;
         }
 
         public SizeF PageSize
         {
-            get
-            {
-                return pageSize;
-            }
-            set
-            {
-                pageSize = value;
-            }
+            get => pageSize;
+            set => pageSize = value;
         }
 
         public double Quantum
         {
-            get
-            {
-                return quantum;
-            }
-            set
-            {
-                quantum = value;
-            }
+            get => quantum;
+            set => quantum = value;
         }
 
         public GraphvizRankDirection RankDirection
         {
-            get
-            {
-                return rankDirection;
-            }
-            set
-            {
-                rankDirection = value;
-            }
+            get => rankDirection;
+            set => rankDirection = value;
         }
 
         public double RankSeparation
         {
-            get
-            {
-                return rankSeparation;
-            }
-            set
-            {
-                rankSeparation = value;
-            }
+            get => rankSeparation;
+            set => rankSeparation = value;
         }
 
         public GraphvizRatioMode Ratio
         {
-            get
-            {
-                return ratio;
-            }
-            set
-            {
-                ratio = value;
-            }
+            get => ratio;
+            set => ratio = value;
         }
 
         public double Resolution
         {
-            get
-            {
-                return resolution;
-            }
-            set
-            {
-                resolution = value;
-            }
+            get => resolution;
+            set => resolution = value;
         }
 
         public int Rotate
         {
-            get
-            {
-                return rotate;
-            }
-            set
-            {
-                rotate = value;
-            }
+            get => rotate;
+            set => rotate = value;
         }
 
         public int SamplePoints
         {
-            get
-            {
-                return samplePoints;
-            }
-            set
-            {
-                samplePoints = value;
-            }
+            get => samplePoints;
+            set => samplePoints = value;
         }
 
         public int SearchSize
         {
-            get
-            {
-                return searchSize;
-            }
-            set
-            {
-                searchSize = value;
-            }
+            get => searchSize;
+            set => searchSize = value;
         }
 
         public SizeF Size
         {
-            get
-            {
-                return size;
-            }
-            set
-            {
-                size = value;
-            }
+            get => size;
+            set => size = value;
         }
 
         public string StyleSheet
         {
-            get
-            {
-                return styleSheet;
-            }
-            set
-            {
-                styleSheet = value;
-            }
+            get => styleSheet;
+            set => styleSheet = value;
         }
 
         public string Url
         {
-            get
-            {
-                return url;
-            }
-            set
-            {
-                url = value;
-            }
+            get => url;
+            set => url = value;
         }
     }
 }

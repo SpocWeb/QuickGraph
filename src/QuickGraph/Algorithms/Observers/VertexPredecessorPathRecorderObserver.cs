@@ -33,15 +33,9 @@ namespace QuickGraph.Algorithms.Observers
             this.vertexPredecessors = vertexPredecessors;
         }
 
-        public IDictionary<TVertex, TEdge> VertexPredecessors
-        {
-            get { return vertexPredecessors; }
-        }
+        public IDictionary<TVertex, TEdge> VertexPredecessors => vertexPredecessors;
 
-        public ICollection<TVertex> EndPathVertices
-        {
-            get { return endPathVertices; }
-        }
+        public ICollection<TVertex> EndPathVertices => endPathVertices;
 
         public IDisposable Attach(IVertexPredecessorRecorderAlgorithm<TVertex, TEdge> algorithm)
         {

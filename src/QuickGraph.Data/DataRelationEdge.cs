@@ -14,19 +14,10 @@ namespace QuickGraph.Data
             this.relation = relation;
         }
 
-        public DataRelation Relation
-        {
-            get { return relation; }
-        }
+        public DataRelation Relation => relation;
 
-        public DataTable Source
-        {
-            get { return relation.ParentTable;}
-        }
+        public DataTable Source => relation.ParentTable;
 
-        public DataTable Target
-        {
-            get { return relation.ChildTable; }
-        }
+        public DataTable Target => relation.ChildTable;
     }
 }

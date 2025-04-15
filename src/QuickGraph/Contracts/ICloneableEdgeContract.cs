@@ -21,15 +21,9 @@ namespace QuickGraph.Contracts
 
         #region IEdge<TVertex> Members
 
-        TVertex IEdge<TVertex>.Source
-        {
-            get { throw new NotImplementedException(); }
-        }
+        TVertex IEdge<TVertex>.Source => throw new NotImplementedException();
 
-        TVertex IEdge<TVertex>.Target
-        {
-            get { throw new NotImplementedException(); }
-        }
+        TVertex IEdge<TVertex>.Target => throw new NotImplementedException();
 
         #endregion
     }

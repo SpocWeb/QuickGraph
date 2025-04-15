@@ -48,19 +48,13 @@ namespace QuickGraph
         /// Gets the source vertex
         /// </summary>
         /// <value></value>
-        public TVertex Source
-        {
-            get { return source; }
-        }
+        public TVertex Source => source;
 
         /// <summary>
         /// Gets the target vertex
         /// </summary>
         /// <value></value>
-        public TVertex Target
-        {
-            get { return target; }
-        }
+        public TVertex Target => target;
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -88,7 +82,7 @@ namespace QuickGraph
 
         public TTag Tag
         {
-            get { return tag; }
+            get => tag;
             set
             {
                 if (!Equals(tag, value))

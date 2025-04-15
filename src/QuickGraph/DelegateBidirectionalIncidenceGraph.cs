@@ -30,10 +30,7 @@ namespace QuickGraph
             this.tryGetInEdges = tryGetInEdges;
         }
 
-        public TryFunc<TVertex, IEnumerable<TEdge>> TryGetInEdgesFunc
-        {
-            get { return tryGetInEdges; }
-        }
+        public TryFunc<TVertex, IEnumerable<TEdge>> TryGetInEdgesFunc => tryGetInEdges;
 
         #region IBidirectionalImplicitGraph<TVertex,TEdge> Members
 

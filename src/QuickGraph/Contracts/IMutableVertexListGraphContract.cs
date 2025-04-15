@@ -39,15 +39,9 @@ namespace QuickGraph.Contracts
 
         #region IGraph<TVertex,TEdge> Members
 
-        bool IGraph<TVertex, TEdge>.IsDirected
-        {
-            get { throw new NotImplementedException(); }
-        }
+        bool IGraph<TVertex, TEdge>.IsDirected => throw new NotImplementedException();
 
-        bool IGraph<TVertex, TEdge>.AllowParallelEdges
-        {
-            get { throw new NotImplementedException(); }
-        }
+        bool IGraph<TVertex, TEdge>.AllowParallelEdges => throw new NotImplementedException();
 
         #endregion
 
@@ -103,8 +97,8 @@ namespace QuickGraph.Contracts
 
         event VertexAction<TVertex> IMutableVertexSet<TVertex>.VertexAdded
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         bool IMutableVertexSet<TVertex>.AddVertex(TVertex v)
@@ -119,8 +113,8 @@ namespace QuickGraph.Contracts
 
         event VertexAction<TVertex> IMutableVertexSet<TVertex>.VertexRemoved
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         bool IMutableVertexSet<TVertex>.RemoveVertex(TVertex v)
@@ -137,20 +131,11 @@ namespace QuickGraph.Contracts
 
         #region IVertexSet<TVertex> Members
 
-        bool IVertexSet<TVertex>.IsVerticesEmpty
-        {
-            get { throw new NotImplementedException(); }
-        }
+        bool IVertexSet<TVertex>.IsVerticesEmpty => throw new NotImplementedException();
 
-        int IVertexSet<TVertex>.VertexCount
-        {
-            get { throw new NotImplementedException(); }
-        }
+        int IVertexSet<TVertex>.VertexCount => throw new NotImplementedException();
 
-        IEnumerable<TVertex> IVertexSet<TVertex>.Vertices
-        {
-            get { throw new NotImplementedException(); }
-        }
+        IEnumerable<TVertex> IVertexSet<TVertex>.Vertices => throw new NotImplementedException();
 
         bool IImplicitVertexSet<TVertex>.ContainsVertex(TVertex vertex)
         {

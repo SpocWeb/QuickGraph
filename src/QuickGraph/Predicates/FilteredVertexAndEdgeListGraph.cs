@@ -21,13 +21,7 @@ namespace QuickGraph.Predicates
             :base(baseGraph,vertexPredicate,edgePredicate)
         { }
 
-        public bool IsEdgesEmpty
-        {
-            get
-            {
-                return EdgeCount == 0;
-            }
-        }
+        public bool IsEdgesEmpty => EdgeCount == 0;
 
         public int EdgeCount
         {

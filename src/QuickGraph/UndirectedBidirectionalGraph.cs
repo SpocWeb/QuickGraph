@@ -24,18 +24,9 @@ namespace QuickGraph
             this.visitedGraph = visitedGraph;
         }
 
-        public EdgeEqualityComparer<TVertex, TEdge> EdgeEqualityComparer
-        {
-            get
-            {
-                return edgeEqualityComparer;
-            }
-        }
+        public EdgeEqualityComparer<TVertex, TEdge> EdgeEqualityComparer => edgeEqualityComparer;
 
-        public IBidirectionalGraph<TVertex, TEdge> VisitedGraph
-        {
-            get { return visitedGraph; }
-        }
+        public IBidirectionalGraph<TVertex, TEdge> VisitedGraph => visitedGraph;
 
         #region IUndirectedGraph<Vertex,Edge> Members
 
@@ -97,20 +88,11 @@ namespace QuickGraph
 
         #region IVertexSet<Vertex,Edge> Members
 
-        public bool IsVerticesEmpty
-        {
-            get  { return VisitedGraph.IsVerticesEmpty; }
-        }
+        public bool IsVerticesEmpty => VisitedGraph.IsVerticesEmpty;
 
-        public int VertexCount
-        {
-            get { return VisitedGraph.VertexCount; }
-        }
+        public int VertexCount => VisitedGraph.VertexCount;
 
-        public IEnumerable<TVertex> Vertices
-        {
-            get { return VisitedGraph.Vertices; }
-        }
+        public IEnumerable<TVertex> Vertices => VisitedGraph.Vertices;
 
         [Pure]
         public bool ContainsVertex(TVertex vertex)
@@ -122,20 +104,11 @@ namespace QuickGraph
 
         #region IEdgeListGraph<Vertex,Edge> Members
 
-        public bool IsEdgesEmpty
-        {
-            get { return VisitedGraph.IsEdgesEmpty; }
-        }
+        public bool IsEdgesEmpty => VisitedGraph.IsEdgesEmpty;
 
-        public int EdgeCount
-        {
-            get { return VisitedGraph.EdgeCount; }
-        }
+        public int EdgeCount => VisitedGraph.EdgeCount;
 
-        public IEnumerable<TEdge> Edges
-        {
-            get { return VisitedGraph.Edges; }
-        }
+        public IEnumerable<TEdge> Edges => VisitedGraph.Edges;
 
         [Pure]
         public bool ContainsEdge(TEdge edge)
@@ -147,15 +120,9 @@ namespace QuickGraph
 
         #region IGraph<Vertex,Edge> Members
 
-        public bool IsDirected
-        {
-            get { return false; }
-        }
+        public bool IsDirected => false;
 
-        public bool AllowParallelEdges
-        {
-            get { return VisitedGraph.AllowParallelEdges; }
-        }
+        public bool AllowParallelEdges => VisitedGraph.AllowParallelEdges;
 
         #endregion
     }

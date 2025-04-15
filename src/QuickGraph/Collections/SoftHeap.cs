@@ -86,30 +86,15 @@ namespace QuickGraph.Collections
             count = 0;
         }
 
-        public int MinRank
-        {
-            get { return r; }
-        }
+        public int MinRank => r;
 
-        public Comparison<TKey> Comparison
-        {
-            get { return comparison; }
-        }
+        public Comparison<TKey> Comparison => comparison;
 
-        public double ErrorRate
-        {
-            get { return errorRate; }
-        }
+        public double ErrorRate => errorRate;
 
-        public int Count
-        {
-            get { return count; }
-        }
+        public int Count => count;
 
-        public TKey KeyMaxValue
-        {
-            get { return keyMaxValue; }
-        }
+        public TKey KeyMaxValue => keyMaxValue;
 
         public void Add(TKey key, TValue value)
         {
@@ -342,18 +327,12 @@ namespace QuickGraph.Collections
                 return false;
             }
 
-            public KeyValuePair<TKey, TValue> Current
-            {
-                get { return current; }
-            }
+            public KeyValuePair<TKey, TValue> Current => current;
 
             public void Dispose()
             { }
 
-            object System.Collections.IEnumerator.Current
-            {
-                get { return Current; }
-            }
+            object System.Collections.IEnumerator.Current => Current;
 
             public void Reset()
             {

@@ -56,11 +56,8 @@ namespace QuickGraph
 
         public int EdgeCapacity
         {
-            get { return edgeCapacity; }
-            set
-            {
-                edgeCapacity = value;
-            }
+            get => edgeCapacity;
+            set => edgeCapacity = value;
         }
 
         public IEnumerable<TVertex> AdjacentVertices(TVertex v)
@@ -98,15 +95,10 @@ namespace QuickGraph
             return newGraph;
         }
         #region IGraph<Vertex,Edge> Members
-        public bool  IsDirected
-        {
-        	get { return false; }
-        }
+        public bool  IsDirected => false;
 
-        public bool  AllowParallelEdges
-        {
-        	get { return allowParallelEdges; }
-        }
+        public bool  AllowParallelEdges => allowParallelEdges;
+
         #endregion
 
         #region IMutableUndirected<Vertex,Edge> Members
@@ -270,20 +262,11 @@ namespace QuickGraph
             return adjacentEdges[v][index];
         }
 
-        public bool IsVerticesEmpty
-        {
-            get { return adjacentEdges.Count == 0; }
-        }
+        public bool IsVerticesEmpty => adjacentEdges.Count == 0;
 
-        public int VertexCount
-        {
-            get { return adjacentEdges.Count; }
-        }
+        public int VertexCount => adjacentEdges.Count;
 
-        public IEnumerable<TVertex> Vertices
-        {
-            get { return adjacentEdges.Keys; }
-        }
+        public IEnumerable<TVertex> Vertices => adjacentEdges.Keys;
 
 
         [Pure]
@@ -409,15 +392,9 @@ namespace QuickGraph
         #endregion
 
         #region IEdgeListGraph<Vertex,Edge> Members
-        public bool IsEdgesEmpty
-        {
-            get { return EdgeCount==0; }
-        }
+        public bool IsEdgesEmpty => EdgeCount==0;
 
-        public int EdgeCount
-        {
-            get { return edgeCount; }
-        }
+        public int EdgeCount => edgeCount;
 
         public IEnumerable<TEdge> Edges
         {

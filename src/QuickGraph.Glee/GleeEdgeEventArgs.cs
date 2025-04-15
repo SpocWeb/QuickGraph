@@ -4,10 +4,7 @@ namespace QuickGraph.Glee
         where TEdge : IEdge<TVertex>
     {
         private readonly Microsoft.Glee.Drawing.Edge gedge;
-        public Microsoft.Glee.Drawing.Edge GEdge
-        {
-            get { return gedge; }
-        }
+        public Microsoft.Glee.Drawing.Edge GEdge => gedge;
 
         public GleeEdgeEventArgs(TEdge edge, Microsoft.Glee.Drawing.Edge gedge)
             :base(edge)

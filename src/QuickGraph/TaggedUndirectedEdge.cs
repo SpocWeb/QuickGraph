@@ -47,7 +47,7 @@ namespace QuickGraph
         /// </summary>
         public TTag Tag
         {
-            get { return tag; }
+            get => tag;
             set
             {
                 if (!Equals(tag, value))

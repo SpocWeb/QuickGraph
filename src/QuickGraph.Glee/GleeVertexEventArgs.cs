@@ -14,10 +14,7 @@ namespace QuickGraph.Glee
             this.node = node;
         }
 
-        public Node Node
-        {
-            get { return node; }
-        }
+        public Node Node => node;
     }
 
     public delegate void GleeVertexNodeEventHandler<Vertex>(

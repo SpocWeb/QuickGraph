@@ -24,15 +24,9 @@ namespace QuickGraph.Graphviz
             graphviz.CommonEdgeFormat.Font = new System.Drawing.Font("Tahoma", 8.25F);
         }
 
-        public GraphvizAlgorithm<TVertex, TEdge> Graphviz
-        {
-            get { return graphviz; }
-        }
+        public GraphvizAlgorithm<TVertex, TEdge> Graphviz => graphviz;
 
-        public IEdgeListGraph<TVertex, TEdge> VisitedGraph
-        {
-            get { return graphviz.VisitedGraph; }
-        }
+        public IEdgeListGraph<TVertex, TEdge> VisitedGraph => graphviz.VisitedGraph;
 
         public string Generate(IDotEngine dot, string fileName)
         {

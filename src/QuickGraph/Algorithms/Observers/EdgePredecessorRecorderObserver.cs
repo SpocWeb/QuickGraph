@@ -38,21 +38,9 @@ namespace QuickGraph.Algorithms.Observers
             this.endPathEdges = endPathEdges;
         }
 
-        public IDictionary<TEdge,TEdge> EdgePredecessors
-        {
-            get
-            {
-                return edgePredecessors;
-            }
-        }
+        public IDictionary<TEdge,TEdge> EdgePredecessors => edgePredecessors;
 
-        public IList<TEdge> EndPathEdges
-        {
-            get
-            {
-                return endPathEdges;
-            }
-        }
+        public IList<TEdge> EndPathEdges => endPathEdges;
 
         public IDisposable Attach(IEdgePredecessorRecorderAlgorithm<TVertex, TEdge> algorithm)
         {

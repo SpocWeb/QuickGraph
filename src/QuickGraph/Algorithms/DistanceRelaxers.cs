@@ -9,10 +9,7 @@
         {
             internal ShortestDistanceRelaxer() { }
 
-            public double InitialDistance
-            {
-                get { return double.MaxValue; }
-            }
+            public double InitialDistance => double.MaxValue;
 
             public int Compare(double a, double b)
             {
@@ -32,10 +29,7 @@
         {
             internal CriticalDistanceRelaxer() { }
 
-            public double InitialDistance
-            {
-                get { return double.MinValue; }
-            }
+            public double InitialDistance => double.MinValue;
 
             public int Compare(double a, double b)
             {
@@ -54,10 +48,7 @@
             : IDistanceRelaxer
         {
 
-            public double InitialDistance
-            {
-                get { return 0; }
-            }
+            public double InitialDistance => 0;
 
             public int Compare(double a, double b)
             {

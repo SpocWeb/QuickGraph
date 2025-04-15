@@ -49,20 +49,11 @@ namespace QuickGraph.Collections
             priorityComparsion = priorityComparison;
         }
 
-        public Comparison<TPriority> PriorityComparison
-        {
-            get { return priorityComparsion; }
-        }
+        public Comparison<TPriority> PriorityComparison => priorityComparsion;
 
-        public int Capacity
-        {
-            get { return items.Length; }
-        }
+        public int Capacity => items.Length;
 
-        public int Count
-        {
-            get { return count; }
-        }
+        public int Count => count;
 
         public void Add(TPriority priority, TValue value)
         {
@@ -427,10 +418,7 @@ namespace QuickGraph.Collections
                 items = null;
             }
 
-            object IEnumerator.Current
-            {
-                get { return Current; }
-            }
+            object IEnumerator.Current => Current;
 
             public bool MoveNext()
             {

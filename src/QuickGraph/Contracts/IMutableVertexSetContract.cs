@@ -13,8 +13,8 @@ namespace QuickGraph.Contracts
 
         event VertexAction<TVertex> IMutableVertexSet<TVertex>.VertexAdded
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         bool IMutableVertexSet<TVertex>.AddVertex(TVertex v)
@@ -41,8 +41,8 @@ namespace QuickGraph.Contracts
 
         event VertexAction<TVertex> IMutableVertexSet<TVertex>.VertexRemoved
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         bool IMutableVertexSet<TVertex>.RemoveVertex(TVertex v)
@@ -71,17 +71,11 @@ namespace QuickGraph.Contracts
 
         #region IVertexSet<TVertex> Members
 
-        public bool IsVerticesEmpty {
-          get { throw new NotImplementedException(); }
-        }
+        public bool IsVerticesEmpty => throw new NotImplementedException();
 
-        public int VertexCount {
-          get { throw new NotImplementedException(); }
-        }
+        public int VertexCount => throw new NotImplementedException();
 
-        public IEnumerable<TVertex> Vertices {
-          get { throw new NotImplementedException(); }
-        }
+        public IEnumerable<TVertex> Vertices => throw new NotImplementedException();
 
         #endregion
 

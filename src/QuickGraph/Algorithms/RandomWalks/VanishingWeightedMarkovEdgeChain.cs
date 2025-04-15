@@ -23,15 +23,9 @@ namespace QuickGraph.Algorithms.RandomWalks
 
 		public double Factor
 		{
-			get
-			{
-				return factor;
-			}
-            set 
-            {
-                factor = value;
-            }
-		}
+			get => factor;
+            set => factor = value;
+        }
 
         public override bool TryGetSuccessor(IImplicitGraph<TVertex,TEdge> g, TVertex u, out TEdge successor)
         {

@@ -16,15 +16,9 @@ namespace QuickGraph.Petri
             this.net = net;
 		}
 
-		public IPetriNet<Token> Net
-		{
-			get
-			{
-				return net;
-			}
-		}
+		public IPetriNet<Token> Net => net;
 
-		public void Initialize()
+        public void Initialize()
 		{
 			transitionBuffers.Clear();
 			foreach(ITransition<Token> tr in Net.Transitions)
@@ -95,14 +89,12 @@ namespace QuickGraph.Petri
             private readonly IList<Token> tokens = new List<Token>();
             private bool enabled = true;
 
-            public IList<Token> Tokens
-            {
-                get { return tokens;}
-            }
+            public IList<Token> Tokens => tokens;
+
             public bool Enabled
             {
-                get { return enabled; }
-                set { enabled = value; }
+                get => enabled;
+                set => enabled = value;
             }
         }
     }

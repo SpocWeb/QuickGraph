@@ -43,13 +43,7 @@ namespace QuickGraph.Algorithms
             temporaryEdges = new List<TEdge>();
         }
 
-        public List<TEdge> Circuit
-        {
-            get
-            {
-                return circuit;
-            }
-        }
+        public List<TEdge> Circuit => circuit;
 
         private bool NotInCircuit(TEdge edge)
         {

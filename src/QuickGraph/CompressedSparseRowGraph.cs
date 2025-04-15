@@ -95,35 +95,20 @@ namespace QuickGraph
                 outEdges);
         }
 
-        public bool IsVerticesEmpty
-        {
-            get { return outEdgeStartRanges.Count > 0; }
-        }
+        public bool IsVerticesEmpty => outEdgeStartRanges.Count > 0;
 
-        public int VertexCount
-        {
-            get { return outEdgeStartRanges.Count; }
-        }
+        public int VertexCount => outEdgeStartRanges.Count;
 
-        public IEnumerable<TVertex> Vertices
-        {
-            get { return outEdgeStartRanges.Keys; }
-        }
+        public IEnumerable<TVertex> Vertices => outEdgeStartRanges.Keys;
 
         public bool ContainsVertex(TVertex vertex)
         {
             return outEdgeStartRanges.ContainsKey(vertex);
         }
 
-        public int EdgeCount
-        {
-            get { return outEdges.Length; }
-        }
+        public int EdgeCount => outEdges.Length;
 
-        public bool IsEdgesEmpty
-        {
-            get { return outEdges.Length > 0; }
-        }
+        public bool IsEdgesEmpty => outEdges.Length > 0;
 
         public IEnumerable<SEquatableEdge<TVertex>> Edges
         {
@@ -228,15 +213,9 @@ namespace QuickGraph
             return new SEquatableEdge<TVertex>(v, outEdges[targetIndex]);
         }
 
-        public bool IsDirected
-        {
-            get { return true; }
-        }
+        public bool IsDirected => true;
 
-        public bool AllowParallelEdges
-        {
-            get { return false; }
-        }
+        public bool AllowParallelEdges => false;
 
         public CompressedSparseRowGraph<TVertex> Clone()
         {

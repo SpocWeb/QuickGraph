@@ -24,13 +24,7 @@ namespace QuickGraph.Predicates
             : base(baseGraph, vertexPredicate, edgePredicate)
         { }
 
-        public EdgeEqualityComparer<TVertex, TEdge> EdgeEqualityComparer
-        {
-            get
-            {
-                return edgeEqualityComparer;
-            }
-        }
+        public EdgeEqualityComparer<TVertex, TEdge> EdgeEqualityComparer => edgeEqualityComparer;
 
         [Pure]
         public IEnumerable<TEdge> AdjacentEdges(TVertex v)

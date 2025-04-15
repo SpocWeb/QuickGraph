@@ -23,15 +23,9 @@ namespace QuickGraph.Algorithms.Contracts
 
         #region IComputation Members
 
-        object IComputation.SyncRoot
-        {
-            get { throw new NotImplementedException(); }
-        }
+        object IComputation.SyncRoot => throw new NotImplementedException();
 
-        ComputationState IComputation.State
-        {
-            get { throw new NotImplementedException(); }
-        }
+        ComputationState IComputation.State => throw new NotImplementedException();
 
         void IComputation.Compute()
         {
@@ -45,26 +39,26 @@ namespace QuickGraph.Algorithms.Contracts
 
         event EventHandler IComputation.StateChanged
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         event EventHandler IComputation.Started
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         event EventHandler IComputation.Finished
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         event EventHandler IComputation.Aborted
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         #endregion

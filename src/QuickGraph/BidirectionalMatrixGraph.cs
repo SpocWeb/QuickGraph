@@ -31,39 +31,23 @@ namespace QuickGraph
         }
 
         #region IGraph
-        public bool AllowParallelEdges
-        {
-            get { return false; }
-        }
+        public bool AllowParallelEdges => false;
 
-        public bool IsDirected
-        {
-            get { return true; }
-        }
+        public bool IsDirected => true;
+
         #endregion
 
         #region IVertexListGraph
-        public int VertexCount
-        {
-            get { return vertexCount; }
-        }
+        public int VertexCount => vertexCount;
 
-        public bool IsVerticesEmpty
-        {
-            get { return VertexCount == 0; }
-        }
+        public bool IsVerticesEmpty => VertexCount == 0;
+
         #endregion
 
         #region IEdgeListGraph
-        public int EdgeCount
-        {
-            get { return edgeCount; }
-        }
+        public int EdgeCount => edgeCount;
 
-        public bool IsEdgesEmpty
-        {
-            get { return EdgeCount == 0; }
-        }
+        public bool IsEdgesEmpty => EdgeCount == 0;
 
         public IEnumerable<TEdge> Edges
         {

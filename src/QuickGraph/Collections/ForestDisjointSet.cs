@@ -51,15 +51,9 @@ namespace QuickGraph.Collections
             setCount = 0;
         }
 
-        public int SetCount
-        {
-            get { return setCount; }
-        }
+        public int SetCount => setCount;
 
-        public int ElementCount
-        {
-            get { return elements.Count; }
-        }
+        public int ElementCount => elements.Count;
 
         /// <summary>
         /// Adds a new set

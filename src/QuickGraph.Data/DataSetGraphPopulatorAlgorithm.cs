@@ -20,10 +20,7 @@ namespace QuickGraph.Data
             this.dataSet = dataSet;
         }
 
-        public DataSet DataSet
-        {
-            get { return dataSet; }
-        }
+        public DataSet DataSet => dataSet;
 
         protected override void InternalCompute()
         {

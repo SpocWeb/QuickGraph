@@ -45,26 +45,14 @@ namespace QuickGraph.Algorithms.RandomWalks
             this.edgeChain = edgeChain;
         }
 
-        public IDictionary<TVertex,GraphColor> VertexColors
-        {
-            get
-            {
-                return vertexColors;
-            }
-        }
+        public IDictionary<TVertex,GraphColor> VertexColors => vertexColors;
 
         public GraphColor GetVertexColor(TVertex v)
         {
             return vertexColors[v];
         }
 
-        public IMarkovEdgeChain<TVertex,TEdge> EdgeChain
-        {
-            get
-            {
-                return edgeChain;
-            }
-        }
+        public IMarkovEdgeChain<TVertex,TEdge> EdgeChain => edgeChain;
 
         /// <summary>
         /// Gets or sets the random number generator used in <c>RandomTree</c>.
@@ -74,10 +62,7 @@ namespace QuickGraph.Algorithms.RandomWalks
         /// </value>
         public Random Rnd
         {
-            get
-            {
-                return rnd;
-            }
+            get => rnd;
             set
             {
                 Contract.Requires(value != null);
@@ -85,13 +70,7 @@ namespace QuickGraph.Algorithms.RandomWalks
             }
         }
 
-        public IDictionary<TVertex,TEdge> Successors
-        {
-            get
-            {
-                return successors;
-            }
-        }
+        public IDictionary<TVertex,TEdge> Successors => successors;
 
         public event VertexAction<TVertex> InitializeVertex;
         private void OnInitializeVertex(TVertex v)

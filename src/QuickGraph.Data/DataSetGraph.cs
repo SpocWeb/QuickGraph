@@ -7,10 +7,7 @@ namespace QuickGraph.Data
         BidirectionalGraph<DataTable, DataRelationEdge>
     {
         readonly DataSet dataSet;
-        public DataSet DataSet
-        {
-            get { return dataSet; }
-        }
+        public DataSet DataSet => dataSet;
 
         internal DataSetGraph(DataSet dataSet)
         {

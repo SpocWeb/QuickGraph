@@ -332,10 +332,7 @@ namespace QuickGraph.Serialization
                 this.id = id;
             }
 
-            public string ID
-            {
-                get { return id; }
-            }
+            public string ID => id;
 
             string _stringd;
             [XmlAttribute("v_stringdefault")]
@@ -518,10 +515,7 @@ namespace QuickGraph.Serialization
                 Bool = _bool;
             }
 
-            public string ID
-            {
-                get { return id; }
-            }
+            public string ID => id;
 
             [XmlAttribute("e_string")]
             [DefaultValue("bla")]

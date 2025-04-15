@@ -152,15 +152,10 @@ namespace QuickGraph
         #endregion
 
         #region IGraph<TVertex,TEdge> Members
-        public bool IsDirected
-        {
-            get { return true; }
-        }
+        public bool IsDirected => true;
 
-        public bool AllowParallelEdges
-        {
-            get { return true; }
-        }        
+        public bool AllowParallelEdges => true;
+
         #endregion
 
         #region IImplicitVertexSet<TVertex> Members
@@ -171,35 +166,18 @@ namespace QuickGraph
         #endregion
 
         #region IVertexSet<TVertex> Members
-        public bool IsVerticesEmpty
-        {
-            get { return vertexOutEdges.Count == 0; }
-        }
+        public bool IsVerticesEmpty => vertexOutEdges.Count == 0;
 
-        public int VertexCount
-        {
-            get { return vertexOutEdges.Count; }
-        }
+        public int VertexCount => vertexOutEdges.Count;
 
-        public IEnumerable<TVertex> Vertices
-        {
-            get 
-            {
-                return vertexOutEdges.Keys;
-            }
-        }
+        public IEnumerable<TVertex> Vertices => vertexOutEdges.Keys;
+
         #endregion
 
         #region IEdgeSet<TVertex,TEdge> Members
-        public bool IsEdgesEmpty
-        {
-            get { return edgeCount == 0; }
-        }
+        public bool IsEdgesEmpty => edgeCount == 0;
 
-        public int EdgeCount
-        {
-            get { return edgeCount; }
-        }
+        public int EdgeCount => edgeCount;
 
         public IEnumerable<TEdge> Edges
         {

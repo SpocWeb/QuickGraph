@@ -58,35 +58,23 @@ namespace QuickGraph
         /// Gets the source vertex
         /// </summary>
         /// <value></value>
-        public TVertex Source
-        {
-            get { return source; }
-        }
+        public TVertex Source => source;
 
         /// <summary>
         /// Gets the target vertex
         /// </summary>
         /// <value></value>
-        public TVertex Target
-        {
-            get { return target; }
-        }
+        public TVertex Target => target;
 
         /// <summary>
         /// Gets the source terminal
         /// </summary>
-        public int SourceTerminal
-        {
-            get { return sourceTerminal; }
-        }
+        public int SourceTerminal => sourceTerminal;
 
         /// <summary>
         /// Gets the target terminal
         /// </summary>
-        public int TargetTerminal
-        {
-            get { return targetTerminal; }
-        }
+        public int TargetTerminal => targetTerminal;
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.

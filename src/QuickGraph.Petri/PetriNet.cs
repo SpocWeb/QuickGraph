@@ -26,15 +26,9 @@ namespace QuickGraph.Petri
             graph.AddVerticesAndEdgeRange(other.graph.Edges);
         }
 
-		public IPetriGraph<Token> Graph
-		{
-			get
-			{
-				return graph;
-			}
-		}
+		public IPetriGraph<Token> Graph => graph;
 
-		public IPlace<Token> AddPlace(string name)
+        public IPlace<Token> AddPlace(string name)
 		{
 			IPlace<Token> p = new Place<Token>(name);
 			places.Add(p);
@@ -63,31 +57,13 @@ namespace QuickGraph.Petri
 			return arc;
 		}
 
-		public IList<IPlace<Token>> Places
-		{
-			get
-			{
-				return places;
-			}
-		}
+		public IList<IPlace<Token>> Places => places;
 
-		public IList<ITransition<Token>> Transitions
-		{
-			get
-			{
-				return transitions;
-			}
-		}
+        public IList<ITransition<Token>> Transitions => transitions;
 
-		public IList<IArc<Token>> Arcs
-		{
-			get
-			{
-				return arcs;
-			}
-		}
+        public IList<IArc<Token>> Arcs => arcs;
 
-		public override string ToString()
+        public override string ToString()
 		{
 			StringWriter sw = new StringWriter();
 			sw.WriteLine("-----------------------------------------------");

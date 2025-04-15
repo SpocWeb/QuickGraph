@@ -78,13 +78,9 @@ namespace QuickGraph.Contracts
 
         #region IGraph<TVertex,TEdge> Members
 
-        public bool IsDirected {
-          get { throw new NotImplementedException(); }
-        }
+        public bool IsDirected => throw new NotImplementedException();
 
-        public bool AllowParallelEdges {
-          get { throw new NotImplementedException(); }
-        }
+        public bool AllowParallelEdges => throw new NotImplementedException();
 
         #endregion
     }

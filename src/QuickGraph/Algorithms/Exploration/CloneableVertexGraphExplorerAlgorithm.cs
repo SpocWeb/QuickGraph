@@ -36,44 +36,35 @@ namespace QuickGraph.Algorithms.Exploration
             :base(host, visitedGraph)
         {}
 
-        public IList<ITransitionFactory<TVertex, TEdge>> TransitionFactories
-        {
-            get { return transitionFactories; }
-        }
+        public IList<ITransitionFactory<TVertex, TEdge>> TransitionFactories => transitionFactories;
 
         public VertexPredicate<TVertex> AddVertexPredicate
         {
-            get { return addVertexPredicate; }
-            set { addVertexPredicate = value; }
+            get => addVertexPredicate;
+            set => addVertexPredicate = value;
         }
 
         public VertexPredicate<TVertex> ExploreVertexPredicate
         {
-            get { return exploreVertexPredicate; }
-            set { exploreVertexPredicate = value; }
+            get => exploreVertexPredicate;
+            set => exploreVertexPredicate = value;
         }
 
         public EdgePredicate<TVertex, TEdge> AddEdgePredicate
         {
-            get { return addEdgePredicate; }
-            set { addEdgePredicate = value; }
+            get => addEdgePredicate;
+            set => addEdgePredicate = value;
         }
 
         public Predicate<CloneableVertexGraphExplorerAlgorithm<TVertex, TEdge>> FinishedPredicate
         {
-            get { return finishedPredicate; }
-            set { finishedPredicate = value; }
+            get => finishedPredicate;
+            set => finishedPredicate = value;
         }
 
-        public IEnumerable<TVertex> UnexploredVertices
-        {
-            get { return unexploredVertices; }
-        }
+        public IEnumerable<TVertex> UnexploredVertices => unexploredVertices;
 
-        public bool FinishedSuccessfully
-        {
-            get { return finishedSuccessfully; }
-        }
+        public bool FinishedSuccessfully => finishedSuccessfully;
 
         public event VertexAction<TVertex> DiscoverVertex;
         private void OnDiscoverVertex(TVertex v)
@@ -200,14 +191,14 @@ namespace QuickGraph.Algorithms.Exploration
 
             public int MaxVertexCount
             {
-                get { return maxVertexCount; }
-                set { maxVertexCount = value; }
+                get => maxVertexCount;
+                set => maxVertexCount = value;
             }
 
             public int MaxEdgeCount
             {
-                get { return maxEdgeCount; }
-                set { maxEdgeCount = value; }
+                get => maxEdgeCount;
+                set => maxEdgeCount = value;
             }
 
             public bool Test(CloneableVertexGraphExplorerAlgorithm<TVertex, TEdge> t)

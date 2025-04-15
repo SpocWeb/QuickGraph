@@ -35,20 +35,11 @@ namespace QuickGraph.Algorithms
             services = new AlgorithmServices(this);
         }
 
-        public TGraph VisitedGraph
-        {
-            get { return visitedGraph; }
-        }
+        public TGraph VisitedGraph => visitedGraph;
 
-        public IAlgorithmServices Services
-        {
-            get { return services; }
-        }
+        public IAlgorithmServices Services => services;
 
-        public object SyncRoot
-        {
-            get { return syncRoot; }
-        }
+        public object SyncRoot => syncRoot;
 
         public ComputationState State
         {

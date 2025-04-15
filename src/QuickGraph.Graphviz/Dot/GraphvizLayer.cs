@@ -16,10 +16,7 @@ namespace QuickGraph.Graphviz.Dot
 
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get => name;
             set
             {
                 Contract.Requires(!string.IsNullOrEmpty(value));

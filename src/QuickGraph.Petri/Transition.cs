@@ -13,22 +13,13 @@ namespace QuickGraph.Petri
 
 		public IConditionExpression<Token> Condition
 		{
-			get
-			{
-				return condition;
-			}
-			set
-			{
-				condition=value;
-			}
-		}
-
-		public string Name
-		{
-            get{return name;}
+			get => condition;
+            set => condition=value;
         }
 
-		public override string ToString()
+		public string Name => name;
+
+        public override string ToString()
 		{
 			return string.Format("T({0})",name);
 		}

@@ -41,13 +41,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             this.distanceRelaxer = distanceRelaxer;
         }
 
-        public Dictionary<TVertex, GraphColor> VertexColors
-        {
-            get
-            {
-                return vertexColors;
-            }
-        }
+        public Dictionary<TVertex, GraphColor> VertexColors => vertexColors;
 
         public GraphColor GetVertexColor(TVertex vertex)
         {
@@ -60,25 +54,16 @@ namespace QuickGraph.Algorithms.ShortestPath
             return distances.TryGetValue(vertex, out distance);
         }
 
-        public Dictionary<TVertex, double> Distances
-        {
-            get { return distances; }
-        }
+        public Dictionary<TVertex, double> Distances => distances;
 
         protected Func<TVertex, double> DistancesIndexGetter()
         {
             return AlgorithmExtensions.GetIndexer(distances);
         }
 
-        public Func<TEdge, double> Weights
-        {
-            get { return weights; }
-        }
+        public Func<TEdge, double> Weights => weights;
 
-        public IDistanceRelaxer DistanceRelaxer
-        {
-            get { return distanceRelaxer; }
-        }
+        public IDistanceRelaxer DistanceRelaxer => distanceRelaxer;
 
         protected override void Initialize()
         {

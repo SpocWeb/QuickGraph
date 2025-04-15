@@ -32,10 +32,7 @@ namespace QuickGraph.Tests
         /// Gets the frequency.
         /// </summary>
         /// <value>The frequency.</value>
-        public static long Frequency
-        {
-            get { return frequency; }
-        }
+        public static long Frequency => frequency;
 
         /// <summary>
         /// Gets the current ticks value.
@@ -101,20 +98,11 @@ namespace QuickGraph.Tests
             this.name = name;
         }
 
-        public string Name
-        {
-            get { return name; }
-        }
+        public string Name => name;
 
-        public double Seconds
-        {
-            get { return PreciseTimer.ToSeconds(duration); }
-        }
+        public double Seconds => PreciseTimer.ToSeconds(duration);
 
-        public long Samples
-        {
-            get { return samples; }
-        }
+        public long Samples => samples;
 
         public override string ToString()
         {

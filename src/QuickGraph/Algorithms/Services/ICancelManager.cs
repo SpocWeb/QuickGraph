@@ -51,10 +51,7 @@ namespace QuickGraph.Algorithms.Services
             }
         }
 
-        public bool IsCancelling
-        {
-            get { return cancelling > 0; }
-        }
+        public bool IsCancelling => cancelling > 0;
 
         /// <summary>
         /// Raised when the cancel state has been reseted

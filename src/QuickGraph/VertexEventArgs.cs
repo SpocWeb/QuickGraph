@@ -12,10 +12,7 @@ namespace QuickGraph
             this.vertex = vertex;
         }
 
-        public TVertex Vertex
-        {
-            get { return vertex; }
-        }
+        public TVertex Vertex => vertex;
     }
 
     public delegate void VertexAction<in TVertex>(TVertex vertex);

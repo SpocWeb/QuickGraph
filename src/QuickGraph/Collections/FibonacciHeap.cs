@@ -63,13 +63,7 @@ namespace QuickGraph.Collections
         FibonacciHeapCell<TPriority, TValue> first;
         FibonacciHeapCell<TPriority, TValue> last;
 
-        public FibonacciHeapCell<TPriority, TValue> First
-        {
-            get
-            {
-                return first;
-            }
-        }
+        public FibonacciHeapCell<TPriority, TValue> First => first;
 
         internal FibonacciHeapLinkedList()
         {
@@ -213,9 +207,9 @@ namespace QuickGraph.Collections
         private readonly Dictionary<int, FibonacciHeapCell<TPriority, TValue>> degreeToNode;
         private readonly Comparison<TPriority> priorityComparsion;
         private readonly HeapDirection direction;
-        public HeapDirection Direction { get { return direction; } }
+        public HeapDirection Direction => direction;
         private int count;
-        public int Count { get { return count; } }
+        public int Count => count;
         //Draws the current heap in a string.  Marked Nodes have a * Next to them
 
         struct NodeLevel
@@ -229,10 +223,7 @@ namespace QuickGraph.Collections
             }
         }
 
-        public Comparison<TPriority> PriorityComparison
-        {
-            get { return priorityComparsion; }
-        }
+        public Comparison<TPriority> PriorityComparison => priorityComparsion;
 
         public string DrawHeap()
         {
@@ -544,20 +535,9 @@ namespace QuickGraph.Collections
             }
         }
 
-        public bool IsEmpty
-        {
-            get
-            {
-                return nodes.First == null;
-            }
-        }
-        public FibonacciHeapCell<TPriority, TValue> Top
-        {
-            get
-            {
-                return next;
-            }
-        }
+        public bool IsEmpty => nodes.First == null;
+
+        public FibonacciHeapCell<TPriority, TValue> Top => next;
 
         public void Merge(FibonacciHeap<TPriority, TValue> other)
         {      

@@ -20,21 +20,9 @@ namespace QuickGraph.Graphviz
             this.graphFormat = graphFormat;
         }
 
-        public IVertexAndEdgeListGraph<TVertex,TEdge> Cluster
-        {
-            get
-            {
-                return cluster;
-            }
-        }
+        public IVertexAndEdgeListGraph<TVertex,TEdge> Cluster => cluster;
 
-        public GraphvizGraph GraphFormat
-        {
-            get
-            {
-                return graphFormat;
-            }
-        }
+        public GraphvizGraph GraphFormat => graphFormat;
     }
 
     public delegate void FormatClusterEventHandler<TVertex, TEdge>(

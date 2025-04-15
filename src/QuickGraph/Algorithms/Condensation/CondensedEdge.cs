@@ -15,9 +15,6 @@ namespace QuickGraph.Algorithms.Condensation
             :base(source,target)
         { }
 
-        public IList<TEdge> Edges
-        {
-            get { return edges; }
-        }
+        public IList<TEdge> Edges => edges;
     }
 }

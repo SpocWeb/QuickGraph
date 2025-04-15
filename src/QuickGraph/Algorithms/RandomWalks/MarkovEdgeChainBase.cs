@@ -14,14 +14,8 @@ namespace QuickGraph.Algorithms.RandomWalks
 
         public Random Rand
         {
-            get
-            {
-                return rand;
-            }
-            set
-            {
-                rand = value;
-            }
+            get => rand;
+            set => rand = value;
         }
 
         public abstract bool TryGetSuccessor(IImplicitGraph<TVertex, TEdge> g, TVertex u, out TEdge successor);

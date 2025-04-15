@@ -53,24 +53,12 @@ namespace QuickGraph.Algorithms.Search
             this.colors = colors;
         }
 
-        public IDictionary<TEdge, GraphColor> EdgeColors
-        {
-            get
-            {
-                return colors;
-            }
-        }
+        public IDictionary<TEdge, GraphColor> EdgeColors => colors;
 
         public int MaxDepth
         {
-            get
-            {
-                return maxDepth;
-            }
-            set
-            {
-                maxDepth = value;
-            }
+            get => maxDepth;
+            set => maxDepth = value;
         }
 
         public event EdgeAction<TVertex,TEdge> InitializeEdge;

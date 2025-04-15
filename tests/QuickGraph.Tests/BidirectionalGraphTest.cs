@@ -21,14 +21,8 @@ namespace QuickGraph.Tests
         ///</summary>
         public TestContext TestContext
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            get => testContextInstance;
+            set => testContextInstance = value;
         }
 
         #region Additional test attributes

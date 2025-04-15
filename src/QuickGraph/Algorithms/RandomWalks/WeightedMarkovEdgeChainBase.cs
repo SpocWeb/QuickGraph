@@ -21,8 +21,8 @@ namespace QuickGraph.Algorithms.RandomWalks
 
         public IDictionary<TEdge, double> Weights
         {
-            get { return weights; }
-            set { weights = value; }
+            get => weights;
+            set => weights = value;
         }
 
         protected double GetOutWeight(IImplicitGraph<TVertex, TEdge> g, TVertex u)

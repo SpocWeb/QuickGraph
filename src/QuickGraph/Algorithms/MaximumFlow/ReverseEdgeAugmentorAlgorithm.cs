@@ -10,17 +10,15 @@ namespace QuickGraph.Algorithms.MaximumFlow
         public static ReversedEdgeAugmentorAlgorithm<TVertex, TEdge> CreateReversedEdgeAugmentorAlgorithm<TVertex, TEdge>(
             this IMutableVertexAndEdgeListGraph<TVertex, TEdge> graph,
             EdgeFactory<TVertex, TEdge> edgeFactory, IAlgorithmComponent host = null) where TEdge : IEdge<TVertex>
-            => null;//new ReversedEdgeAugmentorAlgorithm<TVertex, TEdge>(graph, edgeFactory, host);
+            => new ReversedEdgeAugmentorAlgorithm<TVertex, TEdge>(graph, edgeFactory, host);
     }
     /// <summary> Routines to add and remove auxiliary edges when using <see cref="EdmondsKarpMaximumFlowAlgorithm{TVertex, TEdge}"/> 
     /// or <see cref="MaximumBipartiteMatchingAlgorithm{TVertex, TEdge}.InternalCompute()"/>. 
     /// Remember to call <see cref="RemoveReversedEdges()"/> to remove auxiliary edges.
     /// </summary>
-    /// <typeparam name="TVertex">The type of vertex.</typeparam>
-    /// <typeparam name="TEdge">The type of edge.</typeparam>
     /// <remarks>
-    /// Will throw an exception in <see cref="ReversedEdgeAugmentorAlgorithm{TVertex, TEdge}.AddReversedEdges"/> if TEdge is a value type,
-    /// e.g. <see cref="SEdge{TVertex}"/>.
+    /// Will throw an exception in <see cref="ReversedEdgeAugmentorAlgorithm{TVertex, TEdge}.AddReversedEdges"/>
+    /// if TEdge is a value type, e.g. <see cref="SEdge{TVertex}"/>.
     /// <seealso href="https://github.com/YaccConstructor/QuickGraph/issues/183#issue-377613647"/>.
     /// </remarks>
 #if !SILVERLIGHT
@@ -35,7 +33,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
         private IList<TEdge> augmentedEgdes = new List<TEdge>();
         private Dictionary<TEdge,TEdge> reversedEdges = new Dictionary<TEdge,TEdge>();
         private bool augmented = false;
-         ReversedEdgeAugmentorAlgorithm(IMutableVertexAndEdgeListGraph<TVertex, TEdge> visitedGraph,
+        internal ReversedEdgeAugmentorAlgorithm(IMutableVertexAndEdgeListGraph<TVertex, TEdge> visitedGraph,
             EdgeFactory<TVertex, TEdge> edgeFactory, IAlgorithmComponent host = null)
         {
             Contract.Requires(visitedGraph != null);
@@ -45,42 +43,15 @@ namespace QuickGraph.Algorithms.MaximumFlow
             this.edgeFactory = edgeFactory;
         }
 
-        public IMutableVertexAndEdgeListGraph<TVertex,TEdge> VisitedGraph
-        {
-            get
-            {
-                return visitedGraph;
-            }
-        }
+        public IMutableVertexAndEdgeListGraph<TVertex,TEdge> VisitedGraph => visitedGraph;
 
-        public EdgeFactory<TVertex, TEdge> EdgeFactory
-        {
-            get { return edgeFactory; }
-        }
+        public EdgeFactory<TVertex, TEdge> EdgeFactory => edgeFactory;
 
-        public ICollection<TEdge> AugmentedEdges
-        {
-            get
-            {
-                return augmentedEgdes;
-            }
-        }
+        public ICollection<TEdge> AugmentedEdges => augmentedEgdes;
 
-        public Dictionary<TEdge,TEdge> ReversedEdges
-        {
-            get
-            {
-                return reversedEdges;
-            }
-        }
+        public Dictionary<TEdge,TEdge> ReversedEdges => reversedEdges;
 
-        public bool Augmented
-        {
-            get
-            {
-                return augmented;
-            }
-        }
+        public bool Augmented => augmented;
 
         public event EdgeAction<TVertex,TEdge> ReversedEdgeAdded;
         private void OnReservedEdgeAdded(TEdge e)

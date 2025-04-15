@@ -31,29 +31,11 @@ namespace QuickGraph
             this.allowParralelEdges = allowParralelEdges;
         }
 
-        public bool IsEdgesEmpty
-        {
-            get 
-            { 
-                return edges.Count==0;
-            }
-        }
+        public bool IsEdgesEmpty => edges.Count==0;
 
-        public int EdgeCount
-        {
-            get 
-            { 
-                return edges.Count;
-            }
-        }
+        public int EdgeCount => edges.Count;
 
-        public IEnumerable<TEdge> Edges
-        {
-            get 
-            { 
-                return edges.Keys;
-            }
-        }
+        public IEnumerable<TEdge> Edges => edges.Keys;
 
         [Pure]
         public bool ContainsEdge(TEdge edge)
@@ -61,21 +43,9 @@ namespace QuickGraph
             return edges.ContainsKey(edge);
         }
 
-        public bool IsDirected
-        {
-            get 
-            { 
-                return isDirected;
-            }
-        }
+        public bool IsDirected => isDirected;
 
-        public bool AllowParallelEdges
-        {
-            get 
-            { 
-                return allowParralelEdges;
-            }
-        }
+        public bool AllowParallelEdges => allowParralelEdges;
 
         public bool AddVerticesAndEdge(TEdge edge)
         {
@@ -188,28 +158,13 @@ namespace QuickGraph
 
         #region IVertexSet<TVertex> Members
         [Pure]
-        public bool IsVerticesEmpty
-        {
-            get { return edges.Count == 0; }
-        }
+        public bool IsVerticesEmpty => edges.Count == 0;
 
         [Pure]
-        public int VertexCount
-        {
-            get
-            {
-                return GetVertexCounts().Count;
-            }
-        }
+        public int VertexCount => GetVertexCounts().Count;
 
         [Pure]
-        public IEnumerable<TVertex> Vertices
-        {
-            get
-            {
-                return GetVertexCounts().Keys;
-            }
-        }
+        public IEnumerable<TVertex> Vertices => GetVertexCounts().Keys;
 
         private Dictionary<TVertex, int> GetVertexCounts()
         {

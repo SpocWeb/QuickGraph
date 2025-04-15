@@ -31,13 +31,7 @@ namespace QuickGraph.Algorithms.Observers
             this.vertices = vertices;
         }
 
-        public IEnumerable<TVertex> Vertices
-        {
-            get
-            {
-                return vertices;
-            }
-        }
+        public IEnumerable<TVertex> Vertices => vertices;
 
         public IDisposable Attach(IVertexTimeStamperAlgorithm<TVertex> algorithm)
         {

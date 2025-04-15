@@ -20,35 +20,17 @@ namespace QuickGraph
             this.originalGraph = originalGraph;
         }
 
-        public IBidirectionalGraph<TVertex,TEdge> OriginalGraph
-        {
-            get { return originalGraph;}
-        }
-    
-        public bool  IsVerticesEmpty
-        {
-        	get { return OriginalGraph.IsVerticesEmpty; }
-        }
+        public IBidirectionalGraph<TVertex,TEdge> OriginalGraph => originalGraph;
 
-        public bool IsDirected
-        {
-            get { return OriginalGraph.IsDirected; }
-        }
+        public bool  IsVerticesEmpty => OriginalGraph.IsVerticesEmpty;
 
-        public bool AllowParallelEdges
-        {
-            get { return OriginalGraph.AllowParallelEdges; }
-        }
+        public bool IsDirected => OriginalGraph.IsDirected;
 
-        public int  VertexCount
-        {
-        	get { return OriginalGraph.VertexCount; }
-        }
+        public bool AllowParallelEdges => OriginalGraph.AllowParallelEdges;
 
-        public IEnumerable<TVertex> Vertices
-        {
-        	get { return OriginalGraph.Vertices; }
-        }
+        public int  VertexCount => OriginalGraph.VertexCount;
+
+        public IEnumerable<TVertex> Vertices => OriginalGraph.Vertices;
 
         [Pure]
         public bool ContainsVertex(TVertex vertex)
@@ -208,14 +190,8 @@ namespace QuickGraph
             return OriginalGraph.Degree(v);
         }
 
-        public bool IsEdgesEmpty
-        {
-            get { return OriginalGraph.IsEdgesEmpty; }
-        }
+        public bool IsEdgesEmpty => OriginalGraph.IsEdgesEmpty;
 
-        public int EdgeCount
-        {
-            get { return OriginalGraph.EdgeCount; }
-        }
+        public int EdgeCount => OriginalGraph.EdgeCount;
     }
 }

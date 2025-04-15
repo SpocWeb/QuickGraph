@@ -32,13 +32,7 @@ namespace QuickGraph.Algorithms.Observers
             this.edges = edges;
         }
 
-        public IList<TEdge> Edges
-        {
-            get
-            {
-                return edges;
-            }
-        }
+        public IList<TEdge> Edges => edges;
 
         public IDisposable Attach(ITreeBuilderAlgorithm<TVertex, TEdge> algorithm)
         {

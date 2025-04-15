@@ -36,10 +36,7 @@ namespace QuickGraph.Collections
             heap.Update(distances(v), v);
         }
 
-        public int Count
-        {
-            get { return heap.Count; }
-        }
+        public int Count => heap.Count;
 
         public bool Contains(TVertex value)
         {

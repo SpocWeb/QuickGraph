@@ -28,21 +28,12 @@ namespace QuickGraph
             this.originalEdge = originalEdge;
         }
 
-        public TEdge OriginalEdge
-        {
-            get { return originalEdge; }
-        }
+        public TEdge OriginalEdge => originalEdge;
 
-        public TVertex Source
-        {
-            get { return OriginalEdge.Target; }
-        }
+        public TVertex Source => OriginalEdge.Target;
 
-        public TVertex Target
-        {
-            get { return OriginalEdge.Source; }
-        }
-        
+        public TVertex Target => OriginalEdge.Source;
+
         [Pure]
         public override bool Equals(object obj)
         {

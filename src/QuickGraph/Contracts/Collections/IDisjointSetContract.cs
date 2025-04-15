@@ -6,21 +6,9 @@ namespace QuickGraph.Collections.Contracts
     abstract class IDisjointSetContract<T>
         : IDisjointSet<T>
     {
-        int IDisjointSet<T>.SetCount
-        {
-            get
-            {
-                return default(int);
-            }
-        }
+        int IDisjointSet<T>.SetCount => default;
 
-        int IDisjointSet<T>.ElementCount
-        {
-            get
-            {
-                return default(int);
-            }
-        }
+        int IDisjointSet<T>.ElementCount => default;
 
         [ContractInvariantMethod]
         void ObjectInvariant()

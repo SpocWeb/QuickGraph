@@ -440,20 +440,11 @@ namespace QuickGraph.Serialization
                 this.edgeFactory = edgeFactory;
             }
 
-            public GraphMLDeserializer<TVertex, TEdge, TGraph> Serializer
-            {
-                get { return serializer; }
-            }
+            public GraphMLDeserializer<TVertex, TEdge, TGraph> Serializer => serializer;
 
-            public XmlReader Reader
-            {
-                get { return reader; }
-            }
+            public XmlReader Reader => reader;
 
-            public TGraph VisitedGraph
-            {
-                get { return visitedGraph; }
-            }
+            public TGraph VisitedGraph => visitedGraph;
 
             public void Deserialize()
             {

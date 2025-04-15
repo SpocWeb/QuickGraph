@@ -51,36 +51,15 @@ namespace QuickGraph.Graphviz
             return writeLineReplace.Replace(value, "\\n");
         }
 
-        public GraphvizGraph GraphFormat
-        {
-            get
-            {
-                return graphFormat;
-            }
-        }
+        public GraphvizGraph GraphFormat => graphFormat;
 
-        public GraphvizVertex CommonVertexFormat
-        {
-            get
-            {
-                return commonVertexFormat;
-            }
-        }
+        public GraphvizVertex CommonVertexFormat => commonVertexFormat;
 
-        public GraphvizEdge CommonEdgeFormat
-        {
-            get
-            {
-                return commonEdgeFormat;
-            }
-        }
+        public GraphvizEdge CommonEdgeFormat => commonEdgeFormat;
 
         public IEdgeListGraph<TVertex, TEdge> VisitedGraph
         {
-            get
-            {
-                return visitedGraph;
-            }
+            get => visitedGraph;
             set
             {
                 Contract.Requires(value != null);
@@ -92,39 +71,21 @@ namespace QuickGraph.Graphviz
         /// <summary>
         /// Dot output stream.
         /// </summary>
-        public StringWriter Output
-        {
-            get
-            {
-                return output;
-            }
-        }
+        public StringWriter Output => output;
 
         /// <summary>
         /// Current image output type
         /// </summary>
         public GraphvizImageType ImageType
         {
-            get
-            {
-                return imageType;
-            }
-            set
-            {
-                imageType = value;
-            }
+            get => imageType;
+            set => imageType = value;
         }
 
         internal int ClusterCount
         {
-            get
-            {
-                return clusterCount;
-            }
-            set
-            {
-                clusterCount = value;
-            }
+            get => clusterCount;
+            set => clusterCount = value;
         }
 
 

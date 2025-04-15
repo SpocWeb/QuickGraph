@@ -217,296 +217,152 @@ namespace QuickGraph.Graphviz.Dot
 
         public Point? Position
         {
-            get { return position; }
-            set { position = value; }
+            get => position;
+            set => position = value;
         }
 
         public string BottomLabel
         {
-            get
-            {
-                return bottomLabel;
-            }
-            set
-            {
-                bottomLabel = value;
-            }
+            get => bottomLabel;
+            set => bottomLabel = value;
         }
 
         public string Comment
         {
-            get
-            {
-                return comment;
-            }
-            set
-            {
-                comment = value;
-            }
+            get => comment;
+            set => comment = value;
         }
 
         public double Distorsion
         {
-            get
-            {
-                return distorsion;
-            }
-            set
-            {
-                distorsion = value;
-            }
+            get => distorsion;
+            set => distorsion = value;
         }
 
         public Color FillColor
         {
-            get
-            {
-                return fillColor;
-            }
-            set
-            {
-                fillColor = value;
-            }
+            get => fillColor;
+            set => fillColor = value;
         }
 
         public bool FixedSize
         {
-            get
-            {
-                return fixedSize;
-            }
-            set
-            {
-                fixedSize = value;
-            }
+            get => fixedSize;
+            set => fixedSize = value;
         }
 
         public Font Font
         {
-            get
-            {
-                return font;
-            }
-            set
-            {
-                font = value;
-            }
+            get => font;
+            set => font = value;
         }
 
         public Color FontColor
         {
-            get
-            {
-                return fontColor;
-            }
-            set
-            {
-                fontColor = value;
-            }
+            get => fontColor;
+            set => fontColor = value;
         }
 
         public string Group
         {
-            get
-            {
-                return group;
-            }
-            set
-            {
-                group = value;
-            }
+            get => group;
+            set => group = value;
         }
 
         public string Label
         {
-            get
-            {
-                return label;
-            }
-            set
-            {
-                label = value;
-            }
+            get => label;
+            set => label = value;
         }
 
         public GraphvizLayer Layer
         {
-            get
-            {
-                return layer;
-            }
-            set
-            {
-                layer = value;
-            }
+            get => layer;
+            set => layer = value;
         }
 
         public double Orientation
         {
-            get
-            {
-                return orientation;
-            }
-            set
-            {
-                orientation = value;
-            }
+            get => orientation;
+            set => orientation = value;
         }
 
         public int Peripheries
         {
-            get
-            {
-                return peripheries;
-            }
-            set
-            {
-                peripheries = value;
-            }
+            get => peripheries;
+            set => peripheries = value;
         }
 
         public GraphvizRecord Record
         {
-            get
-            {
-                return record;
-            }
-            set
-            {
-                record = value;
-            }
+            get => record;
+            set => record = value;
         }
 
         public bool Regular
         {
-            get
-            {
-                return regular;
-            }
-            set
-            {
-                regular = value;
-            }
+            get => regular;
+            set => regular = value;
         }
 
         public GraphvizVertexShape Shape
         {
-            get
-            {
-                return shape;
-            }
-            set
-            {
-                shape = value;
-            }
+            get => shape;
+            set => shape = value;
         }
 
         public int Sides
         {
-            get
-            {
-                return sides;
-            }
-            set
-            {
-                sides = value;
-            }
+            get => sides;
+            set => sides = value;
         }
 
         public SizeF Size
         {
-            get
-            {
-                return size;
-            }
-            set
-            {
-                size = value;
-            }
+            get => size;
+            set => size = value;
         }
 
         public double Skew
         {
-            get
-            {
-                return skew;
-            }
-            set
-            {
-                skew = value;
-            }
+            get => skew;
+            set => skew = value;
         }
 
         public Color StrokeColor
         {
-            get
-            {
-                return strokeColor;
-            }
-            set
-            {
-                strokeColor = value;
-            }
+            get => strokeColor;
+            set => strokeColor = value;
         }
 
         public GraphvizVertexStyle Style
         {
-            get
-            {
-                return style;
-            }
-            set
-            {
-                style = value;
-            }
+            get => style;
+            set => style = value;
         }
 
         public string ToolTip
         {
-            get
-            {
-                return toolTip;
-            }
-            set
-            {
-                toolTip = value;
-            }
+            get => toolTip;
+            set => toolTip = value;
         }
 
         public string TopLabel
         {
-            get
-            {
-                return topLabel;
-            }
-            set
-            {
-                topLabel = value;
-            }
+            get => topLabel;
+            set => topLabel = value;
         }
 
         public string Url
         {
-            get
-            {
-                return url;
-            }
-            set
-            {
-                url = value;
-            }
+            get => url;
+            set => url = value;
         }
 
         public double Z
         {
-            get
-            {
-                return z;
-            }
-            set
-            {
-                z = value;
-            }
+            get => z;
+            set => z = value;
         }
     }
 }

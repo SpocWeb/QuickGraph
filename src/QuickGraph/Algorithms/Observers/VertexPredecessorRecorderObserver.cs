@@ -33,10 +33,7 @@ namespace QuickGraph.Algorithms.Observers
             this.vertexPredecessors = vertexPredecessors;
         }
 
-        public IDictionary<TVertex, TEdge> VertexPredecessors
-        {
-            get { return vertexPredecessors; }
-        }
+        public IDictionary<TVertex, TEdge> VertexPredecessors => vertexPredecessors;
 
         public IDisposable Attach(ITreeBuilderAlgorithm<TVertex, TEdge> algorithm)
         {

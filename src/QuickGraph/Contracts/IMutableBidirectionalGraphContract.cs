@@ -88,8 +88,8 @@ namespace QuickGraph.Contracts
 
         event VertexAction<TVertex> IMutableVertexSet<TVertex>.VertexAdded
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         bool IMutableVertexSet<TVertex>.AddVertex(TVertex v)
@@ -104,8 +104,8 @@ namespace QuickGraph.Contracts
 
         event VertexAction<TVertex> IMutableVertexSet<TVertex>.VertexRemoved
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         bool IMutableVertexSet<TVertex>.RemoveVertex(TVertex v)
@@ -129,8 +129,8 @@ namespace QuickGraph.Contracts
 
         event EdgeAction<TVertex, TEdge> IMutableEdgeListGraph<TVertex, TEdge>.EdgeAdded
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         int IMutableEdgeListGraph<TVertex, TEdge>.AddEdgeRange(IEnumerable<TEdge> edges)
@@ -145,8 +145,8 @@ namespace QuickGraph.Contracts
 
         event EdgeAction<TVertex, TEdge> IMutableEdgeListGraph<TVertex, TEdge>.EdgeRemoved
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add => throw new NotImplementedException();
+            remove => throw new NotImplementedException();
         }
 
         int IMutableEdgeListGraph<TVertex, TEdge>.RemoveEdgeIf(EdgePredicate<TVertex, TEdge> predicate)
@@ -158,13 +158,9 @@ namespace QuickGraph.Contracts
 
         #region IGraph<TVertex,TEdge> Members
 
-        public bool IsDirected {
-          get { throw new NotImplementedException(); }
-        }
+        public bool IsDirected => throw new NotImplementedException();
 
-        public bool AllowParallelEdges {
-          get { throw new NotImplementedException(); }
-        }
+        public bool AllowParallelEdges => throw new NotImplementedException();
 
         #endregion
 
@@ -218,33 +214,21 @@ namespace QuickGraph.Contracts
 
         #region IVertexSet<TVertex> Members
 
-        public bool IsVerticesEmpty {
-          get { throw new NotImplementedException(); }
-        }
+        public bool IsVerticesEmpty => throw new NotImplementedException();
 
-        public int VertexCount {
-          get { throw new NotImplementedException(); }
-        }
+        public int VertexCount => throw new NotImplementedException();
 
-        public IEnumerable<TVertex> Vertices {
-          get { throw new NotImplementedException(); }
-        }
+        public IEnumerable<TVertex> Vertices => throw new NotImplementedException();
 
         #endregion
 
         #region IEdgeSet<TVertex,TEdge> Members
 
-        public bool IsEdgesEmpty {
-          get { throw new NotImplementedException(); }
-        }
+        public bool IsEdgesEmpty => throw new NotImplementedException();
 
-        public int EdgeCount {
-          get { throw new NotImplementedException(); }
-        }
+        public int EdgeCount => throw new NotImplementedException();
 
-        public IEnumerable<TEdge> Edges {
-          get { throw new NotImplementedException(); }
-        }
+        public IEnumerable<TEdge> Edges => throw new NotImplementedException();
 
         public bool ContainsEdge(TEdge edge) {
           throw new NotImplementedException();

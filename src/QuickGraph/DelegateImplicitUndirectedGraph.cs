@@ -32,15 +32,9 @@ namespace QuickGraph
             this.allowParallelEdges = allowParallelEdges;
         }
 
-        public EdgeEqualityComparer<TVertex, TEdge> EdgeEqualityComparer
-        {
-            get { return edgeEquality; }
-        }
+        public EdgeEqualityComparer<TVertex, TEdge> EdgeEqualityComparer => edgeEquality;
 
-        public TryFunc<TVertex, IEnumerable<TEdge>> TryGetAdjacencyEdgesFunc
-        {
-            get { return tryGetAdjacentEdges; }
-        }
+        public TryFunc<TVertex, IEnumerable<TEdge>> TryGetAdjacencyEdgesFunc => tryGetAdjacentEdges;
 
         public bool IsAdjacentEdgesEmpty(TVertex v)
         {
@@ -72,15 +66,9 @@ namespace QuickGraph
             return AdjacentEdges(v).ElementAt(index);
         }
 
-        public bool IsDirected
-        {
-            get { return false; }
-        }
+        public bool IsDirected => false;
 
-        public bool AllowParallelEdges
-        {
-            get { return allowParallelEdges; }
-        }
+        public bool AllowParallelEdges => allowParallelEdges;
 
         public bool ContainsVertex(TVertex vertex)
         {

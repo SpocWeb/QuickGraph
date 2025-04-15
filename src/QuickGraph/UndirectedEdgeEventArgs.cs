@@ -17,20 +17,11 @@ namespace QuickGraph
             this.reversed = reversed;
         }
 
-        public bool Reversed
-        {
-            get { return reversed; }
-        }
+        public bool Reversed => reversed;
 
-        public TVertex Source
-        {
-            get { return reversed ? Edge.Target : Edge.Source; }
-        }
+        public TVertex Source => reversed ? Edge.Target : Edge.Source;
 
-        public TVertex Target
-        {
-            get { return reversed ? Edge.Source : Edge.Target; }
-        }
+        public TVertex Target => reversed ? Edge.Source : Edge.Target;
     }
 
     public delegate void UndirectedEdgeAction<TVertex, TEdge>(

@@ -60,10 +60,7 @@ namespace QuickGraph
             }
         }
 
-        public virtual IEnumerable<TVertex> Vertices
-        {
-            get { return vertices; }
-        }
+        public virtual IEnumerable<TVertex> Vertices => vertices;
 
         public bool IsEdgesEmpty
         {

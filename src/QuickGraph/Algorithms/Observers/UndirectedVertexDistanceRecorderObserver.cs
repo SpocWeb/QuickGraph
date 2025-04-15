@@ -38,20 +38,11 @@ namespace QuickGraph.Algorithms.Observers
             this.distances = distances;
         }
 
-        public IDistanceRelaxer DistanceRelaxer
-        {
-            get { return distanceRelaxer; }
-        }
+        public IDistanceRelaxer DistanceRelaxer => distanceRelaxer;
 
-        public Func<TEdge, double> EdgeWeights
-        {
-            get { return edgeWeights; }
-        }
+        public Func<TEdge, double> EdgeWeights => edgeWeights;
 
-        public IDictionary<TVertex, double> Distances
-        {
-            get { return distances; }
-        }
+        public IDictionary<TVertex, double> Distances => distances;
 
         public IDisposable Attach(IUndirectedTreeBuilderAlgorithm<TVertex, TEdge> algorithm)
         {

@@ -35,15 +35,9 @@ namespace QuickGraph
             TagChanged = null;
         }
 
-        public TVertex Source
-        {
-            get { return source; }
-        }
+        public TVertex Source => source;
 
-        public TVertex Target
-        {
-            get { return target; }
-        }
+        public TVertex Target => target;
 
         public event EventHandler TagChanged;
 
@@ -56,7 +50,7 @@ namespace QuickGraph
 
         public TTag Tag
         {
-            get { return tag; }
+            get => tag;
             set
             {
                 if (!Equals(tag, value))

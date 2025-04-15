@@ -44,13 +44,7 @@ namespace QuickGraph.Algorithms.Search
         /// <value>
         /// Vertex color (<see cref="GraphColor"/>) dictionary
         /// </value>
-        public IDictionary<TEdge, GraphColor> EdgeColors
-        {
-            get
-            {
-                return edgeColors;
-            }
-        }
+        public IDictionary<TEdge, GraphColor> EdgeColors => edgeColors;
 
         /// <summary>
         /// Gets or sets the maximum exploration depth, from
@@ -64,14 +58,8 @@ namespace QuickGraph.Algorithms.Search
         /// </value>
         public int MaxDepth
         {
-            get
-            {
-                return maxDepth;
-            }
-            set
-            {
-                maxDepth = value;
-            }
+            get => maxDepth;
+            set => maxDepth = value;
         }
 
 

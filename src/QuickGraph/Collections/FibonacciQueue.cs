@@ -87,7 +87,7 @@ namespace QuickGraph.Collections
         public int Count
         {
             [Pure]
-            get { return heap.Count; }
+            get => heap.Count;
         }
 
         [Pure]

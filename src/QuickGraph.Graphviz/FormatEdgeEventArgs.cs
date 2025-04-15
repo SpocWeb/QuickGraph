@@ -20,13 +20,7 @@ namespace QuickGraph.Graphviz
         /// <summary>
         /// Edge formatter
         /// </summary>
-        public GraphvizEdge EdgeFormatter
-        {
-            get
-            {
-                return edgeFormatter;
-            }
-        }
+        public GraphvizEdge EdgeFormatter => edgeFormatter;
     }
 
     public delegate void FormatEdgeAction<TVertex, TEdge>(

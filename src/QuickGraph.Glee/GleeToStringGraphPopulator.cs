@@ -22,15 +22,9 @@ namespace QuickGraph.Glee
                 this.format = format;
         }
 
-        public IFormatProvider FormatProvider
-        {
-            get { return formatProvider; }
-        }
+        public IFormatProvider FormatProvider => formatProvider;
 
-        public string Format
-        {
-            get { return format; }
-        }
+        public string Format => format;
 
         protected override string GetVertexId(TVertex v)
         {

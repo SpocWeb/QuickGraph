@@ -372,20 +372,11 @@ namespace QuickGraph.Serialization
                 this.edgeIdentities = edgeIdentities;
             }
 
-            public GraphMLSerializer<TVertex, TEdge, TGraph> Serializer
-            {
-                get { return serializer; }
-            }
+            public GraphMLSerializer<TVertex, TEdge, TGraph> Serializer => serializer;
 
-            public XmlWriter Writer
-            {
-                get { return writer; }
-            }
+            public XmlWriter Writer => writer;
 
-            public TGraph VisitedGraph
-            {
-                get { return visitedGraph; }
-            }
+            public TGraph VisitedGraph => visitedGraph;
 
             public void Serialize()
             {

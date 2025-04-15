@@ -15,23 +15,11 @@ namespace QuickGraph.Petri
 			this.name=name;
 		}
 
-		public IList<Token> Marking
-		{
-			get
-			{
-				return marking;
-			}
-		}
+		public IList<Token> Marking => marking;
 
-		public string Name
-		{
-			get
-			{
-				return name;
-			}
-		}
+        public string Name => name;
 
-		public string ToStringWithMarking()
+        public string ToStringWithMarking()
 		{
 			StringWriter sw = new StringWriter();
 			sw.WriteLine(ToString());

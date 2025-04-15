@@ -65,18 +65,9 @@ namespace QuickGraph.Algorithms.Search
             this.outEdgeEnumerator = outEdgeEnumerator;
         }
 
-        public Func<IEnumerable<TEdge>, IEnumerable<TEdge>> OutEdgeEnumerator
-        {
-            get { return outEdgeEnumerator; }
-        }
+        public Func<IEnumerable<TEdge>, IEnumerable<TEdge>> OutEdgeEnumerator => outEdgeEnumerator;
 
-        public IDictionary<TVertex,GraphColor> VertexColors
-        {
-            get
-            {
-                return vertexColors;
-            }
-        }
+        public IDictionary<TVertex,GraphColor> VertexColors => vertexColors;
 
         public GraphColor GetVertexColor(TVertex vertex)
         {

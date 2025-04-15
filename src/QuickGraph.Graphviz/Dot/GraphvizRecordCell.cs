@@ -44,21 +44,9 @@ namespace QuickGraph.Graphviz.Dot
             return ToDot();
         }
 
-        public GraphvizRecordCellCollection Cells
-        {
-            get
-            {
-                return cells;
-            }
-        }
+        public GraphvizRecordCellCollection Cells => cells;
 
-        protected GraphvizRecordEscaper Escaper
-        {
-            get
-            {
-                return escaper;
-            }
-        }
+        protected GraphvizRecordEscaper Escaper => escaper;
 
         public bool HasPort
         {
@@ -86,26 +74,14 @@ namespace QuickGraph.Graphviz.Dot
 
         public string Port
         {
-            get
-            {
-                return port;
-            }
-            set
-            {
-                port = value;
-            }
+            get => port;
+            set => port = value;
         }
 
         public string Text
         {
-            get
-            {
-                return text;
-            }
-            set
-            {
-                text = value;
-            }
+            get => text;
+            set => text = value;
         }
     }
 }

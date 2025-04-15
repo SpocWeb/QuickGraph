@@ -34,35 +34,17 @@ namespace QuickGraph.Algorithms.MaximumFlow
             this.edgeFactory = edgeFactory;
         }
 
-        public VertexFactory<TVertex> VertexFactory
-        {
-            get { return vertexFactory; }
-        }
+        public VertexFactory<TVertex> VertexFactory => vertexFactory;
 
-        public EdgeFactory<TVertex, TEdge> EdgeFactory
-        {
-            get { return edgeFactory; }
-        }
+        public EdgeFactory<TVertex, TEdge> EdgeFactory => edgeFactory;
 
-        public TVertex SuperSource
-        {
-            get { return superSource; }
-        }
+        public TVertex SuperSource => superSource;
 
-        public TVertex SuperSink
-        {
-            get { return superSink; }
-        }
+        public TVertex SuperSink => superSink;
 
-        public bool Augmented
-        {
-            get { return augmented; }
-        }
+        public bool Augmented => augmented;
 
-        public ICollection<TEdge> AugmentedEdges
-        {
-            get { return augmentedEdges; }
-        }
+        public ICollection<TEdge> AugmentedEdges => augmentedEdges;
 
         public event VertexAction<TVertex> SuperSourceAdded;
         private void OnSuperSourceAdded(TVertex v)

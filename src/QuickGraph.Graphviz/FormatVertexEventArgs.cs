@@ -17,13 +17,7 @@ namespace QuickGraph.Graphviz
             this.vertexFormatter = vertexFormatter;
         }
 
-        public GraphvizVertex VertexFormatter
-        {
-            get
-            {
-                return vertexFormatter;
-            }
-        }
+        public GraphvizVertex VertexFormatter => vertexFormatter;
     }
 
     public delegate void FormatVertexEventHandler<TVertex>(

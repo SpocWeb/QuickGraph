@@ -12,10 +12,7 @@ namespace QuickGraph.Glee
         { }
 
         private Graph gleeGraph;
-        public Graph GleeGraph
-        {
-            get { return gleeGraph; }
-        }
+        public Graph GleeGraph => gleeGraph;
 
         #region Events
         public event GleeVertexNodeEventHandler<TVertex> NodeAdded;

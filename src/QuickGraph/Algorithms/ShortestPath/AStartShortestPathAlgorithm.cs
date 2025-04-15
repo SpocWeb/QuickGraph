@@ -61,10 +61,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             this.costHeuristic = costHeuristic;
         }
 
-        public Func<TVertex, double> CostHeuristic
-        {
-            get { return costHeuristic; }
-        }
+        public Func<TVertex, double> CostHeuristic => costHeuristic;
 
         public event VertexAction<TVertex> InitializeVertex;
         public event VertexAction<TVertex> DiscoverVertex;

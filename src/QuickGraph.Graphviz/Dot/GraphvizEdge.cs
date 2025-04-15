@@ -162,218 +162,110 @@ namespace QuickGraph.Graphviz.Dot
 
         public string Comment
         {
-            get
-            {
-                return comment;
-            }
-            set
-            {
-                comment = value;
-            }
+            get => comment;
+            set => comment = value;
         }
 
         public GraphvizEdgeDirection Dir
         {
-            get
-            {
-                return dir;
-            }
-            set
-            {
-                dir = value;
-            }
+            get => dir;
+            set => dir = value;
         }
 
         public Font Font
         {
-            get
-            {
-                return font;
-            }
-            set
-            {
-                font = value;
-            }
+            get => font;
+            set => font = value;
         }
 
         public Color FontColor
         {
-            get
-            {
-                return fontColor;
-            }
-            set
-            {
-                fontColor = value;
-            }
+            get => fontColor;
+            set => fontColor = value;
         }
 
         public GraphvizEdgeExtremity Head
         {
-            get
-            {
-                return head;
-            }
-            set
-            {
-                head = value;
-            }
+            get => head;
+            set => head = value;
         }
 
         public GraphvizArrow HeadArrow
         {
-            get
-            {
-                return headArrow;
-            }
-            set
-            {
-                headArrow = value;
-            }
+            get => headArrow;
+            set => headArrow = value;
         }
 
         public bool IsConstrained
         {
-            get
-            {
-                return isConstrained;
-            }
-            set
-            {
-                isConstrained = value;
-            }
+            get => isConstrained;
+            set => isConstrained = value;
         }
 
         public bool IsDecorated
         {
-            get
-            {
-                return isDecorated;
-            }
-            set
-            {
-                isDecorated = value;
-            }
+            get => isDecorated;
+            set => isDecorated = value;
         }
 
         public GraphvizEdgeLabel Label
         {
-            get
-            {
-                return label;
-            }
-            set
-            {
-                label = value;
-            }
+            get => label;
+            set => label = value;
         }
 
         public GraphvizLayer Layer
         {
-            get
-            {
-                return layer;
-            }
-            set
-            {
-                layer = value;
-            }
+            get => layer;
+            set => layer = value;
         }
 
         public int MinLength
         {
-            get
-            {
-                return minLength;
-            }
-            set
-            {
-                minLength = value;
-            }
+            get => minLength;
+            set => minLength = value;
         }
 
         public Color StrokeColor
         {
-            get
-            {
-                return strokeColor;
-            }
-            set
-            {
-                strokeColor = value;
-            }
+            get => strokeColor;
+            set => strokeColor = value;
         }
 
         public GraphvizEdgeStyle Style
         {
-            get
-            {
-                return style;
-            }
-            set
-            {
-                style = value;
-            }
+            get => style;
+            set => style = value;
         }
 
         public GraphvizEdgeExtremity Tail
         {
-            get
-            {
-                return tail;
-            }
-            set
-            {
-                tail = value;
-            }
+            get => tail;
+            set => tail = value;
         }
 
         public GraphvizArrow TailArrow
         {
-            get
-            {
-                return tailArrow;
-            }
-            set
-            {
-                tailArrow = value;
-            }
+            get => tailArrow;
+            set => tailArrow = value;
         }
 
         public string ToolTip
         {
-            get
-            {
-                return tooltip;
-            }
-            set
-            {
-                tooltip = value;
-            }
+            get => tooltip;
+            set => tooltip = value;
         }
 
         public string Url
         {
-            get
-            {
-                return url;
-            }
-            set
-            {
-                url = value;
-            }
+            get => url;
+            set => url = value;
         }
 
         public double Weight
         {
-            get
-            {
-                return weight;
-            }
-            set
-            {
-                weight = value;
-            }
+            get => weight;
+            set => weight = value;
         }
 
         public string HeadPort { get; set; }
@@ -381,8 +273,8 @@ namespace QuickGraph.Graphviz.Dot
 
         public int Length
         {
-            get { return length; }
-            set { length = value; }
+            get => length;
+            set => length = value;
         }
     }
 }

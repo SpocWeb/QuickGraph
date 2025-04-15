@@ -138,30 +138,15 @@ namespace QuickGraph
             return baseGraph.OutEdge(v, index);
         }
 
-        public bool IsDirected
-        {
-            get { return baseGraph.IsDirected; }
-        }
+        public bool IsDirected => baseGraph.IsDirected;
 
-        public bool AllowParallelEdges
-        {
-            get { return baseGraph.AllowParallelEdges; }
-        }
+        public bool AllowParallelEdges => baseGraph.AllowParallelEdges;
 
-        public bool IsVerticesEmpty
-        {
-            get { return baseGraph.IsVerticesEmpty; }
-        }
+        public bool IsVerticesEmpty => baseGraph.IsVerticesEmpty;
 
-        public int VertexCount
-        {
-            get { return baseGraph.VertexCount; }
-        }
+        public int VertexCount => baseGraph.VertexCount;
 
-        public IEnumerable<TVertex> Vertices
-        {
-            get { return baseGraph.Vertices; }
-        }
+        public IEnumerable<TVertex> Vertices => baseGraph.Vertices;
 
         [Pure]
         public bool ContainsVertex(TVertex vertex)
@@ -169,20 +154,11 @@ namespace QuickGraph
             return baseGraph.ContainsVertex(vertex);
         }
 
-        public bool IsEdgesEmpty
-        {
-            get { return baseGraph.IsEdgesEmpty; }
-        }
+        public bool IsEdgesEmpty => baseGraph.IsEdgesEmpty;
 
-        public int EdgeCount
-        {
-            get { return baseGraph.EdgeCount; }
-        }
+        public int EdgeCount => baseGraph.EdgeCount;
 
-        public virtual IEnumerable<TEdge> Edges
-        {
-            get { return baseGraph.Edges; }
-        }
+        public virtual IEnumerable<TEdge> Edges => baseGraph.Edges;
 
         [Pure]
         public bool ContainsEdge(TEdge edge)

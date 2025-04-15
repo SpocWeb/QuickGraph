@@ -27,41 +27,17 @@ namespace QuickGraph.Petri
 			isInputArc=false;
 		}
 
-		public bool IsInputArc
-		{
-			get
-			{
-				return isInputArc;
-			}
-		}
+		public bool IsInputArc => isInputArc;
 
-		public IPlace<Token> Place
-		{
-			get
-			{
-				return place;
-			}
-		}
+        public IPlace<Token> Place => place;
 
-		public ITransition<Token> Transition
-		{
-			get
-			{
-				return transition;
-			}
-		}
+        public ITransition<Token> Transition => transition;
 
-		public IExpression<Token> Annotation
+        public IExpression<Token> Annotation
 		{
-			get
-			{
-				return annotation;
-			}
-			set
-			{
-				annotation=value;
-			}
-		}
+			get => annotation;
+            set => annotation=value;
+        }
 
 		public override string ToString()
 		{

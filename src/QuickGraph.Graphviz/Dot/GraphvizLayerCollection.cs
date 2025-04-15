@@ -50,10 +50,7 @@ namespace QuickGraph.Graphviz.Dot
 
         public string Separators
         {
-            get
-            {
-                return m_Separators;
-            }
+            get => m_Separators;
             set
             {
                 Contract.Requires(!string.IsNullOrEmpty(value));

@@ -44,97 +44,40 @@ namespace QuickGraph
         }
 
 
-        public ClusteredAdjacencyGraph<TVertex, TEdge> Parent
-        {
-            get
-            {
-                return parent;
-            }
-        }
+        public ClusteredAdjacencyGraph<TVertex, TEdge> Parent => parent;
 
 
         public bool Colapsed
         {
-            get
-            {
-                return colapsed;
-            }
-            set
-            {
-                colapsed = value;
-            }
+            get => colapsed;
+            set => colapsed = value;
         }
 
 
-        protected AdjacencyGraph<TVertex, TEdge> Wrapped
-        {
-            get
-            {
-                return wrapped;
-            }
-        }
+        protected AdjacencyGraph<TVertex, TEdge> Wrapped => wrapped;
 
 
-        public bool IsDirected
-        {
-            get 
-            { 
-                return wrapped.IsDirected;
-            }
-        }
+        public bool IsDirected => wrapped.IsDirected;
 
         public bool AllowParallelEdges
         {
             [Pure]
-            get 
-            {
-                return wrapped.AllowParallelEdges;
-            }
+            get => wrapped.AllowParallelEdges;
         }
 
         public int EdgeCapacity
         {
-            get 
-            {
-                return wrapped.EdgeCapacity;
-            }
-            set 
-            {
-                wrapped.EdgeCapacity = value; 
-            }
+            get => wrapped.EdgeCapacity;
+            set => wrapped.EdgeCapacity = value;
         }
 
-        public static Type EdgeType
-        {
-            get 
-            {
-                return typeof(TEdge); 
-            }
-        }
+        public static Type EdgeType => typeof(TEdge);
 
-        public bool IsVerticesEmpty
-        {
-            get 
-            {
-                return wrapped.IsVerticesEmpty; 
-            }
-        }
+        public bool IsVerticesEmpty => wrapped.IsVerticesEmpty;
 
-        public int VertexCount
-        {
-            get 
-            { 
-                return wrapped.VertexCount; 
-            }
-        }
+        public int VertexCount => wrapped.VertexCount;
 
-        public virtual IEnumerable<TVertex> Vertices
-        {
-            get 
-            {
-                return wrapped.Vertices; 
-            }
-        }
+        public virtual IEnumerable<TVertex> Vertices => wrapped.Vertices;
 
         [Pure]
         public bool ContainsVertex(TVertex v)
@@ -171,20 +114,11 @@ namespace QuickGraph
         public bool IsEdgesEmpty
         {
             [Pure]
-            get 
-            {
-                return wrapped.IsEdgesEmpty;
-            }
+            get => wrapped.IsEdgesEmpty;
         }
 
 
-        public int EdgeCount
-        {
-            get
-            {
-                return wrapped.EdgeCount;
-            }
-        }
+        public int EdgeCount => wrapped.EdgeCount;
 
         [ContractInvariantMethod]
         void ObjectInvariant()
@@ -195,10 +129,7 @@ namespace QuickGraph
         public virtual IEnumerable<TEdge> Edges
         {
             [Pure]
-            get
-            {
-                return wrapped.Edges;
-            }
+            get => wrapped.Edges;
         }
 
         [Pure]
@@ -232,22 +163,10 @@ namespace QuickGraph
         }
 
 
-        public IEnumerable Clusters
-        {
-            get
-            {
-                return clusters;
-            }
-        }
+        public IEnumerable Clusters => clusters;
 
 
-        public int ClustersCount
-        {
-            get
-            {
-                return clusters.Count;
-            }
-        }
+        public int ClustersCount => clusters.Count;
 
 
         public ClusteredAdjacencyGraph<TVertex, TEdge> AddCluster()

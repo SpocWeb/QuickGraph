@@ -32,32 +32,14 @@ namespace QuickGraph.Predicates
         /// <summary>
         /// Underlying filtered graph
         /// </summary>
-        public TGraph BaseGraph
-        {
-            get
-            {
-                return baseGraph;
-            }
-        }
+        public TGraph BaseGraph => baseGraph;
 
         /// <summary>
         /// Edge predicate used to filter the edges
         /// </summary>
-        public EdgePredicate<TVertex, TEdge> EdgePredicate
-        {
-            get
-            {
-                return edgePredicate;
-            }
-        }
+        public EdgePredicate<TVertex, TEdge> EdgePredicate => edgePredicate;
 
-        public VertexPredicate<TVertex> VertexPredicate
-        {
-            get
-            {
-                return vertexPredicate;
-            }
-        }
+        public VertexPredicate<TVertex> VertexPredicate => vertexPredicate;
 
         protected bool TestEdge(TEdge edge)
         {
@@ -66,17 +48,8 @@ namespace QuickGraph.Predicates
                     && EdgePredicate(edge);
         }
 
-        public bool IsDirected
-        {
-            get { return BaseGraph.IsDirected; }
-        }
+        public bool IsDirected => BaseGraph.IsDirected;
 
-        public bool AllowParallelEdges
-        {
-            get
-            {
-                return baseGraph.AllowParallelEdges;
-            }
-        }
+        public bool AllowParallelEdges => baseGraph.AllowParallelEdges;
     }
 }

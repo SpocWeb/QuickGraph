@@ -21,48 +21,24 @@ namespace QuickGraph.Algorithms.Ranking
             :base(visitedGraph)
         {}
 
-        public IDictionary<TVertex,double> Ranks
-        {
-            get
-            {
-                return ranks;
-            }
-        }
+        public IDictionary<TVertex,double> Ranks => ranks;
 
         public double Damping
         {
-            get
-            {
-                return damping;
-            }
-            set
-            {
-                damping = value;
-            }
+            get => damping;
+            set => damping = value;
         }
 
         public double Tolerance
         {
-            get
-            {
-                return tolerance;
-            }
-            set
-            {
-                tolerance = value;
-            }
+            get => tolerance;
+            set => tolerance = value;
         }
 
         public int MaxIteration
         {
-            get
-            {
-                return maxIterations;
-            }
-            set
-            {
-                maxIterations = value;
-            }
+            get => maxIterations;
+            set => maxIterations = value;
         }
 
         public void InitializeRanks()

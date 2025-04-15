@@ -25,10 +25,7 @@ namespace QuickGraph.Serialization
             this.edgeIdentities = edgeIdentities;
         }
 
-        public DirectedGraph DirectedGraph
-        {
-            get { return directedGraph; }
-        }
+        public DirectedGraph DirectedGraph => directedGraph;
 
         protected override void InternalCompute()
         {

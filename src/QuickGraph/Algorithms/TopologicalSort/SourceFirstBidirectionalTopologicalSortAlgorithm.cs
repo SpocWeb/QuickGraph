@@ -40,29 +40,11 @@ namespace QuickGraph.Algorithms.TopologicalSort
             heap = new BinaryQueue<TVertex, int>(e => predCounts[e]);
         }
 
-        public ICollection<TVertex> SortedVertices
-        {
-            get
-            {
-                return sortedVertices;
-            }
-        }
+        public ICollection<TVertex> SortedVertices => sortedVertices;
 
-        public BinaryQueue<TVertex, int> Heap
-        {
-            get
-            {
-                return heap;
-            }
-        }
+        public BinaryQueue<TVertex, int> Heap => heap;
 
-        public IDictionary<TVertex, int> InDegrees
-        {
-            get
-            {
-                return predCounts;
-            }
-        }
+        public IDictionary<TVertex, int> InDegrees => predCounts;
 
         public event VertexAction<TVertex> AddVertex;
         private void OnAddVertex(TVertex v)

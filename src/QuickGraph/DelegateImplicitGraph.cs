@@ -27,10 +27,7 @@ namespace QuickGraph
             this.tryGetOutEdges = tryGetOutEdges;
         }
 
-        public TryFunc<TVertex, IEnumerable<TEdge>> TryGetOutEdgesFunc
-        {
-            get { return tryGetOutEdges; }
-        }
+        public TryFunc<TVertex, IEnumerable<TEdge>> TryGetOutEdgesFunc => tryGetOutEdges;
 
         public bool IsOutEdgesEmpty(TVertex v)
         {
@@ -62,15 +59,9 @@ namespace QuickGraph
             return OutEdges(v).ElementAt(index);
         }
 
-        public bool IsDirected
-        {
-            get { return true; }
-        }
+        public bool IsDirected => true;
 
-        public bool AllowParallelEdges
-        {
-            get { return true; }
-        }
+        public bool AllowParallelEdges => true;
 
         public bool ContainsVertex(TVertex vertex)
         {

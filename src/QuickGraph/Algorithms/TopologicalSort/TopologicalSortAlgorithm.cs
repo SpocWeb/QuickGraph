@@ -31,18 +31,9 @@ namespace QuickGraph.Algorithms.TopologicalSort
         }
 
 
-        public IList<TVertex> SortedVertices
-        {
-            get
-            {
-                return vertices;
-            }
-        }
+        public IList<TVertex> SortedVertices => vertices;
 
-        public bool AllowCyclicGraph
-        {
-            get { return allowCyclicGraph; }
-        }
+        public bool AllowCyclicGraph => allowCyclicGraph;
 
         private void BackEdge(TEdge args)
         {

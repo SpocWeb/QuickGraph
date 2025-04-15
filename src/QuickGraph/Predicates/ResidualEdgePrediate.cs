@@ -16,15 +16,9 @@ namespace QuickGraph.Predicates
             this.residualCapacities = residualCapacities;
 		}
 
-		public IDictionary<TEdge,double> ResidualCapacities
-		{
-			get
-			{
-				return residualCapacities;
-			}
-		}
+		public IDictionary<TEdge,double> ResidualCapacities => residualCapacities;
 
-		public bool Test(TEdge e)
+        public bool Test(TEdge e)
 		{
             Contract.Requires(e != null);
 			return 0 < residualCapacities[e];

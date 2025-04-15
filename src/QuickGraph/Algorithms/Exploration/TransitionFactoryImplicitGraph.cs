@@ -23,21 +23,18 @@ namespace QuickGraph.Algorithms.Exploration
         public TransitionFactoryImplicitGraph()
         {}
 
-        public IList<ITransitionFactory<TVertex, TEdge>> TransitionFactories
-        {
-            get { return transitionFactories; }
-        }
+        public IList<ITransitionFactory<TVertex, TEdge>> TransitionFactories => transitionFactories;
 
         public VertexPredicate<TVertex> SuccessorVertexPredicate
         {
-            get { return successorVertexPredicate; }
-            set { successorVertexPredicate = value; }
+            get => successorVertexPredicate;
+            set => successorVertexPredicate = value;
         }
 
         public EdgePredicate<TVertex, TEdge> SuccessorEdgePredicate
         {
-            get { return successorEdgePredicate; }
-            set { successorEdgePredicate = value; }
+            get => successorEdgePredicate;
+            set => successorEdgePredicate = value;
         }
 
         [Pure]
@@ -103,16 +100,9 @@ namespace QuickGraph.Algorithms.Exploration
             throw new ArgumentOutOfRangeException("index");
         }
 
-        public bool IsDirected
-        {
-            get { return true; }
-        }
+        public bool IsDirected => true;
 
-        public bool AllowParallelEdges
-        {
-            get { return true; }
-        }
-
+        public bool AllowParallelEdges => true;
     }
 }
 #endif

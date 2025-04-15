@@ -47,15 +47,9 @@ namespace QuickGraph.Algorithms.Observers
             _finishTimes = finishTimes;
         }
 
-        public IDictionary<TVertex, int> DiscoverTimes
-        {
-            get { return discoverTimes; }
-        }
+        public IDictionary<TVertex, int> DiscoverTimes => discoverTimes;
 
-        public IDictionary<TVertex, int> FinishTimes
-        {
-            get { return _finishTimes; }
-        }
+        public IDictionary<TVertex, int> FinishTimes => _finishTimes;
 
         public IDisposable Attach(IVertexTimeStamperAlgorithm<TVertex> algorithm)
         {

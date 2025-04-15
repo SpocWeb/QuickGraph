@@ -54,60 +54,19 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             dfsTime = 0;
         }
 
-        public IDictionary<TVertex, int> Components
-        {
-            get
-            {
-                return components;
-            }
-        }
+        public IDictionary<TVertex, int> Components => components;
 
-        public IDictionary<TVertex, TVertex> Roots
-        {
-            get
-            {
-                return roots;
-            }
-        }
+        public IDictionary<TVertex, TVertex> Roots => roots;
 
-        public IDictionary<TVertex, int> DiscoverTimes
-        {
-            get
-            {
-                return discoverTimes;
-            }
-        }
+        public IDictionary<TVertex, int> DiscoverTimes => discoverTimes;
 
-        public int ComponentCount
-        {
-            get
-            {
-                return componentCount;
-            }
-        }
+        public int ComponentCount => componentCount;
 
-        public List<TVertex> Vertices
-        {
-            get
-            {
-                return vertices;
-            }
-        }
+        public List<TVertex> Vertices => vertices;
 
-        public int Steps
-        {
-            get
-            {
-                return step;
-            }
-        }
-        public List<int> DiffBySteps
-        {
-            get
-            {
-                return diffBySteps;
-            }
-        }
+        public int Steps => step;
+
+        public List<int> DiffBySteps => diffBySteps;
 
         private void DiscoverVertex(TVertex v)
         {

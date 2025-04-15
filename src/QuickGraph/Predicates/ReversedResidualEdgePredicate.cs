@@ -26,24 +26,12 @@ namespace QuickGraph.Predicates
         /// <summary>
         /// Residual capacities map
         /// </summary>
-        public IDictionary<TEdge,double> ResidualCapacities
-        {
-            get
-            {
-                return residualCapacities;
-            }
-        }
+        public IDictionary<TEdge,double> ResidualCapacities => residualCapacities;
 
         /// <summary>
         /// Reversed edges map
         /// </summary>
-        public IDictionary<TEdge,TEdge> ReversedEdges
-        {
-            get
-            {
-                return reversedEdges;
-            }
-        }
+        public IDictionary<TEdge,TEdge> ReversedEdges => reversedEdges;
 
         public bool Test(TEdge e)
         {

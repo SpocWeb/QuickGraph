@@ -381,13 +381,7 @@ namespace QuickGraph
         /// <summary>
         /// Default tolerance
         /// </summary>
-        public static float DefaultTolerance
-        {
-            get
-            {
-                return 1e-5f;
-            }
-        }
+        public static float DefaultTolerance => 1e-5f;
 
         /// <summary>
         /// Tolerance used during equality comparison
@@ -444,13 +438,7 @@ namespace QuickGraph
         /// <summary>
         /// Default tolerance
         /// </summary>
-        public static double DefaultTolerance
-        {
-            get
-            {
-                return 1e-5;
-            }
-        }
+        public static double DefaultTolerance => 1e-5;
 
         /// <summary>
         /// Tolerance used during equality comparison
@@ -512,13 +500,7 @@ namespace QuickGraph
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "Yes, it's true that type T cannot be inferred while using this static instance, but in this case, it's ok.")]
-        public static ReferenceEqualityComparer<T> Instance
-        {
-            get
-            {
-                return ReferenceEqualityComparerInstance;
-            }
-        }
+        public static ReferenceEqualityComparer<T> Instance => ReferenceEqualityComparerInstance;
 
         // Make constructor private so that clients must use Instance.
         private ReferenceEqualityComparer()

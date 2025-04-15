@@ -76,44 +76,44 @@ namespace QuickGraph
         public static Type EdgeType
         {
             [Pure]
-            get { return typeof(TEdge); }
+            get => typeof(TEdge);
         }
 
         public int EdgeCapacity
         {
             [Pure]
-            get { return edgeCapacity; }
-            set { edgeCapacity = value; }
+            get => edgeCapacity;
+            set => edgeCapacity = value;
         }
 
         public bool IsDirected
         {
             [Pure]
-            get { return isDirected; }
+            get => isDirected;
         }
 
         public bool AllowParallelEdges
         {
             [Pure]
-            get { return allowParallelEdges; }
+            get => allowParallelEdges;
         }
 
         public bool IsVerticesEmpty
         {
             [Pure]
-            get { return vertexOutEdges.Count == 0; }
+            get => vertexOutEdges.Count == 0;
         }
 
         public int VertexCount
         {
             [Pure]
-            get { return vertexOutEdges.Count; }
+            get => vertexOutEdges.Count;
         }
 
         public virtual IEnumerable<TVertex> Vertices
         {
             [Pure]
-            get { return vertexOutEdges.Keys; }
+            get => vertexOutEdges.Keys;
         }
 
         [Pure]
@@ -204,18 +204,9 @@ namespace QuickGraph
             return OutDegree(v) + InDegree(v);
         }
 
-        public bool IsEdgesEmpty
-        {
-            get { return edgeCount == 0; }
-        }
+        public bool IsEdgesEmpty => edgeCount == 0;
 
-        public int EdgeCount
-        {
-            get 
-            {
-                return edgeCount; 
-            }
-        }
+        public int EdgeCount => edgeCount;
 
         public virtual IEnumerable<TEdge> Edges
         {

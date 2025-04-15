@@ -31,10 +31,7 @@ namespace QuickGraph
         /// Gets the edge.
         /// </summary>
         /// <value>The edge.</value>
-        public TEdge Edge
-        {
-            get { return edge; }
-        }
+        public TEdge Edge => edge;
     }
 
     /// <summary>

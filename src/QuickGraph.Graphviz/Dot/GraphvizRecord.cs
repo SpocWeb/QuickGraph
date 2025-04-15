@@ -32,13 +32,7 @@ namespace QuickGraph.Graphviz.Dot
             return ToDot();
         }
 
-        public GraphvizRecordCellCollection Cells
-        {
-            get
-            {
-                return cells;
-            }
-        }
+        public GraphvizRecordCellCollection Cells => cells;
     }
 }
 

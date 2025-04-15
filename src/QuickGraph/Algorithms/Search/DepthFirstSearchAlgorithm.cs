@@ -102,18 +102,9 @@ namespace QuickGraph.Algorithms.Search
             this.outEdgeEnumerator = outEdgeEnumerator;
 		}
 
-        public IDictionary<TVertex,GraphColor> VertexColors
-		{
-			get
-			{
-				return colors;
-			}
-		}
+        public IDictionary<TVertex,GraphColor> VertexColors => colors;
 
-        public Func<IEnumerable<TEdge>, IEnumerable<TEdge>> OutEdgeEnumerator
-        {
-            get { return outEdgeEnumerator; }
-        }
+        public Func<IEnumerable<TEdge>, IEnumerable<TEdge>> OutEdgeEnumerator => outEdgeEnumerator;
 
         public GraphColor GetVertexColor(TVertex vertex)
         {
@@ -122,11 +113,8 @@ namespace QuickGraph.Algorithms.Search
 
 		public int MaxDepth
 		{
-			get
-			{
-				return maxDepth;
-			}
-			set
+			get => maxDepth;
+            set
 			{
                 Contract.Requires(value > 0);
 				maxDepth = value;

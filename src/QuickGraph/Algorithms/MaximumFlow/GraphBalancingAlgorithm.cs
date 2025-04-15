@@ -89,109 +89,35 @@ namespace QuickGraph.Algorithms.MaximumFlow
                 preFlow.Add(edge, 1);
         }
 
-        public IMutableBidirectionalGraph<TVertex, TEdge> VisitedGraph
-        {
-            get
-            {
-                return visitedGraph;
-            }
-        }
+        public IMutableBidirectionalGraph<TVertex, TEdge> VisitedGraph => visitedGraph;
 
-        public VertexFactory<TVertex> VertexFactory
-        {
-            get { return vertexFactory;}
-        }
+        public VertexFactory<TVertex> VertexFactory => vertexFactory;
 
-        public EdgeFactory<TVertex,TEdge> EdgeFactory
-        {
-            get { return edgeFactory;}
-        }
+        public EdgeFactory<TVertex,TEdge> EdgeFactory => edgeFactory;
 
-        public bool Balanced
-        {
-            get
-            {
-                return balanced;
-            }
-        }
+        public bool Balanced => balanced;
 
-        public TVertex Source
-        {
-            get
-            {
-                return source;
-            }
-        }
-        public TVertex Sink
-        {
-            get
-            {
-                return sink;
-            }
-        }
-        public TVertex BalancingSource
-        {
-            get
-            {
-                return balancingSource;
-            }
-        }
-        public TEdge BalancingSourceEdge
-        {
-            get
-            {
-                return balancingSourceEdge;
-            }
-        }
-        public TVertex BalancingSink
-        {
-            get
-            {
-                return balancingSink;
-            }
-        }
-        public TEdge BalancingSinkEdge
-        {
-            get
-            {
-                return balancingSinkEdge;
-            }
-        }
-        public ICollection<TVertex> SurplusVertices
-        {
-            get
-            {
-                return surplusVertices;
-            }
-        }
-        public ICollection<TEdge> SurplusEdges
-        {
-            get
-            {
-                return surplusEdges;
-            }
-        }
-        public ICollection<TVertex> DeficientVertices
-        {
-            get
-            {
-                return deficientVertices;
-            }
-        }
-        public ICollection<TEdge> DeficientEdges
-        {
-            get
-            {
-                return deficientEdges;
-            }
-        }
-        public IDictionary<TEdge,double> Capacities
-        {
-            get
-            {
-                return capacities;
-            }
-        }
+        public TVertex Source => source;
+
+        public TVertex Sink => sink;
+
+        public TVertex BalancingSource => balancingSource;
+
+        public TEdge BalancingSourceEdge => balancingSourceEdge;
+
+        public TVertex BalancingSink => balancingSink;
+
+        public TEdge BalancingSinkEdge => balancingSinkEdge;
+
+        public ICollection<TVertex> SurplusVertices => surplusVertices;
+
+        public ICollection<TEdge> SurplusEdges => surplusEdges;
+
+        public ICollection<TVertex> DeficientVertices => deficientVertices;
+
+        public ICollection<TEdge> DeficientEdges => deficientEdges;
+
+        public IDictionary<TEdge,double> Capacities => capacities;
 
         public event VertexAction<TVertex> BalancingSourceAdded;
         private void OnBalancingSourceAdded()

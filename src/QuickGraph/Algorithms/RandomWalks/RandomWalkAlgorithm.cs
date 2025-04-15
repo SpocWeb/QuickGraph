@@ -30,20 +30,11 @@ namespace QuickGraph.Algorithms.RandomWalks
             this.edgeChain = edgeChain;
         }
 
-        public IImplicitGraph<TVertex,TEdge> VisitedGraph
-        {
-            get
-            {
-                return visitedGraph;
-            }
-        }
+        public IImplicitGraph<TVertex,TEdge> VisitedGraph => visitedGraph;
 
         public IEdgeChain<TVertex,TEdge> EdgeChain
         {
-            get
-            {
-                return edgeChain;
-            }
+            get => edgeChain;
             set
             {
                 Contract.Requires(value != null);
@@ -54,14 +45,8 @@ namespace QuickGraph.Algorithms.RandomWalks
 
         public EdgePredicate<TVertex,TEdge> EndPredicate
         {
-            get
-            {
-                return endPredicate;
-            }
-            set
-            {
-                endPredicate = value;
-            }
+            get => endPredicate;
+            set => endPredicate = value;
         }
 
         public event VertexAction<TVertex> StartVertex;

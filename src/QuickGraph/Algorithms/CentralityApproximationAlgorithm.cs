@@ -37,21 +37,18 @@ namespace QuickGraph.Algorithms
             predecessorRecorder.Attach(dijkstra);
         }
 
-        public Func<TEdge, double> Distances
-        {
-            get { return dijkstra.Weights; }
-        }
+        public Func<TEdge, double> Distances => dijkstra.Weights;
 
         public Random Rand
         {
-            get { return rand; }
-            set { rand = value; }
+            get => rand;
+            set => rand = value;
         }
 
         public int MaxIterationCount
         {
-            get { return maxIterationCount; }
-            set { maxIterationCount = value; }
+            get => maxIterationCount;
+            set => maxIterationCount = value;
         }
 
         protected override void Initialize()

@@ -130,10 +130,7 @@ namespace QuickGraph.Algorithms.Search
 
 #if DEBUG
         int operatorMaxCount = -1;
-        public int OperatorMaxCount
-        {
-            get { return operatorMaxCount; }
-        }
+        public int OperatorMaxCount => operatorMaxCount;
 #endif
 
         #region ITreeBuilderAlgorithm<TVertex,TEdge> Members

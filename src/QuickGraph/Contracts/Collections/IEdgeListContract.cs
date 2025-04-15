@@ -36,14 +36,8 @@ namespace QuickGraph.Collections
 
         TEdge IList<TEdge>.this[int index]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
 
         void ICollection<TEdge>.Add(TEdge item)
@@ -66,15 +60,9 @@ namespace QuickGraph.Collections
             throw new NotImplementedException();
         }
 
-        int ICollection<TEdge>.Count
-        {
-            get { throw new NotImplementedException(); }
-        }
+        int ICollection<TEdge>.Count => throw new NotImplementedException();
 
-        bool ICollection<TEdge>.IsReadOnly
-        {
-            get { throw new NotImplementedException(); }
-        }
+        bool ICollection<TEdge>.IsReadOnly => throw new NotImplementedException();
 
         bool ICollection<TEdge>.Remove(TEdge item)
         {

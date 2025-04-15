@@ -23,15 +23,13 @@ namespace QuickGraph.Algorithms.Condensation
         public IMutableBidirectionalGraph<
             TGraph,
             CondensedEdge<TVertex, TEdge,TGraph>
-            > CondensedGraph
-        {
-            get { return condensedGraph; }
-        }
+            > CondensedGraph =>
+            condensedGraph;
 
         public bool StronglyConnected
         {
-            get { return stronglyConnected; }
-            set { stronglyConnected = value; }
+            get => stronglyConnected;
+            set => stronglyConnected = value;
         }
 
         protected override void InternalCompute()

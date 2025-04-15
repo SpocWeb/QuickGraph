@@ -52,38 +52,20 @@ namespace QuickGraph.Graphviz.Dot
 
         public GraphvizArrowClipping Clipping
         {
-            get
-            {
-                return clipping;
-            }
-            set
-            {
-                clipping = value;
-            }
+            get => clipping;
+            set => clipping = value;
         }
 
         public GraphvizArrowFilling Filling
         {
-            get
-            {
-                return filling;
-            }
-            set
-            {
-                filling = value;
-            }
+            get => filling;
+            set => filling = value;
         }
 
         public GraphvizArrowShape Shape
         {
-            get
-            {
-                return shape;
-            }
-            set
-            {
-                shape = value;
-            }
+            get => shape;
+            set => shape = value;
         }
     }
 }

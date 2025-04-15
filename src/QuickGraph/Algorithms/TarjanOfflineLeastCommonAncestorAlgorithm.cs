@@ -61,10 +61,7 @@ namespace QuickGraph.Algorithms
             Compute(root);
         }
 
-        public IDictionary<SEquatableEdge<TVertex>, TVertex> Ancestors
-        {
-            get { return ancestors; }
-        }
+        public IDictionary<SEquatableEdge<TVertex>, TVertex> Ancestors => ancestors;
 
         protected override void Initialize()
         {

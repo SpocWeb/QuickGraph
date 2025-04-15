@@ -60,10 +60,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             predecessors = new Dictionary<TVertex,TVertex>();
         }
 
-        public bool FoundNegativeCycle
-        {
-            get { return foundNegativeCycle;}
-        }
+        public bool FoundNegativeCycle => foundNegativeCycle;
 
         /// <summary>
         /// Invoked on each vertex in the graph before the start of the 
@@ -159,13 +156,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         /// <summary>
         /// Constructed predecessor map
         /// </summary>
-        public IDictionary<TVertex,TVertex> Predecessors
-        {
-            get
-            {
-                return predecessors;
-            }
-        }
+        public IDictionary<TVertex,TVertex> Predecessors => predecessors;
 
         protected override void Initialize()
         {

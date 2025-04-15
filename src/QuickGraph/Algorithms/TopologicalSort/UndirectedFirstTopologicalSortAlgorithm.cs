@@ -26,35 +26,17 @@ namespace QuickGraph.Algorithms.TopologicalSort
             heap = new BinaryQueue<TVertex, int>(e => degrees[e]);
         }
 
-        public ICollection<TVertex> SortedVertices
-        {
-            get
-            {
-                return sortedVertices;
-            }
-        }
+        public ICollection<TVertex> SortedVertices => sortedVertices;
 
-        public BinaryQueue<TVertex, int> Heap
-        {
-            get
-            {
-                return heap;
-            }
-        }
+        public BinaryQueue<TVertex, int> Heap => heap;
 
-        public IDictionary<TVertex, int> Degrees
-        {
-            get
-            {
-                return degrees;
-            }
-        }
+        public IDictionary<TVertex, int> Degrees => degrees;
 
 
         public bool AllowCyclicGraph
         {
-            get { return allowCyclicGraph; }
-            set { allowCyclicGraph = value; }
+            get => allowCyclicGraph;
+            set => allowCyclicGraph = value;
         }
 
         public event VertexAction<TVertex> AddVertex;

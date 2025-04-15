@@ -1065,10 +1065,7 @@ this
         {
             public static readonly IDistanceRelaxer Instance = new PrimRelaxer();
 
-            public double InitialDistance
-            {
-                get { return double.MaxValue; }
-            }
+            public double InitialDistance => double.MaxValue;
 
             public int Compare(double a, double b)
             {

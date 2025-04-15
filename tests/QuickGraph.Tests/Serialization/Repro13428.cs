@@ -141,10 +141,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlAttribute]
         public string Id
         {
-            get
-            {
-                return id;
-            }
+            get => id;
 
             set
             {
@@ -162,10 +159,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public string FirstName
         {
-            get
-            {
-                return firstName;
-            }
+            get => firstName;
 
             set
             {
@@ -185,10 +179,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public string LastName
         {
-            get
-            {
-                return lastName;
-            }
+            get => lastName;
 
             set
             {
@@ -208,10 +199,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public string MiddleName
         {
-            get
-            {
-                return middleName;
-            }
+            get => middleName;
 
             set
             {
@@ -287,10 +275,7 @@ namespace QuickGraph.Tests.Serialization
         public string Suffix
         {
 
-            get
-            {
-                return suffix;
-            }
+            get => suffix;
 
             set
             {
@@ -309,10 +294,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public string NickName
         {
-            get
-            {
-                return nickName;
-            }
+            get => nickName;
 
             set
             {
@@ -330,10 +312,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public string MaidenName
         {
-            get
-            {
-                return maidenName;
-            }
+            get => maidenName;
 
             set
             {
@@ -351,10 +330,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public Gender Gender
         {
-            get
-            {
-                return gender;
-            }
+            get => gender;
 
             set
             {
@@ -474,10 +450,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public DateTime? BirthDate
         {
-            get
-            {
-                return birthDate;
-            }
+            get => birthDate;
 
             set
             {
@@ -500,10 +473,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public string BirthPlace
         {
-            get
-            {
-                return birthPlace;
-            }
+            get => birthPlace;
 
             set
             {
@@ -575,10 +545,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public DateTime? DeathDate
         {
-            get
-            {
-                return deathDate;
-            }
+            get => deathDate;
 
             set
             {
@@ -599,10 +566,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public string DeathPlace
         {
-            get
-            {
-                return deathPlace;
-            }
+            get => deathPlace;
 
             set
             {
@@ -621,10 +585,7 @@ namespace QuickGraph.Tests.Serialization
         [XmlElement]
         public bool IsLiving
         {
-            get
-            {
-                return isLiving;
-            }
+            get => isLiving;
 
             set
             {
@@ -767,10 +728,7 @@ namespace QuickGraph.Tests.Serialization
         /// 
         /// Gets an error message indicating what is wrong with this object.
         /// 
-        public string Error
-        {
-            get { return null; }
-        }
+        public string Error => null;
 
         /// 
         /// Gets the error message for the property with the given name.

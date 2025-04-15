@@ -40,10 +40,7 @@ namespace QuickGraph.Serialization
         { }
 
         [XmlElement("graph-traits")]
-        public TGraph Graph
-        {
-            get { return graph; }
-        }
+        public TGraph Graph => graph;
 
         [XmlArray("edges")]
         [XmlArrayItem("edge")]

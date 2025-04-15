@@ -51,13 +51,7 @@ namespace QuickGraph.Algorithms.Search
             this.colors = colors;
         }
 
-        public IDictionary<TVertex, GraphColor> VertexColors
-        {
-            get
-            {
-                return colors;
-            }
-        }
+        public IDictionary<TVertex, GraphColor> VertexColors => colors;
 
         public GraphColor GetVertexColor(TVertex vertex)
         {
@@ -66,14 +60,8 @@ namespace QuickGraph.Algorithms.Search
 
         public int MaxDepth
         {
-            get
-            {
-                return maxDepth;
-            }
-            set
-            {
-                maxDepth = value;
-            }
+            get => maxDepth;
+            set => maxDepth = value;
         }
 
         public event VertexAction<TVertex> InitializeVertex;

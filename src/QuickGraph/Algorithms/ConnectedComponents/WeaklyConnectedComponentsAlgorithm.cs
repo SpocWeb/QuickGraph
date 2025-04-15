@@ -42,15 +42,9 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             this.components = components;
         }
 
-        public IDictionary<TVertex, int> Components
-        {
-            get { return components; }
-        }
+        public IDictionary<TVertex, int> Components => components;
 
-        public int ComponentCount
-        {
-            get { return componentCount; }
-        }
+        public int ComponentCount => componentCount;
 
         protected override void Initialize()
         {

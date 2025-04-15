@@ -29,15 +29,10 @@ namespace QuickGraph.Algorithms.Condensation
 
         public IMutableBidirectionalGraph<TVertex,
             MergedEdge<TVertex,TEdge>
-            > CondensatedGraph
-        {
-            get { return condensatedGraph; }
-        }
+            > CondensatedGraph =>
+            condensatedGraph;
 
-        public VertexPredicate<TVertex> VertexPredicate
-        {
-            get { return vertexPredicate; }
-        }
+        public VertexPredicate<TVertex> VertexPredicate => vertexPredicate;
 
         protected override void InternalCompute()
         {

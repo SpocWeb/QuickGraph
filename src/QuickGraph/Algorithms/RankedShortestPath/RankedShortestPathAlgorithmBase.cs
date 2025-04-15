@@ -17,7 +17,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
 
         public int ShortestPathCount
         {
-            get { return shortestPathCount; }
+            get => shortestPathCount;
             set
             {
                 Contract.Requires(value > 1);
@@ -59,10 +59,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             Console.WriteLine("found shortest path {0}", path.Count);
         }
 
-        public IDistanceRelaxer DistanceRelaxer
-        {
-            get { return distanceRelaxer; }
-        }
+        public IDistanceRelaxer DistanceRelaxer => distanceRelaxer;
 
         protected RankedShortestPathAlgorithmBase(
             IAlgorithmComponent host, 

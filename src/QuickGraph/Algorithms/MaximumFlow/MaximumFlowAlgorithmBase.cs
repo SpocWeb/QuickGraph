@@ -57,7 +57,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         public TVertex Source
         {
-            get { return source; }
+            get => source;
             set 
             {
                 Contract.Requires(value != null);
@@ -67,7 +67,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         public TVertex Sink
         {
-            get { return sink; }
+            get => sink;
             set 
             {
                 Contract.Requires(value != null);
