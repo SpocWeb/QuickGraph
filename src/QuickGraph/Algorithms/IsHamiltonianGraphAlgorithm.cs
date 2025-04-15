@@ -28,7 +28,8 @@ namespace QuickGraph.Algorithms
             return permutations;
         }
 
-        private void GetPermutations(List<TVertex> list, int recursionDepth, int maxDepth, List<List<TVertex>> permutations)
+        /// <summary> Recursively generates all Permutations of the <paramref name="list"/> </summary>
+        private static void GetPermutations(List<TVertex> list, int recursionDepth, int maxDepth, List<List<TVertex>> permutations)
         {
             if (recursionDepth == maxDepth)
             {

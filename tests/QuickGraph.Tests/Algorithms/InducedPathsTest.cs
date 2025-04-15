@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using QuickGraph.Algorithms;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -43,54 +44,50 @@ namespace QuickGraph.Tests.Algorithms
             return res;
         }
 
-        private static List<List<int>> ListSort(List<List<int>> paths)
+        private static List<List<T>> ListSort<T>(List<List<T>> paths, Func<T, T, int> minus = null)
         {
             var res = paths.Select(x => x.OrderBy(y => y).ToList()).ToList();
-            res.Sort(CompareTwoLists);
+            res.Sort((ts, list) => CompareTwoLists(ts, list, minus));
             return res;
         }
 
-        private static int CompareTwoLists(List<int> list1, List<int> list2)
+        public static int CompareTwoLists<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
+            => CompareTwoLists<T>(list1, list2, null);
+
+        public static int CompareTwoLists<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2, Func<T, T, int> minus)// = null)
         {
-            int i = 0;
-            while (i < list1.Count)
+            minus ??= Comparer<T>.Default.Compare;
+            for (int i = list1.Count; --i >= 0; )
             {
-                if (list1[i] < list2[i])
+                var compare = minus(list1[i], list2[i]);
+                if (compare != 0)
                 {
-                    return -1;
-                } else if (list1[i] > list2[i])
-                {
-                    return 1;
+                    return compare;
                 }
-                i++;
             }
 
             return 0;
         }
 
-        private static bool CompareLists(List<List<int>> list1, List<List<int>> list2)
+        public static bool CompareLists<T>(List<List<T>> list1, List<List<T>> list2)
         {
+            if (list1.Count != list2.Count)
+            {
+                return false;
+            }
+
             list1 = ListSort(list1);
             list2 = ListSort(list2);
 
-            int i = 0;
-            bool isEqual = true;
-
-            if (list1.Count != list2.Count)
-            {
-                isEqual = false;
-            }
-
-            while (i < list1.Count && isEqual)
+            for (var i = list1.Count; --i >= 0;)
             {
                 if (list1[i].Count != list2[i].Count || CompareTwoLists(list1[i], list2[i]) != 0)
                 {
-                    isEqual = false;
+                    return false;
                 }
-                i++;
             }
 
-            return isEqual;
+            return true;
         }
 
         [TestMethod]
