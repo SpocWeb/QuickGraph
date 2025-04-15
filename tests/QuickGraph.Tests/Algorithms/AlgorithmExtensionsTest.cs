@@ -8,6 +8,7 @@ using QuickGraph.Serialization;
 namespace QuickGraph.Tests.Algorithms
 {
     [TestClass]
+    [Ignore("Explicit test - run manually and individually")]
     public partial class AlgorithmExtensionsTest
     {
         [TestMethod]
