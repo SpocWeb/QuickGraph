@@ -13,8 +13,8 @@ namespace QuickGraph.Algorithms.ShortestPath.Yen
       IEnumerable<IEnumerable<TaggedEquatableEdge<TVertex, double>>>> _filter;
 
     // limit for amount of paths
-    private int _k;
-    private AdjacencyGraph<TVertex, TaggedEquatableEdge<TVertex, double>> _graph;
+    private readonly int _k;
+    private readonly AdjacencyGraph<TVertex, TaggedEquatableEdge<TVertex, double>> _graph;
     private readonly List<TaggedEquatableEdge<TVertex, double>> _removedEdges = new List<TaggedEquatableEdge<TVertex, double>>();
 
     /*

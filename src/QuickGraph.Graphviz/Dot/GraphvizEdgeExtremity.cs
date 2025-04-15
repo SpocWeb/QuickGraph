@@ -6,7 +6,7 @@ namespace QuickGraph.Graphviz.Dot
     public class GraphvizEdgeExtremity
     {
         private bool isClipped;
-        private bool isHead;
+        private readonly bool isHead;
         private string label;
         private string logical;
         private string same;

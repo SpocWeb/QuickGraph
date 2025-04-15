@@ -5,7 +5,7 @@ namespace QuickGraph.Graphviz.Dot
 
     public sealed class GraphvizRecordEscaper
     {
-        private Regex escapeRegExp = new Regex("(?<Eol>\\n)|(?<Common>\\[|\\]|\\||<|>|\"| )", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+        private readonly Regex escapeRegExp = new Regex("(?<Eol>\\n)|(?<Common>\\[|\\]|\\||<|>|\"| )", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
 
         public string Escape(string text)
         {

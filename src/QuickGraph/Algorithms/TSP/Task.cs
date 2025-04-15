@@ -7,8 +7,8 @@ namespace QuickGraph.Algorithms.TSP
     class Task<TVertex, TEdge>
         where TEdge : EquatableEdge<TVertex>
     {
-        private Dictionary<EquatableEdge<TVertex>, double> _weight;
-        private BidirectionalGraph<TVertex, TEdge> _graph;
+        private readonly Dictionary<EquatableEdge<TVertex>, double> _weight;
+        private readonly BidirectionalGraph<TVertex, TEdge> _graph;
 
         public double MinCost;
         public BidirectionalGraph<TVertex, TEdge> Path;
@@ -219,8 +219,8 @@ namespace QuickGraph.Algorithms.TSP
 
     public class TaskPriority : IComparable<TaskPriority>
     {
-        double _cost;
-        int _pathSize;
+        readonly double _cost;
+        readonly int _pathSize;
 
         public TaskPriority(double cost, int pathSize)
         {

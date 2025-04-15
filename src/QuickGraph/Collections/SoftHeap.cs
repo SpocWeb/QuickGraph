@@ -23,7 +23,7 @@ namespace QuickGraph.Collections
         sealed class Node
         {
             public TKey CKey;
-            public int Rank;
+            public readonly int Rank;
             public Node Next;
             public Node Child;
             public Cell IL;
@@ -63,7 +63,7 @@ namespace QuickGraph.Collections
         readonly Head header;
         readonly Head tail;
         int count;
-        int r;
+        readonly int r;
 
         public SoftHeap(double maximumErrorRate, TKey keyMaxValue)
             : this(maximumErrorRate, keyMaxValue, Comparer<TKey>.Default.Compare)
@@ -327,7 +327,7 @@ namespace QuickGraph.Collections
             : IEnumerator<KeyValuePair<TKey, TValue>>
         {
             readonly SoftHeap<TKey, TValue> owner;
-            KeyValuePair<TKey, TValue> current;
+            readonly KeyValuePair<TKey, TValue> current;
 
             public Enumerator(SoftHeap<TKey, TValue> owner)
             {

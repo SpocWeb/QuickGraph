@@ -12,7 +12,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
         where TGraph : IMutableVertexAndEdgeSet<TVertex, TEdge>
     {
         private bool augmented = false;
-        private List<TEdge> augmentedEdges = new List<TEdge>();
+        private readonly List<TEdge> augmentedEdges = new List<TEdge>();
         private readonly VertexFactory<TVertex> vertexFactory;
         private readonly EdgeFactory<TVertex, TEdge> edgeFactory;
 

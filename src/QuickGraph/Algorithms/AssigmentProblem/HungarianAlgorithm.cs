@@ -9,7 +9,7 @@ namespace QuickGraph.Algorithms.AssigmentProblem
         public int[] AgentsTasks;
 
         private Steps _step;
-        private int[,] _costs;
+        private readonly int[,] _costs;
         private byte[,] _masks;
         private bool[] _rowsCovered;
         private bool[] _colsCovered;
@@ -331,8 +331,8 @@ namespace QuickGraph.Algorithms.AssigmentProblem
         /// </summary>
         private struct Location
         {
-            public int Row;
-            public int Column;
+            public readonly int Row;
+            public readonly int Column;
 
             public Location(int row, int col)
             {

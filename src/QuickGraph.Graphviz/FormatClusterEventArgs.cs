@@ -9,8 +9,8 @@ namespace QuickGraph.Graphviz
     /// </summary>
     public class FormatClusterEventArgs<TVertex, TEdge> : EventArgs where TEdge : IEdge<TVertex>
     {
-        private IVertexAndEdgeListGraph<TVertex,TEdge> cluster;
-        private GraphvizGraph graphFormat;
+        private readonly IVertexAndEdgeListGraph<TVertex,TEdge> cluster;
+        private readonly GraphvizGraph graphFormat;
 
         public FormatClusterEventArgs(IVertexAndEdgeListGraph<TVertex,TEdge> cluster, GraphvizGraph graphFormat)
         {

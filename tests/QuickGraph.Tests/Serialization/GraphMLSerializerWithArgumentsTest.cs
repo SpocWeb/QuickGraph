@@ -324,7 +324,7 @@ namespace QuickGraph.Serialization
 
         public sealed class TestVertex
         {
-            private string id;
+            private readonly string id;
 
             public TestVertex(
                 string id)
@@ -486,7 +486,7 @@ namespace QuickGraph.Serialization
 
         public sealed class TestEdge : Edge<TestVertex>
         {
-            private string id;
+            private readonly string id;
 
             public TestEdge(
                 TestVertex source,

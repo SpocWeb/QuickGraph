@@ -12,9 +12,9 @@ namespace QuickGraph.Algorithms.Exploration
         where TVertex : ICloneable, IComparable<TVertex>
         where TEdge : IEdge<TVertex>
     {
-        private IList<ITransitionFactory<TVertex, TEdge>> transitionFactories = new List<ITransitionFactory<TVertex, TEdge>>();
+        private readonly IList<ITransitionFactory<TVertex, TEdge>> transitionFactories = new List<ITransitionFactory<TVertex, TEdge>>();
 
-        private Queue<TVertex> unexploredVertices = new Queue<TVertex>();
+        private readonly Queue<TVertex> unexploredVertices = new Queue<TVertex>();
 
         private VertexPredicate<TVertex> addVertexPredicate = v => true;
         private VertexPredicate<TVertex> exploreVertexPredicate = v => true;

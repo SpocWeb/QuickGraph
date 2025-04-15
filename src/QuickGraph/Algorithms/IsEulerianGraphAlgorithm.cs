@@ -8,7 +8,7 @@ namespace QuickGraph.Algorithms
 
     public class IsEulerianGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {
-        private UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph;
+        private readonly UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph;
 
         public IsEulerianGraphAlgorithm(UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph)
         {

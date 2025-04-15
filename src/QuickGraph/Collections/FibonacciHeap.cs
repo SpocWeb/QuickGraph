@@ -205,11 +205,12 @@ namespace QuickGraph.Collections
             this.priorityComparsion = priorityComparison;
             count = 0;
         }
-        FibonacciHeapLinkedList<TPriority, TValue> nodes;
+
+        readonly FibonacciHeapLinkedList<TPriority, TValue> nodes;
         FibonacciHeapCell<TPriority, TValue> next;
-        private short DirectionMultiplier;  //Used to control the direction of the heap, set to 1 if the Heap is increasing, -1 if it's decreasing
+        private readonly short DirectionMultiplier;  //Used to control the direction of the heap, set to 1 if the Heap is increasing, -1 if it's decreasing
                                           //We use the approach to avoid unnessecary branches
-        private Dictionary<int, FibonacciHeapCell<TPriority, TValue>> degreeToNode;
+        private readonly Dictionary<int, FibonacciHeapCell<TPriority, TValue>> degreeToNode;
         private readonly Comparison<TPriority> priorityComparsion;
         private readonly HeapDirection direction;
         public HeapDirection Direction { get { return direction; } }

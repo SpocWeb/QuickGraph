@@ -5,7 +5,7 @@ namespace QuickGraph.Graphviz
     public abstract class GraphRendererBase<TVertex,TEdge>
         where TEdge : IEdge<TVertex>
     {
-        private GraphvizAlgorithm<TVertex, TEdge> graphviz;
+        private readonly GraphvizAlgorithm<TVertex, TEdge> graphviz;
 
         public GraphRendererBase(
             IEdgeListGraph<TVertex, TEdge> visitedGraph)

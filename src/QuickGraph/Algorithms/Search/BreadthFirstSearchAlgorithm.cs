@@ -22,8 +22,8 @@ namespace QuickGraph.Algorithms.Search
         , ITreeBuilderAlgorithm<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
     {
-        private IDictionary<TVertex, GraphColor> vertexColors;
-        private IQueue<TVertex> vertexQueue;
+        private readonly IDictionary<TVertex, GraphColor> vertexColors;
+        private readonly IQueue<TVertex> vertexQueue;
         private readonly Func<IEnumerable<TEdge>, IEnumerable<TEdge>> outEdgeEnumerator;
 
         public BreadthFirstSearchAlgorithm(IVertexListGraph<TVertex,TEdge> g)

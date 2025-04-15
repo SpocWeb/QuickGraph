@@ -20,7 +20,7 @@ namespace QuickGraph.Algorithms.GraphColoring.VertexColoring
     public class VertexColoringAlgorithm<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
     {
-        private InputModel<TVertex, TEdge> input;
+        private readonly InputModel<TVertex, TEdge> input;
 
         public VertexColoringAlgorithm(InputModel<TVertex, TEdge> input)
         {

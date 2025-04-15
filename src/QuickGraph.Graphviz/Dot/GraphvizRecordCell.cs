@@ -5,7 +5,7 @@ namespace QuickGraph.Graphviz.Dot
     public class GraphvizRecordCell
     {
         private readonly GraphvizRecordCellCollection cells = new GraphvizRecordCellCollection();
-        private GraphvizRecordEscaper escaper = new GraphvizRecordEscaper();
+        private readonly GraphvizRecordEscaper escaper = new GraphvizRecordEscaper();
         private string port = null;
         private string text = null;
 

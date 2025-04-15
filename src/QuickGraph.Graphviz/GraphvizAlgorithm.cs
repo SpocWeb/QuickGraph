@@ -21,9 +21,9 @@ namespace QuickGraph.Graphviz
         private GraphvizImageType imageType;
         private readonly Dictionary<TVertex, int> vertexIds = new Dictionary<TVertex, int>();
         private int clusterCount;
-        private GraphvizGraph graphFormat;
-        private GraphvizVertex commonVertexFormat;
-        private GraphvizEdge commonEdgeFormat;
+        private readonly GraphvizGraph graphFormat;
+        private readonly GraphvizVertex commonVertexFormat;
+        private readonly GraphvizEdge commonEdgeFormat;
 
         public GraphvizAlgorithm(IEdgeListGraph<TVertex, TEdge> g)
             :this(g,".",GraphvizImageType.Png)

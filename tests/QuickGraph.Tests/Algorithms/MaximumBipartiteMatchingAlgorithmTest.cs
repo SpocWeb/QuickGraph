@@ -11,7 +11,7 @@ namespace QuickGraph.Tests.Algorithms
     public class MaximumBipartiteMatchingAlgorithmTest
     {
 
-        private EdgeFactory<string, Edge<string>> EdgeFactory = 
+        private readonly EdgeFactory<string, Edge<string>> EdgeFactory = 
             (source, target) => new Edge<string>(source, target);
 
 

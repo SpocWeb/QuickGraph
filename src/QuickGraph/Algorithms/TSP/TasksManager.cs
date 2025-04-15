@@ -6,7 +6,7 @@ namespace QuickGraph.Algorithms.TSP
     class TasksManager<TVertex, TEdge>
         where TEdge : EquatableEdge<TVertex>
     {
-        private BinaryHeap<TaskPriority, Task<TVertex, TEdge>> _tasksQueue;
+        private readonly BinaryHeap<TaskPriority, Task<TVertex, TEdge>> _tasksQueue;
 
 
         public TasksManager()

@@ -7,9 +7,9 @@ namespace QuickGraph.Algorithms.KernighanLinAlgoritm
     public sealed class KernighanLinAlgoritm<TVertex, TEdge>
         where TEdge : TaggedUndirectedEdge<TVertex, double>
     {
-        private UndirectedGraph<TVertex, TEdge> g;
-        private int itersNum;
-        private int partitionSize;
+        private readonly UndirectedGraph<TVertex, TEdge> g;
+        private readonly int itersNum;
+        private readonly int partitionSize;
         private SortedSet<TVertex> A, B;
         private SortedSet<TVertex> unswappedA, unswappedB;
 

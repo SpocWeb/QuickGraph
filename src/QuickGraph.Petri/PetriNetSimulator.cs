@@ -92,7 +92,7 @@ namespace QuickGraph.Petri
 
         private sealed class TransitionBuffer
         {
-            private IList<Token> tokens = new List<Token>();
+            private readonly IList<Token> tokens = new List<Token>();
             private bool enabled = true;
 
             public IList<Token> Tokens

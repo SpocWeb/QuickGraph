@@ -9,7 +9,7 @@ namespace QuickGraph.Algorithms.TSP
         where TGraph : BidirectionalGraph<TVertex, TEdge>
         where TEdge : EquatableEdge<TVertex>
     {
-        private TasksManager<TVertex, TEdge> taskManager = new TasksManager<TVertex, TEdge>();
+        private readonly TasksManager<TVertex, TEdge> taskManager = new TasksManager<TVertex, TEdge>();
 
         public BidirectionalGraph<TVertex, TEdge> ResultPath;
         public double BestCost = double.PositiveInfinity;

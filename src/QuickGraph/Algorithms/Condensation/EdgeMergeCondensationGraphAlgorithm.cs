@@ -7,11 +7,11 @@ namespace QuickGraph.Algorithms.Condensation
         AlgorithmBase<IBidirectionalGraph<TVertex, TEdge>>
         where TEdge : IEdge<TVertex>
     {
-        private IMutableBidirectionalGraph<
+        private readonly IMutableBidirectionalGraph<
             TVertex, 
             MergedEdge<TVertex,TEdge>
             > condensatedGraph;
-        private VertexPredicate<TVertex> vertexPredicate;
+        private readonly VertexPredicate<TVertex> vertexPredicate;
 
         public EdgeMergeCondensationGraphAlgorithm(
                 IBidirectionalGraph<TVertex, TEdge> visitedGraph,

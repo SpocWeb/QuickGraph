@@ -15,8 +15,8 @@ namespace QuickGraph.Algorithms
 
     public class IsHamiltonianGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {
-        private UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph;
-        private double threshold;
+        private readonly UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph;
+        private readonly double threshold;
 
         public List<List<TVertex>> GetPermutations()
         {
