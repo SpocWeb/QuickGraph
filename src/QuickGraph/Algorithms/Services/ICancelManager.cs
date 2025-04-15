@@ -42,10 +42,10 @@ namespace QuickGraph.Algorithms.Services
 
         public void Cancel()
         {
-            var value = Interlocked.Increment(ref this.cancelling);
+            var value = Interlocked.Increment(ref cancelling);
             if (value == 0)
             {
-                var eh = this.CancelRequested;
+                var eh = CancelRequested;
                 if (eh != null)
                     eh(this, EventArgs.Empty);
             }
@@ -53,7 +53,7 @@ namespace QuickGraph.Algorithms.Services
 
         public bool IsCancelling
         {
-            get { return this.cancelling > 0; }
+            get { return cancelling > 0; }
         }
 
         /// <summary>
@@ -66,10 +66,10 @@ namespace QuickGraph.Algorithms.Services
         /// </summary>
         public void ResetCancel()
         {
-            var value = Interlocked.Exchange(ref this.cancelling, 0);
+            var value = Interlocked.Exchange(ref cancelling, 0);
             if (value != 0)
             {
-                var eh = this.CancelReseted;
+                var eh = CancelReseted;
                 if (eh != null)
                     eh(this, EventArgs.Empty);
             }

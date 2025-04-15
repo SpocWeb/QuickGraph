@@ -100,15 +100,15 @@ namespace QuickGraph.Collections
         {
             Contract.Requires(node != null);
 
-            if (this.last != null)
+            if (last != null)
             {
-                this.last.Next = node;
+                last.Next = node;
             }
-            node.Previous = this.last;
-            this.last = node;
-            if (this.first == null)
+            node.Previous = last;
+            last = node;
+            if (first == null)
             {
-                this.first = node;
+                first = node;
             }
         }
 
@@ -122,7 +122,7 @@ namespace QuickGraph.Collections
             }
             else if (first == node)
             {
-                this.first = node.Next;
+                first = node.Next;
             }
 
             if (node.Next != null)
@@ -131,7 +131,7 @@ namespace QuickGraph.Collections
             }
             else if (last == node)
             {
-                this.last = node.Previous;
+                last = node.Previous;
             }
 
             node.Next = null;
@@ -142,7 +142,7 @@ namespace QuickGraph.Collections
 
         public IEnumerator<FibonacciHeapCell<TPriority, TValue>> GetEnumerator()
         {
-            var current = this.first;
+            var current = first;
             while (current != null)
             {
                 yield return current;
@@ -154,7 +154,7 @@ namespace QuickGraph.Collections
         #region IEnumerable Members
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         #endregion
@@ -180,7 +180,7 @@ namespace QuickGraph.Collections
 
         public KeyValuePair<TPriority, TValue> ToKeyValuePair()
         {
-            return new KeyValuePair<TPriority, TValue>(this.Priority, this.Value);
+            return new KeyValuePair<TPriority, TValue>(Priority, Value);
         }
     }
 
@@ -201,8 +201,8 @@ namespace QuickGraph.Collections
             nodes = new FibonacciHeapLinkedList<TPriority, TValue>();
             degreeToNode = new Dictionary<int, FibonacciHeapCell<TPriority, TValue>>();
             DirectionMultiplier = (short)(Direction == HeapDirection.Increasing ? 1 : -1);
-            this.direction = Direction;
-            this.priorityComparsion = priorityComparison;
+            direction = Direction;
+            priorityComparsion = priorityComparison;
             count = 0;
         }
 
@@ -224,14 +224,14 @@ namespace QuickGraph.Collections
             public readonly int Level;
             public NodeLevel(FibonacciHeapCell<TPriority, TValue> node, int level)
             {
-                this.Node = node;
-                this.Level = level;
+                Node = node;
+                Level = level;
             }
         }
 
         public Comparison<TPriority> PriorityComparison
         {
-            get { return this.priorityComparsion; }
+            get { return priorityComparsion; }
         }
 
         public string DrawHeap()
@@ -286,9 +286,9 @@ namespace QuickGraph.Collections
 
             //We don't do any book keeping or maintenance of the heap on Enqueue,
             //We just add this node to the end of the list of Heaps, updating the Next if required
-            this.nodes.AddLast(newNode);
+            nodes.AddLast(newNode);
             if (next == null || 
-                (this.priorityComparsion(newNode.Priority, next.Priority) * DirectionMultiplier) < 0)
+                (priorityComparsion(newNode.Priority, next.Priority) * DirectionMultiplier) < 0)
             {
                 next = newNode;
             }
@@ -317,10 +317,10 @@ namespace QuickGraph.Collections
         {
             Contract.Requires(node != null);
 
-            var delta = Math.Sign(this.priorityComparsion(node.Priority, NewKey));
+            var delta = Math.Sign(priorityComparsion(node.Priority, NewKey));
             if (delta == 0)
                 return;
-            if (delta == this.DirectionMultiplier || deletingNode)
+            if (delta == DirectionMultiplier || deletingNode)
             {
                 //New value is in the same direciton as the heap
                 node.Priority = NewKey;
@@ -436,14 +436,14 @@ namespace QuickGraph.Collections
 
         public KeyValuePair<TPriority, TValue> Dequeue()
         {
-            if (this.count == 0)
+            if (count == 0)
                 throw new InvalidOperationException();
 
             var result = new KeyValuePair<TPriority, TValue>(
-                this.next.Priority,
-                this.next.Value);
+                next.Priority,
+                next.Value);
 
-            this.nodes.Remove(next);
+            nodes.Remove(next);
             next.Next = null;
             next.Parent = null;
             next.Previous = null;
@@ -464,7 +464,7 @@ namespace QuickGraph.Collections
             nodes.MergeLists(next.Children);
             next.Children = null;
             count--;
-            this.UpdateNext();
+            UpdateNext();
 
             return result;
         }
@@ -476,12 +476,12 @@ namespace QuickGraph.Collections
         /// </summary>
         private void UpdateNext()
         {
-            this.CompressHeap();
-            var node = this.nodes.First;
-            next = this.nodes.First;
+            CompressHeap();
+            var node = nodes.First;
+            next = nodes.First;
             while (node != null)
             {
-                if ((this.priorityComparsion(node.Priority, next.Priority) * DirectionMultiplier) < 0)
+                if ((priorityComparsion(node.Priority, next.Priority) * DirectionMultiplier) < 0)
                 {
                     next = node;
                 }
@@ -491,7 +491,7 @@ namespace QuickGraph.Collections
 
         private void CompressHeap()
         {
-            var node = this.nodes.First;
+            var node = nodes.First;
             FibonacciHeapCell<TPriority, TValue> currentDegreeNode;
             while (node != null)
             {
@@ -499,13 +499,13 @@ namespace QuickGraph.Collections
                 while (degreeToNode.TryGetValue(node.Degree, out currentDegreeNode) && currentDegreeNode != node)
                 {
                     degreeToNode.Remove(node.Degree);
-                    if ((this.priorityComparsion(currentDegreeNode.Priority, node.Priority) * DirectionMultiplier) <= 0)
+                    if ((priorityComparsion(currentDegreeNode.Priority, node.Priority) * DirectionMultiplier) <= 0)
                     {
                         if (node == nextNode)
                         {
                             nextNode = node.Next;
                         }
-                        this.ReduceNodes(currentDegreeNode, node);
+                        ReduceNodes(currentDegreeNode, node);
                         node = currentDegreeNode;
                     }
                     else
@@ -514,7 +514,7 @@ namespace QuickGraph.Collections
                         {
                             nextNode = currentDegreeNode.Next;
                         }
-                        this.ReduceNodes(node, currentDegreeNode);
+                        ReduceNodes(node, currentDegreeNode);
                     }
                 }
                 degreeToNode[node.Degree] = node;
@@ -534,7 +534,7 @@ namespace QuickGraph.Collections
             Contract.Requires(parentNode != null);
             Contract.Requires(childNode != null);
 
-            this.nodes.Remove(childNode);
+            nodes.Remove(childNode);
             parentNode.Children.AddLast(childNode);
             childNode.Parent = parentNode;
             childNode.Marked = false;
@@ -555,7 +555,7 @@ namespace QuickGraph.Collections
         {
             get
             {
-                return this.next;
+                return next;
             }
         }
 
@@ -563,7 +563,7 @@ namespace QuickGraph.Collections
         {      
             Contract.Requires(other != null);
 
-            if (other.Direction != this.Direction)
+            if (other.Direction != Direction)
             {
                 throw new Exception("Error: Heaps must go in the same direction when merging");
             }
@@ -577,7 +577,7 @@ namespace QuickGraph.Collections
 
         public IEnumerator<KeyValuePair<TPriority, TValue>> GetEnumerator()
         {
-            var tempHeap = new FibonacciHeap<TPriority, TValue>(this.Direction, this.priorityComparsion);
+            var tempHeap = new FibonacciHeap<TPriority, TValue>(Direction, priorityComparsion);
             var nodeStack = new Stack<FibonacciHeapCell<TPriority, TValue>>();
             LambdaHelpers.ForEach(nodes, x => nodeStack.Push(x));
             while (nodeStack.Count > 0)
@@ -595,17 +595,17 @@ namespace QuickGraph.Collections
         }
         public IEnumerable<KeyValuePair<TPriority, TValue>> GetDestructiveEnumerator()
         {
-            while (!this.IsEmpty)
+            while (!IsEmpty)
             {
-                yield return this.Top.ToKeyValuePair();
-                this.Dequeue();
+                yield return Top.ToKeyValuePair();
+                Dequeue();
             }
         }
 
         #region IEnumerable Members
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
         #endregion
     }

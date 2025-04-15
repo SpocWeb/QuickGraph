@@ -141,7 +141,7 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
         public void Repro12288()
         {
             AdjacencyGraph<int, Edge<int>> g;
-            using (var stream = this.GetType().Assembly.GetManifestResourceStream(
+            using (var stream = GetType().Assembly.GetManifestResourceStream(
                 "QuickGraph.Tests.Algorithms.RankedShortestPath.AdjacencyGraph.bin"))
                 g = stream.DeserializeFromBinary<int, Edge<int>, AdjacencyGraph<int, Edge<int>>>();
 

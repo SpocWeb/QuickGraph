@@ -25,55 +25,55 @@ namespace QuickGraph.Algorithms
             if (host == null)
                 host = this;
             this.visitedGraph = visitedGraph;
-            this.services = new AlgorithmServices(host);
+            services = new AlgorithmServices(host);
         }
 
         protected AlgorithmBase(TGraph visitedGraph)
         {
             Contract.Requires(visitedGraph != null);
             this.visitedGraph = visitedGraph;
-            this.services = new AlgorithmServices(this);
+            services = new AlgorithmServices(this);
         }
 
         public TGraph VisitedGraph
         {
-            get { return this.visitedGraph; }
+            get { return visitedGraph; }
         }
 
         public IAlgorithmServices Services
         {
-            get { return this.services; }
+            get { return services; }
         }
 
         public object SyncRoot
         {
-            get { return this.syncRoot; }
+            get { return syncRoot; }
         }
 
         public ComputationState State
         {
             get
             {
-                lock (this.syncRoot)
+                lock (syncRoot)
                 {
-                    return this.state;
+                    return state;
                 }
             }
         }
 
         public void Compute()
         {
-            this.BeginComputation();
-            this.Initialize();
+            BeginComputation();
+            Initialize();
             try
             {
-                this.InternalCompute();
+                InternalCompute();
             }
             finally
             {
-                this.Clean();
+                Clean();
             }
-            this.EndComputation();
+            EndComputation();
         }
 
         protected virtual void Initialize()
@@ -87,23 +87,23 @@ namespace QuickGraph.Algorithms
         public void Abort()
         {
             bool raise = false;
-            lock (this.syncRoot)
+            lock (syncRoot)
             {
-                if (this.state == ComputationState.Running)
+                if (state == ComputationState.Running)
                 {
-                    this.state = ComputationState.PendingAbortion;
-                    this.Services.CancelManager.Cancel();
+                    state = ComputationState.PendingAbortion;
+                    Services.CancelManager.Cancel();
                     raise = true;
                 }
             }
             if (raise)
-                this.OnStateChanged(EventArgs.Empty);
+                OnStateChanged(EventArgs.Empty);
         }
 
         public event EventHandler StateChanged;
         protected virtual void OnStateChanged(EventArgs e)
         {
-            EventHandler eh = this.StateChanged;
+            EventHandler eh = StateChanged;
             if (eh!=null)
                 eh(this, e);
         }
@@ -111,7 +111,7 @@ namespace QuickGraph.Algorithms
         public event EventHandler Started;
         protected virtual void OnStarted(EventArgs e)
         {
-            EventHandler eh = this.Started;
+            EventHandler eh = Started;
             if (eh != null)
                 eh(this, e);
         }
@@ -119,7 +119,7 @@ namespace QuickGraph.Algorithms
         public event EventHandler Finished;
         protected virtual void OnFinished(EventArgs e)
         {
-            EventHandler eh = this.Finished;
+            EventHandler eh = Finished;
             if (eh != null)
                 eh(this, e);
         }
@@ -127,45 +127,45 @@ namespace QuickGraph.Algorithms
         public event EventHandler Aborted;
         protected virtual void OnAborted(EventArgs e)
         {
-            EventHandler eh = this.Aborted;
+            EventHandler eh = Aborted;
             if (eh != null)
                 eh(this, e);
         }
 
         protected void BeginComputation()
         {
-            Contract.Requires(this.State == ComputationState.NotRunning);
-            lock (this.syncRoot)
+            Contract.Requires(State == ComputationState.NotRunning);
+            lock (syncRoot)
             {
-                this.state = ComputationState.Running;
-                this.Services.CancelManager.ResetCancel();
-                this.OnStarted(EventArgs.Empty);
-                this.OnStateChanged(EventArgs.Empty);
+                state = ComputationState.Running;
+                Services.CancelManager.ResetCancel();
+                OnStarted(EventArgs.Empty);
+                OnStateChanged(EventArgs.Empty);
             }
         }
 
         protected void EndComputation()
         {
             Contract.Requires(
-                this.State == ComputationState.Running || 
-                this.State == ComputationState.Aborted);
-            lock (this.syncRoot)
+                State == ComputationState.Running || 
+                State == ComputationState.Aborted);
+            lock (syncRoot)
             {
-                switch (this.state)
+                switch (state)
                 {
                     case ComputationState.Running:
-                        this.state = ComputationState.Finished;
-                        this.OnFinished(EventArgs.Empty);
+                        state = ComputationState.Finished;
+                        OnFinished(EventArgs.Empty);
                         break;
                     case ComputationState.PendingAbortion:
-                        this.state = ComputationState.Aborted;
-                        this.OnAborted(EventArgs.Empty);
+                        state = ComputationState.Aborted;
+                        OnAborted(EventArgs.Empty);
                         break;
                     default:
                         throw new InvalidOperationException();
                 }
-                this.Services.CancelManager.ResetCancel();
-                this.OnStateChanged(EventArgs.Empty);
+                Services.CancelManager.ResetCancel();
+                OnStateChanged(EventArgs.Empty);
             }
         }
 
@@ -173,7 +173,7 @@ namespace QuickGraph.Algorithms
             where T : IService
         {
             T service;
-            if (!this.TryGetService(out service))
+            if (!TryGetService(out service))
                 throw new InvalidOperationException("service not found");
             return service;
         }
@@ -182,7 +182,7 @@ namespace QuickGraph.Algorithms
             where T : IService
         {
             object serviceObject;
-            if (this.TryGetService(typeof(T), out serviceObject))
+            if (TryGetService(typeof(T), out serviceObject))
             {
                 service = (T)serviceObject;
                 return true;
@@ -196,16 +196,16 @@ namespace QuickGraph.Algorithms
         protected virtual bool TryGetService(Type serviceType, out object service)
         {
             Contract.Requires(serviceType != null);
-            lock (this.SyncRoot)
+            lock (SyncRoot)
             {
-                if (this._services == null)
-                    this._services = new Dictionary<Type, object>();
-                if (!this._services.TryGetValue(serviceType, out service))
+                if (_services == null)
+                    _services = new Dictionary<Type, object>();
+                if (!_services.TryGetValue(serviceType, out service))
                 {
                     if (serviceType == typeof(ICancelManager))
-                        this._services[serviceType] = service = new CancelManager();
+                        _services[serviceType] = service = new CancelManager();
                     else
-                        this._services[serviceType] = service = null;
+                        _services[serviceType] = service = null;
                 }
 
                 return service != null;

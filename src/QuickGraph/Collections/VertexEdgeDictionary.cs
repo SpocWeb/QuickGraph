@@ -29,7 +29,7 @@ namespace QuickGraph.Collections
 
         public VertexEdgeDictionary<TVertex, TEdge> Clone()
         {
-            var clone = new VertexEdgeDictionary<TVertex, TEdge>(this.Count);
+            var clone = new VertexEdgeDictionary<TVertex, TEdge>(Count);
             foreach (var kv in this)
                 clone.Add(kv.Key, kv.Value.Clone());
             return clone;
@@ -37,13 +37,13 @@ namespace QuickGraph.Collections
 
         IVertexEdgeDictionary<TVertex, TEdge> IVertexEdgeDictionary<TVertex,TEdge>.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 #endif
     }

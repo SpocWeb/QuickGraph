@@ -6,7 +6,7 @@ namespace QuickGraph.Collections
     /// A disjoint-set data structure
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [ContractClass(typeof(QuickGraph.Collections.Contracts.IDisjointSetContract<>))]
+    [ContractClass(typeof(Contracts.IDisjointSetContract<>))]
     public interface IDisjointSet<T>
     {
         /// <summary>

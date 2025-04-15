@@ -36,39 +36,39 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         public VertexFactory<TVertex> VertexFactory
         {
-            get { return this.vertexFactory; }
+            get { return vertexFactory; }
         }
 
         public EdgeFactory<TVertex, TEdge> EdgeFactory
         {
-            get { return this.edgeFactory; }
+            get { return edgeFactory; }
         }
 
         public TVertex SuperSource
         {
-            get { return this.superSource; }
+            get { return superSource; }
         }
 
         public TVertex SuperSink
         {
-            get { return this.superSink; }
+            get { return superSink; }
         }
 
         public bool Augmented
         {
-            get { return this.augmented; }
+            get { return augmented; }
         }
 
         public ICollection<TEdge> AugmentedEdges
         {
-            get { return this.augmentedEdges; }
+            get { return augmentedEdges; }
         }
 
         public event VertexAction<TVertex> SuperSourceAdded;
         private void OnSuperSourceAdded(TVertex v)
         {
             Contract.Requires(v != null);
-            var eh = this.SuperSourceAdded;
+            var eh = SuperSourceAdded;
             if (eh != null)
                 eh(v);
         }
@@ -77,7 +77,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
         private void OnSuperSinkAdded(TVertex v)
         {
             Contract.Requires(v != null);
-            var eh = this.SuperSinkAdded;
+            var eh = SuperSinkAdded;
             if (eh != null)
                 eh(v);
         }
@@ -86,7 +86,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
         private void OnEdgeAdded(TEdge e)
         {
             Contract.Requires(e != null);
-            var eh = this.EdgeAdded;
+            var eh = EdgeAdded;
             if (eh != null)
                 eh(e);
         }
@@ -94,47 +94,47 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         protected override void InternalCompute()
         {
-            if (this.Augmented)
+            if (Augmented)
                 throw new InvalidOperationException("Graph already augmented");
 
-            this.superSource = this.VertexFactory();
-            this.VisitedGraph.AddVertex(this.superSource);
-            this.OnSuperSourceAdded(this.SuperSource);
+            superSource = VertexFactory();
+            VisitedGraph.AddVertex(superSource);
+            OnSuperSourceAdded(SuperSource);
 
-            this.superSink = this.VertexFactory();
-            this.VisitedGraph.AddVertex(this.superSink);
-            this.OnSuperSinkAdded(this.SuperSink);
+            superSink = VertexFactory();
+            VisitedGraph.AddVertex(superSink);
+            OnSuperSinkAdded(SuperSink);
 
-            this.AugmentGraph();
-            this.augmented = true;
+            AugmentGraph();
+            augmented = true;
         }
 
         public virtual void Rollback()
         {
-            if (!this.Augmented)
+            if (!Augmented)
                 return;
 
-            this.augmented = false;
-            this.VisitedGraph.RemoveVertex(this.SuperSource);
-            this.VisitedGraph.RemoveVertex(this.SuperSink);
-            this.superSource = default(TVertex);
-            this.superSink = default(TVertex);
-            this.augmentedEdges.Clear();
+            augmented = false;
+            VisitedGraph.RemoveVertex(SuperSource);
+            VisitedGraph.RemoveVertex(SuperSink);
+            superSource = default(TVertex);
+            superSink = default(TVertex);
+            augmentedEdges.Clear();
         }
 
         public void Dispose()
         {
-            this.Rollback();
+            Rollback();
         }
 
         protected abstract void AugmentGraph();
 
         protected void AddAugmentedEdge(TVertex source, TVertex target)
         {
-            TEdge edge = this.EdgeFactory(source, target);
-            this.augmentedEdges.Add(edge);
-            this.VisitedGraph.AddEdge(edge);
-            this.OnEdgeAdded(edge);
+            TEdge edge = EdgeFactory(source, target);
+            augmentedEdges.Add(edge);
+            VisitedGraph.AddEdge(edge);
+            OnEdgeAdded(edge);
         }
     }
 }

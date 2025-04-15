@@ -31,51 +31,51 @@ namespace QuickGraph
         {
             Contract.Requires(graph != null);
 
-            this.edgeEqualityComparer = graph.EdgeEqualityComparer;
-            this.edgeCount = graph.EdgeCount;
-            this.vertexEdges = new Dictionary<TVertex, TEdge[]>(graph.VertexCount);
+            edgeEqualityComparer = graph.EdgeEqualityComparer;
+            edgeCount = graph.EdgeCount;
+            vertexEdges = new Dictionary<TVertex, TEdge[]>(graph.VertexCount);
             foreach (var v in graph.Vertices)
             {
                 var edges = graph.AdjacentEdges(v).ToArray();
-                this.vertexEdges.Add(v, edges);
+                vertexEdges.Add(v, edges);
             }
         }
 
         #region IImplicitUndirectedGraph<TVertex,TEdge> Members
         public EdgeEqualityComparer<TVertex, TEdge> EdgeEqualityComparer
         {
-            get { return this.edgeEqualityComparer; }
+            get { return edgeEqualityComparer; }
         }
 
         public IEnumerable<TEdge> AdjacentEdges(TVertex v)
         {
-            var edges = this.vertexEdges[v];
+            var edges = vertexEdges[v];
             return edges != null ? edges : Enumerable.Empty<TEdge>();
         }
 
         public int AdjacentDegree(TVertex v)
         {
-            var edges = this.vertexEdges[v];
+            var edges = vertexEdges[v];
             return edges != null ? edges.Length : 0;
         }
 
         public bool IsAdjacentEdgesEmpty(TVertex v)
         {
-            return this.vertexEdges[v] != null;
+            return vertexEdges[v] != null;
         }
 
         public TEdge AdjacentEdge(TVertex v, int index)
         {
-            return this.vertexEdges[v][index];
+            return vertexEdges[v][index];
         }
 
         public bool TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
-            var edges = this.vertexEdges[source];
+            var edges = vertexEdges[source];
             if (edges != null)
                 for (int i = 0; i < edges.Length; i++)
                 {
-                    if (this.edgeEqualityComparer(edges[i], source, target))
+                    if (edgeEqualityComparer(edges[i], source, target))
                     {
                         edge = edges[i];
                         return true;
@@ -89,14 +89,14 @@ namespace QuickGraph
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             TEdge edge;
-            return this.TryGetEdge(source, target, out edge);
+            return TryGetEdge(source, target, out edge);
         }
         #endregion
 
         #region IImplicitVertexSet<TVertex> Members
         public bool ContainsVertex(TVertex vertex)
         {
-            return this.vertexEdges.ContainsKey(vertex);
+            return vertexEdges.ContainsKey(vertex);
         }
         #endregion
 
@@ -116,19 +116,19 @@ namespace QuickGraph
 
         public bool IsEdgesEmpty
         {
-            get { return this.edgeCount > 0; }
+            get { return edgeCount > 0; }
         }
 
         public int EdgeCount
         {
-            get { return this.edgeCount; }
+            get { return edgeCount; }
         }
 
         public IEnumerable<TEdge> Edges
         {
             get
             {
-                foreach (var edges in this.vertexEdges.Values)
+                foreach (var edges in vertexEdges.Values)
                     if (edges != null)
                         for (int i = 0; i < edges.Length; i++)
                             yield return edges[i];
@@ -139,7 +139,7 @@ namespace QuickGraph
         {
             var source = edge.Source;
             TEdge[] edges;
-            if (this.vertexEdges.TryGetValue(source, out edges))
+            if (vertexEdges.TryGetValue(source, out edges))
                 for (int i = 0; i < edges.Length; i++)
                     if (edges[i].Equals(edge))
                         return true;
@@ -151,17 +151,17 @@ namespace QuickGraph
 
         public bool IsVerticesEmpty
         {
-            get { return this.vertexEdges.Count == 0; }
+            get { return vertexEdges.Count == 0; }
         }
 
         public int VertexCount
         {
-            get { return this.vertexEdges.Count; }
+            get { return vertexEdges.Count; }
         }
 
         public IEnumerable<TVertex> Vertices
         {
-            get { return this.vertexEdges.Keys; }
+            get { return vertexEdges.Keys; }
         }
         #endregion
 

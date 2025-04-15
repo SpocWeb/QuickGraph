@@ -17,21 +17,21 @@ namespace QuickGraph.Petri
 		{
 			this.place=place;
 			this.transition=transition;
-			this.isInputArc=true;
+			isInputArc=true;
 		}
 		public Arc(ITransition<Token> transition,IPlace<Token> place)
             :base(place,transition)
         {
             this.place=place;
 			this.transition=transition;
-			this.isInputArc=false;
+			isInputArc=false;
 		}
 
 		public bool IsInputArc
 		{
 			get
 			{
-				return this.isInputArc;
+				return isInputArc;
 			}
 		}
 
@@ -39,7 +39,7 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.place;
+				return place;
 			}
 		}
 
@@ -47,7 +47,7 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.transition;
+				return transition;
 			}
 		}
 
@@ -55,20 +55,20 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.annotation;
+				return annotation;
 			}
 			set
 			{
-				this.annotation=value;
+				annotation=value;
 			}
 		}
 
 		public override string ToString()
 		{
-			if (this.IsInputArc)
-				return string.Format("{0} -> {1}",this.place,this.transition);
+			if (IsInputArc)
+				return string.Format("{0} -> {1}",place,transition);
 			else
-				return string.Format("{0} -> {1}",this.transition,this.place);
+				return string.Format("{0} -> {1}",transition,place);
 		}
 	}
 }

@@ -27,11 +27,11 @@ namespace QuickGraph.Collections
             public Element(T value)
             {
 #if DEBUG
-                this.ID = nextID++;
+                ID = nextID++;
 #endif
-                this.Parent = null;
-                this.Rank = 0;
-                this.Value = value;
+                Parent = null;
+                Rank = 0;
+                Value = value;
             }
         }
 
@@ -41,24 +41,24 @@ namespace QuickGraph.Collections
         public ForestDisjointSet(int elementCapacity)
         {
             Contract.Requires(elementCapacity >= 0 && elementCapacity < int.MaxValue);
-            this.elements = new Dictionary<T, Element>(elementCapacity);
-            this.setCount = 0;
+            elements = new Dictionary<T, Element>(elementCapacity);
+            setCount = 0;
         }
 
         public ForestDisjointSet()
         {
-            this.elements = new Dictionary<T, Element>();
-            this.setCount = 0;
+            elements = new Dictionary<T, Element>();
+            setCount = 0;
         }
 
         public int SetCount
         {
-            get { return this.setCount; }
+            get { return setCount; }
         }
 
         public int ElementCount
         {
-            get { return this.elements.Count; }
+            get { return elements.Count; }
         }
 
         /// <summary>
@@ -68,29 +68,29 @@ namespace QuickGraph.Collections
         public void MakeSet(T value)
         {
             var element = new Element(value);
-            this.elements.Add(value, element);
-            this.setCount++;
+            elements.Add(value, element);
+            setCount++;
         }
 
         [Pure]
         public bool Contains(T value)
         {
-            return this.elements.ContainsKey(value);
+            return elements.ContainsKey(value);
         }
 
         public bool Union(T left, T right)
         {
-            return this.Union(this.elements[left], this.elements[right]);
+            return Union(elements[left], elements[right]);
         }
 
         public T FindSet(T value)
         {
-            return Find(this.elements[value]).Value;
+            return Find(elements[value]).Value;
         }
 
         public bool AreInSameSet(T left, T right)
         {
-            return this.FindSet(left).Equals(this.FindSet(right));
+            return FindSet(left).Equals(FindSet(right));
         }
 
         [Pure]
@@ -143,8 +143,8 @@ namespace QuickGraph.Collections
             Contract.Requires(right != null);
             Contract.Ensures(
                 Contract.Result<bool>() 
-                ? Contract.OldValue(this.SetCount) - 1 == this.SetCount             
-                : Contract.OldValue(this.SetCount) == this.SetCount);
+                ? Contract.OldValue(SetCount) - 1 == SetCount             
+                : Contract.OldValue(SetCount) == SetCount);
             Contract.Ensures(FindNoCompression(left) == FindNoCompression(right));
 
             // shortcut when already unioned,
@@ -166,15 +166,15 @@ namespace QuickGraph.Collections
             else
                 return false; // do not update the setcount
 
-            this.setCount--;
+            setCount--;
             return true;
         }
 
         [ContractInvariantMethod]
         void ObjectInvariant()
         {
-            Contract.Invariant(this.setCount >= 0);
-            Contract.Invariant(this.setCount <= this.elements.Count);
+            Contract.Invariant(setCount >= 0);
+            Contract.Invariant(setCount <= elements.Count);
         }
     }
 }

@@ -15,8 +15,8 @@ namespace QuickGraph.Collections
 
             public Cell(TKey key, TValue value)
             {
-                this.Key = key;
-                this.Value = value;
+                Key = key;
+                Value = value;
             }
         }
 
@@ -31,20 +31,20 @@ namespace QuickGraph.Collections
 
             public Node(Cell cell)
             {
-                this.Rank = 0;
-                this.CKey = cell.Key;
-                this.IL = cell;
-                this.ILTail = cell;
+                Rank = 0;
+                CKey = cell.Key;
+                IL = cell;
+                ILTail = cell;
             }
 
             public Node(TKey cKey, int rank, Node next, Node child, Cell il, Cell iltail)
             {
-                this.CKey = cKey;
-                this.Rank = rank;
-                this.Next = next;
-                this.Child = child;
-                this.IL = il;
-                this.ILTail = iltail;
+                CKey = cKey;
+                Rank = rank;
+                Next = next;
+                Child = child;
+                IL = il;
+                ILTail = iltail;
             }
         }
 
@@ -76,50 +76,50 @@ namespace QuickGraph.Collections
 
             this.comparison = comparison;
             this.keyMaxValue = keyMaxValue;
-            this.header = new Head();
-            this.tail = new Head();
-            this.tail.Rank = int.MaxValue;
-            this.header.Next = tail;
-            this.tail.Prev = header;
-            this.errorRate = maximumErrorRate;
-            this.r = 2 + 2 * (int)Math.Ceiling(Math.Log(1.0 / this.errorRate, 2.0));
-            this.count = 0;
+            header = new Head();
+            tail = new Head();
+            tail.Rank = int.MaxValue;
+            header.Next = tail;
+            tail.Prev = header;
+            errorRate = maximumErrorRate;
+            r = 2 + 2 * (int)Math.Ceiling(Math.Log(1.0 / errorRate, 2.0));
+            count = 0;
         }
 
         public int MinRank
         {
-            get { return this.r; }
+            get { return r; }
         }
 
         public Comparison<TKey> Comparison
         {
-            get { return this.comparison; }
+            get { return comparison; }
         }
 
         public double ErrorRate
         {
-            get { return this.errorRate; }
+            get { return errorRate; }
         }
 
         public int Count
         {
-            get { return this.count; }
+            get { return count; }
         }
 
         public TKey KeyMaxValue
         {
-            get { return this.keyMaxValue; }
+            get { return keyMaxValue; }
         }
 
         public void Add(TKey key, TValue value)
         {
-            Contract.Requires(this.Comparison(key, this.KeyMaxValue) < 0);
+            Contract.Requires(Comparison(key, KeyMaxValue) < 0);
 
             var l = new Cell(key, value);
             var q = new Node(l);
 
-            this.Meld(q);
-            this.count++;
+            Meld(q);
+            count++;
         }
 
         private void Meld(Node q)
@@ -136,7 +136,7 @@ namespace QuickGraph.Collections
             while (q.Rank == toHead.Rank)
             {
                 Node top, bottom;
-                if (this.comparison(toHead.Queue.CKey, q.CKey) > 0)
+                if (comparison(toHead.Queue.CKey, q.CKey) > 0)
                 {
                     top = q;
                     bottom = toHead.Queue;
@@ -177,7 +177,7 @@ namespace QuickGraph.Collections
 
             while (h != header)
             {
-                if (this.comparison(tmpmin.Queue.CKey, h.Queue.CKey) > 0)
+                if (comparison(tmpmin.Queue.CKey, h.Queue.CKey) > 0)
                     tmpmin = h;
 
                 h.SuffixMin = tmpmin;
@@ -193,13 +193,13 @@ namespace QuickGraph.Collections
             v.ILTail = null;
             if (v.Next == null && v.Child == null)
             {
-                v.CKey = this.keyMaxValue;
+                v.CKey = keyMaxValue;
                 return v;
             }
 
             v.Next = Shift(v.Next);
             // restore heap ordering that might be broken by shifting
-            if (this.comparison(v.Next.CKey, v.Child.CKey) > 0)
+            if (comparison(v.Next.CKey, v.Child.CKey) > 0)
             {
                 var tmp = v.Child;
                 v.Child = v.Next;
@@ -211,19 +211,19 @@ namespace QuickGraph.Collections
             v.CKey = v.Next.CKey;
 
             // softening the heap
-            if (v.Rank > this.r &&
+            if (v.Rank > r &&
                 (v.Rank % 2 == 1 || v.Child.Rank < v.Rank - 1))
             {
                 v.Next = Shift(v.Next);
                 // restore heap ordering that might be broken by shifting
-                if (this.comparison(v.Next.CKey, v.Child.CKey) > 0)
+                if (comparison(v.Next.CKey, v.Child.CKey) > 0)
                 {
                     var tmp = v.Child;
                     v.Child = v.Next;
                     v.Next = tmp;
                 }
 
-                if (this.comparison(v.Next.CKey, this.keyMaxValue) != 0 && v.Next.IL != null)
+                if (comparison(v.Next.CKey, keyMaxValue) != 0 && v.Next.IL != null)
                 {
                     v.Next.ILTail.Next = v.IL;
                     v.IL = v.Next.IL;
@@ -233,9 +233,9 @@ namespace QuickGraph.Collections
                 }
             }  // end second shift
 
-            if (this.comparison(v.Child.CKey, this.keyMaxValue) == 0)
+            if (comparison(v.Child.CKey, keyMaxValue) == 0)
             {
-                if (this.comparison(v.Next.CKey, this.keyMaxValue) == 0)
+                if (comparison(v.Next.CKey, keyMaxValue) == 0)
                 {
                     v.Child = null;
                     v.Next = null;
@@ -252,10 +252,10 @@ namespace QuickGraph.Collections
 
         public KeyValuePair<TKey, TValue> DeleteMin()
         {
-            if (this.count == 0)
+            if (count == 0)
                 throw new InvalidOperationException();
 
-            var h = this.header.Next.SuffixMin;
+            var h = header.Next.SuffixMin;
             while (h.Queue.IL == null)
             {
                 var tmp = h.Queue;
@@ -281,7 +281,7 @@ namespace QuickGraph.Collections
                 else
                 {
                     h.Queue = Shift(h.Queue);
-                    if (this.comparison(h.Queue.CKey, this.keyMaxValue) == 0)
+                    if (comparison(h.Queue.CKey, keyMaxValue) == 0)
                     {
                         h.Prev.Next = h.Next;
                         h.Next.Prev = h.Prev;
@@ -300,16 +300,16 @@ namespace QuickGraph.Collections
             if (h.Queue.IL == null)
                 h.Queue.ILTail = null;
 
-            this.count--;
+            count--;
             return new KeyValuePair<TKey, TValue>(min, value);
         }
 
         [ContractInvariantMethod]
         void Invariant()
         {
-            Contract.Invariant(this.count > -1);
-            Contract.Invariant(this.header != null);
-            Contract.Invariant(this.tail != null);
+            Contract.Invariant(count > -1);
+            Contract.Invariant(header != null);
+            Contract.Invariant(tail != null);
         }
 
         #region IEnumerable<KeyValuePair<TKey,TValue>> Members
@@ -320,7 +320,7 @@ namespace QuickGraph.Collections
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         struct Enumerator
@@ -333,7 +333,7 @@ namespace QuickGraph.Collections
             {
                 Contract.Requires(owner != null);
                 this.owner = owner;
-                this.current = new KeyValuePair<TKey, TValue>();
+                current = new KeyValuePair<TKey, TValue>();
             }
 
             public bool MoveNext()
@@ -344,7 +344,7 @@ namespace QuickGraph.Collections
 
             public KeyValuePair<TKey, TValue> Current
             {
-                get { return this.current; }
+                get { return current; }
             }
 
             public void Dispose()
@@ -352,7 +352,7 @@ namespace QuickGraph.Collections
 
             object System.Collections.IEnumerator.Current
             {
-                get { return this.Current; }
+                get { return Current; }
             }
 
             public void Reset()

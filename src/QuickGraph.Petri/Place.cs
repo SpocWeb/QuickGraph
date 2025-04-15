@@ -19,7 +19,7 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.marking;
+				return marking;
 			}
 		}
 
@@ -27,15 +27,15 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.name;
+				return name;
 			}
 		}
 
 		public string ToStringWithMarking()
 		{
 			StringWriter sw = new StringWriter();
-			sw.WriteLine(this.ToString());
-			foreach(object token in this.marking)
+			sw.WriteLine(ToString());
+			foreach(object token in marking)
 				sw.WriteLine("\t{0}",token.GetType().Name);
 
 			return sw.ToString();
@@ -43,7 +43,7 @@ namespace QuickGraph.Petri
 		}
 		public override string ToString()
 		{
-			return string.Format("P({0}|{1})",this.name,this.marking.Count);
+			return string.Format("P({0}|{1})",name,marking.Count);
 		}
 	}
 }

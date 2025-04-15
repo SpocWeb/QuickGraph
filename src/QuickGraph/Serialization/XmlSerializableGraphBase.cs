@@ -42,7 +42,7 @@ namespace QuickGraph.Serialization
         [XmlElement("graph-traits")]
         public TGraph Graph
         {
-            get { return this.graph; }
+            get { return graph; }
         }
 
         [XmlArray("edges")]
@@ -51,9 +51,9 @@ namespace QuickGraph.Serialization
         {
             get
             {
-                if (this._edges == null)
-                    this._edges = new XmlEdgeList(this.graph);
-                return this._edges;
+                if (_edges == null)
+                    _edges = new XmlEdgeList(graph);
+                return _edges;
             }
         }
 
@@ -71,19 +71,19 @@ namespace QuickGraph.Serialization
 
             public IEnumerator<TEdge> GetEnumerator()
             {
-                return this.graph.Edges.GetEnumerator();
+                return graph.Edges.GetEnumerator();
             }
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
-                return this.GetEnumerator();
+                return GetEnumerator();
             }
 
             public void Add(TEdge edge)
             {
                 Contract.Requires(edge != null);
 
-                this.graph.AddVerticesAndEdge(edge);
+                graph.AddVerticesAndEdge(edge);
             }
         }
     }

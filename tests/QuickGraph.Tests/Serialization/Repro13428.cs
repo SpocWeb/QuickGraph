@@ -97,9 +97,9 @@ namespace QuickGraph.Tests.Serialization
         /// 
         public Person()
         {
-            this.id = Guid.NewGuid().ToString();
-            this.firstName = DefaultFirstName;
-            this.isLiving = true;
+            id = Guid.NewGuid().ToString();
+            firstName = DefaultFirstName;
+            isLiving = true;
         }
 
         /// 
@@ -143,15 +143,15 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.id;
+                return id;
             }
 
             set
             {
-                if (this.id != value)
+                if (id != value)
                 {
-                    this.id = value;
-                    this.OnPropertyChanged("Id");
+                    id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -164,17 +164,17 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.firstName;
+                return firstName;
             }
 
             set
             {
-                if (this.firstName != value)
+                if (firstName != value)
                 {
-                    this.firstName = value;
-                    this.OnPropertyChanged("FirstName");
-                    this.OnPropertyChanged("Name");
-                    this.OnPropertyChanged("FullName");
+                    firstName = value;
+                    OnPropertyChanged("FirstName");
+                    OnPropertyChanged("Name");
+                    OnPropertyChanged("FullName");
                 }
             }
         }
@@ -187,17 +187,17 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.lastName;
+                return lastName;
             }
 
             set
             {
-                if (this.lastName != value)
+                if (lastName != value)
                 {
-                    this.lastName = value;
-                    this.OnPropertyChanged("LastName");
-                    this.OnPropertyChanged("Name");
-                    this.OnPropertyChanged("FullName");
+                    lastName = value;
+                    OnPropertyChanged("LastName");
+                    OnPropertyChanged("Name");
+                    OnPropertyChanged("FullName");
                 }
             }
         }
@@ -210,16 +210,16 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.middleName;
+                return middleName;
             }
 
             set
             {
-                if (this.middleName != value)
+                if (middleName != value)
                 {
-                    this.middleName = value;
-                    this.OnPropertyChanged("MiddleName");
-                    this.OnPropertyChanged("FullName");
+                    middleName = value;
+                    OnPropertyChanged("MiddleName");
+                    OnPropertyChanged("FullName");
                 }
             }
         }
@@ -233,14 +233,14 @@ namespace QuickGraph.Tests.Serialization
             get
             {
                 string name = string.Empty;
-                if (!string.IsNullOrEmpty(this.firstName))
+                if (!string.IsNullOrEmpty(firstName))
                 {
-                    name += this.firstName;
+                    name += firstName;
                 }
 
-                if (!string.IsNullOrEmpty(this.lastName))
+                if (!string.IsNullOrEmpty(lastName))
                 {
-                    name += " " + this.lastName;
+                    name += " " + lastName;
                 }
 
                 return name;
@@ -256,24 +256,24 @@ namespace QuickGraph.Tests.Serialization
             get
             {
                 string fullName = string.Empty;
-                if (!string.IsNullOrEmpty(this.firstName))
+                if (!string.IsNullOrEmpty(firstName))
                 {
-                    fullName += this.firstName;
+                    fullName += firstName;
                 }
 
-                if (!string.IsNullOrEmpty(this.middleName))
+                if (!string.IsNullOrEmpty(middleName))
                 {
-                    fullName += " " + this.middleName;
+                    fullName += " " + middleName;
                 }
 
-                if (!string.IsNullOrEmpty(this.lastName))
+                if (!string.IsNullOrEmpty(lastName))
                 {
-                    fullName += " " + this.lastName;
+                    fullName += " " + lastName;
                 }
 
-                if (!string.IsNullOrEmpty(this.suffix))
+                if (!string.IsNullOrEmpty(suffix))
                 {
-                    fullName += " " + this.suffix;
+                    fullName += " " + suffix;
                 }
 
                 return fullName;
@@ -289,16 +289,16 @@ namespace QuickGraph.Tests.Serialization
 
             get
             {
-                return this.suffix;
+                return suffix;
             }
 
             set
             {
-                if (this.suffix != value)
+                if (suffix != value)
                 {
-                    this.suffix = value;
-                    this.OnPropertyChanged("Suffix");
-                    this.OnPropertyChanged("FullName");
+                    suffix = value;
+                    OnPropertyChanged("Suffix");
+                    OnPropertyChanged("FullName");
                 }
             }
         }
@@ -311,15 +311,15 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.nickName;
+                return nickName;
             }
 
             set
             {
-                if (this.nickName != value)
+                if (nickName != value)
                 {
-                    this.nickName = value;
-                    this.OnPropertyChanged("NickName");
+                    nickName = value;
+                    OnPropertyChanged("NickName");
                 }
             }
         }
@@ -332,15 +332,15 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.maidenName;
+                return maidenName;
             }
 
             set
             {
-                if (this.maidenName != value)
+                if (maidenName != value)
                 {
-                    this.maidenName = value;
-                    this.OnPropertyChanged("MaidenName");
+                    maidenName = value;
+                    OnPropertyChanged("MaidenName");
                 }
             }
         }
@@ -353,15 +353,15 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.gender;
+                return gender;
             }
 
             set
             {
-                if (this.gender != value)
+                if (gender != value)
                 {
-                    this.gender = value;
-                    this.OnPropertyChanged("Gender");
+                    gender = value;
+                    OnPropertyChanged("Gender");
                 }
             }
         }
@@ -374,14 +374,14 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.BirthDate == null)
+                if (BirthDate == null)
                 {
                     return null;
                 }
 
                 // Determine the age of the person based on just the year.
-                DateTime startDate = this.BirthDate.Value;
-                DateTime endDate = (this.IsLiving || this.DeathDate == null) ? DateTime.Now : this.DeathDate.Value;
+                DateTime startDate = BirthDate.Value;
+                DateTime endDate = (IsLiving || DeathDate == null) ? DateTime.Now : DeathDate.Value;
                 int age = endDate.Year - startDate.Year;
 
                 // Compensate for the month and day of month (if they have not had a birthday this year).
@@ -404,19 +404,19 @@ namespace QuickGraph.Tests.Serialization
             {
                 AgeGroup ageGroup = AgeGroup.Unknown;
 
-                if (this.Age.HasValue)
+                if (Age.HasValue)
                 {
                     // The AgeGroup enumeration is defined later in this file. It is up to the Person
                     // class to define the ages that fall into the particular age groups
-                    if (this.Age >= 0 && this.Age < 20)
+                    if (Age >= 0 && Age < 20)
                     {
                         ageGroup = AgeGroup.Youth;
                     }
-                    else if (this.Age >= 20 && this.Age < 40)
+                    else if (Age >= 20 && Age < 40)
                     {
                         ageGroup = AgeGroup.Adult;
                     }
-                    else if (this.Age >= 40 && this.Age < 65)
+                    else if (Age >= 40 && Age < 65)
                     {
                         ageGroup = AgeGroup.MiddleAge;
                     }
@@ -438,9 +438,9 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.birthDate.HasValue)
+                if (birthDate.HasValue)
                 {
-                    return this.birthDate.Value.Year.ToString(CultureInfo.CurrentCulture);
+                    return birthDate.Value.Year.ToString(CultureInfo.CurrentCulture);
                 }
                 else
                 {
@@ -457,9 +457,9 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.deathDate.HasValue && !this.isLiving)
+                if (deathDate.HasValue && !isLiving)
                 {
-                    return this.deathDate.Value.Year.ToString(CultureInfo.CurrentCulture);
+                    return deathDate.Value.Year.ToString(CultureInfo.CurrentCulture);
                 }
                 else
                 {
@@ -476,20 +476,20 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.birthDate;
+                return birthDate;
             }
 
             set
             {
-                if (this.birthDate == null || this.birthDate != value)
+                if (birthDate == null || birthDate != value)
                 {
-                    this.birthDate = value;
-                    this.OnPropertyChanged("BirthDate");
-                    this.OnPropertyChanged("Age");
-                    this.OnPropertyChanged("AgeGroup");
-                    this.OnPropertyChanged("YearOfBirth");
-                    this.OnPropertyChanged("BirthMonthAndDay");
-                    this.OnPropertyChanged("BirthDateAndPlace");
+                    birthDate = value;
+                    OnPropertyChanged("BirthDate");
+                    OnPropertyChanged("Age");
+                    OnPropertyChanged("AgeGroup");
+                    OnPropertyChanged("YearOfBirth");
+                    OnPropertyChanged("BirthMonthAndDay");
+                    OnPropertyChanged("BirthDateAndPlace");
                 }
             }
         }
@@ -502,16 +502,16 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.birthPlace;
+                return birthPlace;
             }
 
             set
             {
-                if (this.birthPlace != value)
+                if (birthPlace != value)
                 {
-                    this.birthPlace = value;
-                    this.OnPropertyChanged("BirthPlace");
-                    this.OnPropertyChanged("BirthDateAndPlace");
+                    birthPlace = value;
+                    OnPropertyChanged("BirthPlace");
+                    OnPropertyChanged("BirthDateAndPlace");
                 }
             }
         }
@@ -524,13 +524,13 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.birthDate == null)
+                if (birthDate == null)
                 {
                     return null;
                 }
                 else
                 {
-                    return this.birthDate.Value.ToString(
+                    return birthDate.Value.ToString(
                         DateTimeFormatInfo.CurrentInfo.MonthDayPattern,
                         CultureInfo.CurrentCulture);
                 }
@@ -545,7 +545,7 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.birthDate == null)
+                if (birthDate == null)
                 {
                     return null;
                 }
@@ -554,14 +554,14 @@ namespace QuickGraph.Tests.Serialization
                     StringBuilder returnValue = new StringBuilder();
                     returnValue.Append("Born ");
                     returnValue.Append(
-                        this.birthDate.Value.ToString(
+                        birthDate.Value.ToString(
                             DateTimeFormatInfo.CurrentInfo.ShortDatePattern,
                             CultureInfo.CurrentCulture));
 
-                    if (!string.IsNullOrEmpty(this.birthPlace))
+                    if (!string.IsNullOrEmpty(birthPlace))
                     {
                         returnValue.Append(", ");
-                        returnValue.Append(this.birthPlace);
+                        returnValue.Append(birthPlace);
                     }
 
                     return returnValue.ToString();
@@ -577,18 +577,18 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.deathDate;
+                return deathDate;
             }
 
             set
             {
-                if (this.deathDate == null || this.deathDate != value)
+                if (deathDate == null || deathDate != value)
                 {
-                    this.IsLiving = false;
-                    this.deathDate = value;
-                    this.OnPropertyChanged("DeathDate");
-                    this.OnPropertyChanged("Age");
-                    this.OnPropertyChanged("YearOfDeath");
+                    IsLiving = false;
+                    deathDate = value;
+                    OnPropertyChanged("DeathDate");
+                    OnPropertyChanged("Age");
+                    OnPropertyChanged("YearOfDeath");
                 }
             }
         }
@@ -601,16 +601,16 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.deathPlace;
+                return deathPlace;
             }
 
             set
             {
-                if (this.deathPlace != value)
+                if (deathPlace != value)
                 {
-                    this.IsLiving = false;
-                    this.deathPlace = value;
-                    this.OnPropertyChanged("DeathPlace");
+                    IsLiving = false;
+                    deathPlace = value;
+                    OnPropertyChanged("DeathPlace");
                 }
             }
         }
@@ -623,15 +623,15 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                return this.isLiving;
+                return isLiving;
             }
 
             set
             {
-                if (this.isLiving != value)
+                if (isLiving != value)
                 {
-                    this.isLiving = value;
-                    this.OnPropertyChanged("IsLiving");
+                    isLiving = value;
+                    OnPropertyChanged("IsLiving");
                 }
             }
         }
@@ -644,7 +644,7 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.gender == Gender.Male)
+                if (gender == Gender.Male)
                 {
                     return "Son";
                 }
@@ -663,7 +663,7 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.gender == Gender.Male)
+                if (gender == Gender.Male)
                 {
                     return "Brother";
                 }
@@ -682,7 +682,7 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.gender == Gender.Male)
+                if (gender == Gender.Male)
                 {
                     return "Husband";
                 }
@@ -701,7 +701,7 @@ namespace QuickGraph.Tests.Serialization
         {
             get
             {
-                if (this.gender == Gender.Male)
+                if (gender == Gender.Male)
                 {
                     return "Father";
                 }
@@ -727,9 +727,9 @@ namespace QuickGraph.Tests.Serialization
         /// <param name="propertyName" />Property name.
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -744,7 +744,7 @@ namespace QuickGraph.Tests.Serialization
         /// true if the current object is equal to the other parameter; otherwise, false. 
         public bool Equals(Person other)
         {
-            return this.Id == other.Id;
+            return Id == other.Id;
         }
 
         #endregion
@@ -757,7 +757,7 @@ namespace QuickGraph.Tests.Serialization
         /// A String that represents the current Object.
         public override string ToString()
         {
-            return this.Name;
+            return Name;
         }
 
         #endregion
@@ -785,7 +785,7 @@ namespace QuickGraph.Tests.Serialization
 
                 if (columnName == "BirthDate")
                 {
-                    if (this.BirthDate == DateTime.MinValue)
+                    if (BirthDate == DateTime.MinValue)
                     {
                         result = "This does not appear to be a valid date.";
                     }
@@ -793,7 +793,7 @@ namespace QuickGraph.Tests.Serialization
 
                 if (columnName == "DeathDate")
                 {
-                    if (this.DeathDate == DateTime.MinValue)
+                    if (DeathDate == DateTime.MinValue)
                     {
                         result = "This does not appear to be a valid date.";
                     }

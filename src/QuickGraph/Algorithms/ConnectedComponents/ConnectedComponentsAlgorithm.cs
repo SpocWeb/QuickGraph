@@ -43,48 +43,48 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             get
             {
-                return this.components;
+                return components;
             }
         }
 
         public int ComponentCount
         {
-            get { return this.componentCount; }
+            get { return componentCount; }
         }
 
         private void StartVertex(TVertex v)
         {
-            ++this.componentCount;
+            ++componentCount;
         }
 
         private void DiscoverVertex(TVertex v)
         {
-            this.Components[v] = this.componentCount;
+            Components[v] = componentCount;
         }
 
         protected override void InternalCompute()
         {
-            this.components.Clear();
-            if (this.VisitedGraph.VertexCount == 0)
+            components.Clear();
+            if (VisitedGraph.VertexCount == 0)
             {
-                this.componentCount = 0;
+                componentCount = 0;
                 return;
             }
 
-            this.componentCount = -1;
+            componentCount = -1;
             UndirectedDepthFirstSearchAlgorithm<TVertex, TEdge> dfs = null;
             try
             {
                 dfs = new UndirectedDepthFirstSearchAlgorithm<TVertex, TEdge>(
                     this,
-                    this.VisitedGraph,
-                    new Dictionary<TVertex, GraphColor>(this.VisitedGraph.VertexCount)
+                    VisitedGraph,
+                    new Dictionary<TVertex, GraphColor>(VisitedGraph.VertexCount)
                     );
 
                 dfs.StartVertex += StartVertex;
                 dfs.DiscoverVertex += DiscoverVertex;
                 dfs.Compute();
-                ++this.componentCount;
+                ++componentCount;
             }
             finally
             {

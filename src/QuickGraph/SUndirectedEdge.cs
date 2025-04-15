@@ -44,7 +44,7 @@ namespace QuickGraph
         /// <value></value>
         public TVertex Source
         {
-            get { return this.source; }
+            get { return source; }
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace QuickGraph
         /// <value></value>
         public TVertex Target
         {
-            get { return this.target; }
+            get { return target; }
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace QuickGraph
         {
             return string.Format(
                 EdgeExtensions.UndirectedEdgeFormatString, 
-                this.Source, 
-                this.Target);
+                Source, 
+                Target);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace QuickGraph.Algorithms.RandomWalks
                     outEdgeIndices.Add(u, index);
                 }
                 TEdge e = g.OutEdge(u, index);
-                this.outEdgeIndices[u] = (++index) % outDegree;
+                outEdgeIndices[u] = (++index) % outDegree;
 
                 successor = e;
                 return true;
@@ -48,7 +48,7 @@ namespace QuickGraph.Algorithms.RandomWalks
                     outEdgeIndices.Add(u, index);
                 }
                 var e = edges.ElementAt(index);
-                this.outEdgeIndices[u] = (++index) % edgeCount;
+                outEdgeIndices[u] = (++index) % edgeCount;
                 successor = e;
                 return true;
             }

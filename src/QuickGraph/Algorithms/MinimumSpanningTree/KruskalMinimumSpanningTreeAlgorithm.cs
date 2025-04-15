@@ -37,7 +37,7 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
         public event EdgeAction<TVertex, TEdge> ExamineEdge;
         private void OnExamineEdge(TEdge edge)
         {
-            var eh = this.ExamineEdge;
+            var eh = ExamineEdge;
             if (eh != null)
                 eh(edge);
         }
@@ -45,23 +45,23 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
         public event EdgeAction<TVertex, TEdge> TreeEdge;
         private void OnTreeEdge(TEdge edge)
         {
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(edge);
         }
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
-            var ds = new ForestDisjointSet<TVertex>(this.VisitedGraph.VertexCount);
-            foreach (var v in this.VisitedGraph.Vertices)
+            var cancelManager = Services.CancelManager;
+            var ds = new ForestDisjointSet<TVertex>(VisitedGraph.VertexCount);
+            foreach (var v in VisitedGraph.Vertices)
                 ds.MakeSet(v);
 
             if (cancelManager.IsCancelling)
                 return;
 
-            var queue = new BinaryQueue<TEdge, double>(this.edgeWeights);
-            foreach (var e in this.VisitedGraph.Edges)
+            var queue = new BinaryQueue<TEdge, double>(edgeWeights);
+            foreach (var e in VisitedGraph.Edges)
                 queue.Enqueue(e);
 
             if (cancelManager.IsCancelling)
@@ -70,10 +70,10 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
             while (queue.Count > 0)
             {
                 var e = queue.Dequeue();
-                this.OnExamineEdge(e);
+                OnExamineEdge(e);
                 if (!ds.AreInSameSet(e.Source, e.Target))
                 {
-                    this.OnTreeEdge(e);
+                    OnTreeEdge(e);
                     ds.Union(e.Source, e.Target);
                 }
             }

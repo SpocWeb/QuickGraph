@@ -10,33 +10,33 @@ namespace QuickGraph.Graphviz
         public GraphRendererBase(
             IEdgeListGraph<TVertex, TEdge> visitedGraph)
         {
-            this.graphviz = new GraphvizAlgorithm<TVertex, TEdge>(visitedGraph);
-            this.Initialize();
+            graphviz = new GraphvizAlgorithm<TVertex, TEdge>(visitedGraph);
+            Initialize();
         }
 
         protected virtual void Initialize()        
         {
-            this.graphviz.CommonVertexFormat.Style = GraphvizVertexStyle.Filled;
-            this.graphviz.CommonVertexFormat.FillColor = System.Drawing.Color.LightYellow;
-            this.graphviz.CommonVertexFormat.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.graphviz.CommonVertexFormat.Shape = GraphvizVertexShape.Box;
+            graphviz.CommonVertexFormat.Style = GraphvizVertexStyle.Filled;
+            graphviz.CommonVertexFormat.FillColor = System.Drawing.Color.LightYellow;
+            graphviz.CommonVertexFormat.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            graphviz.CommonVertexFormat.Shape = GraphvizVertexShape.Box;
 
-            this.graphviz.CommonEdgeFormat.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            graphviz.CommonEdgeFormat.Font = new System.Drawing.Font("Tahoma", 8.25F);
         }
 
         public GraphvizAlgorithm<TVertex, TEdge> Graphviz
         {
-            get { return this.graphviz; }
+            get { return graphviz; }
         }
 
         public IEdgeListGraph<TVertex, TEdge> VisitedGraph
         {
-            get { return this.graphviz.VisitedGraph; }
+            get { return graphviz.VisitedGraph; }
         }
 
         public string Generate(IDotEngine dot, string fileName)
         {
-            return this.graphviz.Generate(dot, fileName);
+            return graphviz.Generate(dot, fileName);
         }
     }
 }

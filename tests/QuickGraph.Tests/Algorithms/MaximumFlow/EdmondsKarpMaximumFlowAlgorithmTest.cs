@@ -36,7 +36,7 @@ namespace QuickGraph.Tests.Algorithms.MaximumFlow
 
         private static double RunMaxFlowAlgorithm<TVertex, TEdge>(IMutableVertexAndEdgeListGraph<TVertex, TEdge> g, EdgeFactory<TVertex, TEdge> edgeFactory, TVertex source, TVertex sink) where TEdge : IEdge<TVertex>
         {
-            var reversedEdgeAugmentorAlgorithm = new ReversedEdgeAugmentorAlgorithm<TVertex, TEdge>(g, edgeFactory);
+            var reversedEdgeAugmentorAlgorithm = g.CreateReversedEdgeAugmentorAlgorithm(edgeFactory);
             reversedEdgeAugmentorAlgorithm.AddReversedEdges();
 
             TryFunc<TVertex, TEdge> flowPredecessors;

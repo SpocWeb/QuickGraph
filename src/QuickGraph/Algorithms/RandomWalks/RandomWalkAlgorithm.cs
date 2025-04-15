@@ -34,7 +34,7 @@ namespace QuickGraph.Algorithms.RandomWalks
         {
             get
             {
-                return this.visitedGraph;
+                return visitedGraph;
             }
         }
 
@@ -42,13 +42,13 @@ namespace QuickGraph.Algorithms.RandomWalks
         {
             get
             {
-                return this.edgeChain;
+                return edgeChain;
             }
             set
             {
                 Contract.Requires(value != null);
 
-                this.edgeChain = value;
+                edgeChain = value;
             }
         }
 
@@ -56,18 +56,18 @@ namespace QuickGraph.Algorithms.RandomWalks
         {
             get
             {
-                return this.endPredicate;
+                return endPredicate;
             }
             set
             {
-                this.endPredicate = value;
+                endPredicate = value;
             }
         }
 
         public event VertexAction<TVertex> StartVertex;
         private void OnStartVertex(TVertex v)
         {
-            var eh = this.StartVertex;
+            var eh = StartVertex;
             if (eh != null)
                 eh(v);
         }
@@ -75,7 +75,7 @@ namespace QuickGraph.Algorithms.RandomWalks
         public event VertexAction<TVertex> EndVertex;
         private void OnEndVertex(TVertex v)
         {
-            var eh = this.EndVertex;
+            var eh = EndVertex;
             if (eh != null)
                 eh(v);
         }
@@ -83,14 +83,14 @@ namespace QuickGraph.Algorithms.RandomWalks
         public event EdgeAction<TVertex,TEdge> TreeEdge;
         private void OnTreeEdge(TEdge e)
         {
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(e);
         }
 
         private bool TryGetSuccessor(TVertex u, out TEdge successor)
         {
-            return this.EdgeChain.TryGetSuccessor(this.VisitedGraph, u, out successor);
+            return EdgeChain.TryGetSuccessor(VisitedGraph, u, out successor);
         }
 
         public void Generate(TVertex root)
@@ -109,13 +109,13 @@ namespace QuickGraph.Algorithms.RandomWalks
             TVertex v = root;
 
             OnStartVertex(root);
-            while (count < walkCount && this.TryGetSuccessor(v, out e))
+            while (count < walkCount && TryGetSuccessor(v, out e))
             {
                 // if dead end stop
                 if (e==null)
                     break;
                 // if end predicate, test
-                if (this.endPredicate != null && this.endPredicate(e))
+                if (endPredicate != null && endPredicate(e))
                     break;
                 OnTreeEdge(e);
                 v = e.Target;

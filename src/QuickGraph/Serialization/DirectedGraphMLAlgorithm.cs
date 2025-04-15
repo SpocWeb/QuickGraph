@@ -27,42 +27,42 @@ namespace QuickGraph.Serialization
 
         public DirectedGraph DirectedGraph
         {
-            get { return this.directedGraph; }
+            get { return directedGraph; }
         }
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
-            this.directedGraph = new DirectedGraph();
+            var cancelManager = Services.CancelManager;
+            directedGraph = new DirectedGraph();
 
-            var nodes = new List<DirectedGraphNode>(this.VisitedGraph.VertexCount);
-            foreach (var vertex in this.VisitedGraph.Vertices)
+            var nodes = new List<DirectedGraphNode>(VisitedGraph.VertexCount);
+            foreach (var vertex in VisitedGraph.Vertices)
             {
                 if (cancelManager.IsCancelling) return;
 
-                var node = new DirectedGraphNode { Id = this.vertexIdentities(vertex) };
-                this.OnFormatNode(vertex, node);
+                var node = new DirectedGraphNode { Id = vertexIdentities(vertex) };
+                OnFormatNode(vertex, node);
                 nodes.Add(node);
             }
-            this.directedGraph.Nodes = nodes.ToArray();
+            directedGraph.Nodes = nodes.ToArray();
 
-            var links = new List<DirectedGraphLink>(this.VisitedGraph.EdgeCount);
-            foreach (var edge in this.VisitedGraph.Edges)
+            var links = new List<DirectedGraphLink>(VisitedGraph.EdgeCount);
+            foreach (var edge in VisitedGraph.Edges)
             {
                 if (cancelManager.IsCancelling) return;
 
                 var link = new DirectedGraphLink
                 {
-                    Label = this.edgeIdentities(edge),
-                    Source = this.vertexIdentities(edge.Source),
-                    Target = this.vertexIdentities(edge.Target)
+                    Label = edgeIdentities(edge),
+                    Source = vertexIdentities(edge.Source),
+                    Target = vertexIdentities(edge.Target)
                 };
-                this.OnFormatEdge(edge, link);
+                OnFormatEdge(edge, link);
                 links.Add(link);
             }
-            this.directedGraph.Links = links.ToArray();
+            directedGraph.Links = links.ToArray();
 
-            this.OnFormatGraph();
+            OnFormatGraph();
         }
 
         /// <summary>
@@ -72,9 +72,9 @@ namespace QuickGraph.Serialization
 
         private void OnFormatGraph()
         {
-            var eh = this.FormatGraph;
+            var eh = FormatGraph;
             if (eh != null)
-                eh(this.VisitedGraph, this.DirectedGraph);
+                eh(VisitedGraph, DirectedGraph);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace QuickGraph.Serialization
             Contract.Requires(edge != null);
             Contract.Requires(link != null);
 
-            var eh = this.FormatEdge;
+            var eh = FormatEdge;
             if (eh != null)
                 eh(edge, link);
         }
@@ -100,7 +100,7 @@ namespace QuickGraph.Serialization
         private void OnFormatNode(TVertex vertex, DirectedGraphNode node)
         {
             Contract.Requires(node != null);
-            var eh = this.FormatNode;
+            var eh = FormatNode;
             if (eh != null)
                 eh(vertex, node);
         }

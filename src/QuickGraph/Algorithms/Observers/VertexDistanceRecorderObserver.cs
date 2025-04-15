@@ -40,23 +40,23 @@ namespace QuickGraph.Algorithms.Observers
 
         public IDistanceRelaxer DistanceRelaxer
         {
-            get { return this.distanceRelaxer; }
+            get { return distanceRelaxer; }
         }
 
         public Func<TEdge, double> EdgeWeights
         {
-            get { return this.edgeWeights; }
+            get { return edgeWeights; }
         }
 
         public IDictionary<TVertex, double> Distances
         {
-            get { return this.distances; }
+            get { return distances; }
         }
 
         public IDisposable Attach(ITreeBuilderAlgorithm<TVertex, TEdge> algorithm)
         {
-            algorithm.TreeEdge += this.TreeEdge;
-            return new DisposableAction(() => algorithm.TreeEdge -= this.TreeEdge);
+            algorithm.TreeEdge += TreeEdge;
+            return new DisposableAction(() => algorithm.TreeEdge -= TreeEdge);
         }
 
         private void TreeEdge(TEdge edge)
@@ -65,9 +65,9 @@ namespace QuickGraph.Algorithms.Observers
             var target = edge.Target;
 
             double sourceDistance;
-            if (!this.distances.TryGetValue(source, out sourceDistance))
-                this.distances[source] = sourceDistance = this.distanceRelaxer.InitialDistance;
-            this.distances[target] = this.DistanceRelaxer.Combine(sourceDistance, this.edgeWeights(edge));
+            if (!distances.TryGetValue(source, out sourceDistance))
+                distances[source] = sourceDistance = distanceRelaxer.InitialDistance;
+            distances[target] = DistanceRelaxer.Combine(sourceDistance, edgeWeights(edge));
         }
     }
 }

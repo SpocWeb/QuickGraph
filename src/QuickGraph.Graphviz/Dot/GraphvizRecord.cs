@@ -8,13 +8,13 @@ namespace QuickGraph.Graphviz.Dot
 
         public string ToDot()
         {
-            if (this.Cells.Count == 0)
+            if (Cells.Count == 0)
             {
                 return "";
             }
             StringBuilder builder = new StringBuilder();
             bool flag = false;
-            foreach (GraphvizRecordCell cell in this.Cells)
+            foreach (GraphvizRecordCell cell in Cells)
             {
                 if (flag)
                 {
@@ -29,14 +29,14 @@ namespace QuickGraph.Graphviz.Dot
 
         public override string ToString()
         {
-            return this.ToDot();
+            return ToDot();
         }
 
         public GraphvizRecordCellCollection Cells
         {
             get
             {
-                return this.cells;
+                return cells;
             }
         }
     }

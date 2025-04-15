@@ -31,37 +31,37 @@ namespace QuickGraph
             this.source = source;
             this.target = target;
             this.tag = tag;
-            this.TagChanged = null;
+            TagChanged = null;
         }
 
         public TVertex Source
         {
-            get { return this.source; }
+            get { return source; }
         }
 
         public TVertex Target
         {
-            get { return this.target; }
+            get { return target; }
         }
 
         public event EventHandler TagChanged;
 
         void OnTagChanged(EventArgs e)
         {
-            var eh = this.TagChanged;
+            var eh = TagChanged;
             if (eh != null)
                 eh(this, e);
         }
 
         public TTag Tag
         {
-            get { return this.tag; }
+            get { return tag; }
             set
             {
-                if (!object.Equals(this.tag, value))
+                if (!Equals(tag, value))
                 {
-                    this.tag = value;
-                    this.OnTagChanged(EventArgs.Empty);
+                    tag = value;
+                    OnTagChanged(EventArgs.Empty);
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace QuickGraph
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0}->{1}:{2}", this.Source, this.Target, this.Tag);
+            return string.Format("{0}->{1}:{2}", Source, Target, Tag);
         }
 
     }

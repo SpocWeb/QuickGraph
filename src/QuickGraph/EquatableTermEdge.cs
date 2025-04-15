@@ -27,22 +27,22 @@ namespace QuickGraph
         {
             return
                 (object)other != null &&
-                this.Source.Equals(other.Source) &&
-                this.Target.Equals(other.Target) &&
-                this.SourceTerminal.Equals(other.SourceTerminal) &&
-                this.TargetTerminal.Equals(other.TargetTerminal);
+                Source.Equals(other.Source) &&
+                Target.Equals(other.Target) &&
+                SourceTerminal.Equals(other.SourceTerminal) &&
+                TargetTerminal.Equals(other.TargetTerminal);
         }
 
         public override bool Equals(object obj)
         {
-            return this.Equals(obj as EquatableTermEdge<TVertex>);
+            return Equals(obj as EquatableTermEdge<TVertex>);
         }
 
         public override int GetHashCode()
         {
             return
-                HashCodeHelper.Combine(this.Source.GetHashCode(), this.Target.GetHashCode(),
-                                       this.SourceTerminal.GetHashCode(), this.TargetTerminal.GetHashCode());
+                HashCodeHelper.Combine(Source.GetHashCode(), Target.GetHashCode(),
+                                       SourceTerminal.GetHashCode(), TargetTerminal.GetHashCode());
         }
     }
 }

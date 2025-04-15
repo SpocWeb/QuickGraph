@@ -8,31 +8,31 @@ namespace QuickGraph.Graphviz.Dot
         private double angle = -25;
         private double distance = 1;
         private bool @float = true;
-        private System.Drawing.Font font = null;
+        private Font font = null;
         private Color fontColor = Color.Black;
         private string value = null;
 
         public void AddParameters(IDictionary dic)
         {
-            if (this.Value != null)
+            if (Value != null)
             {
-                dic["label"] = this.Value;
-                if (this.Angle != -25)
+                dic["label"] = Value;
+                if (Angle != -25)
                 {
-                    dic["labelangle"] = this.Angle;
+                    dic["labelangle"] = Angle;
                 }
-                if (this.Distance != 1)
+                if (Distance != 1)
                 {
-                    dic["labeldistance"] = this.Distance;
+                    dic["labeldistance"] = Distance;
                 }
-                if (!this.Float)
+                if (!Float)
                 {
-                    dic["labelfloat"] = this.Float;
+                    dic["labelfloat"] = Float;
                 }
-                if (this.Font != null)
+                if (Font != null)
                 {
-                    dic["labelfontname"] = this.Font.Name;
-                    dic["labelfontsize"] = this.Font.SizeInPoints;
+                    dic["labelfontname"] = Font.Name;
+                    dic["labelfontsize"] = Font.SizeInPoints;
                 }
             }
         }
@@ -41,11 +41,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.angle;
+                return angle;
             }
             set
             {
-                this.angle = value;
+                angle = value;
             }
         }
 
@@ -53,11 +53,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.distance;
+                return distance;
             }
             set
             {
-                this.distance = value;
+                distance = value;
             }
         }
 
@@ -65,23 +65,23 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.@float;
+                return @float;
             }
             set
             {
-                this.@float = value;
+                @float = value;
             }
         }
 
-        public System.Drawing.Font Font
+        public Font Font
         {
             get
             {
-                return this.font;
+                return font;
             }
             set
             {
-                this.font = value;
+                font = value;
             }
         }
 
@@ -89,11 +89,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.fontColor;
+                return fontColor;
             }
             set
             {
-                this.fontColor = value;
+                fontColor = value;
             }
         }
 
@@ -101,7 +101,7 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.value;
+                return value;
             }
             set
             {

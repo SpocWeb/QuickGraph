@@ -24,17 +24,17 @@ namespace QuickGraph.Glee
 
         public IFormatProvider FormatProvider
         {
-            get { return this.formatProvider; }
+            get { return formatProvider; }
         }
 
         public string Format
         {
-            get { return this.format; }
+            get { return format; }
         }
 
         protected override string GetVertexId(TVertex v)
         {
-            return string.Format(this.formatProvider, this.format, v);
+            return string.Format(formatProvider, format, v);
         }
     }
 }

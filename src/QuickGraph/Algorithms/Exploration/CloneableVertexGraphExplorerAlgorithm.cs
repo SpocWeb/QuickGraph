@@ -38,41 +38,41 @@ namespace QuickGraph.Algorithms.Exploration
 
         public IList<ITransitionFactory<TVertex, TEdge>> TransitionFactories
         {
-            get { return this.transitionFactories; }
+            get { return transitionFactories; }
         }
 
         public VertexPredicate<TVertex> AddVertexPredicate
         {
-            get { return this.addVertexPredicate; }
-            set { this.addVertexPredicate = value; }
+            get { return addVertexPredicate; }
+            set { addVertexPredicate = value; }
         }
 
         public VertexPredicate<TVertex> ExploreVertexPredicate
         {
-            get { return this.exploreVertexPredicate; }
-            set { this.exploreVertexPredicate = value; }
+            get { return exploreVertexPredicate; }
+            set { exploreVertexPredicate = value; }
         }
 
         public EdgePredicate<TVertex, TEdge> AddEdgePredicate
         {
-            get { return this.addEdgePredicate; }
-            set { this.addEdgePredicate = value; }
+            get { return addEdgePredicate; }
+            set { addEdgePredicate = value; }
         }
 
         public Predicate<CloneableVertexGraphExplorerAlgorithm<TVertex, TEdge>> FinishedPredicate
         {
-            get { return this.finishedPredicate; }
-            set { this.finishedPredicate = value; }
+            get { return finishedPredicate; }
+            set { finishedPredicate = value; }
         }
 
         public IEnumerable<TVertex> UnexploredVertices
         {
-            get { return this.unexploredVertices; }
+            get { return unexploredVertices; }
         }
 
         public bool FinishedSuccessfully
         {
-            get { return this.finishedSuccessfully; }
+            get { return finishedSuccessfully; }
         }
 
         public event VertexAction<TVertex> DiscoverVertex;
@@ -80,10 +80,10 @@ namespace QuickGraph.Algorithms.Exploration
         {
             Contract.Requires(v != null);
 
-            this.VisitedGraph.AddVertex(v);
-            this.unexploredVertices.Enqueue(v);
+            VisitedGraph.AddVertex(v);
+            unexploredVertices.Enqueue(v);
 
-            var eh = this.DiscoverVertex;
+            var eh = DiscoverVertex;
             if (eh != null)
                 eh(v);
         }
@@ -92,7 +92,7 @@ namespace QuickGraph.Algorithms.Exploration
         {
             Contract.Requires(e != null);
 
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(e);
         }
@@ -100,7 +100,7 @@ namespace QuickGraph.Algorithms.Exploration
         private void OnBackEdge(TEdge e)
         {
             Contract.Requires(e != null);
-            var eh = this.BackEdge;
+            var eh = BackEdge;
             if (eh != null)
                 eh(e);
         }
@@ -108,7 +108,7 @@ namespace QuickGraph.Algorithms.Exploration
         private void OnEdgeSkipped(TEdge e)
         {
             Contract.Requires(e != null);
-            var eh = this.EdgeSkipped;
+            var eh = EdgeSkipped;
             if (eh != null)
                 eh(e);
         }
@@ -116,23 +116,23 @@ namespace QuickGraph.Algorithms.Exploration
         protected override void  InternalCompute()
         {
             TVertex rootVertex;
-            if (!this.TryGetRootVertex(out rootVertex))
+            if (!TryGetRootVertex(out rootVertex))
                 throw new InvalidOperationException("RootVertex is not specified");
 
-            this.VisitedGraph.Clear();
-            this.unexploredVertices.Clear();
-            this.finishedSuccessfully = false;
+            VisitedGraph.Clear();
+            unexploredVertices.Clear();
+            finishedSuccessfully = false;
 
-            if (!this.AddVertexPredicate(rootVertex))
+            if (!AddVertexPredicate(rootVertex))
                 throw new ArgumentException("StartVertex does not satisfy AddVertexPredicate");
-            this.OnDiscoverVertex(rootVertex);
+            OnDiscoverVertex(rootVertex);
 
             while (unexploredVertices.Count > 0)
             {
                 // are we done yet ?
-                if (!this.FinishedPredicate(this))
+                if (!FinishedPredicate(this))
                 {
-                    this.finishedSuccessfully = false;
+                    finishedSuccessfully = false;
                     return;
                 }
 
@@ -140,16 +140,16 @@ namespace QuickGraph.Algorithms.Exploration
                 TVertex clone = (TVertex)current.Clone();
 
                 // let's make sure we want to explore this one
-                if (!this.ExploreVertexPredicate(clone))
+                if (!ExploreVertexPredicate(clone))
                     continue;
 
-                foreach (ITransitionFactory<TVertex, TEdge> transitionFactory in this.TransitionFactories)
+                foreach (ITransitionFactory<TVertex, TEdge> transitionFactory in TransitionFactories)
                 {
                     GenerateFromTransitionFactory(clone, transitionFactory);
                 }
             }
 
-            this.finishedSuccessfully = true;
+            finishedSuccessfully = true;
         }
 
         private void GenerateFromTransitionFactory(
@@ -163,22 +163,22 @@ namespace QuickGraph.Algorithms.Exploration
             foreach (var transition in transitionFactory.Apply(current))
             {
                 if (    
-                    !this.AddVertexPredicate(transition.Target)
-                 || !this.AddEdgePredicate(transition))
+                    !AddVertexPredicate(transition.Target)
+                 || !AddEdgePredicate(transition))
                 {
-                    this.OnEdgeSkipped(transition);
+                    OnEdgeSkipped(transition);
                     continue;
                 }
 
-                bool backEdge = this.VisitedGraph.ContainsVertex(transition.Target);
+                bool backEdge = VisitedGraph.ContainsVertex(transition.Target);
                 if (!backEdge)
-                    this.OnDiscoverVertex(transition.Target);
+                    OnDiscoverVertex(transition.Target);
 
-                this.VisitedGraph.AddEdge(transition);
+                VisitedGraph.AddEdge(transition);
                 if (backEdge)
-                    this.OnBackEdge(transition);
+                    OnBackEdge(transition);
                 else
-                    this.OnTreeEdge(transition);
+                    OnTreeEdge(transition);
             }
         }
 
@@ -200,21 +200,21 @@ namespace QuickGraph.Algorithms.Exploration
 
             public int MaxVertexCount
             {
-                get { return this.maxVertexCount; }
-                set { this.maxVertexCount = value; }
+                get { return maxVertexCount; }
+                set { maxVertexCount = value; }
             }
 
             public int MaxEdgeCount
             {
-                get { return this.maxEdgeCount; }
-                set { this.maxEdgeCount = value; }
+                get { return maxEdgeCount; }
+                set { maxEdgeCount = value; }
             }
 
             public bool Test(CloneableVertexGraphExplorerAlgorithm<TVertex, TEdge> t)
             {
-                if (t.VisitedGraph.VertexCount > this.MaxVertexCount)
+                if (t.VisitedGraph.VertexCount > MaxVertexCount)
                     return false;
-                if (t.VisitedGraph.EdgeCount > this.MaxEdgeCount)
+                if (t.VisitedGraph.EdgeCount > MaxEdgeCount)
                     return false;
                 return true;
             }

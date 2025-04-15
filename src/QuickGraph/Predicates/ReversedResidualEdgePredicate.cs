@@ -30,7 +30,7 @@ namespace QuickGraph.Predicates
         {
             get
             {
-                return this.residualCapacities;
+                return residualCapacities;
             }
         }
 
@@ -41,14 +41,14 @@ namespace QuickGraph.Predicates
         {
             get
             {
-                return this.reversedEdges;
+                return reversedEdges;
             }
         }
 
         public bool Test(TEdge e)
         {
             Contract.Requires(e != null);
-            return 0 < this.residualCapacities[reversedEdges[e]];
+            return 0 < residualCapacities[reversedEdges[e]];
         }
     }
 }

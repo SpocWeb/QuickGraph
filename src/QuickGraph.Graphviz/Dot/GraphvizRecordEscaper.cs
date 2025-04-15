@@ -11,7 +11,7 @@ namespace QuickGraph.Graphviz.Dot
         {
             Contract.Requires(text != null);
 
-            return this.escapeRegExp.Replace(text, new System.Text.RegularExpressions.MatchEvaluator(MatchEvaluator));
+            return escapeRegExp.Replace(text, new MatchEvaluator(MatchEvaluator));
         }
 
         public static string MatchEvaluator(Match m)

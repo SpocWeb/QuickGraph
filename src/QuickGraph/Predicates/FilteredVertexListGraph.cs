@@ -24,8 +24,8 @@ namespace QuickGraph.Predicates
         {
             get 
             {
-                foreach (var v in this.BaseGraph.Vertices)
-                    if (this.VertexPredicate(v))
+                foreach (var v in BaseGraph.Vertices)
+                    if (VertexPredicate(v))
                         return false;
                 return true;
             }
@@ -36,8 +36,8 @@ namespace QuickGraph.Predicates
             get 
             {
                 int count = 0;
-                foreach (var v in this.BaseGraph.Vertices)
-                    if (this.VertexPredicate(v))
+                foreach (var v in BaseGraph.Vertices)
+                    if (VertexPredicate(v))
                         count++;
                 return count;
             }
@@ -47,8 +47,8 @@ namespace QuickGraph.Predicates
         {
             get 
             {
-                foreach (var v in this.BaseGraph.Vertices)
-                    if (this.VertexPredicate(v))
+                foreach (var v in BaseGraph.Vertices)
+                    if (VertexPredicate(v))
                         yield return v;
             }
         }

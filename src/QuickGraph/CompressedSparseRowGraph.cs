@@ -36,8 +36,8 @@ namespace QuickGraph
                 Contract.Ensures(Contract.ValueAtReturn(out this).Start == start);
                 Contract.Ensures(Contract.ValueAtReturn(out this).End == end);
 
-                this.Start = start;
-                this.End = end;
+                Start = start;
+                End = end;
             }
 
             public int Length
@@ -45,7 +45,7 @@ namespace QuickGraph
                 get {
                     Contract.Ensures(Contract.Result<int>() >= 0);
 
-                    return this.End - this.Start;
+                    return End - Start;
                 }
             }
         }
@@ -97,45 +97,45 @@ namespace QuickGraph
 
         public bool IsVerticesEmpty
         {
-            get { return this.outEdgeStartRanges.Count > 0; }
+            get { return outEdgeStartRanges.Count > 0; }
         }
 
         public int VertexCount
         {
-            get { return this.outEdgeStartRanges.Count; }
+            get { return outEdgeStartRanges.Count; }
         }
 
         public IEnumerable<TVertex> Vertices
         {
-            get { return this.outEdgeStartRanges.Keys; }
+            get { return outEdgeStartRanges.Keys; }
         }
 
         public bool ContainsVertex(TVertex vertex)
         {
-            return this.outEdgeStartRanges.ContainsKey(vertex);
+            return outEdgeStartRanges.ContainsKey(vertex);
         }
 
         public int EdgeCount
         {
-            get { return this.outEdges.Length; }
+            get { return outEdges.Length; }
         }
 
         public bool IsEdgesEmpty
         {
-            get { return this.outEdges.Length > 0; }
+            get { return outEdges.Length > 0; }
         }
 
         public IEnumerable<SEquatableEdge<TVertex>> Edges
         {
             get 
             {
-                foreach (var kv in this.outEdgeStartRanges)
+                foreach (var kv in outEdgeStartRanges)
                 {
                     var source = kv.Key;
                     var range = kv.Value;
                     for (int i = range.Start; i < range.End; ++i)
                     {
-                        var target = this.outEdges[i];
+                        var target = outEdges[i];
                         yield return new SEquatableEdge<TVertex>(source, target);
                     }
                 }
@@ -150,10 +150,10 @@ namespace QuickGraph
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             Range range;
-            if (this.outEdgeStartRanges.TryGetValue(source, out range))
+            if (outEdgeStartRanges.TryGetValue(source, out range))
             {
                 for (int i = range.Start; i < range.End; ++i)
-                    if (this.outEdges[i].Equals(target))
+                    if (outEdges[i].Equals(target))
                         return true;
             }
 
@@ -165,7 +165,7 @@ namespace QuickGraph
             TVertex target, 
             out IEnumerable<SEquatableEdge<TVertex>> edges)
         {
-            if (this.ContainsEdge(source, target))
+            if (ContainsEdge(source, target))
             {
                 edges = new SEquatableEdge<TVertex>[] { new SEquatableEdge<TVertex>(source, target) };
                 return true;
@@ -180,7 +180,7 @@ namespace QuickGraph
             TVertex target, 
             out SEquatableEdge<TVertex> edge)
         {
-            if (this.ContainsEdge(source, target))
+            if (ContainsEdge(source, target))
             {
                 edge = new SEquatableEdge<TVertex>(source, target);
                 return true;
@@ -192,27 +192,27 @@ namespace QuickGraph
 
         public bool IsOutEdgesEmpty(TVertex v)
         {
-            return this.outEdgeStartRanges[v].Length == 0;
+            return outEdgeStartRanges[v].Length == 0;
         }
 
         public int OutDegree(TVertex v)
         {
-            return this.outEdgeStartRanges[v].Length;
+            return outEdgeStartRanges[v].Length;
         }
 
         public IEnumerable<SEquatableEdge<TVertex>> OutEdges(TVertex v)
         {
-            var range = this.outEdgeStartRanges[v];
+            var range = outEdgeStartRanges[v];
             for(int i = range.Start;i<range.End;++i)
-                yield return new SEquatableEdge<TVertex>(v, this.outEdges[i]);
+                yield return new SEquatableEdge<TVertex>(v, outEdges[i]);
         }
 
         public bool TryGetOutEdges(TVertex v, out IEnumerable<SEquatableEdge<TVertex>> edges)
         {
-            var range = this.outEdgeStartRanges[v];
+            var range = outEdgeStartRanges[v];
             if (range.Length > 0)
             {
-                edges = this.OutEdges(v);
+                edges = OutEdges(v);
                 return false;
             }
 
@@ -222,10 +222,10 @@ namespace QuickGraph
 
         public SEquatableEdge<TVertex> OutEdge(TVertex v, int index)
         {
-            var range = this.outEdgeStartRanges[v];
+            var range = outEdgeStartRanges[v];
             var targetIndex = range.Start + index;
             Contract.Assert(targetIndex < range.End);
-            return new SEquatableEdge<TVertex>(v, this.outEdges[targetIndex]);
+            return new SEquatableEdge<TVertex>(v, outEdges[targetIndex]);
         }
 
         public bool IsDirected
@@ -240,15 +240,15 @@ namespace QuickGraph
 
         public CompressedSparseRowGraph<TVertex> Clone()
         {
-            var ranges = new Dictionary<TVertex, Range>(this.outEdgeStartRanges);
-            var edges = (TVertex[])this.outEdges.Clone();
+            var ranges = new Dictionary<TVertex, Range>(outEdgeStartRanges);
+            var edges = (TVertex[])outEdges.Clone();
             return new CompressedSparseRowGraph<TVertex>(ranges, edges);
         }
 
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 #endif
     }

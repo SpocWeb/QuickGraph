@@ -214,7 +214,7 @@ this
                 settings.Schemas.Add(GraphMlXmlResolver.GraphMlNamespace, xsdReader);
         }
 
-        static void ValidationEventHandler(object sender, System.Xml.Schema.ValidationEventArgs e)
+        static void ValidationEventHandler(object sender, ValidationEventArgs e)
         {
             if(e.Severity == XmlSeverityType.Error)
                 throw new InvalidOperationException(e.Message);

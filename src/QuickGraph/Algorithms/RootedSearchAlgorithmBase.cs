@@ -18,9 +18,9 @@ namespace QuickGraph.Algorithms
 
         public bool TryGetGoalVertex(out TVertex goalVertex)
         {
-            if (this.hasGoalVertex)
+            if (hasGoalVertex)
             {
-                goalVertex = this._goalVertex;
+                goalVertex = _goalVertex;
                 return true;
             }
             else
@@ -34,23 +34,23 @@ namespace QuickGraph.Algorithms
         {
             Contract.Requires(goalVertex != null);
 
-            bool changed = !Comparison<TVertex>.Equals(this._goalVertex, goalVertex);
-            this._goalVertex = goalVertex;
+            bool changed = !Equals(_goalVertex, goalVertex);
+            _goalVertex = goalVertex;
             if (changed)
-                this.OnGoalVertexChanged(EventArgs.Empty);
-            this.hasGoalVertex = true;
+                OnGoalVertexChanged(EventArgs.Empty);
+            hasGoalVertex = true;
         }
 
         public void ClearGoalVertex()
         {
-            this._goalVertex = default(TVertex);
-            this.hasGoalVertex = false;
+            _goalVertex = default(TVertex);
+            hasGoalVertex = false;
         }
 
         public event EventHandler GoalReached;
         protected virtual void OnGoalReached()
         {
-            var eh = this.GoalReached;
+            var eh = GoalReached;
             if (eh != null)
                 eh(this, EventArgs.Empty);
         }
@@ -60,7 +60,7 @@ namespace QuickGraph.Algorithms
         {
             Contract.Requires(e != null);
 
-            var eh = this.GoalVertexChanged;
+            var eh = GoalVertexChanged;
             if (eh != null)
                 eh(this, e);
         }
@@ -70,8 +70,8 @@ namespace QuickGraph.Algorithms
             Contract.Requires(root != null);
             Contract.Requires(goal != null);
 
-            this.SetGoalVertex(goal);
-            this.Compute(root);
+            SetGoalVertex(goal);
+            Compute(root);
         }
     }
 }

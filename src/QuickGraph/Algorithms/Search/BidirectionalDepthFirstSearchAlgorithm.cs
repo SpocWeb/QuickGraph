@@ -55,31 +55,31 @@ namespace QuickGraph.Algorithms.Search
         {
             get
             {
-                return this.colors;
+                return colors;
             }
         }
 
         public GraphColor GetVertexColor(TVertex vertex)
         {
-            return this.colors[vertex];
+            return colors[vertex];
         }
 
         public int MaxDepth
         {
             get
             {
-                return this.maxDepth;
+                return maxDepth;
             }
             set
             {
-                this.maxDepth = value;
+                maxDepth = value;
             }
         }
 
         public event VertexAction<TVertex> InitializeVertex;
         private void OnInitializeVertex(TVertex v)
         {
-            var eh = this.InitializeVertex;
+            var eh = InitializeVertex;
             if (eh != null)
                 eh(v);
         }
@@ -87,7 +87,7 @@ namespace QuickGraph.Algorithms.Search
         public event VertexAction<TVertex> StartVertex;
         private void OnStartVertex(TVertex v)
         {
-            var eh = this.StartVertex;
+            var eh = StartVertex;
             if (eh != null)
                 eh(v);
         }
@@ -95,7 +95,7 @@ namespace QuickGraph.Algorithms.Search
         public event VertexAction<TVertex> DiscoverVertex;
         private void OnDiscoverVertex(TVertex v)
         {
-            var eh = this.DiscoverVertex;
+            var eh = DiscoverVertex;
             if (eh != null)
                 eh(v);
         }
@@ -103,7 +103,7 @@ namespace QuickGraph.Algorithms.Search
         public event EdgeAction<TVertex, TEdge> ExamineEdge;
         private void OnExamineEdge(TEdge e)
         {
-            var eh = this.ExamineEdge;
+            var eh = ExamineEdge;
             if (eh != null)
                 eh(e);
         }
@@ -111,7 +111,7 @@ namespace QuickGraph.Algorithms.Search
         public event EdgeAction<TVertex, TEdge> TreeEdge;
         private void OnTreeEdge(TEdge e)
         {
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(e);
         }
@@ -119,7 +119,7 @@ namespace QuickGraph.Algorithms.Search
         public event EdgeAction<TVertex, TEdge> BackEdge;
         private void OnBackEdge(TEdge e)
         {
-            var eh = this.BackEdge;
+            var eh = BackEdge;
             if (eh != null)
                 eh(e);
         }
@@ -127,7 +127,7 @@ namespace QuickGraph.Algorithms.Search
         public event EdgeAction<TVertex, TEdge> ForwardOrCrossEdge;
         private void OnForwardOrCrossEdge(TEdge e)
         {
-            var eh = this.ForwardOrCrossEdge;
+            var eh = ForwardOrCrossEdge;
             if (eh != null)
                 eh(e);
         }
@@ -135,7 +135,7 @@ namespace QuickGraph.Algorithms.Search
         public event VertexAction<TVertex> FinishVertex;
         private void OnFinishVertex(TVertex v)
         {
-            var eh = this.FinishVertex;
+            var eh = FinishVertex;
             if (eh != null)
                 eh(v);
         }
@@ -147,14 +147,14 @@ namespace QuickGraph.Algorithms.Search
 
             // if there is a starting vertex, start whith him:
             TVertex rootVertex;
-            if (this.TryGetRootVertex(out rootVertex))
+            if (TryGetRootVertex(out rootVertex))
             {
                 OnStartVertex(rootVertex);
                 Visit(rootVertex, 0);
             }
 
             // process each vertex 
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             foreach (var u in VisitedGraph.Vertices)
             {
                 if (cancelManager.IsCancelling) return;
@@ -170,7 +170,7 @@ namespace QuickGraph.Algorithms.Search
         {
             base.Initialize();
 
-            this.VertexColors.Clear();
+            VertexColors.Clear();
             foreach (var u in VisitedGraph.Vertices)
             {
                 VertexColors[u] = GraphColor.White;
@@ -182,13 +182,13 @@ namespace QuickGraph.Algorithms.Search
         {
             Contract.Requires(u != null);
 
-            if (depth > this.maxDepth)
+            if (depth > maxDepth)
                 return;
 
             VertexColors[u] = GraphColor.Gray;
             OnDiscoverVertex(u);
 
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             foreach (var e in VisitedGraph.OutEdges(u))
             {
                 if (cancelManager.IsCancelling) return;

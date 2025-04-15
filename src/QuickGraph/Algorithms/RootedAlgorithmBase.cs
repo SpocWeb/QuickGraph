@@ -21,7 +21,7 @@ namespace QuickGraph.Algorithms
 
         public bool TryGetRootVertex(out TVertex rootVertex)
         {
-            if (this.hasRootVertex)
+            if (hasRootVertex)
             {
                 rootVertex = this.rootVertex;
                 return true;
@@ -37,17 +37,17 @@ namespace QuickGraph.Algorithms
         {
             Contract.Requires(rootVertex != null);
 
-            bool changed = !Comparison<TVertex>.Equals(this.rootVertex, rootVertex);
+            bool changed = !Equals(this.rootVertex, rootVertex);
             this.rootVertex = rootVertex;
             if (changed)
-                this.OnRootVertexChanged(EventArgs.Empty);
-            this.hasRootVertex = true;
+                OnRootVertexChanged(EventArgs.Empty);
+            hasRootVertex = true;
         }
 
         public void ClearRootVertex()
         {
-            this.rootVertex = default(TVertex);
-            this.hasRootVertex = false;
+            rootVertex = default(TVertex);
+            hasRootVertex = false;
         }
 
         public event EventHandler RootVertexChanged;
@@ -55,7 +55,7 @@ namespace QuickGraph.Algorithms
         {
             Contract.Requires(e != null);
 
-            var eh = this.RootVertexChanged;
+            var eh = RootVertexChanged;
             if (eh != null)
                 eh(this, e);
         }
@@ -64,8 +64,8 @@ namespace QuickGraph.Algorithms
         {
             Contract.Requires(rootVertex != null);
 
-            this.SetRootVertex(rootVertex);
-            this.Compute();
+            SetRootVertex(rootVertex);
+            Compute();
         }
     }
 }

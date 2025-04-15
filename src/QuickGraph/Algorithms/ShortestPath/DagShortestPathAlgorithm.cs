@@ -50,7 +50,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         public event VertexAction<TVertex> InitializeVertex;
         private void OnInitializeVertex(TVertex v)
         {
-            var eh = this.InitializeVertex;
+            var eh = InitializeVertex;
             if (eh != null)
                 eh(v);
         }
@@ -58,7 +58,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         public event VertexAction<TVertex> StartVertex;
         private void OnStartVertex(TVertex v)
         {
-            var eh = this.StartVertex;
+            var eh = StartVertex;
             if (eh!=null)
                 eh(v);
         }
@@ -66,7 +66,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         public event VertexAction<TVertex> DiscoverVertex;
         private void OnDiscoverVertex(TVertex v)
         {
-            var eh = this.DiscoverVertex;
+            var eh = DiscoverVertex;
             if (eh != null)
                 eh(v);
         }
@@ -74,7 +74,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         public event VertexAction<TVertex> ExamineVertex;
         private void OnExamineVertex(TVertex v)
         {
-            var eh = this.ExamineVertex;
+            var eh = ExamineVertex;
             if (eh != null)
                 eh(v);
         }
@@ -82,7 +82,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         public event EdgeAction<TVertex,TEdge> ExamineEdge;
         private void OnExamineEdge(TEdge e)
         {
-            var eh = this.ExamineEdge;
+            var eh = ExamineEdge;
             if (eh != null)
                 eh(e);
         }
@@ -90,7 +90,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         public event EdgeAction<TVertex,TEdge> EdgeNotRelaxed;
         private void OnEdgeNotRelaxed(TEdge e)
         {
-            var eh = this.EdgeNotRelaxed;
+            var eh = EdgeNotRelaxed;
             if (eh != null)
                 eh(e);
         }
@@ -98,7 +98,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         public event VertexAction<TVertex> FinishVertex;
         private void OnFinishVertex(TVertex v)
         {
-            var eh = this.FinishVertex;
+            var eh = FinishVertex;
             if (eh != null)
                 eh(v);
         }
@@ -107,19 +107,19 @@ namespace QuickGraph.Algorithms.ShortestPath
         {
             base.Initialize();
             // init color, distance
-            var initialDistance = this.DistanceRelaxer.InitialDistance;
+            var initialDistance = DistanceRelaxer.InitialDistance;
             foreach (var u in VisitedGraph.Vertices)
             {
-                this.VertexColors.Add(u, GraphColor.White);
-                this.Distances.Add(u, initialDistance);
-                this.OnInitializeVertex(u);
+                VertexColors.Add(u, GraphColor.White);
+                Distances.Add(u, initialDistance);
+                OnInitializeVertex(u);
             }
         }
         
         protected override void  InternalCompute()
         {
             TVertex rootVertex;
-            if (!this.TryGetRootVertex(out rootVertex))
+            if (!TryGetRootVertex(out rootVertex))
                 throw new InvalidOperationException("RootVertex not initialized");
 
             VertexColors[rootVertex] = GraphColor.Gray;
@@ -129,7 +129,7 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         public void ComputeNoInit(TVertex s)
         {
-            var orderedVertices = this.VisitedGraph.TopologicalSort();
+            var orderedVertices = VisitedGraph.TopologicalSort();
 
             OnDiscoverVertex(s);
             foreach (var v in orderedVertices)

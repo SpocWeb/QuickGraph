@@ -30,17 +30,17 @@ namespace QuickGraph
 
         public TEdge OriginalEdge
         {
-            get { return this.originalEdge; }
+            get { return originalEdge; }
         }
 
         public TVertex Source
         {
-            get { return this.OriginalEdge.Target; }
+            get { return OriginalEdge.Target; }
         }
 
         public TVertex Target
         {
-            get { return this.OriginalEdge.Source; }
+            get { return OriginalEdge.Source; }
         }
         
         [Pure]
@@ -55,19 +55,19 @@ namespace QuickGraph
         [Pure]
         public override int GetHashCode()
         {
-            return this.OriginalEdge.GetHashCode() ^ 16777619;
+            return OriginalEdge.GetHashCode() ^ 16777619;
         }
 
         [Pure]
         public override string ToString()
         {
-            return string.Format("R({0})", this.OriginalEdge);
+            return string.Format("R({0})", OriginalEdge);
         }
 
         [Pure]
         public bool Equals(SReversedEdge<TVertex, TEdge> other)
         {
-            return this.OriginalEdge.Equals(other.OriginalEdge);
+            return OriginalEdge.Equals(other.OriginalEdge);
         }
     }
 }

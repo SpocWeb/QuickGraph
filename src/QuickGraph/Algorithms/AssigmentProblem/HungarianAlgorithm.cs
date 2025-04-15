@@ -20,8 +20,8 @@ namespace QuickGraph.Algorithms.AssigmentProblem
 
         public HungarianAlgorithm(int[,] costs)
         {
-            this._costs = costs;
-            this._step = Steps.Init;
+            _costs = costs;
+            _step = Steps.Init;
         }
 
         /// <summary>
@@ -336,8 +336,8 @@ namespace QuickGraph.Algorithms.AssigmentProblem
 
             public Location(int row, int col)
             {
-                this.Row = row;
-                this.Column = col;
+                Row = row;
+                Column = col;
             }
         }
     }

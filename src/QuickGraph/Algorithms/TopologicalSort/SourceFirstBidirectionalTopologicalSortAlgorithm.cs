@@ -37,14 +37,14 @@ namespace QuickGraph.Algorithms.TopologicalSort
             : base(visitedGraph)
         {
             this.direction = direction;
-            this.heap = new BinaryQueue<TVertex, int>(e => this.predCounts[e]);
+            heap = new BinaryQueue<TVertex, int>(e => predCounts[e]);
         }
 
         public ICollection<TVertex> SortedVertices
         {
             get
             {
-                return this.sortedVertices;
+                return sortedVertices;
             }
         }
 
@@ -52,7 +52,7 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             get
             {
-                return this.heap;
+                return heap;
             }
         }
 
@@ -60,14 +60,14 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             get
             {
-                return this.predCounts;
+                return predCounts;
             }
         }
 
         public event VertexAction<TVertex> AddVertex;
         private void OnAddVertex(TVertex v)
         {
-            var eh = this.AddVertex;
+            var eh = AddVertex;
             if (eh != null)
                 eh(v);
         }
@@ -76,59 +76,59 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             Contract.Requires(vertices != null);
 
-            this.sortedVertices = vertices;
+            sortedVertices = vertices;
             Compute();
         }
 
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
-            this.InitializeInDegrees();
+            var cancelManager = Services.CancelManager;
+            InitializeInDegrees();
 
-            while (this.heap.Count != 0)
+            while (heap.Count != 0)
             {
                 if (cancelManager.IsCancelling) break;
 
-                TVertex v = this.heap.Dequeue();
-                if (this.predCounts[v] != 0)
+                TVertex v = heap.Dequeue();
+                if (predCounts[v] != 0)
                     throw new NonAcyclicGraphException();
 
-                this.sortedVertices.Add(v);
-                this.OnAddVertex(v);
+                sortedVertices.Add(v);
+                OnAddVertex(v);
 
                 // update the count of its successor vertices
-                var succEdges = (this.direction == TopologicalSortDirection.Forward) ? this.VisitedGraph.OutEdges(v) : this.VisitedGraph.InEdges(v);
+                var succEdges = (direction == TopologicalSortDirection.Forward) ? VisitedGraph.OutEdges(v) : VisitedGraph.InEdges(v);
                 foreach (var e in succEdges)
                 {
                     if (e.Source.Equals(e.Target))
                         continue;
                     var succ = (direction == TopologicalSortDirection.Forward) ? e.Target : e.Source;
-                    this.predCounts[succ]--;
-                    Contract.Assert(this.predCounts[succ] >= 0);
-                    this.heap.Update(succ);
+                    predCounts[succ]--;
+                    Contract.Assert(predCounts[succ] >= 0);
+                    heap.Update(succ);
                 }
             }
         }
 
         private void InitializeInDegrees()
         {
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
-                this.predCounts.Add(v, 0);
+                predCounts.Add(v, 0);
             }
 
-            foreach (var e in this.VisitedGraph.Edges)
+            foreach (var e in VisitedGraph.Edges)
             {
                 if (e.Source.Equals(e.Target))
                     continue;
                 var succ = (direction == TopologicalSortDirection.Forward) ? e.Target : e.Source;
-                this.predCounts[succ]++;
+                predCounts[succ]++;
             }
 
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
-                this.heap.Enqueue(v);
+                heap.Enqueue(v);
             }
         }
     }

@@ -33,7 +33,7 @@ namespace QuickGraph
         /// <value>The edge.</value>
         public TEdge Edge
         {
-            get { return this.edge; }
+            get { return edge; }
         }
     }
 

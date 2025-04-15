@@ -35,8 +35,8 @@ namespace QuickGraph.Algorithms.MaximumFlow
             )
             : base(host, visitedGraph,vertexFactory,edgeFactory)
         {
-            this.VertexSetA = vertexSetA;
-            this.VertexSetB = vertexSetB;
+            VertexSetA = vertexSetA;
+            VertexSetB = vertexSetB;
         }
 
         public IEnumerable<TVertex> VertexSetA { get; private set; }
@@ -45,19 +45,19 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         protected override void AugmentGraph()
         {
-            var cancelManager = this.Services.CancelManager;
-            foreach (var v in this.VertexSetA)
+            var cancelManager = Services.CancelManager;
+            foreach (var v in VertexSetA)
             {
                 if (cancelManager.IsCancelling) break;
 
-                this.AddAugmentedEdge(this.SuperSource, v);
+                AddAugmentedEdge(SuperSource, v);
             }
 
-            foreach (var v in this.VertexSetB)
+            foreach (var v in VertexSetB)
             {
                 if (cancelManager.IsCancelling) break;
 
-                this.AddAugmentedEdge(v, this.SuperSink);
+                AddAugmentedEdge(v, SuperSink);
             }
         }
     }

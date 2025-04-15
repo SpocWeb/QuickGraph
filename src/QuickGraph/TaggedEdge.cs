@@ -15,7 +15,7 @@ namespace QuickGraph
         public TaggedEdge(TVertex source, TVertex target, TTag tag)
             :base(source,target)
         {
-            Contract.Ensures(object.Equals(this.Tag,tag));
+            Contract.Ensures(Equals(Tag,tag));
 
             this.tag = tag;
         }
@@ -24,20 +24,20 @@ namespace QuickGraph
 
         protected virtual void OnTagChanged(EventArgs e)
         {
-            var eh = this.TagChanged;
+            var eh = TagChanged;
             if (eh != null)
                 eh(this, e);
         }
 
         public TTag Tag
         {
-            get { return this.tag; }
+            get { return tag; }
             set 
             {
-                if (!object.Equals(this.tag, value))
+                if (!Equals(tag, value))
                 {
-                    this.tag = value;
-                    this.OnTagChanged(EventArgs.Empty);
+                    tag = value;
+                    OnTagChanged(EventArgs.Empty);
                 }
             }
         }

@@ -25,7 +25,7 @@ namespace QuickGraph.Algorithms.Ranking
         {
             get
             {
-                return this.ranks;
+                return ranks;
             }
         }
 
@@ -33,11 +33,11 @@ namespace QuickGraph.Algorithms.Ranking
         {
             get
             {
-                return this.damping;
+                return damping;
             }
             set
             {
-                this.damping = value;
+                damping = value;
             }
         }
 
@@ -45,11 +45,11 @@ namespace QuickGraph.Algorithms.Ranking
         {
             get
             {
-                return this.tolerance;
+                return tolerance;
             }
             set
             {
-                this.tolerance = value;
+                tolerance = value;
             }
         }
 
@@ -57,20 +57,20 @@ namespace QuickGraph.Algorithms.Ranking
         {
             get
             {
-                return this.maxIterations;
+                return maxIterations;
             }
             set
             {
-                this.maxIterations = value;
+                maxIterations = value;
             }
         }
 
         public void InitializeRanks()
         {
-            this.ranks.Clear();
-            foreach (var v in this.VisitedGraph.Vertices)
+            ranks.Clear();
+            foreach (var v in VisitedGraph.Vertices)
             {
-                this.ranks.Add(v, 0);
+                ranks.Add(v, 0);
             }
 //            this.RemoveDanglingLinks();
         }
@@ -105,7 +105,7 @@ namespace QuickGraph.Algorithms.Ranking
 */
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             IDictionary<TVertex, double> tempRanks = new Dictionary<TVertex, double>();
 
             // create filtered graph
@@ -114,8 +114,8 @@ namespace QuickGraph.Algorithms.Ranking
                 TEdge,
                 IBidirectionalGraph<TVertex,TEdge>
                 > fg = new FilteredBidirectionalGraph<TVertex, TEdge, IBidirectionalGraph<TVertex, TEdge>>(
-                this.VisitedGraph,
-                new InDictionaryVertexPredicate<TVertex,double>(this.ranks).Test,
+                VisitedGraph,
+                new InDictionaryVertexPredicate<TVertex,double>(ranks).Test,
                 e => true
                 );
 
@@ -128,7 +128,7 @@ namespace QuickGraph.Algorithms.Ranking
                   
                 // compute page ranks
                 error = 0;
-                foreach (KeyValuePair<TVertex,double> de in this.Ranks)
+                foreach (KeyValuePair<TVertex,double> de in Ranks)
                 {
                     if (cancelManager.IsCancelling)
                         return;
@@ -139,11 +139,11 @@ namespace QuickGraph.Algorithms.Ranking
                     double r = 0;
                     foreach (var e in fg.InEdges(v))
                     {
-                        r += this.ranks[e.Source] / fg.OutDegree(e.Source);
+                        r += ranks[e.Source] / fg.OutDegree(e.Source);
                     }
 
                     // add sourceRank and store
-                    double newRank = (1 - this.damping) + this.damping * r;
+                    double newRank = (1 - damping) + damping * r;
                     tempRanks[v] = newRank;
                     // compute deviation
                     error += Math.Abs(rank - newRank);
@@ -155,14 +155,14 @@ namespace QuickGraph.Algorithms.Ranking
                 tempRanks = temp;
 
                 iter++;
-            } while (error > this.tolerance && iter < this.maxIterations);
+            } while (error > tolerance && iter < maxIterations);
             Console.WriteLine("{0}, {1}", iter, error);
         }
 
         public double GetRanksSum()
         {
             double sum = 0;
-            foreach (double rank in this.ranks.Values)
+            foreach (double rank in ranks.Values)
             {
                 sum += rank;
             }
@@ -171,7 +171,7 @@ namespace QuickGraph.Algorithms.Ranking
 
         public double GetRanksMean()
         {
-            return GetRanksSum() / this.ranks.Count;
+            return GetRanksSum() / ranks.Count;
         }
     }
 }

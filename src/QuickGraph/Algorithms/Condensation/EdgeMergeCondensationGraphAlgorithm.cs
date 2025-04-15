@@ -31,12 +31,12 @@ namespace QuickGraph.Algorithms.Condensation
             MergedEdge<TVertex,TEdge>
             > CondensatedGraph
         {
-            get { return this.condensatedGraph; }
+            get { return condensatedGraph; }
         }
 
         public VertexPredicate<TVertex> VertexPredicate
         {
-            get { return this.vertexPredicate; }
+            get { return vertexPredicate; }
         }
 
         protected override void InternalCompute()
@@ -44,20 +44,20 @@ namespace QuickGraph.Algorithms.Condensation
             // adding vertices to the new graph
             // and pusing filtered vertices in queue
             Queue<TVertex> filteredVertices = new Queue<TVertex>();
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
-                this.CondensatedGraph.AddVertex(v);
-                if (!this.VertexPredicate(v))
+                CondensatedGraph.AddVertex(v);
+                if (!VertexPredicate(v))
                     filteredVertices.Enqueue(v);
             }
 
             // adding all edges
-            foreach (var edge in this.VisitedGraph.Edges)
+            foreach (var edge in VisitedGraph.Edges)
             {
                 MergedEdge<TVertex, TEdge> mergedEdge = new MergedEdge<TVertex, TEdge>(edge.Source, edge.Target);
                 mergedEdge.Edges.Add(edge);
 
-                this.CondensatedGraph.AddEdge(mergedEdge);
+                CondensatedGraph.AddEdge(mergedEdge);
             }
 
             // remove vertices
@@ -74,12 +74,12 @@ namespace QuickGraph.Algorithms.Condensation
         {
             // get in edges and outedge
             List<MergedEdge<TVertex, TEdge>> inEdges =
-                new List<MergedEdge<TVertex, TEdge>>(this.CondensatedGraph.InEdges(v));
+                new List<MergedEdge<TVertex, TEdge>>(CondensatedGraph.InEdges(v));
             List<MergedEdge<TVertex, TEdge>> outEdges =
-                new List<MergedEdge<TVertex, TEdge>>(this.CondensatedGraph.OutEdges(v));
+                new List<MergedEdge<TVertex, TEdge>>(CondensatedGraph.OutEdges(v));
 
             // remove vertex
-            this.CondensatedGraph.RemoveVertex(v);
+            CondensatedGraph.RemoveVertex(v);
 
             // add condensated edges
             for (int i = 0; i < inEdges.Count; ++i)
@@ -96,7 +96,7 @@ namespace QuickGraph.Algorithms.Condensation
 
                     MergedEdge<TVertex, TEdge> newEdge =
                         MergedEdge<TVertex, TEdge>.Merge(inEdge, outEdge);
-                    this.CondensatedGraph.AddEdge(newEdge);
+                    CondensatedGraph.AddEdge(newEdge);
                 }
             }
         }

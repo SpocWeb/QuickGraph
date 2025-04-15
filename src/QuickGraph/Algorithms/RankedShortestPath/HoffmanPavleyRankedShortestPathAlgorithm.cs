@@ -49,14 +49,14 @@ namespace QuickGraph.Algorithms.RankedShortestPath
         public void SetGoalVertex(TVertex goalVertex)
         {
             Contract.Requires(goalVertex != null);
-            Contract.Requires(this.VisitedGraph.ContainsVertex(goalVertex));
+            Contract.Requires(VisitedGraph.ContainsVertex(goalVertex));
             this.goalVertex = goalVertex;
-            this.goalVertexSet = true;
+            goalVertexSet = true;
         }
 
         public bool TryGetGoalVertex(out TVertex goalVertex)
         {
-            if (this.goalVertexSet)
+            if (goalVertexSet)
             {
                 goalVertex = this.goalVertex;
                 return true;
@@ -72,39 +72,39 @@ namespace QuickGraph.Algorithms.RankedShortestPath
         {
             Contract.Requires(rootVertex != null);
             Contract.Requires(goalVertex != null);
-            Contract.Requires(this.VisitedGraph.ContainsVertex(rootVertex));
-            Contract.Requires(this.VisitedGraph.ContainsVertex(goalVertex));
+            Contract.Requires(VisitedGraph.ContainsVertex(rootVertex));
+            Contract.Requires(VisitedGraph.ContainsVertex(goalVertex));
 
-            this.SetRootVertex(rootVertex);
-            this.SetGoalVertex(goalVertex);
-            this.Compute();
+            SetRootVertex(rootVertex);
+            SetGoalVertex(goalVertex);
+            Compute();
         }
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             TVertex root;
-            if (!this.TryGetRootVertex(out root))
+            if (!TryGetRootVertex(out root))
                 throw new InvalidOperationException("root vertex not set");
             TVertex goal;
-            if (!this.TryGetGoalVertex(out goal))
+            if (!TryGetGoalVertex(out goal))
                 throw new InvalidOperationException("goal vertex not set");
 
             // start by building the minimum tree starting from the goal vertex.
             IDictionary<TVertex, TEdge> successors;
             IDictionary<TVertex, double> distances;
-            this.ComputeMinimumTree(goal, out successors, out distances);
+            ComputeMinimumTree(goal, out successors, out distances);
 
             if (cancelManager.IsCancelling) return;
 
             var queue = new FibonacciQueue<DeviationPath, double>(dp => dp.Weight);
-            var vertexCount = this.VisitedGraph.VertexCount;
+            var vertexCount = VisitedGraph.VertexCount;
 
             // first shortest path
-            this.EnqueueFirstShortestPath(queue, successors, distances, root);
+            EnqueueFirstShortestPath(queue, successors, distances, root);
 
             while (queue.Count > 0 && 
-                this.ComputedShortestPathCount < this.ShortestPathCount)
+                ComputedShortestPathCount < ShortestPathCount)
             {
                 if (cancelManager.IsCancelling) return;
 
@@ -116,18 +116,18 @@ namespace QuickGraph.Algorithms.RankedShortestPath
                     path.Add(deviation.ParentPath[i]);
                 path.Add(deviation.DeviationEdge);
                 int startEdge = path.Count;
-                this.AppendShortestPath(path, successors, deviation.DeviationEdge.Target);
+                AppendShortestPath(path, successors, deviation.DeviationEdge.Target);
 
                 Contract.Assert(deviation.Weight == path.Sum(e => edgeWeights(e)));
                 Contract.Assert(path.Count > 0);
 
                 // add to list if loopless
                 if (!path.HasCycles<TVertex, TEdge>())
-                    this.AddComputedShortestPath(path);
+                    AddComputedShortestPath(path);
 
                 // append new deviation paths
                 if (path.Count < vertexCount)
-                    this.EnqueueDeviationPaths(
+                    EnqueueDeviationPaths(
                         queue,
                         root,
                         successors,
@@ -159,10 +159,10 @@ namespace QuickGraph.Algorithms.RankedShortestPath
                 return; // unreachable vertices
 
             if (!path.HasCycles<TVertex, TEdge>())
-                this.AddComputedShortestPath(path);
+                AddComputedShortestPath(path);
 
             // create deviation paths
-            this.EnqueueDeviationPaths(
+            EnqueueDeviationPaths(
                 queue,
                 root,
                 successors,
@@ -177,16 +177,16 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             out IDictionary<TVertex, double> distances)
         {
             var reversedGraph = 
-                new ReversedBidirectionalGraph<TVertex, TEdge>(this.VisitedGraph);
+                new ReversedBidirectionalGraph<TVertex, TEdge>(VisitedGraph);
             var successorsObserver = 
                 new VertexPredecessorRecorderObserver<TVertex, SReversedEdge<TVertex, TEdge>>();
             Func<SReversedEdge<TVertex, TEdge>, double> reversedEdgeWeight = 
-                e => this.edgeWeights(e.OriginalEdge);
+                e => edgeWeights(e.OriginalEdge);
             var distancesObserser = 
                 new VertexDistanceRecorderObserver<TVertex, SReversedEdge<TVertex, TEdge>>(reversedEdgeWeight);
             var shortestpath = 
                 new DijkstraShortestPathAlgorithm<TVertex, SReversedEdge<TVertex, TEdge>>(
-                    this, reversedGraph, reversedEdgeWeight, this.DistanceRelaxer);
+                    this, reversedGraph, reversedEdgeWeight, DistanceRelaxer);
             using (successorsObserver.Attach(shortestpath))
             using (distancesObserser.Attach(shortestpath))
                 shortestpath.Compute(goal);
@@ -221,7 +221,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             {
                 var edge = path[iedge];
                 if (iedge >= startEdge)
-                    this.EnqueueDeviationPaths(
+                    EnqueueDeviationPaths(
                         queue, 
                         distances, 
                         path, 
@@ -232,7 +232,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
 
                 // update counter
                 previousVertex = edge.Target;
-                previousWeight += this.edgeWeights(edge);
+                previousWeight += edgeWeights(edge);
 
                 // detection of loops
                 if (iedge == 0)
@@ -258,7 +258,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             Contract.Requires(path != null);
 
             var edge = path[iedge];
-            foreach (var deviationEdge in this.VisitedGraph.OutEdges(previousVertex))
+            foreach (var deviationEdge in VisitedGraph.OutEdges(previousVertex))
             {
                 // skip self edges,
                 // skip equal edges,
@@ -272,10 +272,10 @@ namespace QuickGraph.Algorithms.RankedShortestPath
                 if (distances.TryGetValue(atarget, out adistance))
                 {
                     var deviationWeight =
-                        this.DistanceRelaxer.Combine(
+                        DistanceRelaxer.Combine(
                             previousWeight,
-                            this.DistanceRelaxer.Combine(
-                                this.edgeWeights(deviationEdge),
+                            DistanceRelaxer.Combine(
+                                edgeWeights(deviationEdge),
                                 adistance
                                 )
                             );
@@ -299,7 +299,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             Contract.Requires(path != null);
             Contract.Requires(successors != null);
             Contract.Requires(startVertex != null);
-            Contract.Ensures(path[path.Count - 1].Target.Equals(this.goalVertex));
+            Contract.Ensures(path[path.Count - 1].Target.Equals(goalVertex));
 
             var current = startVertex;
             TEdge edge;
@@ -329,15 +329,15 @@ namespace QuickGraph.Algorithms.RankedShortestPath
                 Contract.Requires(deviationEdge != null);
                 Contract.Requires(weight >= 0);
 
-                this.ParentPath = parentPath;
-                this.DeviationIndex = deviationIndex;
-                this.DeviationEdge = deviationEdge;
-                this.Weight = weight;
+                ParentPath = parentPath;
+                DeviationIndex = deviationIndex;
+                DeviationEdge = deviationEdge;
+                Weight = weight;
             }
 
             public override string ToString()
             {
-                return string.Format("{0} at {1} {2}", this.Weight, this.DeviationEdge);
+                return string.Format("{0} at {1} {2}", Weight, DeviationEdge);
             }
         }
     }

@@ -11,26 +11,26 @@ namespace QuickGraph.Graphviz.Dot
         public GraphvizArrow(GraphvizArrowShape shape)
         {
             this.shape = shape;
-            this.clipping = GraphvizArrowClipping.None;
-            this.filling = GraphvizArrowFilling.Close;
+            clipping = GraphvizArrowClipping.None;
+            filling = GraphvizArrowFilling.Close;
         }
 
         public GraphvizArrow(GraphvizArrowShape shape, GraphvizArrowClipping clip, GraphvizArrowFilling fill)
         {
             this.shape = shape;
-            this.clipping = clip;
-            this.filling = fill;
+            clipping = clip;
+            filling = fill;
         }
 
         public string ToDot()
         {
             using (StringWriter writer = new StringWriter())
             {
-                if (this.filling == GraphvizArrowFilling.Open)
+                if (filling == GraphvizArrowFilling.Open)
                 {
                     writer.Write('o');
                 }
-                switch (this.clipping)
+                switch (clipping)
                 {
                     case GraphvizArrowClipping.Left:
                         writer.Write('l');
@@ -40,25 +40,25 @@ namespace QuickGraph.Graphviz.Dot
                         writer.Write('r');
                         break;
                 }
-                writer.Write(this.shape.ToString().ToLower());
+                writer.Write(shape.ToString().ToLower());
                 return writer.ToString();
             }
         }
 
         public override string ToString()
         {
-            return this.ToDot();
+            return ToDot();
         }
 
         public GraphvizArrowClipping Clipping
         {
             get
             {
-                return this.clipping;
+                return clipping;
             }
             set
             {
-                this.clipping = value;
+                clipping = value;
             }
         }
 
@@ -66,11 +66,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.filling;
+                return filling;
             }
             set
             {
-                this.filling = value;
+                filling = value;
             }
         }
 
@@ -78,11 +78,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.shape;
+                return shape;
             }
             set
             {
-                this.shape = value;
+                shape = value;
             }
         }
     }

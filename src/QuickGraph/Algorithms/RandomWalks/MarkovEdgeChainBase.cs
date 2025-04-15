@@ -16,11 +16,11 @@ namespace QuickGraph.Algorithms.RandomWalks
         {
             get
             {
-                return this.rand;
+                return rand;
             }
             set
             {
-                this.rand = value;
+                rand = value;
             }
         }
 

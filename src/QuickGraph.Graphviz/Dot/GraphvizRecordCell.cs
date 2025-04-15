@@ -12,19 +12,19 @@ namespace QuickGraph.Graphviz.Dot
         public string ToDot()
         {
             StringBuilder builder = new StringBuilder();
-            if (this.HasPort)
+            if (HasPort)
             {
-                builder.AppendFormat("<{0}> ", this.Escaper.Escape(this.Port));
+                builder.AppendFormat("<{0}> ", Escaper.Escape(Port));
             }
-            if (this.HasText)
+            if (HasText)
             {
-                builder.AppendFormat("{0}", this.Escaper.Escape(this.Text));
+                builder.AppendFormat("{0}", Escaper.Escape(Text));
             }
-            if (this.Cells.Count > 0)
+            if (Cells.Count > 0)
             {
                 builder.Append(" { ");
                 bool flag = false;
-                foreach (GraphvizRecordCell cell in this.Cells)
+                foreach (GraphvizRecordCell cell in Cells)
                 {
                     if (flag)
                     {
@@ -41,14 +41,14 @@ namespace QuickGraph.Graphviz.Dot
 
         public override string ToString()
         {
-            return this.ToDot();
+            return ToDot();
         }
 
         public GraphvizRecordCellCollection Cells
         {
             get
             {
-                return this.cells;
+                return cells;
             }
         }
 
@@ -56,7 +56,7 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.escaper;
+                return escaper;
             }
         }
 
@@ -64,9 +64,9 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                if (this.Port != null)
+                if (Port != null)
                 {
-                    return (this.Port.Length > 0);
+                    return (Port.Length > 0);
                 }
                 return false;
             }
@@ -76,9 +76,9 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                if (this.text != null)
+                if (text != null)
                 {
-                    return (this.text.Length > 0);
+                    return (text.Length > 0);
                 }
                 return false;
             }
@@ -88,11 +88,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.port;
+                return port;
             }
             set
             {
-                this.port = value;
+                port = value;
             }
         }
 
@@ -100,11 +100,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.text;
+                return text;
             }
             set
             {
-                this.text = value;
+                text = value;
             }
         }
     }

@@ -85,7 +85,7 @@ namespace QuickGraph.Tests
         /// <returns></returns>
         public static double ToSecondsFromNow(long start)
         {
-            return ToSeconds(start, PreciseTimer.Now);
+            return ToSeconds(start, Now);
         }
     }
 
@@ -103,22 +103,22 @@ namespace QuickGraph.Tests
 
         public string Name
         {
-            get { return this.name; }
+            get { return name; }
         }
 
         public double Seconds
         {
-            get { return PreciseTimer.ToSeconds(this.duration); }
+            get { return PreciseTimer.ToSeconds(duration); }
         }
 
         public long Samples
         {
-            get { return this.samples; }
+            get { return samples; }
         }
 
         public override string ToString()
         {
-            return string.Format("{0}: {1}s, {2} samples", this.Name, this.Seconds, this.samples);
+            return string.Format("{0}: {1}s, {2} samples", Name, Seconds, samples);
         }
 
         public void Run(Action action)
@@ -131,8 +131,8 @@ namespace QuickGraph.Tests
             finally
             {
                 long finish = PreciseTimer.Now;
-                this.duration += finish - start;
-                this.samples++;
+                duration += finish - start;
+                samples++;
             }
         }
     }

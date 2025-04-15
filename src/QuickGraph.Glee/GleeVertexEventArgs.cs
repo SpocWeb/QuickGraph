@@ -16,7 +16,7 @@ namespace QuickGraph.Glee
 
         public Node Node
         {
-            get { return this.node; }
+            get { return node; }
         }
     }
 

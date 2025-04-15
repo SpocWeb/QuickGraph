@@ -25,13 +25,13 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         protected override void AugmentGraph()
         {
-            var cancelManager = this.Services.CancelManager;
-            foreach (var v in this.VisitedGraph.Vertices)
+            var cancelManager = Services.CancelManager;
+            foreach (var v in VisitedGraph.Vertices)
             {
                 if (cancelManager.IsCancelling) break;
 
-                this.AddAugmentedEdge(this.SuperSource, v);
-                this.AddAugmentedEdge(v, this.SuperSink);
+                AddAugmentedEdge(SuperSource, v);
+                AddAugmentedEdge(v, SuperSink);
             }
         }
     }

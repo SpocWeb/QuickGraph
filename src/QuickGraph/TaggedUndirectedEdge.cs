@@ -37,7 +37,7 @@ namespace QuickGraph
 
         void OnTagChanged(EventArgs e)
         {
-            var eh = this.TagChanged;
+            var eh = TagChanged;
             if (eh != null)
                 eh(this, e);
         }
@@ -47,13 +47,13 @@ namespace QuickGraph
         /// </summary>
         public TTag Tag
         {
-            get { return this.tag; }
+            get { return tag; }
             set
             {
-                if (!object.Equals(this.tag, value))
+                if (!Equals(tag, value))
                 {
-                    this.tag = value;
-                    this.OnTagChanged(EventArgs.Empty);
+                    tag = value;
+                    OnTagChanged(EventArgs.Empty);
                 }
             }
         }
@@ -68,9 +68,9 @@ namespace QuickGraph
         {
             return string.Format(
                 EdgeExtensions.TaggedUndirectedEdgeFormatString,
-                this.Source,
-                this.Target,
-                this.Tag);
+                Source,
+                Target,
+                Tag);
         }
     }
 }

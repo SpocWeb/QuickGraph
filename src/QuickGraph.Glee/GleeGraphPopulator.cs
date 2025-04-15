@@ -11,17 +11,17 @@ namespace QuickGraph.Glee
             : base(visitedGraph)
         { }
 
-        private Microsoft.Glee.Drawing.Graph gleeGraph;
-        public Microsoft.Glee.Drawing.Graph GleeGraph
+        private Graph gleeGraph;
+        public Graph GleeGraph
         {
-            get { return this.gleeGraph; }
+            get { return gleeGraph; }
         }
 
         #region Events
         public event GleeVertexNodeEventHandler<TVertex> NodeAdded;
         protected virtual void OnNodeAdded(GleeVertexEventArgs<TVertex> e)
         {
-            GleeVertexNodeEventHandler<TVertex> eh = this.NodeAdded;
+            GleeVertexNodeEventHandler<TVertex> eh = NodeAdded;
             if (eh != null)
                 eh(this, e);
         }
@@ -29,7 +29,7 @@ namespace QuickGraph.Glee
         public event GleeEdgeEventHandler<TVertex, TEdge> EdgeAdded;
         protected virtual void OnEdgeAdded(GleeEdgeEventArgs<TVertex, TEdge> e)
         {
-            var eh = this.EdgeAdded;
+            var eh = EdgeAdded;
             if (eh != null)
                 eh(this, e);
         }
@@ -37,25 +37,25 @@ namespace QuickGraph.Glee
 
         protected override void InternalCompute()
         {
-            this.gleeGraph = new Microsoft.Glee.Drawing.Graph("");
+            gleeGraph = new Graph("");
 
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
-                Node node = this.AddNode(v);
+                Node node = AddNode(v);
                 node.UserData = v;
-                this.OnNodeAdded(new GleeVertexEventArgs<TVertex>(v, node));
+                OnNodeAdded(new GleeVertexEventArgs<TVertex>(v, node));
             }
 
-            foreach (var e in this.VisitedGraph.Edges)
+            foreach (var e in VisitedGraph.Edges)
             {
-                Microsoft.Glee.Drawing.Edge edge = this.AddEdge(e);
+                Edge edge = AddEdge(e);
                 edge.UserData = e;
-                this.OnEdgeAdded(new GleeEdgeEventArgs<TVertex,TEdge>(e, edge));
+                OnEdgeAdded(new GleeEdgeEventArgs<TVertex,TEdge>(e, edge));
             }
         }
 
         protected abstract Node AddNode(TVertex v);
 
-        protected abstract Microsoft.Glee.Drawing.Edge AddEdge(TEdge e);
+        protected abstract Edge AddEdge(TEdge e);
     }
 }

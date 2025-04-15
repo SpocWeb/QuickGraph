@@ -44,7 +44,7 @@ namespace QuickGraph.Algorithms
 
         public ComponentWithEdges checkComponentsWithEdges()
         {
-            var componentsAlgo = new ConnectedComponentsAlgorithm<TVertex, UndirectedEdge<TVertex>>(this.graph);
+            var componentsAlgo = new ConnectedComponentsAlgorithm<TVertex, UndirectedEdge<TVertex>>(graph);
             componentsAlgo.Compute();
 
             bool[] hasEdgesInComponent = new bool[componentsAlgo.ComponentCount];

@@ -18,14 +18,14 @@ namespace QuickGraph.Glee
 
         protected override Node AddNode(TVertex v)
         {
-            return (Node)this.GleeGraph.AddNode(this.vertexIdentities(v));
+            return (Node)GleeGraph.AddNode(vertexIdentities(v));
         }
 
-        protected override Microsoft.Glee.Drawing.Edge AddEdge(TEdge e)
+        protected override Edge AddEdge(TEdge e)
         {
-            return (Microsoft.Glee.Drawing.Edge)this.GleeGraph.AddEdge(
-                this.vertexIdentities(e.Source),
-                this.vertexIdentities(e.Target));
+            return (Edge)GleeGraph.AddEdge(
+                vertexIdentities(e.Source),
+                vertexIdentities(e.Target));
         }
     }
 }

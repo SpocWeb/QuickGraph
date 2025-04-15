@@ -30,13 +30,13 @@ namespace QuickGraph.Collections
 
         IEdgeList<TVertex, TEdge> IEdgeList<TVertex,TEdge>.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 #endif
 

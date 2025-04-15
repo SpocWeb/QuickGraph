@@ -18,12 +18,12 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.name;
+                return name;
             }
             set
             {
                 Contract.Requires(!string.IsNullOrEmpty(value));
-                this.name = value;
+                name = value;
             }
         }
     }

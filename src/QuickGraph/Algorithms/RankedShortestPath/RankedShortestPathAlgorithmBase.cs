@@ -17,13 +17,13 @@ namespace QuickGraph.Algorithms.RankedShortestPath
 
         public int ShortestPathCount
         {
-            get { return this.shortestPathCount; }
+            get { return shortestPathCount; }
             set
             {
                 Contract.Requires(value > 1);
-                Contract.Ensures(this.ShortestPathCount == value);
+                Contract.Ensures(ShortestPathCount == value);
 
-                this.shortestPathCount = value;
+                shortestPathCount = value;
             }
         }
 
@@ -31,9 +31,9 @@ namespace QuickGraph.Algorithms.RankedShortestPath
         {
             get
             {
-                Contract.Ensures(Contract.Result<int>() == this.ComputedShortestPaths.Count());
+                Contract.Ensures(Contract.Result<int>() == ComputedShortestPaths.Count());
 
-                return this.computedShortestPaths == null ? 0 : this.computedShortestPaths.Count;
+                return computedShortestPaths == null ? 0 : computedShortestPaths.Count;
             }
         }
 
@@ -41,10 +41,10 @@ namespace QuickGraph.Algorithms.RankedShortestPath
         {
             get
             {
-                if (this.computedShortestPaths == null)
+                if (computedShortestPaths == null)
                     yield break;
                 else
-                    foreach (var path in this.computedShortestPaths)
+                    foreach (var path in computedShortestPaths)
                         yield return path;
             }
         }
@@ -55,13 +55,13 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             Contract.Requires(path.All(e => e != null));
 
             var pathArray = path.ToArray();
-            this.computedShortestPaths.Add(pathArray);
+            computedShortestPaths.Add(pathArray);
             Console.WriteLine("found shortest path {0}", path.Count);
         }
 
         public IDistanceRelaxer DistanceRelaxer
         {
-            get { return this.distanceRelaxer; }
+            get { return distanceRelaxer; }
         }
 
         protected RankedShortestPathAlgorithmBase(
@@ -78,7 +78,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
         protected override void Initialize()
         {
             base.Initialize();
-            this.computedShortestPaths = new List<IEnumerable<TEdge>>(this.ShortestPathCount);
+            computedShortestPaths = new List<IEnumerable<TEdge>>(ShortestPathCount);
         }
     }
 }

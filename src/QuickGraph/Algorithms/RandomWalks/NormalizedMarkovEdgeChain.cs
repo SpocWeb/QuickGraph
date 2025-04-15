@@ -16,7 +16,7 @@ namespace QuickGraph.Algorithms.RandomWalks
             int outDegree = g.OutDegree(u);
             if (outDegree > 0)
             {
-                int index = this.Rand.Next(0, outDegree);
+                int index = Rand.Next(0, outDegree);
                 successor = g.OutEdge(u, index);
                 return true;
             }
@@ -31,7 +31,7 @@ namespace QuickGraph.Algorithms.RandomWalks
 
             if (edgeCount > 0)
             {
-                int index = this.Rand.Next(0, edgeCount);
+                int index = Rand.Next(0, edgeCount);
                 successor = edges.ElementAt(index);
                 return true;
             }

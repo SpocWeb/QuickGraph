@@ -83,12 +83,12 @@ namespace QuickGraph.Algorithms.ShortestPath
             ug.AddEdge(e3);
 
             var udspa =
-                new UndirectedDijkstraShortestPathAlgorithm<object, QuickGraph.Edge<object>>(ug, _ => (double)1);
+                new UndirectedDijkstraShortestPathAlgorithm<object, Edge<object>>(ug, _ => (double)1);
             var observer =
                 new UndirectedVertexPredecessorRecorderObserver<object, Edge<object>>();
             using (observer.Attach(udspa))
                 udspa.Compute(v1);
-            IEnumerable<QuickGraph.Edge<object>> path;
+            IEnumerable<Edge<object>> path;
             observer.TryGetPath(v3, out path);
         }
     }

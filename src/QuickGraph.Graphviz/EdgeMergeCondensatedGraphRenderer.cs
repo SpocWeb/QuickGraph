@@ -16,8 +16,8 @@ namespace QuickGraph.Graphviz
         protected override void Initialize()
         {
             base.Initialize();
-            this.Graphviz.FormatVertex += Graphviz_FormatVertex;
-            this.Graphviz.FormatEdge += Graphviz_FormatEdge;
+            Graphviz.FormatVertex += Graphviz_FormatVertex;
+            Graphviz.FormatEdge += Graphviz_FormatEdge;
         }
 
         void Graphviz_FormatEdge(object sender, FormatEdgeEventArgs<TVertex, MergedEdge<TVertex, TEdge>> e)
@@ -26,7 +26,7 @@ namespace QuickGraph.Graphviz
             sw.WriteLine("{0}", e.Edge.Edges.Count);
             foreach (var edge in e.Edge.Edges)
                 sw.WriteLine("  {0}", edge);
-            e.EdgeFormatter.Label.Value = this.Graphviz.Escape(sw.ToString());
+            e.EdgeFormatter.Label.Value = Graphviz.Escape(sw.ToString());
         }
 
         static void Graphviz_FormatVertex(object sender, FormatVertexEventArgs<TVertex> e)

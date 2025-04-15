@@ -42,10 +42,10 @@ namespace QuickGraph
             get
             {
                 // shortcut
-                if (this._vertexCount > -1)
-                    return this._vertexCount == 0;
+                if (_vertexCount > -1)
+                    return _vertexCount == 0;
                 // count
-                foreach (var vertex in this.vertices)
+                foreach (var vertex in vertices)
                     return false;
                 return true;
             }
@@ -55,26 +55,26 @@ namespace QuickGraph
         {
             get
             {
-                if (this._vertexCount < 0)
-                    this._vertexCount = this.vertices.Count();
-                return this._vertexCount;
+                if (_vertexCount < 0)
+                    _vertexCount = vertices.Count();
+                return _vertexCount;
             }
         }
 
         public virtual IEnumerable<TVertex> Vertices
         {
-            get { return this.vertices; }
+            get { return vertices; }
         }
 
         public bool IsEdgesEmpty
         {
             get {
-                if (this._vertexCount == 0 || 
-                    this._edgeCount == 0)
+                if (_vertexCount == 0 || 
+                    _edgeCount == 0)
                     return true; // no vertices or no edges.
 
-                foreach (var vertex in this.vertices)
-                    foreach (var edge in this.AdjacentEdges(vertex))
+                foreach (var vertex in vertices)
+                    foreach (var edge in AdjacentEdges(vertex))
                         return false;
                 return true;
             }
@@ -84,9 +84,9 @@ namespace QuickGraph
         {
             get
             {
-                if (this._edgeCount < 0)
-                    this._edgeCount = this.Edges.Count();
-                return this._edgeCount;
+                if (_edgeCount < 0)
+                    _edgeCount = Edges.Count();
+                return _edgeCount;
             }
         }
 
@@ -94,8 +94,8 @@ namespace QuickGraph
         {
             get 
             {
-                foreach (var vertex in this.vertices)
-                    foreach (var edge in this.AdjacentEdges(vertex))
+                foreach (var vertex in vertices)
+                    foreach (var edge in AdjacentEdges(vertex))
                         if (edge.Source.Equals(vertex))
                             yield return edge;
             }
@@ -104,7 +104,7 @@ namespace QuickGraph
         public bool ContainsEdge(TEdge edge)
         {
             IEnumerable<TEdge> edges;
-            if (this.TryGetAdjacentEdges(edge.Source, out edges))
+            if (TryGetAdjacentEdges(edge.Source, out edges))
                 foreach (var e in edges)
                     if (e.Equals(edge))
                         return true;

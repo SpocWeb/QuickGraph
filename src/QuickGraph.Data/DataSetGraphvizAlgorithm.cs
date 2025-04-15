@@ -15,7 +15,7 @@ namespace QuickGraph.Data
         public DataSetGraphvizAlgorithm(DataSetGraph visitedGraph)
             : base(visitedGraph)
         {
-            this.InitializeFormat();
+            InitializeFormat();
         }
 
         public DataSetGraphvizAlgorithm(
@@ -25,16 +25,16 @@ namespace QuickGraph.Data
             )
             : base(visitedGraph, path, imageType)
         {
-            this.InitializeFormat();
+            InitializeFormat();
         }
 
         private void InitializeFormat()
         {
-            this.FormatVertex += FormatTable;
-            this.FormatEdge += FormatRelationEdge;
+            FormatVertex += FormatTable;
+            FormatEdge += FormatRelationEdge;
 
-            this.CommonVertexFormat.Style = GraphvizVertexStyle.Solid;
-            this.CommonVertexFormat.Shape = GraphvizVertexShape.Record;
+            CommonVertexFormat.Style = GraphvizVertexStyle.Solid;
+            CommonVertexFormat.Shape = GraphvizVertexShape.Record;
         }
 
 

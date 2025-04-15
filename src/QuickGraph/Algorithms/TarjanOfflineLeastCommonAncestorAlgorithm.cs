@@ -58,34 +58,34 @@ namespace QuickGraph.Algorithms
             Contract.Requires(pairs != null);
 
             this.pairs = pairs.ToArray();
-            this.Compute(root);
+            Compute(root);
         }
 
         public IDictionary<SEquatableEdge<TVertex>, TVertex> Ancestors
         {
-            get { return this.ancestors; }
+            get { return ancestors; }
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-            this.ancestors.Clear();
+            ancestors.Clear();
         }
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
 
             TVertex root;
-            if (!this.TryGetRootVertex(out root))
+            if (!TryGetRootVertex(out root))
                 throw new InvalidOperationException("root vertex not set");
-            if (this.pairs == null)
+            if (pairs == null)
                 throw new InvalidProgramException("pairs not set");
 
-            var gpair = this.pairs.ToAdjacencyGraph();
+            var gpair = pairs.ToAdjacencyGraph();
             var disjointSet = new ForestDisjointSet<TVertex>();
             var vancestors = new Dictionary<TVertex, TVertex>();
-            var dfs = new DepthFirstSearchAlgorithm<TVertex, TEdge>(this, this.VisitedGraph, new Dictionary<TVertex, GraphColor>(this.VisitedGraph.VertexCount));
+            var dfs = new DepthFirstSearchAlgorithm<TVertex, TEdge>(this, VisitedGraph, new Dictionary<TVertex, GraphColor>(VisitedGraph.VertexCount));
 
             dfs.InitializeVertex += v => disjointSet.MakeSet(v);
             dfs.DiscoverVertex += v => vancestors[v] = v;
@@ -98,7 +98,7 @@ namespace QuickGraph.Algorithms
                 {
                     foreach (var e in gpair.OutEdges(v))
                         if (dfs.VertexColors[e.Target] == GraphColor.Black)
-                            this.ancestors[e.ToVertexPair<TVertex, SEquatableEdge<TVertex>>()] = vancestors[disjointSet.FindSet(e.Target)];
+                            ancestors[e.ToVertexPair<TVertex, SEquatableEdge<TVertex>>()] = vancestors[disjointSet.FindSet(e.Target)];
                 };
 
             // go!

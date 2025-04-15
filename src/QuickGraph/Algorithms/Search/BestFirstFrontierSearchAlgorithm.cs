@@ -39,23 +39,23 @@ namespace QuickGraph.Algorithms.Search
         protected override void InternalCompute()
         {
             TVertex root;
-            if (!this.TryGetRootVertex(out root))
+            if (!TryGetRootVertex(out root))
                 throw new InvalidOperationException("root vertex not set");
             TVertex goal;
-            if (!this.TryGetGoalVertex(out goal))
+            if (!TryGetGoalVertex(out goal))
                 throw new InvalidOperationException("goal vertex not set");
 
             // little shortcut
             if (root.Equals(goal))
             {
-                this.OnGoalReached();
+                OnGoalReached();
                 return; // found it
             }
 
-            var cancelManager = this.Services.CancelManager;
-            var open = new BinaryHeap<double, TVertex>(this.distanceRelaxer.Compare);
+            var cancelManager = Services.CancelManager;
+            var open = new BinaryHeap<double, TVertex>(distanceRelaxer.Compare);
             var operators = new Dictionary<TEdge, GraphColor>();
-            var g = this.VisitedGraph;
+            var g = VisitedGraph;
 
             // (1) Place the initial node on Open, with all its operators marked unused.
             open.Add(0, root);
@@ -74,7 +74,7 @@ namespace QuickGraph.Algorithms.Search
                 // (4) if node n is a goal node, terminate with success
                 if (n.Equals(goal))
                 {
-                    this.OnGoalReached();
+                    OnGoalReached();
                     return;
                 }
 
@@ -90,8 +90,8 @@ namespace QuickGraph.Algorithms.Search
                     bool hasColor = operators.TryGetValue(edge, out edgeColor);
                     if (!hasColor || edgeColor == GraphColor.White)
                     {
-                        var weight = this.edgeWeights(edge);
-                        var ncost = this.distanceRelaxer.Combine(cost, weight);
+                        var weight = edgeWeights(edge);
+                        var ncost = distanceRelaxer.Combine(cost, weight);
 
                         // (7) foreach neighboring node of n' mark the operator from n to n' as used
                         // (8) for each node n', if there is no copy of n' in open addit
@@ -99,7 +99,7 @@ namespace QuickGraph.Algorithms.Search
                         // mak as used in any of the copies
                         operators[edge] = GraphColor.Gray;
                         if (open.MinimumUpdate(ncost, edge.Target))
-                            this.OnTreeEdge(edge);
+                            OnTreeEdge(edge);
                     }
                     else if (hasColor)
                     {
@@ -110,7 +110,7 @@ namespace QuickGraph.Algorithms.Search
                 }
 
 #if DEBUG
-                this.operatorMaxCount = Math.Max(this.operatorMaxCount, operators.Count);
+                operatorMaxCount = Math.Max(operatorMaxCount, operators.Count);
 #endif
 
                 // (6) in a directed graph, generate each predecessor node n via an unused operator
@@ -132,7 +132,7 @@ namespace QuickGraph.Algorithms.Search
         int operatorMaxCount = -1;
         public int OperatorMaxCount
         {
-            get { return this.operatorMaxCount; }
+            get { return operatorMaxCount; }
         }
 #endif
 
@@ -140,7 +140,7 @@ namespace QuickGraph.Algorithms.Search
         public event EdgeAction<TVertex, TEdge> TreeEdge;
         private void OnTreeEdge(TEdge edge)
         {
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(edge);
         }

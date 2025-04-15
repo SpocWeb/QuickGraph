@@ -9,7 +9,7 @@ namespace QuickGraph.Data
         readonly DataSet dataSet;
         public DataSet DataSet
         {
-            get { return this.dataSet; }
+            get { return dataSet; }
         }
 
         internal DataSetGraph(DataSet dataSet)

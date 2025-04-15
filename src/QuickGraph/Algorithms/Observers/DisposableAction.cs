@@ -18,8 +18,8 @@ namespace QuickGraph.Algorithms.Observers
 
         public void Dispose()
         {
-            var a = this.action;
-            this.action = null;
+            var a = action;
+            action = null;
             if (a != null)
                 a();
         }

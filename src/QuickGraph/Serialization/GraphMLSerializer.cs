@@ -374,64 +374,64 @@ namespace QuickGraph.Serialization
 
             public GraphMLSerializer<TVertex, TEdge, TGraph> Serializer
             {
-                get { return this.serializer; }
+                get { return serializer; }
             }
 
             public XmlWriter Writer
             {
-                get { return this.writer; }
+                get { return writer; }
             }
 
             public TGraph VisitedGraph
             {
-                get { return this.visitedGraph; }
+                get { return visitedGraph; }
             }
 
             public void Serialize()
             {
-                this.WriteHeader();
-                this.WriteGraphAttributeDefinitions();
-                this.WriteVertexAttributeDefinitions();
-                this.WriteEdgeAttributeDefinitions();
-                this.WriteGraphHeader();
-                this.WriteVertices();
-                this.WriteEdges();
-                this.WriteGraphFooter();
-                this.WriteFooter();
+                WriteHeader();
+                WriteGraphAttributeDefinitions();
+                WriteVertexAttributeDefinitions();
+                WriteEdgeAttributeDefinitions();
+                WriteGraphHeader();
+                WriteVertices();
+                WriteEdges();
+                WriteGraphFooter();
+                WriteFooter();
             }
 
             private void WriteHeader()
             {
-                if (this.Serializer.EmitDocumentDeclaration)
-                    this.Writer.WriteStartDocument();
-                this.Writer.WriteStartElement("", "graphml", GraphMlXmlResolver.GraphMlNamespace);
+                if (Serializer.EmitDocumentDeclaration)
+                    Writer.WriteStartDocument();
+                Writer.WriteStartElement("", "graphml", GraphMlXmlResolver.GraphMlNamespace);
             }
 
             private void WriteFooter()
             {
-                this.Writer.WriteEndElement();
-                this.Writer.WriteEndDocument();
+                Writer.WriteEndElement();
+                Writer.WriteEndDocument();
             }
 
             private void WriteGraphHeader()
             {
-                this.Writer.WriteStartElement("graph", GraphMlXmlResolver.GraphMlNamespace);
-                this.Writer.WriteAttributeString("id", "G");
-                this.Writer.WriteAttributeString("edgedefault",
-                    (this.VisitedGraph.IsDirected) ? "directed" : "undirected"
+                Writer.WriteStartElement("graph", GraphMlXmlResolver.GraphMlNamespace);
+                Writer.WriteAttributeString("id", "G");
+                Writer.WriteAttributeString("edgedefault",
+                    (VisitedGraph.IsDirected) ? "directed" : "undirected"
                     );
-                this.Writer.WriteAttributeString("parse.nodes", this.VisitedGraph.VertexCount.ToString());
-                this.Writer.WriteAttributeString("parse.edges", this.VisitedGraph.EdgeCount.ToString());
-                this.Writer.WriteAttributeString("parse.order", "nodesfirst");
-                this.Writer.WriteAttributeString("parse.nodeids", "free");
-                this.Writer.WriteAttributeString("parse.edgeids", "free");
+                Writer.WriteAttributeString("parse.nodes", VisitedGraph.VertexCount.ToString());
+                Writer.WriteAttributeString("parse.edges", VisitedGraph.EdgeCount.ToString());
+                Writer.WriteAttributeString("parse.order", "nodesfirst");
+                Writer.WriteAttributeString("parse.nodeids", "free");
+                Writer.WriteAttributeString("parse.edgeids", "free");
 
-                GraphMLSerializer<TVertex, TEdge, TGraph>.WriteDelegateCompiler.GraphAttributesWriter(this.Writer, this.VisitedGraph);
+                WriteDelegateCompiler.GraphAttributesWriter(Writer, VisitedGraph);
             }
 
             private void WriteGraphFooter()
             {
-                this.Writer.WriteEndElement();
+                Writer.WriteEndElement();
             }
 
             private void WriteGraphAttributeDefinitions()
@@ -439,7 +439,7 @@ namespace QuickGraph.Serialization
                 string forNode = "graph";
                 Type nodeType = typeof(TGraph);
 
-                this.WriteAttributeDefinitions(forNode, nodeType);
+                WriteAttributeDefinitions(forNode, nodeType);
             }
 
             private void WriteVertexAttributeDefinitions()
@@ -447,7 +447,7 @@ namespace QuickGraph.Serialization
                 string forNode = "node";
                 Type nodeType = typeof(TVertex);
 
-                this.WriteAttributeDefinitions(forNode, nodeType);
+                WriteAttributeDefinitions(forNode, nodeType);
             }
 
             private void WriteEdgeAttributeDefinitions()
@@ -455,7 +455,7 @@ namespace QuickGraph.Serialization
                 string forNode = "edge";
                 Type nodeType = typeof(TEdge);
 
-                this.WriteAttributeDefinitions(forNode, nodeType);
+                WriteAttributeDefinitions(forNode, nodeType);
             }
 
             private static string ConstructTypeCodeForSimpleType(Type t)
@@ -562,10 +562,10 @@ namespace QuickGraph.Serialization
 
                     {
                         //<key id="d1" for="edge" attr.name="weight" attr.type="double"/>
-                        this.Writer.WriteStartElement("key", GraphMlXmlResolver.GraphMlNamespace);
-                        this.Writer.WriteAttributeString("id", name);
-                        this.Writer.WriteAttributeString("for", forNode);
-                        this.Writer.WriteAttributeString("attr.name", name);
+                        Writer.WriteStartElement("key", GraphMlXmlResolver.GraphMlNamespace);
+                        Writer.WriteAttributeString("id", name);
+                        Writer.WriteAttributeString("for", forNode);
+                        Writer.WriteAttributeString("attr.name", name);
 
                         string typeCodeStr;
 
@@ -578,34 +578,34 @@ namespace QuickGraph.Serialization
                             throw new NotSupportedException(string.Format("Property type {0}.{1} not supported by the GraphML schema", property.DeclaringType, property.Name));
                         }
 
-                        this.Writer.WriteAttributeString("attr.type", typeCodeStr);
+                        Writer.WriteAttributeString("attr.type", typeCodeStr);
                     }
 
                     // <default>...</default>
                     object defaultValue;
                     if (kv.TryGetDefaultValue(out defaultValue))
                     {
-                        this.Writer.WriteStartElement("default");
+                        Writer.WriteStartElement("default");
                         var defaultValueType = defaultValue.GetType();
                         switch (Type.GetTypeCode(defaultValueType))
                         {
                             case TypeCode.Boolean:
-                                this.Writer.WriteString(XmlConvert.ToString((bool)defaultValue));
+                                Writer.WriteString(XmlConvert.ToString((bool)defaultValue));
                                 break;
                             case TypeCode.Int32:
-                                this.Writer.WriteString(XmlConvert.ToString((int)defaultValue));
+                                Writer.WriteString(XmlConvert.ToString((int)defaultValue));
                                 break;
                             case TypeCode.Int64:
-                                this.Writer.WriteString(XmlConvert.ToString((long)defaultValue));
+                                Writer.WriteString(XmlConvert.ToString((long)defaultValue));
                                 break;
                             case TypeCode.Single:
-                                this.Writer.WriteString(XmlConvert.ToString((float)defaultValue));
+                                Writer.WriteString(XmlConvert.ToString((float)defaultValue));
                                 break;
                             case TypeCode.Double:
-                                this.Writer.WriteString(XmlConvert.ToString((double)defaultValue));
+                                Writer.WriteString(XmlConvert.ToString((double)defaultValue));
                                 break;
                             case TypeCode.String:
-                                this.Writer.WriteString((string)defaultValue);
+                                Writer.WriteString((string)defaultValue);
                                 break;
                             case TypeCode.Object:
                                 if (defaultValueType.IsArray)
@@ -616,34 +616,34 @@ namespace QuickGraph.Serialization
                             default:
                                 throw new NotSupportedException(string.Format("Property type {0}.{1} not supported by the GraphML schema", property.DeclaringType, property.Name));
                         }
-                        this.Writer.WriteEndElement();
+                        Writer.WriteEndElement();
                     }
 
-                    this.Writer.WriteEndElement();
+                    Writer.WriteEndElement();
                 }
             }
             
             private void WriteVertices()
             {
-                foreach (var v in this.VisitedGraph.Vertices)
+                foreach (var v in VisitedGraph.Vertices)
                 {
-                    this.Writer.WriteStartElement("node", GraphMlXmlResolver.GraphMlNamespace);
-                    this.Writer.WriteAttributeString("id", this.vertexIdentities(v));
-                    GraphMLSerializer<TVertex, TEdge,TGraph>.WriteDelegateCompiler.VertexAttributesWriter(this.Writer, v);
-                    this.Writer.WriteEndElement();
+                    Writer.WriteStartElement("node", GraphMlXmlResolver.GraphMlNamespace);
+                    Writer.WriteAttributeString("id", vertexIdentities(v));
+                    WriteDelegateCompiler.VertexAttributesWriter(Writer, v);
+                    Writer.WriteEndElement();
                 }
             }
             
             private void WriteEdges()
             {
-                foreach (var e in this.VisitedGraph.Edges)
+                foreach (var e in VisitedGraph.Edges)
                 {
-                    this.Writer.WriteStartElement("edge", GraphMlXmlResolver.GraphMlNamespace);
-                    this.Writer.WriteAttributeString("id", this.edgeIdentities(e));
-                    this.Writer.WriteAttributeString("source", this.vertexIdentities(e.Source));
-                    this.Writer.WriteAttributeString("target", this.vertexIdentities(e.Target));
-                    GraphMLSerializer<TVertex, TEdge,TGraph>.WriteDelegateCompiler.EdgeAttributesWriter(this.Writer, e);
-                    this.Writer.WriteEndElement();
+                    Writer.WriteStartElement("edge", GraphMlXmlResolver.GraphMlNamespace);
+                    Writer.WriteAttributeString("id", edgeIdentities(e));
+                    Writer.WriteAttributeString("source", vertexIdentities(e.Source));
+                    Writer.WriteAttributeString("target", vertexIdentities(e.Target));
+                    WriteDelegateCompiler.EdgeAttributesWriter(Writer, e);
+                    Writer.WriteEndElement();
                 }
             }
         }

@@ -70,7 +70,7 @@ namespace QuickGraph.Graphviz.Dot
         private double distorsion = 0;
         private Color fillColor = Color.White;
         private bool fixedSize = false;
-        private System.Drawing.Font font = null;
+        private Font font = null;
         private Color fontColor = Color.Black;
         private string group = null;
         private string label = null;
@@ -89,121 +89,121 @@ namespace QuickGraph.Graphviz.Dot
         private string topLabel = null;
         private string url = null;
         private double z = -1;
-        private System.Drawing.Point? position;
+        private Point? position;
 
         public string ToDot()
         {
             var pairs = new Dictionary<string, object>();
-            if (this.Font != null)
+            if (Font != null)
             {
-                pairs["fontname"] = this.Font.Name;
-                pairs["fontsize"] = this.Font.SizeInPoints;
+                pairs["fontname"] = Font.Name;
+                pairs["fontsize"] = Font.SizeInPoints;
             }
-            if (this.FontColor != Color.Black)
+            if (FontColor != Color.Black)
             {
-                pairs["fontcolor"] = this.FontColor;
+                pairs["fontcolor"] = FontColor;
             }
-            if (this.Shape != GraphvizVertexShape.Unspecified)
+            if (Shape != GraphvizVertexShape.Unspecified)
             {
-                pairs["shape"] = this.Shape;
+                pairs["shape"] = Shape;
             }
-            if (this.Style != GraphvizVertexStyle.Unspecified)
+            if (Style != GraphvizVertexStyle.Unspecified)
             {
-                pairs["style"] = this.Style;
+                pairs["style"] = Style;
             }
-            if (this.Shape == GraphvizVertexShape.Record)
+            if (Shape == GraphvizVertexShape.Record)
             {
-                pairs["label"] = this.Record;
+                pairs["label"] = Record;
             }
-            else if (this.Label != null)
+            else if (Label != null)
             {
-                pairs["label"] = this.Label;
+                pairs["label"] = Label;
             }
-            if (this.FixedSize)
+            if (FixedSize)
             {
                 pairs["fixedsize"] = true;
-                if (this.Size.Height > 0f)
+                if (Size.Height > 0f)
                 {
-                    pairs["height"] = this.Size.Height;
+                    pairs["height"] = Size.Height;
                 }
-                if (this.Size.Width > 0f)
+                if (Size.Width > 0f)
                 {
-                    pairs["width"] = this.Size.Width;
+                    pairs["width"] = Size.Width;
                 }
             }
-            if (this.StrokeColor != Color.Black)
+            if (StrokeColor != Color.Black)
             {
-                pairs["color"] = this.StrokeColor;
+                pairs["color"] = StrokeColor;
             }
-            if (this.FillColor != Color.White)
+            if (FillColor != Color.White)
             {
-                pairs["fillcolor"] = this.FillColor;
+                pairs["fillcolor"] = FillColor;
             }
-            if (this.Regular)
+            if (Regular)
             {
-                pairs["regular"] = this.Regular;
+                pairs["regular"] = Regular;
             }
-            if (this.Url != null)
+            if (Url != null)
             {
-                pairs["URL"] = this.Url;
+                pairs["URL"] = Url;
             }
-            if (this.ToolTip != null)
+            if (ToolTip != null)
             {
-                pairs["tooltip"] = this.ToolTip;
+                pairs["tooltip"] = ToolTip;
             }
-            if (this.Comment != null)
+            if (Comment != null)
             {
-                pairs["comment"] = this.Comment;
+                pairs["comment"] = Comment;
             }
-            if (this.Group != null)
+            if (Group != null)
             {
-                pairs["group"] = this.Group;
+                pairs["group"] = Group;
             }
-            if (this.Layer != null)
+            if (Layer != null)
             {
-                pairs["layer"] = this.Layer.Name;
+                pairs["layer"] = Layer.Name;
             }
-            if (this.Orientation > 0)
+            if (Orientation > 0)
             {
-                pairs["orientation"] = this.Orientation;
+                pairs["orientation"] = Orientation;
             }
-            if (this.Peripheries >= 0)
+            if (Peripheries >= 0)
             {
-                pairs["peripheries"] = this.Peripheries;
+                pairs["peripheries"] = Peripheries;
             }
-            if (this.Z > 0)
+            if (Z > 0)
             {
-                pairs["z"] = this.Z;
+                pairs["z"] = Z;
             }
-            if (this.position.HasValue)
+            if (position.HasValue)
             {
-                var p = this.position.Value;
+                var p = position.Value;
                 pairs["pos"] = string.Format("{0},{1}!", p.X, p.Y);
             }
-            if (((this.Style == GraphvizVertexStyle.Diagonals) || (this.Shape == GraphvizVertexShape.MCircle)) || ((this.Shape == GraphvizVertexShape.MDiamond) || (this.Shape == GraphvizVertexShape.MSquare)))
+            if (((Style == GraphvizVertexStyle.Diagonals) || (Shape == GraphvizVertexShape.MCircle)) || ((Shape == GraphvizVertexShape.MDiamond) || (Shape == GraphvizVertexShape.MSquare)))
             {
-                if (this.TopLabel != null)
+                if (TopLabel != null)
                 {
-                    pairs["toplabel"] = this.TopLabel;
+                    pairs["toplabel"] = TopLabel;
                 }
-                if (this.BottomLabel != null)
+                if (BottomLabel != null)
                 {
-                    pairs["bottomlable"] = this.BottomLabel;
+                    pairs["bottomlable"] = BottomLabel;
                 }
             }
-            if (this.Shape == GraphvizVertexShape.Polygon)
+            if (Shape == GraphvizVertexShape.Polygon)
             {
-                if (this.Sides != 0)
+                if (Sides != 0)
                 {
-                    pairs["sides"] = this.Sides;
+                    pairs["sides"] = Sides;
                 }
-                if (this.Skew != 0)
+                if (Skew != 0)
                 {
-                    pairs["skew"] = this.Skew;
+                    pairs["skew"] = Skew;
                 }
-                if (this.Distorsion != 0)
+                if (Distorsion != 0)
                 {
-                    pairs["distorsion"] = this.Distorsion;
+                    pairs["distorsion"] = Distorsion;
                 }
             }
 
@@ -212,24 +212,24 @@ namespace QuickGraph.Graphviz.Dot
 
         public override string ToString()
         {
-            return this.ToDot();
+            return ToDot();
         }
 
-        public System.Drawing.Point? Position
+        public Point? Position
         {
-            get { return this.position; }
-            set { this.position = value; }
+            get { return position; }
+            set { position = value; }
         }
 
         public string BottomLabel
         {
             get
             {
-                return this.bottomLabel;
+                return bottomLabel;
             }
             set
             {
-                this.bottomLabel = value;
+                bottomLabel = value;
             }
         }
 
@@ -237,11 +237,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.comment;
+                return comment;
             }
             set
             {
-                this.comment = value;
+                comment = value;
             }
         }
 
@@ -249,11 +249,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.distorsion;
+                return distorsion;
             }
             set
             {
-                this.distorsion = value;
+                distorsion = value;
             }
         }
 
@@ -261,11 +261,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.fillColor;
+                return fillColor;
             }
             set
             {
-                this.fillColor = value;
+                fillColor = value;
             }
         }
 
@@ -273,23 +273,23 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.fixedSize;
+                return fixedSize;
             }
             set
             {
-                this.fixedSize = value;
+                fixedSize = value;
             }
         }
 
-        public System.Drawing.Font Font
+        public Font Font
         {
             get
             {
-                return this.font;
+                return font;
             }
             set
             {
-                this.font = value;
+                font = value;
             }
         }
 
@@ -297,11 +297,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.fontColor;
+                return fontColor;
             }
             set
             {
-                this.fontColor = value;
+                fontColor = value;
             }
         }
 
@@ -309,11 +309,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.group;
+                return group;
             }
             set
             {
-                this.group = value;
+                group = value;
             }
         }
 
@@ -321,11 +321,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.label;
+                return label;
             }
             set
             {
-                this.label = value;
+                label = value;
             }
         }
 
@@ -333,11 +333,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.layer;
+                return layer;
             }
             set
             {
-                this.layer = value;
+                layer = value;
             }
         }
 
@@ -345,11 +345,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.orientation;
+                return orientation;
             }
             set
             {
-                this.orientation = value;
+                orientation = value;
             }
         }
 
@@ -357,11 +357,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.peripheries;
+                return peripheries;
             }
             set
             {
-                this.peripheries = value;
+                peripheries = value;
             }
         }
 
@@ -369,11 +369,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.record;
+                return record;
             }
             set
             {
-                this.record = value;
+                record = value;
             }
         }
 
@@ -381,11 +381,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.regular;
+                return regular;
             }
             set
             {
-                this.regular = value;
+                regular = value;
             }
         }
 
@@ -393,11 +393,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.shape;
+                return shape;
             }
             set
             {
-                this.shape = value;
+                shape = value;
             }
         }
 
@@ -405,11 +405,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.sides;
+                return sides;
             }
             set
             {
-                this.sides = value;
+                sides = value;
             }
         }
 
@@ -417,11 +417,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.size;
+                return size;
             }
             set
             {
-                this.size = value;
+                size = value;
             }
         }
 
@@ -429,11 +429,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.skew;
+                return skew;
             }
             set
             {
-                this.skew = value;
+                skew = value;
             }
         }
 
@@ -441,11 +441,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.strokeColor;
+                return strokeColor;
             }
             set
             {
-                this.strokeColor = value;
+                strokeColor = value;
             }
         }
 
@@ -453,11 +453,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.style;
+                return style;
             }
             set
             {
-                this.style = value;
+                style = value;
             }
         }
 
@@ -465,11 +465,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.toolTip;
+                return toolTip;
             }
             set
             {
-                this.toolTip = value;
+                toolTip = value;
             }
         }
 
@@ -477,11 +477,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.topLabel;
+                return topLabel;
             }
             set
             {
-                this.topLabel = value;
+                topLabel = value;
             }
         }
 
@@ -489,11 +489,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.url;
+                return url;
             }
             set
             {
-                this.url = value;
+                url = value;
             }
         }
 
@@ -501,11 +501,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.z;
+                return z;
             }
             set
             {
-                this.z = value;
+                z = value;
             }
         }
     }

@@ -20,11 +20,11 @@ namespace QuickGraph.Algorithms
             Contract.Requires(vertexFactory != null);
             Contract.Requires(edgeFactory != null);
 
-            this.VertexSetA = vertexSetA;
-            this.VertexSetB = vertexSetB;
-            this.VertexFactory = vertexFactory;
-            this.EdgeFactory = edgeFactory;
-            this.MatchedEdges = new List<TEdge>();
+            VertexSetA = vertexSetA;
+            VertexSetB = vertexSetB;
+            VertexFactory = vertexFactory;
+            EdgeFactory = edgeFactory;
+            MatchedEdges = new List<TEdge>();
         }
 
         public IEnumerable<TVertex> VertexSetA { get; private set; }
@@ -35,8 +35,8 @@ namespace QuickGraph.Algorithms
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
-            this.MatchedEdges.Clear();
+            var cancelManager = Services.CancelManager;
+            MatchedEdges.Clear();
 
             BipartiteToMaximumFlowGraphAugmentorAlgorithm<TVertex, TEdge> augmentor = null;
             ReversedEdgeAugmentorAlgorithm<TVertex, TEdge> reverser = null;
@@ -53,11 +53,11 @@ namespace QuickGraph.Algorithms
                 //augmenting graph
                 augmentor = new BipartiteToMaximumFlowGraphAugmentorAlgorithm<TVertex, TEdge>(
                     this,
-                    this.VisitedGraph,
-                    this.VertexSetA,
-                    this.VertexSetB,
-                    this.VertexFactory,
-                    this.EdgeFactory);
+                    VisitedGraph,
+                    VertexSetA,
+                    VertexSetB,
+                    VertexFactory,
+                    EdgeFactory);
                 augmentor.Compute();
 
                 if (cancelManager.IsCancelling)
@@ -67,11 +67,7 @@ namespace QuickGraph.Algorithms
 //                this.VisitedGraph.OpenAsDGML("afteraugment.dgml");
 //#endif
                 //adding reverse edges
-                reverser = new ReversedEdgeAugmentorAlgorithm<TVertex, TEdge>(
-                    this,
-                    this.VisitedGraph,
-                    this.EdgeFactory
-                    );
+                reverser = VisitedGraph.CreateReversedEdgeAugmentorAlgorithm(EdgeFactory, this);
                 reverser.AddReversedEdges();
                 if (cancelManager.IsCancelling)
                     return;
@@ -83,9 +79,9 @@ namespace QuickGraph.Algorithms
                 // compute maxflow
                 var flow = new EdmondsKarpMaximumFlowAlgorithm<TVertex, TEdge>(
                     this,
-                    this.VisitedGraph,
+                    VisitedGraph,
                     e => 1,
-                    this.EdgeFactory,
+                    EdgeFactory,
                     reverser
                     );
 
@@ -96,7 +92,7 @@ namespace QuickGraph.Algorithms
 
 
 
-                foreach (var edge in this.VisitedGraph.Edges)
+                foreach (var edge in VisitedGraph.Edges)
                 {
                     if (flow.ResidualCapacities[edge] == 0)
                     {
@@ -109,7 +105,7 @@ namespace QuickGraph.Algorithms
                             continue;
                         }
 
-                        this.MatchedEdges.Add(edge);
+                        MatchedEdges.Add(edge);
                     }
                 }
             }

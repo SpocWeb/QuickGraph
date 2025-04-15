@@ -22,16 +22,16 @@ namespace QuickGraph.Data
 
         public DataSet DataSet
         {
-            get { return this.dataSet; }
+            get { return dataSet; }
         }
 
         protected override void InternalCompute()
         {
-            foreach (DataTable table in this.DataSet.Tables)
-                this.VisitedGraph.AddVertex(table);
+            foreach (DataTable table in DataSet.Tables)
+                VisitedGraph.AddVertex(table);
 
-            foreach (DataRelation relation in this.DataSet.Relations)
-                this.VisitedGraph.AddEdge(new DataRelationEdge(relation));
+            foreach (DataRelation relation in DataSet.Relations)
+                VisitedGraph.AddEdge(new DataRelationEdge(relation));
         }
     }
 }

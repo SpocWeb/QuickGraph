@@ -31,12 +31,12 @@ namespace QuickGraph
             )
         {
             Contract.Requires(visitedGraph != null);
-            this.vertexOutEdges = new Dictionary<TVertex, TEdge[]>(visitedGraph.VertexCount);
-            this.edgeCount = visitedGraph.EdgeCount;
+            vertexOutEdges = new Dictionary<TVertex, TEdge[]>(visitedGraph.VertexCount);
+            edgeCount = visitedGraph.EdgeCount;
             foreach (var vertex in visitedGraph.Vertices)
             {
                 var outEdges = new List<TEdge>(visitedGraph.OutEdges(vertex));
-                this.vertexOutEdges.Add(vertex, outEdges.ToArray());
+                vertexOutEdges.Add(vertex, outEdges.ToArray());
             }
         }
 
@@ -57,13 +57,13 @@ namespace QuickGraph
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             TEdge edge;
-            return this.TryGetEdge(source, target, out edge);
+            return TryGetEdge(source, target, out edge);
         }
 
         public bool TryGetEdges(TVertex source, TVertex target, out IEnumerable<TEdge> edges)
         {
             TEdge[] es;
-            if (this.vertexOutEdges.TryGetValue(source, out es))
+            if (vertexOutEdges.TryGetValue(source, out es))
             {
                 List<TEdge> _edges = null;
                 for (int i = 0; i < es.Length; i++)
@@ -87,7 +87,7 @@ namespace QuickGraph
         public bool TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
             TEdge[] edges;
-            if (this.vertexOutEdges.TryGetValue(source, out edges) &&
+            if (vertexOutEdges.TryGetValue(source, out edges) &&
                 edges != null)
             {
                 for (int i = 0; i < edges.Length; i++)
@@ -109,13 +109,13 @@ namespace QuickGraph
         #region IImplicitGraph<TVertex,TEdge> Members
         public bool IsOutEdgesEmpty(TVertex v)
         {
-            return this.OutDegree(v) == 0;
+            return OutDegree(v) == 0;
         }
 
         public int OutDegree(TVertex v)
         {
             TEdge[] edges;
-            if (this.vertexOutEdges.TryGetValue(v, out edges) &&
+            if (vertexOutEdges.TryGetValue(v, out edges) &&
                 edges != null)
                 return edges.Length;
             return 0;
@@ -124,7 +124,7 @@ namespace QuickGraph
         public IEnumerable<TEdge> OutEdges(TVertex v)
         {
             TEdge[] edges;
-            if (this.vertexOutEdges.TryGetValue(v, out edges) &&
+            if (vertexOutEdges.TryGetValue(v, out edges) &&
                 edges != null)
                 return edges;
 
@@ -134,7 +134,7 @@ namespace QuickGraph
         public bool TryGetOutEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             TEdge[] aedges;
-            if (this.vertexOutEdges.TryGetValue(v, out aedges) &&
+            if (vertexOutEdges.TryGetValue(v, out aedges) &&
                 aedges != null)
             {
                 edges = aedges;
@@ -147,7 +147,7 @@ namespace QuickGraph
 
         public TEdge OutEdge(TVertex v, int index)
         {
-            return this.vertexOutEdges[v][index];
+            return vertexOutEdges[v][index];
         }
         #endregion
 
@@ -166,26 +166,26 @@ namespace QuickGraph
         #region IImplicitVertexSet<TVertex> Members
         public bool ContainsVertex(TVertex vertex)
         {
-            return this.vertexOutEdges.ContainsKey(vertex);
+            return vertexOutEdges.ContainsKey(vertex);
         }
         #endregion
 
         #region IVertexSet<TVertex> Members
         public bool IsVerticesEmpty
         {
-            get { return this.vertexOutEdges.Count == 0; }
+            get { return vertexOutEdges.Count == 0; }
         }
 
         public int VertexCount
         {
-            get { return this.vertexOutEdges.Count; }
+            get { return vertexOutEdges.Count; }
         }
 
         public IEnumerable<TVertex> Vertices
         {
             get 
             {
-                return this.vertexOutEdges.Keys;
+                return vertexOutEdges.Keys;
             }
         }
         #endregion
@@ -193,19 +193,19 @@ namespace QuickGraph
         #region IEdgeSet<TVertex,TEdge> Members
         public bool IsEdgesEmpty
         {
-            get { return this.edgeCount == 0; }
+            get { return edgeCount == 0; }
         }
 
         public int EdgeCount
         {
-            get { return this.edgeCount; }
+            get { return edgeCount; }
         }
 
         public IEnumerable<TEdge> Edges
         {
             get             
             { 
-                foreach(var edges in this.vertexOutEdges.Values)
+                foreach(var edges in vertexOutEdges.Values)
                     if (edges != null)
                         for (int i = 0; i < edges.Length; i++)
                             yield return edges[i];
@@ -215,7 +215,7 @@ namespace QuickGraph
         public bool ContainsEdge(TEdge edge)
         {
             TEdge[] edges;
-            if (this.vertexOutEdges.TryGetValue(edge.Source, out edges) &&
+            if (vertexOutEdges.TryGetValue(edge.Source, out edges) &&
                 edges != null)
                 for (int i = 0; i < edges.Length; i++)
                     if (edges[i].Equals(edge))
@@ -237,7 +237,7 @@ namespace QuickGraph
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 #endif
         #endregion

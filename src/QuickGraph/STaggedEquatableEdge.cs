@@ -32,37 +32,37 @@ namespace QuickGraph
             this.source = source;
             this.target = target;
             this.tag = tag;
-            this.TagChanged = null;
+            TagChanged = null;
         }
 
         public TVertex Source
         {
-            get { return this.source; }
+            get { return source; }
         }
 
         public TVertex Target
         {
-            get { return this.target; }
+            get { return target; }
         }
 
         public event EventHandler TagChanged;
 
         void OnTagChanged(EventArgs e)
         {
-            var eh = this.TagChanged;
+            var eh = TagChanged;
             if (eh != null)
                 eh(this, e);
         }
 
         public TTag Tag
         {
-            get { return this.tag; }
+            get { return tag; }
             set
             {
-                if (!object.Equals(this.tag, value))
+                if (!Equals(tag, value))
                 {
-                    this.tag = value;
-                    this.OnTagChanged(EventArgs.Empty);
+                    tag = value;
+                    OnTagChanged(EventArgs.Empty);
                 }
             }
         }
@@ -77,8 +77,8 @@ namespace QuickGraph
         {
             return string.Format(
                 EdgeExtensions.EdgeFormatString,
-                this.Source,
-                this.Target);
+                Source,
+                Target);
         }
 
         /// <summary>
@@ -92,13 +92,13 @@ namespace QuickGraph
         {
             Contract.Ensures(
                 Contract.Result<bool>() ==
-                (this.Source.Equals(other.Source) &&
-                this.Target.Equals(other.Target))
+                (Source.Equals(other.Source) &&
+                Target.Equals(other.Target))
                 );
 
             return
-                this.source.Equals(other.source) &&
-                this.target.Equals(other.target);
+                source.Equals(other.source) &&
+                target.Equals(other.target);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace QuickGraph
         {
             return
                 obj is STaggedEquatableEdge<TVertex,TTag> edge &&
-                this.Equals(edge);
+                Equals(edge);
         }
 
         /// <summary>
@@ -124,8 +124,8 @@ namespace QuickGraph
         public override int GetHashCode()
         {
             return HashCodeHelper.Combine(
-                this.source.GetHashCode(),
-                this.target.GetHashCode());
+                source.GetHashCode(),
+                target.GetHashCode());
         }
     }
 }

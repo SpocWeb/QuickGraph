@@ -14,7 +14,7 @@ namespace QuickGraph
 
         public TVertex Vertex
         {
-            get { return this.vertex; }
+            get { return vertex; }
         }
     }
 

@@ -23,14 +23,14 @@ namespace QuickGraph
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             TEdge edge;
-            return this.TryGetEdge(source, target, out edge);
+            return TryGetEdge(source, target, out edge);
         }
 
         public bool TryGetEdges(TVertex source, TVertex target, out IEnumerable<TEdge> edges)
         {
             IEnumerable<TEdge> outEdges;
             List<TEdge> result = null;
-            if (this.TryGetOutEdges(source, out outEdges))
+            if (TryGetOutEdges(source, out outEdges))
                 foreach (var e in outEdges)
                     if (e.Target.Equals(target))
                     {
@@ -46,7 +46,7 @@ namespace QuickGraph
         public bool TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
             IEnumerable<TEdge> edges;
-            if (this.TryGetOutEdges(source, out edges))
+            if (TryGetOutEdges(source, out edges))
                 foreach (var e in edges)
                     if (e.Target.Equals(target))
                     {

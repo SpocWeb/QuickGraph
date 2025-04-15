@@ -25,11 +25,11 @@ namespace QuickGraph.Algorithms.RandomWalks
 		{
 			get
 			{
-				return this.factor;
+				return factor;
 			}
             set 
             {
-                this.factor = value;
+                factor = value;
             }
 		}
 
@@ -41,17 +41,17 @@ namespace QuickGraph.Algorithms.RandomWalks
                 double outWeight = GetOutWeight(g, u);
                 // get succesor
                 TEdge s;
-                if (this.TryGetSuccessor(g, u, this.Rand.NextDouble() * outWeight, out s))
+                if (TryGetSuccessor(g, u, Rand.NextDouble() * outWeight, out s))
                 {
                     // update probabilities
-                    this.Weights[s] *= this.Factor;
+                    Weights[s] *= Factor;
 
                     // normalize
                     foreach (TEdge e in g.OutEdges(u))
                     {
                         checked
                         {
-                            this.Weights[e] /= outWeight;
+                            Weights[e] /= outWeight;
                         }
                     }
 
@@ -67,20 +67,20 @@ namespace QuickGraph.Algorithms.RandomWalks
         public override bool TryGetSuccessor(IEnumerable<TEdge> edges, TVertex u, out TEdge successor)
         {
             // get outweight
-            double outWeight = this.GetWeights(edges);
+            double outWeight = GetWeights(edges);
             // get succesor
             TEdge s;
-            if (this.TryGetSuccessor(edges, this.Rand.NextDouble() * outWeight, out s))
+            if (TryGetSuccessor(edges, Rand.NextDouble() * outWeight, out s))
             {
                 // update probabilities
-                this.Weights[s] *= this.Factor;
+                Weights[s] *= Factor;
 
                 // normalize
                 foreach (var e in edges)
                 {
                     checked
                     {
-                        this.Weights[e] /= outWeight;
+                        Weights[e] /= outWeight;
                     }
                 }
 

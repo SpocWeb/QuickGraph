@@ -17,7 +17,7 @@ namespace QuickGraph.Algorithms.Condensation
 
         public IList<TEdge> Edges
         {
-            get { return this.edges; }
+            get { return edges; }
         }
 
         public static MergedEdge<TVertex, TEdge> Merge(

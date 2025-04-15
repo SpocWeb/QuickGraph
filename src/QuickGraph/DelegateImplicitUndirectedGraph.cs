@@ -28,48 +28,48 @@ namespace QuickGraph
         {
             Contract.Requires(tryGetAdjacenyEdges != null);
 
-            this.tryGetAdjacentEdges = tryGetAdjacenyEdges;
+            tryGetAdjacentEdges = tryGetAdjacenyEdges;
             this.allowParallelEdges = allowParallelEdges;
         }
 
         public EdgeEqualityComparer<TVertex, TEdge> EdgeEqualityComparer
         {
-            get { return this.edgeEquality; }
+            get { return edgeEquality; }
         }
 
         public TryFunc<TVertex, IEnumerable<TEdge>> TryGetAdjacencyEdgesFunc
         {
-            get { return this.tryGetAdjacentEdges; }
+            get { return tryGetAdjacentEdges; }
         }
 
         public bool IsAdjacentEdgesEmpty(TVertex v)
         {
-            foreach (var edge in this.AdjacentEdges(v))
+            foreach (var edge in AdjacentEdges(v))
                 return false;
             return true;
         }
 
         public int AdjacentDegree(TVertex v)
         {
-            return this.AdjacentEdges(v).Count();
+            return AdjacentEdges(v).Count();
         }
 
         public IEnumerable<TEdge> AdjacentEdges(TVertex v)
         {
             IEnumerable<TEdge> result;
-            if (!this.tryGetAdjacentEdges(v, out result))
+            if (!tryGetAdjacentEdges(v, out result))
                 return Enumerable.Empty<TEdge>();
             return result;
         }
 
         public bool TryGetAdjacentEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
-            return this.tryGetAdjacentEdges(v, out edges);
+            return tryGetAdjacentEdges(v, out edges);
         }
 
         public TEdge AdjacentEdge(TVertex v, int index)
         {
-            return this.AdjacentEdges(v).ElementAt(index);
+            return AdjacentEdges(v).ElementAt(index);
         }
 
         public bool IsDirected
@@ -79,22 +79,22 @@ namespace QuickGraph
 
         public bool AllowParallelEdges
         {
-            get { return this.allowParallelEdges; }
+            get { return allowParallelEdges; }
         }
 
         public bool ContainsVertex(TVertex vertex)
         {
             IEnumerable<TEdge> edges;
             return
-                this.tryGetAdjacentEdges(vertex, out edges);
+                tryGetAdjacentEdges(vertex, out edges);
         }
 
         public bool TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
             IEnumerable<TEdge> edges;
-            if (this.TryGetAdjacentEdges(source, out edges))
+            if (TryGetAdjacentEdges(source, out edges))
                 foreach (var e in edges)
-                    if (this.edgeEquality(e, source, target))
+                    if (edgeEquality(e, source, target))
                     {
                         edge = e;
                         return true;
@@ -107,7 +107,7 @@ namespace QuickGraph
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             TEdge edge;
-            return this.TryGetEdge(source, target, out edge);
+            return TryGetEdge(source, target, out edge);
         }
     }
 }

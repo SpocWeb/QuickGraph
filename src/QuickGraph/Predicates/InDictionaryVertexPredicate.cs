@@ -23,7 +23,7 @@ namespace QuickGraph.Predicates
         {
             Contract.Requires(v != null);
 
-            return this.dictionary.ContainsKey(v);
+            return dictionary.ContainsKey(v);
         }
     }
 }

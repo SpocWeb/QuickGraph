@@ -20,7 +20,7 @@ namespace QuickGraph.Predicates
 
         public bool Test(TVertex v)
         {
-            return this.visitedGraph.IsOutEdgesEmpty(v);
+            return visitedGraph.IsOutEdgesEmpty(v);
         }
     }
 }

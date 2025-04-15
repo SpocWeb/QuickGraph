@@ -46,51 +46,51 @@ namespace QuickGraph.Algorithms.ShortestPath
         {
             get
             {
-                return this.vertexColors;
+                return vertexColors;
             }
         }
 
         public GraphColor GetVertexColor(TVertex vertex)
         {
-            Contract.Assert(this.distances != null);
+            Contract.Assert(distances != null);
 
             return
-                this.vertexColors[vertex];
+                vertexColors[vertex];
         }
 
         public bool TryGetDistance(TVertex vertex, out double distance)
         {
             Contract.Requires(vertex != null);
-            Contract.Assert(this.distances != null);
+            Contract.Assert(distances != null);
 
-            return this.distances.TryGetValue(vertex, out distance);
+            return distances.TryGetValue(vertex, out distance);
         }
 
         public Dictionary<TVertex, double> Distances
         {
-            get { return this.distances; }
+            get { return distances; }
         }
 
         protected Func<TVertex, double> DistancesIndexGetter()
         {
-            return AlgorithmExtensions.GetIndexer(this.distances);
+            return AlgorithmExtensions.GetIndexer(distances);
         }
 
         public Func<TEdge, double> Weights
         {
-            get { return this.weights; }
+            get { return weights; }
         }
 
         public IDistanceRelaxer DistanceRelaxer
         {
-            get { return this.distanceRelaxer; }
+            get { return distanceRelaxer; }
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-            this.vertexColors = new Dictionary<TVertex, GraphColor>(this.VisitedGraph.VertexCount);
-            this.distances = new Dictionary<TVertex, double>(this.VisitedGraph.VertexCount);
+            vertexColors = new Dictionary<TVertex, GraphColor>(VisitedGraph.VertexCount);
+            distances = new Dictionary<TVertex, double>(VisitedGraph.VertexCount);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         /// <param name="e">edge that raised the event</param>
         protected virtual void OnTreeEdge(TEdge e)
         {
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(e);
         }
@@ -117,15 +117,15 @@ namespace QuickGraph.Algorithms.ShortestPath
 
             var source = e.Source;
             var target = e.Target;
-            double du = this.distances[source];
-            double dv = this.distances[target];
-            double we = this.Weights(e);
+            double du = distances[source];
+            double dv = distances[target];
+            double we = Weights(e);
 
-            var relaxer = this.DistanceRelaxer;
+            var relaxer = DistanceRelaxer;
             var duwe = relaxer.Combine(du, we);
             if (relaxer.Compare(duwe, dv) < 0)
             {
-                this.distances[target] = duwe;
+                distances[target] = duwe;
                 return true;
             }
             else

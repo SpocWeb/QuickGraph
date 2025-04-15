@@ -47,18 +47,18 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             Contract.Requires(components != null);
 
             this.components = components;
-            this.roots = new Dictionary<TVertex, TVertex>();
-            this.discoverTimes = new Dictionary<TVertex, int>();
-            this.stack = new Stack<TVertex>();
-            this.componentCount = 0;
-            this.dfsTime = 0;
+            roots = new Dictionary<TVertex, TVertex>();
+            discoverTimes = new Dictionary<TVertex, int>();
+            stack = new Stack<TVertex>();
+            componentCount = 0;
+            dfsTime = 0;
         }
 
         public IDictionary<TVertex, int> Components
         {
             get
             {
-                return this.components;
+                return components;
             }
         }
 
@@ -66,7 +66,7 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             get
             {
-                return this.roots;
+                return roots;
             }
         }
 
@@ -74,7 +74,7 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             get
             {
-                return this.discoverTimes;
+                return discoverTimes;
             }
         }
 
@@ -82,7 +82,7 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             get
             {
-                return this.componentCount;
+                return componentCount;
             }
         }
 
@@ -90,7 +90,7 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             get
             {
-                return this.vertices;
+                return vertices;
             }
         }
 
@@ -111,27 +111,27 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 
         private void DiscoverVertex(TVertex v)
         {
-            this.Roots[v] = v;
-            this.Components[v] = int.MaxValue;
+            Roots[v] = v;
+            Components[v] = int.MaxValue;
 
             // this.diffBySteps[step] = componentCount;
-            this.diffBySteps.Add(componentCount);
-            this.vertices.Add(v);
-            this.step++;
+            diffBySteps.Add(componentCount);
+            vertices.Add(v);
+            step++;
 
-            this.DiscoverTimes[v] = dfsTime++;
-            this.stack.Push(v);
+            DiscoverTimes[v] = dfsTime++;
+            stack.Push(v);
         }
 
         private void FinishVertex(TVertex v)
         {
-            var roots = this.Roots;
+            var roots = Roots;
 
-            foreach (var e in this.VisitedGraph.OutEdges(v))
+            foreach (var e in VisitedGraph.OutEdges(v))
             {
                 var w = e.Target;
-                if (this.Components[w] == int.MaxValue)
-                    roots[v] = this.MinDiscoverTime(roots[v], roots[w]);
+                if (Components[w] == int.MaxValue)
+                    roots[v] = MinDiscoverTime(roots[v], roots[w]);
             }
 
             if (this.roots[v].Equals(v))
@@ -139,13 +139,13 @@ namespace QuickGraph.Algorithms.ConnectedComponents
                 var w = default(TVertex);
                 do
                 {
-                    w = this.stack.Pop();
-                    this.Components[w] = componentCount;
+                    w = stack.Pop();
+                    Components[w] = componentCount;
 
 
-                    this.diffBySteps.Add(componentCount);
-                    this.vertices.Add(w);
-                    this.step++;
+                    diffBySteps.Add(componentCount);
+                    vertices.Add(w);
+                    step++;
                 }
                 while (!w.Equals(v));
                 ++componentCount;
@@ -157,12 +157,12 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             Contract.Requires(u != null);
             Contract.Requires(v != null);
-            Contract.Ensures(this.DiscoverTimes[u] < this.DiscoverTimes[v]
+            Contract.Ensures(DiscoverTimes[u] < DiscoverTimes[v]
                 ? Contract.Result<TVertex>().Equals(u)
                 : Contract.Result<TVertex>().Equals(v)
                 );
 
-            TVertex minVertex = this.discoverTimes[u] < this.discoverTimes[v] ? u : v;
+            TVertex minVertex = discoverTimes[u] < discoverTimes[v] ? u : v;
             return minVertex;
         }
 
@@ -199,21 +199,21 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 
         protected override void InternalCompute()
         {
-            Contract.Ensures(this.ComponentCount >= 0);
-            Contract.Ensures(this.VisitedGraph.VertexCount == 0 || this.ComponentCount > 0);
-            Contract.Ensures(this.VisitedGraph.Vertices.All(v => this.Components.ContainsKey(v)));
-            Contract.Ensures(this.VisitedGraph.VertexCount == this.Components.Count);
-            Contract.Ensures(this.Components.Values.All(c => c <= this.ComponentCount));
+            Contract.Ensures(ComponentCount >= 0);
+            Contract.Ensures(VisitedGraph.VertexCount == 0 || ComponentCount > 0);
+            Contract.Ensures(VisitedGraph.Vertices.All(v => Components.ContainsKey(v)));
+            Contract.Ensures(VisitedGraph.VertexCount == Components.Count);
+            Contract.Ensures(Components.Values.All(c => c <= ComponentCount));
 
             diffBySteps = new List<int>();
             vertices = new List<TVertex>();
 
-            this.Components.Clear();
-            this.Roots.Clear();
-            this.DiscoverTimes.Clear();
-            this.stack.Clear();
-            this.componentCount = 0;
-            this.dfsTime = 0;
+            Components.Clear();
+            Roots.Clear();
+            DiscoverTimes.Clear();
+            stack.Clear();
+            componentCount = 0;
+            dfsTime = 0;
 
             DepthFirstSearchAlgorithm<TVertex, TEdge> dfs = null;
             try
@@ -221,7 +221,7 @@ namespace QuickGraph.Algorithms.ConnectedComponents
                 dfs = new DepthFirstSearchAlgorithm<TVertex, TEdge>(
                     this,
                     VisitedGraph,
-                    new Dictionary<TVertex, GraphColor>(this.VisitedGraph.VertexCount)
+                    new Dictionary<TVertex, GraphColor>(VisitedGraph.VertexCount)
                     );
                 dfs.DiscoverVertex += DiscoverVertex;
                 dfs.FinishVertex += FinishVertex;

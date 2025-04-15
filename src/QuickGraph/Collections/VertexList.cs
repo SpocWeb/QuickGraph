@@ -31,7 +31,7 @@ namespace QuickGraph.Collections
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 #endif
     }

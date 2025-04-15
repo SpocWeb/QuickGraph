@@ -23,14 +23,14 @@ namespace QuickGraph.Algorithms.TopologicalSort
             )
             : base(visitedGraph)
         {
-            this.heap = new BinaryQueue<TVertex, int>(e => this.degrees[e]);
+            heap = new BinaryQueue<TVertex, int>(e => degrees[e]);
         }
 
         public ICollection<TVertex> SortedVertices
         {
             get
             {
-                return this.sortedVertices;
+                return sortedVertices;
             }
         }
 
@@ -38,7 +38,7 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             get
             {
-                return this.heap;
+                return heap;
             }
         }
 
@@ -46,15 +46,15 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             get
             {
-                return this.degrees;
+                return degrees;
             }
         }
 
 
         public bool AllowCyclicGraph
         {
-            get { return this.allowCyclicGraph; }
-            set { this.allowCyclicGraph = value; }
+            get { return allowCyclicGraph; }
+            set { allowCyclicGraph = value; }
         }
 
         public event VertexAction<TVertex> AddVertex;
@@ -69,48 +69,48 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             Contract.Requires(vertices != null);
 
-            this.sortedVertices = vertices;
+            sortedVertices = vertices;
             Compute();
         }
 
 
         protected override void InternalCompute()
         {
-            this.InitializeInDegrees();
-            var cancelManager = this.Services.CancelManager;
+            InitializeInDegrees();
+            var cancelManager = Services.CancelManager;
 
-            while (this.heap.Count != 0)
+            while (heap.Count != 0)
             {
                 if (cancelManager.IsCancelling) return;
 
-                TVertex v = this.heap.Dequeue();
-                if (this.degrees[v] != 0 && !this.AllowCyclicGraph)
+                TVertex v = heap.Dequeue();
+                if (degrees[v] != 0 && !AllowCyclicGraph)
                     throw new NonAcyclicGraphException();
 
-                this.sortedVertices.Add(v);
-                this.OnAddVertex(v);
+                sortedVertices.Add(v);
+                OnAddVertex(v);
 
                 // update the count of it's adjacent vertices
-                foreach (var e in this.VisitedGraph.AdjacentEdges(v))
+                foreach (var e in VisitedGraph.AdjacentEdges(v))
                 {
                     if (e.Source.Equals(e.Target))
                         continue;
 
-                    this.degrees[e.Target]--;
-                    if (this.degrees[e.Target] < 0 && !this.AllowCyclicGraph)
+                    degrees[e.Target]--;
+                    if (degrees[e.Target] < 0 && !AllowCyclicGraph)
                         throw new InvalidOperationException("Degree is negative, and cannot be");
-                    if (this.heap.Contains(e.Target))
-                        this.heap.Update(e.Target);
+                    if (heap.Contains(e.Target))
+                        heap.Update(e.Target);
                 }
             }
         }
 
         private void InitializeInDegrees()
         {
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
-                this.degrees.Add(v, this.VisitedGraph.AdjacentDegree(v));
-                this.heap.Enqueue(v);
+                degrees.Add(v, VisitedGraph.AdjacentDegree(v));
+                heap.Enqueue(v);
             }
         }
     }

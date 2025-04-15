@@ -29,37 +29,37 @@ namespace QuickGraph
 
         public TryFunc<TVertex, IEnumerable<TEdge>> TryGetOutEdgesFunc
         {
-            get { return this.tryGetOutEdges; }
+            get { return tryGetOutEdges; }
         }
 
         public bool IsOutEdgesEmpty(TVertex v)
         {
-            foreach (var edge in this.OutEdges(v))
+            foreach (var edge in OutEdges(v))
                 return false;
             return true;
         }
 
         public int OutDegree(TVertex v)
         {
-            return this.OutEdges(v).Count();
+            return OutEdges(v).Count();
         }
 
         public IEnumerable<TEdge> OutEdges(TVertex v)
         {
             IEnumerable<TEdge> result;
-            if (!this.tryGetOutEdges(v, out result))
+            if (!tryGetOutEdges(v, out result))
                 return Enumerable.Empty<TEdge>();
             return result;
         }
 
         public bool TryGetOutEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
-            return this.tryGetOutEdges(v, out edges);
+            return tryGetOutEdges(v, out edges);
         }
 
         public TEdge OutEdge(TVertex v, int index)
         {
-            return this.OutEdges(v).ElementAt(index);
+            return OutEdges(v).ElementAt(index);
         }
 
         public bool IsDirected
@@ -76,7 +76,7 @@ namespace QuickGraph
         {
             IEnumerable<TEdge> edges;
             return
-                this.tryGetOutEdges(vertex, out edges);
+                tryGetOutEdges(vertex, out edges);
         }
     }
 }

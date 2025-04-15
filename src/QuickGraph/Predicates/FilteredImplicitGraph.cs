@@ -24,15 +24,15 @@ namespace QuickGraph.Predicates
         [Pure]
         public bool IsOutEdgesEmpty(TVertex v)
         {
-            return this.OutDegree(v) == 0;
+            return OutDegree(v) == 0;
         }
 
         [Pure]
         public int OutDegree(TVertex v)
         {
             int count =0;
-            foreach (var edge in this.BaseGraph.OutEdges(v))
-                if (this.TestEdge(edge))
+            foreach (var edge in BaseGraph.OutEdges(v))
+                if (TestEdge(edge))
                     count++;
             return count;
         }
@@ -40,8 +40,8 @@ namespace QuickGraph.Predicates
         [Pure]
         public IEnumerable<TEdge> OutEdges(TVertex v)
         {
-            foreach (var edge in this.BaseGraph.OutEdges(v))
-                if (this.TestEdge(edge))
+            foreach (var edge in BaseGraph.OutEdges(v))
+                if (TestEdge(edge))
                     yield return edge;
         }
 
@@ -49,13 +49,13 @@ namespace QuickGraph.Predicates
         public bool TryGetOutEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             IEnumerable<TEdge> baseEdges;
-            if (!this.BaseGraph.TryGetOutEdges(v, out baseEdges))
+            if (!BaseGraph.TryGetOutEdges(v, out baseEdges))
             {
                 edges = null;
                 return false;
             }
 
-            edges = this.OutEdges(v);
+            edges = OutEdges(v);
             return true;
         }
 

@@ -20,14 +20,14 @@ namespace QuickGraph.Predicates
 		{
 			get
 			{
-				return this.residualCapacities;
+				return residualCapacities;
 			}
 		}
 
 		public bool Test(TEdge e)
 		{
             Contract.Requires(e != null);
-			return 0 < this.residualCapacities[e];
+			return 0 < residualCapacities[e];
 		}
     }
 }

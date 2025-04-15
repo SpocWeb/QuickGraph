@@ -33,10 +33,10 @@ namespace QuickGraph
             Contract.Requires(target != null);
             Contract.Requires(sourceTerminal >= 0);
             Contract.Requires(targetTerminal >= 0);
-            Contract.Ensures(this.Source.Equals(source));
-            Contract.Ensures(this.Target.Equals(target));
-            Contract.Ensures(this.SourceTerminal.Equals(sourceTerminal));
-            Contract.Ensures(this.TargetTerminal.Equals(targetTerminal));
+            Contract.Ensures(Source.Equals(source));
+            Contract.Ensures(Target.Equals(target));
+            Contract.Ensures(SourceTerminal.Equals(sourceTerminal));
+            Contract.Ensures(TargetTerminal.Equals(targetTerminal));
 
             this.source = source;
             this.target = target;
@@ -60,7 +60,7 @@ namespace QuickGraph
         /// <value></value>
         public TVertex Source
         {
-            get { return this.source; }
+            get { return source; }
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace QuickGraph
         /// <value></value>
         public TVertex Target
         {
-            get { return this.target; }
+            get { return target; }
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace QuickGraph
         /// </summary>
         public int SourceTerminal
         {
-            get { return this.sourceTerminal; }
+            get { return sourceTerminal; }
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace QuickGraph
         /// </summary>
         public int TargetTerminal
         {
-            get { return this.targetTerminal; }
+            get { return targetTerminal; }
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace QuickGraph
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0} ({1}) -> {2} ({3})", this.Source, this.SourceTerminal, this.Target, this.TargetTerminal);
+            return string.Format("{0} ({1}) -> {2} ({3})", Source, SourceTerminal, Target, TargetTerminal);
         }
     }
 }

@@ -151,12 +151,12 @@ namespace QuickGraph.Algorithms
 
         public Letter(char letter)
         {
-            this.Char = letter;
+            Char = letter;
         }
 
         public override string ToString()
         {
-            return this.Char.ToString();
+            return Char.ToString();
         }
 
     }

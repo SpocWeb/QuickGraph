@@ -25,30 +25,30 @@ namespace QuickGraph.Algorithms.Condensation
             CondensedEdge<TVertex, TEdge,TGraph>
             > CondensedGraph
         {
-            get { return this.condensedGraph; }
+            get { return condensedGraph; }
         }
 
         public bool StronglyConnected
         {
-            get { return this.stronglyConnected; }
-            set { this.stronglyConnected = value; }
+            get { return stronglyConnected; }
+            set { stronglyConnected = value; }
         }
 
         protected override void InternalCompute()
         {
             // create condensated graph
-            this.condensedGraph = new BidirectionalGraph<
+            condensedGraph = new BidirectionalGraph<
                 TGraph,
                 CondensedEdge<TVertex, TEdge, TGraph>
                 >(false);
-            if (this.VisitedGraph.VertexCount == 0)
+            if (VisitedGraph.VertexCount == 0)
                 return;
 
             // compute strongly connected components
-            var components = new Dictionary<TVertex, int>(this.VisitedGraph.VertexCount);
+            var components = new Dictionary<TVertex, int>(VisitedGraph.VertexCount);
             int componentCount = ComputeComponentCount(components);
 
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             if (cancelManager.IsCancelling) return;
 
             // create list vertices
@@ -57,11 +57,11 @@ namespace QuickGraph.Algorithms.Condensation
             {
                 TGraph v = new TGraph();
                 condensatedVertices.Add(i, v);
-                this.condensedGraph.AddVertex(v);
+                condensedGraph.AddVertex(v);
             }
 
             // addingvertices
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
                 condensatedVertices[components[v]].AddVertex(v);
             }
@@ -71,7 +71,7 @@ namespace QuickGraph.Algorithms.Condensation
             var condensatedEdges = new Dictionary<EdgeKey, CondensedEdge<TVertex, TEdge, TGraph>>(componentCount);
 
             // iterate over edges and condensate graph
-            foreach (var edge in this.VisitedGraph.Edges)
+            foreach (var edge in VisitedGraph.Edges)
             {
                 // get component ids
                 int sourceID = components[edge.Source];
@@ -94,7 +94,7 @@ namespace QuickGraph.Algorithms.Condensation
 
                     condensatedEdge = new CondensedEdge<TVertex, TEdge, TGraph>(sources, targets);
                     condensatedEdges.Add(edgeKey, condensatedEdge);
-                    this.condensedGraph.AddEdge(condensatedEdge);
+                    condensedGraph.AddEdge(condensatedEdge);
                 }
                 condensatedEdge.Edges.Add(edge);
             }
@@ -103,15 +103,15 @@ namespace QuickGraph.Algorithms.Condensation
         private int ComputeComponentCount(Dictionary<TVertex, int> components)
         {
             IConnectedComponentAlgorithm<TVertex, TEdge, IVertexListGraph<TVertex, TEdge>> componentAlgorithm;
-            if (this.StronglyConnected)
+            if (StronglyConnected)
                 componentAlgorithm = new StronglyConnectedComponentsAlgorithm<TVertex, TEdge>(
                     this,
-                    this.VisitedGraph,
+                    VisitedGraph,
                     components);
             else
                 componentAlgorithm = new WeaklyConnectedComponentsAlgorithm<TVertex, TEdge>(
                     this,
-                    this.VisitedGraph,
+                    VisitedGraph,
                     components);
             componentAlgorithm.Compute();
             return componentAlgorithm.ComponentCount;
@@ -143,7 +143,7 @@ namespace QuickGraph.Algorithms.Condensation
 
             public override int GetHashCode()
             {
-                return HashCodeHelper.Combine(this.SourceID, this.TargetID);
+                return HashCodeHelper.Combine(SourceID, TargetID);
             }
         }
     }

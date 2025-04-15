@@ -19,47 +19,47 @@ namespace QuickGraph.Petri
 
         private PetriNet(PetriNet<Token> other)
         {
-            this.places.AddRange(other.places);
-            this.transitions.AddRange(other.transitions);
-            this.arcs.AddRange(other.arcs);
-            this.graph = new PetriGraph<Token>();
-            this.graph.AddVerticesAndEdgeRange(other.graph.Edges);
+            places.AddRange(other.places);
+            transitions.AddRange(other.transitions);
+            arcs.AddRange(other.arcs);
+            graph = new PetriGraph<Token>();
+            graph.AddVerticesAndEdgeRange(other.graph.Edges);
         }
 
 		public IPetriGraph<Token> Graph
 		{
 			get
 			{
-				return this.graph;
+				return graph;
 			}
 		}
 
 		public IPlace<Token> AddPlace(string name)
 		{
 			IPlace<Token> p = new Place<Token>(name);
-			this.places.Add(p);
-			this.graph.AddVertex(p);
+			places.Add(p);
+			graph.AddVertex(p);
 			return p;
 		}
 		public ITransition<Token> AddTransition(string name)
 		{
 			ITransition<Token> tr = new Transition<Token>(name);
-			this.transitions.Add(tr);
-			this.graph.AddVertex(tr);
+			transitions.Add(tr);
+			graph.AddVertex(tr);
 			return tr;
 		}
 		public IArc<Token> AddArc(IPlace<Token> place, ITransition<Token> transition)
 		{
             IArc<Token> arc = new Arc<Token>(place, transition);
-            this.arcs.Add(arc);
-			this.graph.AddEdge(arc);
+            arcs.Add(arc);
+			graph.AddEdge(arc);
 			return arc;
 		}
 		public IArc<Token> AddArc(ITransition<Token> transition,IPlace<Token> place)
 		{
 			IArc<Token> arc=new Arc<Token>(transition,place);
-			this.arcs.Add(arc);
-			this.graph.AddEdge(arc);
+			arcs.Add(arc);
+			graph.AddEdge(arc);
 			return arc;
 		}
 
@@ -67,7 +67,7 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.places;
+				return places;
 			}
 		}
 
@@ -75,7 +75,7 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.transitions;
+				return transitions;
 			}
 		}
 
@@ -83,7 +83,7 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.arcs;
+				return arcs;
 			}
 		}
 
@@ -91,20 +91,20 @@ namespace QuickGraph.Petri
 		{
 			StringWriter sw = new StringWriter();
 			sw.WriteLine("-----------------------------------------------");
-			sw.WriteLine("Places ({0})",this.places.Count);
-            foreach (IPlace<Token> place in this.places)
+			sw.WriteLine("Places ({0})",places.Count);
+            foreach (IPlace<Token> place in places)
             {
 				sw.WriteLine("\t{0}",place.ToStringWithMarking());
 			}
 
-			sw.WriteLine("Transitions ({0})",this.transitions.Count);
-            foreach (ITransition<Token> transition in this.transitions)
+			sw.WriteLine("Transitions ({0})",transitions.Count);
+            foreach (ITransition<Token> transition in transitions)
             {
 				sw.WriteLine("\t{0}",transition);
 			}
 
 			sw.WriteLine("Arcs");
-            foreach (IArc<Token> arc in this.arcs)
+            foreach (IArc<Token> arc in arcs)
             {
 				sw.WriteLine("\t{0}",arc);
 			}
@@ -119,7 +119,7 @@ namespace QuickGraph.Petri
 
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 
 	}

@@ -33,7 +33,7 @@ namespace QuickGraph.Algorithms.Observers
             Contract.Requires(discoverTimes != null);
 
             this.discoverTimes = discoverTimes;
-            this._finishTimes = null;
+            _finishTimes = null;
         }
 
         public VertexTimeStamperObserver(
@@ -44,42 +44,42 @@ namespace QuickGraph.Algorithms.Observers
             Contract.Requires(finishTimes != null);
 
             this.discoverTimes = discoverTimes;
-            this._finishTimes = finishTimes;
+            _finishTimes = finishTimes;
         }
 
         public IDictionary<TVertex, int> DiscoverTimes
         {
-            get { return this.discoverTimes; }
+            get { return discoverTimes; }
         }
 
         public IDictionary<TVertex, int> FinishTimes
         {
-            get { return this._finishTimes; }
+            get { return _finishTimes; }
         }
 
         public IDisposable Attach(IVertexTimeStamperAlgorithm<TVertex> algorithm)
         {
             algorithm.DiscoverVertex += DiscoverVertex;
-            if (this._finishTimes != null)
+            if (_finishTimes != null)
                 algorithm.FinishVertex += FinishVertex;
 
             return new DisposableAction(
                 () =>
                 {
                     algorithm.DiscoverVertex -= DiscoverVertex;
-                    if (this._finishTimes != null)
+                    if (_finishTimes != null)
                         algorithm.FinishVertex -= FinishVertex;
                 });
         }
 
         void DiscoverVertex(TVertex v)
         {
-            this.discoverTimes[v] = this.currentTime++;
+            discoverTimes[v] = currentTime++;
         }
 
         void FinishVertex(TVertex v)
         {
-            this._finishTimes[v] = this.currentTime++;
+            _finishTimes[v] = currentTime++;
         }
     }
 }

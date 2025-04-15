@@ -28,42 +28,42 @@ namespace QuickGraph.Collections
             Contract.Requires(distanceComparison != null);
 
 			this.distances = distances;
-            this.heap = new BinaryHeap<TDistance, TVertex>(distanceComparison);
+            heap = new BinaryHeap<TDistance, TVertex>(distanceComparison);
 		}
 
 		public void Update(TVertex v)
 		{
-            this.heap.Update(this.distances(v), v);
+            heap.Update(distances(v), v);
         }
 
         public int Count
         {
-            get { return this.heap.Count; }
+            get { return heap.Count; }
         }
 
         public bool Contains(TVertex value)
         {
-            return this.heap.IndexOf(value) > -1;
+            return heap.IndexOf(value) > -1;
         }
 
         public void Enqueue(TVertex value)
         {
-            this.heap.Add(this.distances(value), value);
+            heap.Add(distances(value), value);
         }
 
         public TVertex Dequeue()
         {
-            return this.heap.RemoveMinimum().Value;
+            return heap.RemoveMinimum().Value;
         }
 
         public TVertex Peek()
         {
-            return this.heap.Minimum().Value;
+            return heap.Minimum().Value;
         }
 
         public TVertex[] ToArray()
         {
-            return this.heap.ToValueArray();
+            return heap.ToValueArray();
         }
 
         public KeyValuePair<TDistance, TVertex>[] ToArray2()

@@ -35,7 +35,7 @@ namespace QuickGraph
         {
             get 
             { 
-                return this.edges.Count==0;
+                return edges.Count==0;
             }
         }
 
@@ -43,7 +43,7 @@ namespace QuickGraph
         {
             get 
             { 
-                return this.edges.Count;
+                return edges.Count;
             }
         }
 
@@ -51,21 +51,21 @@ namespace QuickGraph
         {
             get 
             { 
-                return this.edges.Keys;
+                return edges.Keys;
             }
         }
 
         [Pure]
         public bool ContainsEdge(TEdge edge)
         {
-            return this.edges.ContainsKey(edge);
+            return edges.ContainsKey(edge);
         }
 
         public bool IsDirected
         {
             get 
             { 
-                return this.isDirected;
+                return isDirected;
             }
         }
 
@@ -73,30 +73,30 @@ namespace QuickGraph
         {
             get 
             { 
-                return this.allowParralelEdges;
+                return allowParralelEdges;
             }
         }
 
         public bool AddVerticesAndEdge(TEdge edge)
         {
-            return this.AddEdge(edge);
+            return AddEdge(edge);
         }
 
         public int AddVerticesAndEdgeRange(IEnumerable<TEdge> edges)
         {
             int count = 0;
             foreach (var edge in edges)
-                if (this.AddVerticesAndEdge(edge))
+                if (AddVerticesAndEdge(edge))
                     count++;
             return count;
         }
 
         public bool AddEdge(TEdge edge)
         {
-            if(this.ContainsEdge(edge))
+            if(ContainsEdge(edge))
                 return false;
-            this.edges.Add(edge, edge);
-            this.OnEdgeAdded(edge);
+            edges.Add(edge, edge);
+            OnEdgeAdded(edge);
             return true;
         }
 
@@ -104,7 +104,7 @@ namespace QuickGraph
         {
             int count = 0;
             foreach (var edge in edges)
-                if (this.AddEdge(edge))
+                if (AddEdge(edge))
                     count++;
             return count;
         }
@@ -112,16 +112,16 @@ namespace QuickGraph
         public event EdgeAction<TVertex, TEdge> EdgeAdded;
         protected virtual void OnEdgeAdded(TEdge args)
         {
-            var eh = this.EdgeAdded;
+            var eh = EdgeAdded;
             if (eh != null)
                 eh(args);
         }
 
         public bool RemoveEdge(TEdge edge)
         {
-            if (this.edges.Remove(edge))
+            if (edges.Remove(edge))
             {
-                this.OnEdgeRemoved(edge);
+                OnEdgeRemoved(edge);
                 return true;
             }
             else
@@ -131,7 +131,7 @@ namespace QuickGraph
         public event EdgeAction<TVertex, TEdge> EdgeRemoved;
         protected virtual void OnEdgeRemoved(TEdge args)
         {
-            var eh = this.EdgeRemoved;
+            var eh = EdgeRemoved;
             if (eh != null)
                 eh(args);
         }
@@ -139,7 +139,7 @@ namespace QuickGraph
         public int RemoveEdgeIf(EdgePredicate<TVertex, TEdge> predicate)
         {
             List<TEdge> edgesToRemove = new List<TEdge>();
-            foreach (var edge in this.Edges)
+            foreach (var edge in Edges)
                 if (predicate(edge))
                     edgesToRemove.Add(edge);
 
@@ -153,7 +153,7 @@ namespace QuickGraph
             var edges = this.edges.Clone();
             this.edges.Clear();
             foreach (var edge in edges.Keys)
-                this.OnEdgeRemoved(edge);
+                OnEdgeRemoved(edge);
         }
 
         #region ICloneable Members
@@ -172,16 +172,16 @@ namespace QuickGraph
         public EdgeListGraph<TVertex, TEdge> Clone()
         {
             return new EdgeListGraph<TVertex, TEdge>(
-                this.isDirected, 
-                this.allowParralelEdges, 
-                this.edges.Clone()
+                isDirected, 
+                allowParralelEdges, 
+                edges.Clone()
                 );
         }
 
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 #endif
         #endregion
@@ -190,7 +190,7 @@ namespace QuickGraph
         [Pure]
         public bool IsVerticesEmpty
         {
-            get { return this.edges.Count == 0; }
+            get { return edges.Count == 0; }
         }
 
         [Pure]
@@ -198,7 +198,7 @@ namespace QuickGraph
         {
             get
             {
-                return this.GetVertexCounts().Count;
+                return GetVertexCounts().Count;
             }
         }
 
@@ -207,14 +207,14 @@ namespace QuickGraph
         {
             get
             {
-                return this.GetVertexCounts().Keys;
+                return GetVertexCounts().Keys;
             }
         }
 
         private Dictionary<TVertex, int> GetVertexCounts()
         {
-            var vertices = new Dictionary<TVertex, int>(this.EdgeCount * 2);
-            foreach (var e in this.Edges)
+            var vertices = new Dictionary<TVertex, int>(EdgeCount * 2);
+            foreach (var e in Edges)
             {
                 vertices[e.Source]++;
                 vertices[e.Target]++;
@@ -225,7 +225,7 @@ namespace QuickGraph
         [Pure]
         public bool ContainsVertex(TVertex vertex)
         {
-            foreach (var e in this.Edges)
+            foreach (var e in Edges)
                 if (e.Source.Equals(vertex) ||
                     e.Target.Equals(vertex))
                     return true;

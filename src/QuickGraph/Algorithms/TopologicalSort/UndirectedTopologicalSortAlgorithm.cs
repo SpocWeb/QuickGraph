@@ -40,13 +40,13 @@ namespace QuickGraph.Algorithms.TopologicalSort
 
         public bool AllowCyclicGraph
         {
-            get { return this.allowCyclicGraph; }
-            set { this.allowCyclicGraph = value; }
+            get { return allowCyclicGraph; }
+            set { allowCyclicGraph = value; }
         }
 
         private void BackEdge(object sender, UndirectedEdgeEventArgs<TVertex, TEdge> a)
         {
-            if (!this.AllowCyclicGraph)
+            if (!AllowCyclicGraph)
                 throw new NonAcyclicGraphException();
         }
 
@@ -63,7 +63,7 @@ namespace QuickGraph.Algorithms.TopologicalSort
                 dfs = new UndirectedDepthFirstSearchAlgorithm<TVertex, TEdge>(
                     this,
                     VisitedGraph,
-                    new Dictionary<TVertex, GraphColor>(this.VisitedGraph.VertexCount)
+                    new Dictionary<TVertex, GraphColor>(VisitedGraph.VertexCount)
                     );
                 dfs.BackEdge += BackEdge;
                 dfs.FinishVertex += FinishVertex;
@@ -84,7 +84,7 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             this.vertices = vertices;
             this.vertices.Clear();
-            this.Compute();
+            Compute();
         }
     }
 }

@@ -30,46 +30,46 @@ namespace QuickGraph.Algorithms.ShortestPath
 
             public bool TryGetPredecessor(out TVertex predecessor)
             {
-                predecessor = this._predecessor;
-                return !this.edgeStored;
+                predecessor = _predecessor;
+                return !edgeStored;
             }
 
             public bool TryGetEdge(out TEdge _edge)
             {
                 _edge = this._edge;
-                return this.edgeStored;
+                return edgeStored;
             }
 
             public VertexData(double distance, TEdge _edge)
             {
-                this.Distance = distance;
-                this._predecessor = default(TVertex);
+                Distance = distance;
+                _predecessor = default(TVertex);
                 this._edge = _edge;
-                this.edgeStored = true;
+                edgeStored = true;
             }
 
             public VertexData(double distance, TVertex predecessor)
             {
                 Contract.Requires(predecessor != null);
 
-                this.Distance = distance;
-                this._predecessor = predecessor;
-                this._edge = default(TEdge);
-                this.edgeStored = false;
+                Distance = distance;
+                _predecessor = predecessor;
+                _edge = default(TEdge);
+                edgeStored = false;
             }
 
             [ContractInvariantMethod]
             void ObjectInvariant()
             {
-                Contract.Invariant(this.edgeStored ? this._edge != null : this._predecessor != null);
+                Contract.Invariant(edgeStored ? _edge != null : _predecessor != null);
             }
 
             public override string ToString()
             {
-                if (this.edgeStored)
-                    return string.Format("e:{0}-{1}", this.Distance, this._edge);
+                if (edgeStored)
+                    return string.Format("e:{0}-{1}", Distance, _edge);
                 else
-                    return string.Format("p:{0}-{1}", this.Distance, this._predecessor);
+                    return string.Format("p:{0}-{1}", Distance, _predecessor);
             }
         }
 
@@ -86,7 +86,7 @@ namespace QuickGraph.Algorithms.ShortestPath
 
             this.weights = weights;
             this.distanceRelaxer = distanceRelaxer;
-            this.data = new Dictionary<SEquatableEdge<TVertex>, VertexData>();
+            data = new Dictionary<SEquatableEdge<TVertex>, VertexData>();
         }
 
         public FloydWarshallAllShortestPathAlgorithm(
@@ -100,7 +100,7 @@ namespace QuickGraph.Algorithms.ShortestPath
 
             this.weights =weights;
             this.distanceRelaxer = distanceRelaxer;
-            this.data = new Dictionary<SEquatableEdge<TVertex>, VertexData>();
+            data = new Dictionary<SEquatableEdge<TVertex>, VertexData>();
         }
 
         public FloydWarshallAllShortestPathAlgorithm(
@@ -116,7 +116,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             Contract.Requires(target != null);
 
             VertexData value;
-            if (this.data.TryGetValue(new SEquatableEdge<TVertex>(source, target), out value))
+            if (data.TryGetValue(new SEquatableEdge<TVertex>(source, target), out value))
             {
                 cost = value.Distance;
                 return true;
@@ -196,19 +196,19 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             // matrix i,j -> path
-            this.data.Clear();
+            data.Clear();
 
-            var vertices = this.VisitedGraph.Vertices;
-            var edges = this.VisitedGraph.Edges;
+            var vertices = VisitedGraph.Vertices;
+            var edges = VisitedGraph.Edges;
 
             // prepare the matrix with initial costs
             // walk each edge and add entry in cost dictionary
             foreach (var edge in edges)
             {
                 var ij = edge.ToVertexPair<TVertex, TEdge>();
-                var cost = this.weights(edge);
+                var cost = weights(edge);
                 VertexData value;
                 if (!data.TryGetValue(ij, out value))
                     data[ij] = new VertexData(cost, edge);
@@ -239,12 +239,12 @@ namespace QuickGraph.Algorithms.ShortestPath
                             VertexData pathkj;
                             if (data.TryGetValue(kj, out pathkj))
                             {
-                                double combined = this.distanceRelaxer.Combine(pathik.Distance, pathkj.Distance);
+                                double combined = distanceRelaxer.Combine(pathik.Distance, pathkj.Distance);
                                 var ij = new SEquatableEdge<TVertex>(vi, vj);
                                 VertexData pathij;
                                 if (data.TryGetValue(ij, out pathij))
                                 {
-                                    if (this.distanceRelaxer.Compare(combined, pathij.Distance) < 0)
+                                    if (distanceRelaxer.Compare(combined, pathij.Distance) < 0)
                                         data[ij] = new VertexData(combined, vk);
                                 }
                                 else
@@ -269,7 +269,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         public void Dump(TextWriter writer)
         {
             writer.WriteLine("data:");
-            foreach (var kv in this.data)
+            foreach (var kv in data)
                 writer.WriteLine("{0}->{1}: {2}", 
                     kv.Key.Source, 
                     kv.Key.Target, 

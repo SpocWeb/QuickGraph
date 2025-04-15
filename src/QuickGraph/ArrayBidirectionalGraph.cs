@@ -35,17 +35,17 @@ namespace QuickGraph
             private readonly TEdge[] _inEdges;
             public InOutEdges(TEdge[] outEdges, TEdge[] inEdges)
             {
-                this._outEdges = outEdges != null && outEdges.Length > 0 ? outEdges : null;
-                this._inEdges = inEdges != null && inEdges.Length > 0 ? inEdges : null;
+                _outEdges = outEdges != null && outEdges.Length > 0 ? outEdges : null;
+                _inEdges = inEdges != null && inEdges.Length > 0 ? inEdges : null;
             }
             public bool TryGetOutEdges(out TEdge[] edges)
             {
-                edges=  this._outEdges;
+                edges=  _outEdges;
                 return edges != null;
             }
             public bool TryGetInEdges(out TEdge[] edges)
             {
-                edges=  this._inEdges;
+                edges=  _inEdges;
                 return edges != null;
             }
         }
@@ -61,13 +61,13 @@ namespace QuickGraph
         {
             Contract.Requires(visitedGraph != null);
 
-            this.vertexEdges = new Dictionary<TVertex, InOutEdges>(visitedGraph.VertexCount);
-            this.edgeCount = visitedGraph.EdgeCount;
+            vertexEdges = new Dictionary<TVertex, InOutEdges>(visitedGraph.VertexCount);
+            edgeCount = visitedGraph.EdgeCount;
             foreach (var vertex in visitedGraph.Vertices)
             {
                 var outEdges = visitedGraph.OutEdges(vertex).ToArray();
                 var inEdges = visitedGraph.InEdges(vertex).ToArray();
-                this.vertexEdges.Add(vertex, new InOutEdges(outEdges, inEdges));
+                vertexEdges.Add(vertex, new InOutEdges(outEdges, inEdges));
             }
         }
 
@@ -87,13 +87,13 @@ namespace QuickGraph
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             TEdge edge;
-            return this.TryGetEdge(source, target, out edge);
+            return TryGetEdge(source, target, out edge);
         }
 
         public bool TryGetEdges(TVertex source, TVertex target, out IEnumerable<TEdge> edges)
         {
             InOutEdges es;
-            if (this.vertexEdges.TryGetValue(source, out es))
+            if (vertexEdges.TryGetValue(source, out es))
             {
                 List<TEdge> _edges = null;
                 TEdge[] outEdges;
@@ -119,7 +119,7 @@ namespace QuickGraph
         {
             InOutEdges io;
             TEdge[] edges;
-            if (this.vertexEdges.TryGetValue(source, out io) &&
+            if (vertexEdges.TryGetValue(source, out io) &&
                 (io.TryGetOutEdges(out edges)))
             {
                 for (int i = 0; i < edges.Length; i++)
@@ -143,7 +143,7 @@ namespace QuickGraph
         {
             InOutEdges io;
             TEdge[] edges;
-            if (this.vertexEdges.TryGetValue(v, out io) &&
+            if (vertexEdges.TryGetValue(v, out io) &&
                 (io.TryGetOutEdges(out edges)))
                 return false;
             return true;
@@ -153,7 +153,7 @@ namespace QuickGraph
         {
             InOutEdges io;
             TEdge[] edges;
-            if (this.vertexEdges.TryGetValue(v, out io) &&
+            if (vertexEdges.TryGetValue(v, out io) &&
                 (io.TryGetOutEdges(out edges)))
                 return edges.Length;
             return 0;
@@ -162,7 +162,7 @@ namespace QuickGraph
         public IEnumerable<TEdge> OutEdges(TVertex v)
         {
             IEnumerable<TEdge> result;
-            if (this.TryGetInEdges(v, out result))
+            if (TryGetInEdges(v, out result))
                 return result;
             else
                 return Enumerable.Empty<TEdge>();
@@ -172,7 +172,7 @@ namespace QuickGraph
         {
             InOutEdges io;
             TEdge[] aedges;
-            if (this.vertexEdges.TryGetValue(v, out io) &&
+            if (vertexEdges.TryGetValue(v, out io) &&
                 (io.TryGetOutEdges(out aedges)))
             {
                 edges = aedges;
@@ -185,7 +185,7 @@ namespace QuickGraph
 
         public TEdge OutEdge(TVertex v, int index)
         {
-            var io = this.vertexEdges[v];
+            var io = vertexEdges[v];
 
             TEdge[] edges;
             if (!io.TryGetOutEdges(out edges))
@@ -210,26 +210,26 @@ namespace QuickGraph
         #region IImplicitVertexSet<TVertex> Members
         public bool ContainsVertex(TVertex vertex)
         {
-            return this.vertexEdges.ContainsKey(vertex);
+            return vertexEdges.ContainsKey(vertex);
         }
         #endregion
 
         #region IVertexSet<TVertex> Members
         public bool IsVerticesEmpty
         {
-            get { return this.vertexEdges.Count == 0; }
+            get { return vertexEdges.Count == 0; }
         }
 
         public int VertexCount
         {
-            get { return this.vertexEdges.Count; }
+            get { return vertexEdges.Count; }
         }
 
         public IEnumerable<TVertex> Vertices
         {
             get 
             {
-                return this.vertexEdges.Keys;
+                return vertexEdges.Keys;
             }
         }
         #endregion
@@ -237,19 +237,19 @@ namespace QuickGraph
         #region IEdgeSet<TVertex,TEdge> Members
         public bool IsEdgesEmpty
         {
-            get { return this.edgeCount == 0; }
+            get { return edgeCount == 0; }
         }
 
         public int EdgeCount
         {
-            get { return this.edgeCount; }
+            get { return edgeCount; }
         }
 
         public IEnumerable<TEdge> Edges
         {
             get             
             {
-                foreach (var io in this.vertexEdges.Values)
+                foreach (var io in vertexEdges.Values)
                 {
                     TEdge[] edges;
                     if (io.TryGetOutEdges(out edges))
@@ -263,7 +263,7 @@ namespace QuickGraph
         {
             InOutEdges io;
             TEdge[] edges;
-            if (this.vertexEdges.TryGetValue(edge.Source, out io) &&
+            if (vertexEdges.TryGetValue(edge.Source, out io) &&
                 (io.TryGetOutEdges(out edges)))
                 for (int i = 0; i < edges.Length; i++)
                     if (edges[i].Equals(edge))
@@ -285,7 +285,7 @@ namespace QuickGraph
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 #endif
         #endregion
@@ -295,7 +295,7 @@ namespace QuickGraph
         {
             InOutEdges io;
             TEdge[] edges;
-            if (this.vertexEdges.TryGetValue(v, out io) &&
+            if (vertexEdges.TryGetValue(v, out io) &&
                 (io.TryGetInEdges(out edges)))
                 return false;
             return true;
@@ -305,7 +305,7 @@ namespace QuickGraph
         {
             InOutEdges io;
             TEdge[] edges;
-            if (this.vertexEdges.TryGetValue(v, out io) &&
+            if (vertexEdges.TryGetValue(v, out io) &&
                 (io.TryGetInEdges(out edges)))
                 return edges.Length;
             return 0;
@@ -314,7 +314,7 @@ namespace QuickGraph
         public IEnumerable<TEdge> InEdges(TVertex v)
         {
             IEnumerable<TEdge> result;
-            if (this.TryGetInEdges(v, out result))
+            if (TryGetInEdges(v, out result))
                 return result;
             else
                 return Enumerable.Empty<TEdge>();
@@ -324,7 +324,7 @@ namespace QuickGraph
         {
             InOutEdges io;
             TEdge[] aedges;
-            if (this.vertexEdges.TryGetValue(v, out io) &&
+            if (vertexEdges.TryGetValue(v, out io) &&
                 (io.TryGetInEdges(out aedges)))
             {
                 edges = aedges;
@@ -337,7 +337,7 @@ namespace QuickGraph
 
         public TEdge InEdge(TVertex v, int index)
         {
-            var io = this.vertexEdges[v];
+            var io = vertexEdges[v];
 
             TEdge[] edges;
             if (!io.TryGetOutEdges(out edges))

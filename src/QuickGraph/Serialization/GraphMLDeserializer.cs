@@ -442,24 +442,24 @@ namespace QuickGraph.Serialization
 
             public GraphMLDeserializer<TVertex, TEdge, TGraph> Serializer
             {
-                get { return this.serializer; }
+                get { return serializer; }
             }
 
             public XmlReader Reader
             {
-                get { return this.reader; }
+                get { return reader; }
             }
 
             public TGraph VisitedGraph
             {
-                get { return this.visitedGraph; }
+                get { return visitedGraph; }
             }
 
             public void Deserialize()
             {
-                this.ReadHeader();
-                this.ReadGraphHeader();
-                this.ReadElements();
+                ReadHeader();
+                ReadGraphHeader();
+                ReadElements();
             }
 
             private void ReadHeader()
@@ -470,7 +470,7 @@ namespace QuickGraph.Serialization
                     if (reader.NodeType == XmlNodeType.Element &&
                         reader.Name == "graphml")
                     {
-                        this.graphMLNamespace = reader.NamespaceURI;
+                        graphMLNamespace = reader.NamespaceURI;
                         return;
                     }
                 }
@@ -480,41 +480,41 @@ namespace QuickGraph.Serialization
 
             private void ReadGraphHeader()
             {
-                if (!this.Reader.ReadToDescendant("graph", this.graphMLNamespace))
+                if (!Reader.ReadToDescendant("graph", graphMLNamespace))
                     throw new ArgumentException("graph node not found");
             }
 
             private void ReadElements()
             {
                 Contract.Requires(
-                    this.Reader.Name == "graph" &&
-                    this.Reader.NamespaceURI == this.graphMLNamespace,
+                    Reader.Name == "graph" &&
+                    Reader.NamespaceURI == graphMLNamespace,
                     "incorrect reader position");
 
-                ReadDelegateCompiler.SetGraphDefault(this.VisitedGraph);
+                ReadDelegateCompiler.SetGraphDefault(VisitedGraph);
 
                 var vertices = new Dictionary<string, TVertex>(StringComparer.Ordinal);
 
                 // read vertices or edges
-                var reader = this.Reader;
+                var reader = Reader;
                 while (reader.Read())
                 {
                     if (reader.NodeType == XmlNodeType.Element &&
-                        reader.NamespaceURI == this.graphMLNamespace)
+                        reader.NamespaceURI == graphMLNamespace)
                     {
                         switch (reader.Name)
                         {
                             case "node":
-                                this.ReadVertex(vertices);
+                                ReadVertex(vertices);
                                 break;
                             case "edge":
-                                this.ReadEdge(vertices);
+                                ReadEdge(vertices);
                                 break;
                             case "data":
-                                GraphMLDeserializer<TVertex, TEdge, TGraph>.ReadDelegateCompiler.GraphAttributesReader(this.Reader, this.graphMLNamespace, this.VisitedGraph);
+                                ReadDelegateCompiler.GraphAttributesReader(Reader, graphMLNamespace, VisitedGraph);
                                 break;
                             default:
-                                throw new InvalidOperationException(string.Format("invalid reader position {0}:{1}", this.Reader.NamespaceURI, this.Reader.Name));
+                                throw new InvalidOperationException(string.Format("invalid reader position {0}:{1}", Reader.NamespaceURI, Reader.Name));
                         }
                     }
                 }
@@ -524,25 +524,25 @@ namespace QuickGraph.Serialization
             {
                 Contract.Requires(vertices != null);
                 Contract.Assert(
-                    this.Reader.NodeType == XmlNodeType.Element &&
-                    this.Reader.Name == "edge" &&
-                    this.Reader.NamespaceURI == this.graphMLNamespace);
+                    Reader.NodeType == XmlNodeType.Element &&
+                    Reader.Name == "edge" &&
+                    Reader.NamespaceURI == graphMLNamespace);
 
                 // get subtree
-                using (var subReader = this.Reader.ReadSubtree())
+                using (var subReader = Reader.ReadSubtree())
                 {
                     // read id
-                    string id = ReadAttributeValue(this.Reader, "id");
-                    string sourceid = ReadAttributeValue(this.Reader, "source");
+                    string id = ReadAttributeValue(Reader, "id");
+                    string sourceid = ReadAttributeValue(Reader, "source");
                     TVertex source;
                     if (!vertices.TryGetValue(sourceid, out source))
                         throw new ArgumentException("Could not find vertex " + sourceid);
-                    string targetid = ReadAttributeValue(this.Reader, "target");
+                    string targetid = ReadAttributeValue(Reader, "target");
                     TVertex target;
                     if (!vertices.TryGetValue(targetid, out target))
                         throw new ArgumentException("Could not find vertex " + targetid);
 
-                    var edge = this.edgeFactory(source, target, id);
+                    var edge = edgeFactory(source, target, id);
                     ReadDelegateCompiler.SetEdgeDefault(edge);
 
                     // read data
@@ -550,11 +550,11 @@ namespace QuickGraph.Serialization
                     {
                         if (reader.NodeType == XmlNodeType.Element &&
                             reader.Name == "data" &&
-                            reader.NamespaceURI == this.graphMLNamespace)
-                            ReadDelegateCompiler.EdgeAttributesReader(subReader, this.graphMLNamespace, edge);
+                            reader.NamespaceURI == graphMLNamespace)
+                            ReadDelegateCompiler.EdgeAttributesReader(subReader, graphMLNamespace, edge);
                     }
 
-                    this.VisitedGraph.AddEdge(edge);
+                    VisitedGraph.AddEdge(edge);
                 }
             }
 
@@ -562,15 +562,15 @@ namespace QuickGraph.Serialization
             {
                 Contract.Requires(vertices != null);
                 Contract.Assert(
-                    this.Reader.NodeType == XmlNodeType.Element &&
-                    this.Reader.Name == "node" &&
-                    this.Reader.NamespaceURI == this.graphMLNamespace);
+                    Reader.NodeType == XmlNodeType.Element &&
+                    Reader.Name == "node" &&
+                    Reader.NamespaceURI == graphMLNamespace);
 
                 // get subtree
-                using (var subReader = this.Reader.ReadSubtree())
+                using (var subReader = Reader.ReadSubtree())
                 {
                     // read id
-                    string id = ReadAttributeValue(this.Reader, "id");
+                    string id = ReadAttributeValue(Reader, "id");
                     // create new vertex
                     TVertex vertex = vertexFactory(id);
                     // apply defaults
@@ -580,11 +580,11 @@ namespace QuickGraph.Serialization
                     {
                         if (reader.NodeType == XmlNodeType.Element &&
                             reader.Name == "data" &&
-                            reader.NamespaceURI == this.graphMLNamespace)
-                            ReadDelegateCompiler.VertexAttributesReader(subReader, this.graphMLNamespace, vertex);
+                            reader.NamespaceURI == graphMLNamespace)
+                            ReadDelegateCompiler.VertexAttributesReader(subReader, graphMLNamespace, vertex);
                     }
                     // add to graph
-                    this.VisitedGraph.AddVertex(vertex);
+                    VisitedGraph.AddVertex(vertex);
                     vertices.Add(id, vertex);
                 }
             }

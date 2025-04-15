@@ -69,14 +69,14 @@ namespace QuickGraph
 
             public static Func<string, Attributes, KeyValuePair<string, int?>>
                 WeightedNullable = (v, attrs) =>
-                    new KeyValuePair<string, int?>(v, DotParserAdapter.Common.GetWeightNullable(attrs));
+                    new KeyValuePair<string, int?>(v, Common.GetWeightNullable(attrs));
 
 
             public static Func<string, Attributes, KeyValuePair<string, int>>
                 Weighted(int defaultValue)
             {
                 return (v, attrs) =>
-                    new KeyValuePair<string, int>(v, DotParserAdapter.Common.GetWeight(attrs, defaultValue));
+                    new KeyValuePair<string, int>(v, Common.GetWeight(attrs, defaultValue));
             }
         }
 
@@ -94,14 +94,14 @@ namespace QuickGraph
 
             public static Func<TVertex, TVertex, Attributes, STaggedEdge<TVertex, int?>>
                 WeightedNullable = (v1, v2, attrs) =>
-                    new STaggedEdge<TVertex, int?>(v1, v2, DotParserAdapter.Common.GetWeightNullable(attrs));
+                    new STaggedEdge<TVertex, int?>(v1, v2, Common.GetWeightNullable(attrs));
 
 
             public static Func<TVertex, TVertex, Attributes, STaggedEdge<TVertex, int>>
                 Weighted(int defaultValue)
             {
                 return (v1, v2, attrs) =>
-                    new STaggedEdge<TVertex, int>(v1, v2, DotParserAdapter.Common.GetWeight(attrs, defaultValue));
+                    new STaggedEdge<TVertex, int>(v1, v2, Common.GetWeight(attrs, defaultValue));
             }
         }
     }

@@ -24,8 +24,8 @@ namespace QuickGraph.Predicates
         {
             Contract.Requires(v != null);
 
-            return this.visitedGraph.IsInEdgesEmpty(v)
-                && this.visitedGraph.IsOutEdgesEmpty(v);
+            return visitedGraph.IsInEdgesEmpty(v)
+                && visitedGraph.IsOutEdgesEmpty(v);
         }
     }
 }

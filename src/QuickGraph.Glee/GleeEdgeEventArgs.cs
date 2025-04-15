@@ -6,7 +6,7 @@ namespace QuickGraph.Glee
         private readonly Microsoft.Glee.Drawing.Edge gedge;
         public Microsoft.Glee.Drawing.Edge GEdge
         {
-            get { return this.gedge; }
+            get { return gedge; }
         }
 
         public GleeEdgeEventArgs(TEdge edge, Microsoft.Glee.Drawing.Edge gedge)

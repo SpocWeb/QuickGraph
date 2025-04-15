@@ -44,20 +44,20 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 
         public IDictionary<TVertex, int> Components
         {
-            get { return this.components; }
+            get { return components; }
         }
 
         public int ComponentCount
         {
-            get { return this.componentCount; }
+            get { return componentCount; }
         }
 
         protected override void Initialize()
         {
-            this.componentCount = 0;
-            this.currentComponent = 0;
-            this.componentEquivalences.Clear();
-            this.components.Clear();
+            componentCount = 0;
+            currentComponent = 0;
+            componentEquivalences.Clear();
+            components.Clear();
         }
 
         public List<BidirectionalGraph<TVertex, TEdge>> Graphs
@@ -93,14 +93,14 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 
         protected override void InternalCompute()
         {
-            Contract.Ensures(0 <= this.ComponentCount && this.ComponentCount <= this.VisitedGraph.VertexCount);
-            Contract.Ensures(this.VisitedGraph.Vertices.All(v => 0 <= this.Components[v] && this.Components[v] < this.ComponentCount));
+            Contract.Ensures(0 <= ComponentCount && ComponentCount <= VisitedGraph.VertexCount);
+            Contract.Ensures(VisitedGraph.Vertices.All(v => 0 <= Components[v] && Components[v] < ComponentCount));
 
             // shortcut for empty graph
-            if (this.VisitedGraph.IsVerticesEmpty)
+            if (VisitedGraph.IsVerticesEmpty)
                 return;
 
-            var dfs = new DepthFirstSearchAlgorithm<TVertex, TEdge>(this.VisitedGraph);
+            var dfs = new DepthFirstSearchAlgorithm<TVertex, TEdge>(VisitedGraph);
             try
             {
                 dfs.StartVertex += dfs_StartVertex;
@@ -117,40 +117,40 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             }
 
             // updating component numbers
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
-                int component = this.components[v];
-                int equivalent = this.GetComponentEquivalence(component);
+                int component = components[v];
+                int equivalent = GetComponentEquivalence(component);
                 if (component != equivalent)
-                    this.components[v] = equivalent;
+                    components[v] = equivalent;
             }
-            this.componentEquivalences.Clear();
+            componentEquivalences.Clear();
         }
 
         void dfs_StartVertex(TVertex v)
         {
             // we are looking on a new tree
-            this.currentComponent = this.componentEquivalences.Count;
-            this.componentEquivalences.Add(this.currentComponent, this.currentComponent);
-            this.componentCount++;
-            this.components.Add(v, this.currentComponent);
+            currentComponent = componentEquivalences.Count;
+            componentEquivalences.Add(currentComponent, currentComponent);
+            componentCount++;
+            components.Add(v, currentComponent);
         }
 
         void dfs_TreeEdge(TEdge e)
         {
             // new edge, we store with the current component number
-            this.components.Add(e.Target, this.currentComponent);
+            components.Add(e.Target, currentComponent);
         }
 
         private int GetComponentEquivalence(int component)
         {
             int equivalent = component;
-            int temp = this.componentEquivalences[equivalent];
+            int temp = componentEquivalences[equivalent];
             bool compress = false;
             while (temp != equivalent)
             {
                 equivalent = temp;
-                temp = this.componentEquivalences[equivalent];
+                temp = componentEquivalences[equivalent];
                 compress = true;
             }
 
@@ -158,11 +158,11 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             if (compress)
             {
                 int c = component;
-                temp = this.componentEquivalences[c];
+                temp = componentEquivalences[c];
                 while (temp != equivalent)
                 {
-                    temp = this.componentEquivalences[c];
-                    this.componentEquivalences[c] = equivalent;
+                    temp = componentEquivalences[c];
+                    componentEquivalences[c] = equivalent;
                 }
             }
 
@@ -172,19 +172,19 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         void dfs_ForwardOrCrossEdge(TEdge e)
         {
             // we have touched another tree, updating count and current component
-            int otherComponent = this.GetComponentEquivalence(this.components[e.Target]);
-            if (otherComponent != this.currentComponent)
+            int otherComponent = GetComponentEquivalence(components[e.Target]);
+            if (otherComponent != currentComponent)
             {
-                this.componentCount--;
-                Contract.Assert(this.componentCount > 0);
-                if (this.currentComponent > otherComponent)
+                componentCount--;
+                Contract.Assert(componentCount > 0);
+                if (currentComponent > otherComponent)
                 {
-                    this.componentEquivalences[this.currentComponent] = otherComponent;
-                    this.currentComponent = otherComponent;
+                    componentEquivalences[currentComponent] = otherComponent;
+                    currentComponent = otherComponent;
                 }
                 else
                 {
-                    this.componentEquivalences[otherComponent] = this.currentComponent;
+                    componentEquivalences[otherComponent] = currentComponent;
                 }
             }
         }

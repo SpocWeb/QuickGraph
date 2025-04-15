@@ -86,14 +86,14 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         public StringVertexFactory(string prefix)
         {
-            this.Prefix = prefix;
+            Prefix = prefix;
         }
 
         public string Prefix { get; set; }
 
         public string CreateVertex()
         {
-            return this.Prefix + (++id).ToString();
+            return Prefix + (++id).ToString();
         }
     }
 }

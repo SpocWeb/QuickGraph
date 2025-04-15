@@ -35,12 +35,12 @@ namespace QuickGraph.Algorithms.Observers
 
         public IDictionary<TVertex, TEdge> VertexPredecessors
         {
-            get { return this.vertexPredecessors; }
+            get { return vertexPredecessors; }
         }
 
         public ICollection<TVertex> EndPathVertices
         {
-            get { return this.endPathVertices; }
+            get { return endPathVertices; }
         }
 
         public IDisposable Attach(IVertexPredecessorRecorderAlgorithm<TVertex, TEdge> algorithm)
@@ -62,21 +62,21 @@ namespace QuickGraph.Algorithms.Observers
 
         void FinishVertex(TVertex v)
         {
-            foreach (var edge in this.VertexPredecessors.Values)
+            foreach (var edge in VertexPredecessors.Values)
             {
                 if (edge.Source.Equals(v))
                     return;
             }
-            this.endPathVertices.Add(v);
+            endPathVertices.Add(v);
         }
 
         public IEnumerable<IEnumerable<TEdge>> AllPaths()
         {
             List<IEnumerable<TEdge>> es = new List<IEnumerable<TEdge>>();
-            foreach (var v in this.EndPathVertices)
+            foreach (var v in EndPathVertices)
             {
                 IEnumerable<TEdge> path;
-                if (this.vertexPredecessors.TryGetPath(v, out path))
+                if (vertexPredecessors.TryGetPath(v, out path))
                     es.Add(path);
             }
             return es;

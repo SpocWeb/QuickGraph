@@ -35,7 +35,7 @@ namespace QuickGraph.Algorithms.Observers
 
         public IDictionary<TVertex, TEdge> VertexPredecessors
         {
-            get { return this.vertexPredecessors; }
+            get { return vertexPredecessors; }
         }
 
         public IDisposable Attach(IUndirectedTreeBuilderAlgorithm<TVertex, TEdge> algorithm)
@@ -46,12 +46,12 @@ namespace QuickGraph.Algorithms.Observers
 
         void TreeEdge(object sender, UndirectedEdgeEventArgs<TVertex,TEdge> e)
         {
-            this.vertexPredecessors[e.Target] = e.Edge;
+            vertexPredecessors[e.Target] = e.Edge;
         }
 
         public bool TryGetPath(TVertex vertex, out IEnumerable<TEdge> path)
         {
-            return this.VertexPredecessors.TryGetPath(vertex, out path);
+            return VertexPredecessors.TryGetPath(vertex, out path);
         }
     }
 }

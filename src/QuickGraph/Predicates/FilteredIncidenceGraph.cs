@@ -22,13 +22,13 @@ namespace QuickGraph.Predicates
 
         public bool ContainsEdge(TVertex source, TVertex target)
         {
-            if (!this.VertexPredicate(source))
+            if (!VertexPredicate(source))
                 return false;
-            if (!this.VertexPredicate(target))
+            if (!VertexPredicate(target))
                 return false;
 
-            foreach (var edge in this.BaseGraph.OutEdges(source))
-                if (edge.Target.Equals(target) && this.EdgePredicate(edge))
+            foreach (var edge in BaseGraph.OutEdges(source))
+                if (edge.Target.Equals(target) && EdgePredicate(edge))
                     return true;
             return false;
         }
@@ -39,12 +39,12 @@ namespace QuickGraph.Predicates
             out TEdge edge)
         {
             IEnumerable<TEdge> unfilteredEdges;
-            if (this.VertexPredicate(source) &&
-                this.VertexPredicate(target) &&
-                this.BaseGraph.TryGetEdges(source, target, out unfilteredEdges))
+            if (VertexPredicate(source) &&
+                VertexPredicate(target) &&
+                BaseGraph.TryGetEdges(source, target, out unfilteredEdges))
             {
                 foreach (var ufe in unfilteredEdges)
-                    if (this.EdgePredicate(ufe))
+                    if (EdgePredicate(ufe))
                     {
                         edge = ufe;
                         return true;
@@ -60,17 +60,17 @@ namespace QuickGraph.Predicates
             out IEnumerable<TEdge> edges)
         {
             edges = null;
-            if (!this.VertexPredicate(source))
+            if (!VertexPredicate(source))
                 return false;
-            if (!this.VertexPredicate(target))
+            if (!VertexPredicate(target))
                 return false;
 
             IEnumerable<TEdge> unfilteredEdges;
-            if (this.BaseGraph.TryGetEdges(source, target, out unfilteredEdges))
+            if (BaseGraph.TryGetEdges(source, target, out unfilteredEdges))
             {
                 List<TEdge> filtered = new List<TEdge>();
                 foreach (var edge in unfilteredEdges)
-                    if (this.EdgePredicate(edge))
+                    if (EdgePredicate(edge))
                         filtered.Add(edge);
                 edges = filtered;
                 return true;

@@ -32,44 +32,44 @@ namespace QuickGraph
 
         public TryFunc<TVertex, IEnumerable<TEdge>> TryGetInEdgesFunc
         {
-            get { return this.tryGetInEdges; }
+            get { return tryGetInEdges; }
         }
 
         #region IBidirectionalImplicitGraph<TVertex,TEdge> Members
 
         public bool IsInEdgesEmpty(TVertex v)
         {
-            foreach (var edge in this.InEdges(v))
+            foreach (var edge in InEdges(v))
                 return false;
             return true;
         }
 
         public int InDegree(TVertex v)
         {
-            return this.InEdges(v).Count();
+            return InEdges(v).Count();
         }
 
         public IEnumerable<TEdge> InEdges(TVertex v)
         {
             IEnumerable<TEdge> result;
-            if (!this.tryGetInEdges(v, out result))
+            if (!tryGetInEdges(v, out result))
                 return Enumerable.Empty<TEdge>();
             return result;
         }
 
         public bool TryGetInEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
-            return this.tryGetInEdges(v, out edges);
+            return tryGetInEdges(v, out edges);
         }
 
         public TEdge InEdge(TVertex v, int index)
         {
-            return this.InEdges(v).ElementAt(index);
+            return InEdges(v).ElementAt(index);
         }
 
         public int Degree(TVertex v)
         {
-            return this.InDegree(v) + this.OutDegree(v);
+            return InDegree(v) + OutDegree(v);
         }
         #endregion
     }

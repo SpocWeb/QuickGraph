@@ -35,7 +35,7 @@ namespace QuickGraph.Algorithms.Observers
         {
             get
             {
-                return this.vertices;
+                return vertices;
             }
         }
 
@@ -47,7 +47,7 @@ namespace QuickGraph.Algorithms.Observers
 
         void algorithm_DiscoverVertex(TVertex v)
         {
-            this.vertices.Add(v);
+            vertices.Add(v);
         }
     }
 }

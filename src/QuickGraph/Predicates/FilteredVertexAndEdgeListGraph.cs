@@ -25,7 +25,7 @@ namespace QuickGraph.Predicates
         {
             get
             {
-                return this.EdgeCount == 0;
+                return EdgeCount == 0;
             }
         }
 
@@ -34,12 +34,12 @@ namespace QuickGraph.Predicates
             get
             {
                 int count = 0;
-                foreach (var edge in this.BaseGraph.Edges)
+                foreach (var edge in BaseGraph.Edges)
                 {
                     if (
-                           this.VertexPredicate(edge.Source)
-                        && this.VertexPredicate(edge.Target)
-                        && this.EdgePredicate(edge))
+                           VertexPredicate(edge.Source)
+                        && VertexPredicate(edge.Target)
+                        && EdgePredicate(edge))
                         count++;
                 }
                 return count;
@@ -50,12 +50,12 @@ namespace QuickGraph.Predicates
         {
             get
             {
-                foreach(TEdge edge in this.BaseGraph.Edges)
+                foreach(TEdge edge in BaseGraph.Edges)
                 {
                     if (
-                           this.VertexPredicate(edge.Source)
-                        && this.VertexPredicate(edge.Target)
-                        && this.EdgePredicate(edge))
+                           VertexPredicate(edge.Source)
+                        && VertexPredicate(edge.Target)
+                        && EdgePredicate(edge))
                         yield return edge;
                 }
             }
@@ -64,8 +64,8 @@ namespace QuickGraph.Predicates
         [Pure]
         public bool ContainsEdge(TEdge edge)
         {
-            foreach (var e in this.Edges)
-                if (Comparison<TEdge>.Equals(edge, e))
+            foreach (var e in Edges)
+                if (Equals(edge, e))
                     return true;
             return false;
         }

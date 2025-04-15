@@ -22,7 +22,7 @@ namespace QuickGraph.Graphviz.Dot
 
         public string ToDot()
         {
-            if (base.Count == 0)
+            if (Count == 0)
             {
                 return null;
             }
@@ -34,7 +34,7 @@ namespace QuickGraph.Graphviz.Dot
                 {
                     if (flag)
                     {
-                        writer.Write(this.Separators);
+                        writer.Write(Separators);
                     }
                     else
                     {
@@ -43,7 +43,7 @@ namespace QuickGraph.Graphviz.Dot
                     writer.Write(layer.Name);
                 }
                 writer.WriteLine("\";");
-                writer.WriteLine("layersep=\"{0}\"", this.Separators);
+                writer.WriteLine("layersep=\"{0}\"", Separators);
                 return writer.ToString();
             }
         }
@@ -52,13 +52,13 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.m_Separators;
+                return m_Separators;
             }
             set
             {
                 Contract.Requires(!string.IsNullOrEmpty(value));
 
-                this.m_Separators = value;
+                m_Separators = value;
             }
         }
     }

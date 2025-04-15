@@ -38,7 +38,7 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
         public event EdgeAction<TVertex, TEdge> ExamineEdge;
         private void OnExamineEdge(TEdge edge)
         {
-            var eh = this.ExamineEdge;
+            var eh = ExamineEdge;
             if (eh != null)
                 eh(edge);
         }
@@ -46,7 +46,7 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
         public event EdgeAction<TVertex, TEdge> TreeEdge;
         private void OnTreeEdge(TEdge edge)
         {
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(edge);
         }
@@ -54,12 +54,12 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
         protected override void InternalCompute()
         {
             var dic = new Dictionary<TVertex, HashSet<TEdge>>();
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             var visetedVert = new HashSet<TVertex>();
             var edges = new HashSet<TEdge>();
-            var queue = new BinaryQueue<TEdge, double>(this.edgeWeights);
-            var ds = new ForestDisjointSet<TVertex>(this.VisitedGraph.VertexCount);
-            foreach (var v in this.VisitedGraph.Vertices)
+            var queue = new BinaryQueue<TEdge, double>(edgeWeights);
+            var ds = new ForestDisjointSet<TVertex>(VisitedGraph.VertexCount);
+            foreach (var v in VisitedGraph.Vertices)
             {
                 if (visetedVert.Count == 0)
                 {
@@ -68,7 +68,7 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
                 ds.MakeSet(v);
                 dic.Add(v, new HashSet<TEdge>());
             }
-            foreach (var e in this.VisitedGraph.Edges)
+            foreach (var e in VisitedGraph.Edges)
             {
                 dic[e.Source].Add(e);
                 dic[e.Target].Add(e);
@@ -91,10 +91,10 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
             while (edges.Count > 0 && visetedVert.Count < VisitedGraph.VertexCount)
             {
                 var mined = queue.Dequeue();
-                this.OnExamineEdge(mined);
+                OnExamineEdge(mined);
                 if (!ds.AreInSameSet(mined.Source, mined.Target))
                 {
-                    this.OnTreeEdge(mined);
+                    OnTreeEdge(mined);
                     ds.Union(mined.Source, mined.Target);
                     if (visetedVert.Contains(mined.Source))
                     {

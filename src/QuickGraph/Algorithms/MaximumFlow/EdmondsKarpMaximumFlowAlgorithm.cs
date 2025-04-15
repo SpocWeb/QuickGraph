@@ -105,47 +105,47 @@ namespace QuickGraph.Algorithms.MaximumFlow
 		/// <returns></returns>
         protected override void InternalCompute()
         {
-            if (this.Source == null)
+            if (Source == null)
                 throw new InvalidOperationException("Source is not specified");
-            if (this.Sink == null)
+            if (Sink == null)
                 throw new InvalidOperationException("Sink is not specified");
 
 
-            if (this.Services.CancelManager.IsCancelling)
+            if (Services.CancelManager.IsCancelling)
                 return;
 
-            var g = this.VisitedGraph;
+            var g = VisitedGraph;
             foreach (var u in g.Vertices)
                 foreach (var e in g.OutEdges(u))
                 {
-                    var capacity = this.Capacities(e);
+                    var capacity = Capacities(e);
                     if (capacity < 0)
                         throw new InvalidOperationException("negative edge capacity");
-                    this.ResidualCapacities[e] = capacity;
+                    ResidualCapacities[e] = capacity;
                 }
 
-            this.VertexColors[Sink] = GraphColor.Gray;
-            while (this.VertexColors[Sink] != GraphColor.White)
+            VertexColors[Sink] = GraphColor.Gray;
+            while (VertexColors[Sink] != GraphColor.White)
             {
                 var vis = new VertexPredecessorRecorderObserver<TVertex, TEdge>(
-                    this.Predecessors
+                    Predecessors
                     );
-                var queue = new QuickGraph.Collections.Queue<TVertex>();
+                var queue = new Collections.Queue<TVertex>();
                 var bfs = new BreadthFirstSearchAlgorithm<TVertex, TEdge>(
-                    this.ResidualGraph,
+                    ResidualGraph,
                     queue,
-                    this.VertexColors
+                    VertexColors
                     );
                 using (vis.Attach(bfs))
-                    bfs.Compute(this.Source);
+                    bfs.Compute(Source);
 
-                if (this.VertexColors[this.Sink] != GraphColor.White)
-                    this.Augment(this.Source, this.Sink);
+                if (VertexColors[Sink] != GraphColor.White)
+                    Augment(Source, Sink);
             } // while
 
-            this.MaxFlow = 0;
+            MaxFlow = 0;
             foreach (var e in g.OutEdges(Source))
-                this.MaxFlow += (this.Capacities(e) - this.ResidualCapacities[e]);
+                MaxFlow += (Capacities(e) - ResidualCapacities[e]);
 
 
            

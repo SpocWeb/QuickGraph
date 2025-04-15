@@ -19,17 +19,17 @@ namespace QuickGraph
 
         public bool Reversed
         {
-            get { return this.reversed; }
+            get { return reversed; }
         }
 
         public TVertex Source
         {
-            get { return this.reversed ? this.Edge.Target : this.Edge.Source; }
+            get { return reversed ? Edge.Target : Edge.Source; }
         }
 
         public TVertex Target
         {
-            get { return this.reversed ? this.Edge.Source : this.Edge.Target; }
+            get { return reversed ? Edge.Source : Edge.Target; }
         }
     }
 

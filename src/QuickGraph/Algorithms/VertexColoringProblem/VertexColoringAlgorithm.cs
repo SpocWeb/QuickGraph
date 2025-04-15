@@ -30,7 +30,7 @@ namespace QuickGraph.Algorithms.GraphColoring.VertexColoring
         public event VertexAction<TVertex> ColourVertex;
         private void OnColourVertex(TVertex v)
         {
-            var eh = this.ColourVertex;
+            var eh = ColourVertex;
             if (eh != null)
                 eh(v);
         }
@@ -50,7 +50,7 @@ namespace QuickGraph.Algorithms.GraphColoring.VertexColoring
 
             // Assign the first color to first vertex
             vertexColor[firstVertex] = 0;
-            this.OnColourVertex(firstVertex);
+            OnColourVertex(firstVertex);
 
             /*
             A temporary array to store the available colors. True
@@ -90,7 +90,7 @@ namespace QuickGraph.Algorithms.GraphColoring.VertexColoring
 
                     // Assign the found color
                     vertexColor[vertexOfGraph] = usingColor;
-                    this.OnColourVertex(vertexOfGraph);
+                    OnColourVertex(vertexOfGraph);
 
                     // Reset the values back to false for the next iteration
                     foreach (var edgesOfProcessVertex in input.Graph.AdjacentEdges(vertexOfGraph))

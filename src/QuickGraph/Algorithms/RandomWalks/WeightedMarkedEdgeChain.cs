@@ -23,7 +23,7 @@ namespace QuickGraph.Algorithms.RandomWalks
                 // compute out-edge su
                 double outWeight = GetOutWeight(g, u);
                 // scale and get next edge
-                double r = this.Rand.NextDouble() * outWeight;
+                double r = Rand.NextDouble() * outWeight;
                 return TryGetSuccessor(g, u, r, out successor);
             }
 
@@ -36,7 +36,7 @@ namespace QuickGraph.Algorithms.RandomWalks
             // compute out-edge su
             double outWeight = GetWeights(edges);
             // scale and get next edge
-            double r = this.Rand.NextDouble() * outWeight;
+            double r = Rand.NextDouble() * outWeight;
             return TryGetSuccessor(edges, r, out sucessor);
         }
 

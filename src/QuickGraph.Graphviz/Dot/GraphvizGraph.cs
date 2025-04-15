@@ -52,7 +52,7 @@ namespace QuickGraph.Graphviz.Dot
         private Color backgroundColor = Color.White;
         private GraphvizClusterMode clusterRank = GraphvizClusterMode.Local;
         private string comment = null;
-        private System.Drawing.Font font = null;
+        private Font font = null;
         private Color fontColor = Color.Black;
         private bool isCentered = false;
         private bool isCompounded = false;
@@ -70,7 +70,7 @@ namespace QuickGraph.Graphviz.Dot
         private int nsLimit1 = -1;
         private GraphvizOutputMode outputOrder = GraphvizOutputMode.BreadthFirst;
         private GraphvizPageDirection pageDirection = GraphvizPageDirection.BL;
-        private System.Drawing.SizeF pageSize = new System.Drawing.SizeF(0, 0);
+        private SizeF pageSize = new SizeF(0, 0);
         private double quantum = 0;
         private GraphvizRankDirection rankDirection = GraphvizRankDirection.TB;
         private double rankSeparation = 0.5;
@@ -79,169 +79,169 @@ namespace QuickGraph.Graphviz.Dot
         private int rotate = 0;
         private int samplePoints = 8;
         private int searchSize = 30;
-        private System.Drawing.SizeF size = new System.Drawing.SizeF(0, 0);
+        private SizeF size = new SizeF(0, 0);
         private string styleSheet = null;
         private string url = null;
 
         public string ToDot()
         {
             Hashtable pairs = new Hashtable();
-            if (this.Url != null)
+            if (Url != null)
             {
-                pairs["URL"] = this.Url;
+                pairs["URL"] = Url;
             }
-            if (this.BackgroundColor != Color.White)
+            if (BackgroundColor != Color.White)
             {
-                pairs["bgcolor"] = this.BackgroundColor;
+                pairs["bgcolor"] = BackgroundColor;
             }
-            if (this.IsCentered)
+            if (IsCentered)
             {
                 pairs["center"] = true;
             }
-            if (this.ClusterRank != GraphvizClusterMode.Local)
+            if (ClusterRank != GraphvizClusterMode.Local)
             {
-                pairs["clusterrank"] = this.ClusterRank.ToString().ToLower();
+                pairs["clusterrank"] = ClusterRank.ToString().ToLower();
             }
-            if (this.Comment != null)
+            if (Comment != null)
             {
-                pairs["comment"] = this.Comment;
+                pairs["comment"] = Comment;
             }
-            if (this.IsCompounded)
+            if (IsCompounded)
             {
-                pairs["compound"] = this.IsCompounded;
+                pairs["compound"] = IsCompounded;
             }
-            if (this.IsConcentrated)
+            if (IsConcentrated)
             {
-                pairs["concentrated"] = this.IsConcentrated;
+                pairs["concentrated"] = IsConcentrated;
             }
-            if (this.Font != null)
+            if (Font != null)
             {
-                pairs["fontname"] = this.Font.Name;
-                pairs["fontsize"] = this.Font.SizeInPoints;
+                pairs["fontname"] = Font.Name;
+                pairs["fontsize"] = Font.SizeInPoints;
             }
-            if (this.FontColor != Color.Black)
+            if (FontColor != Color.Black)
             {
-                pairs["fontcolor"] = this.FontColor;
+                pairs["fontcolor"] = FontColor;
             }
-            if (this.Label != null)
+            if (Label != null)
             {
-                pairs["label"] = this.Label;
+                pairs["label"] = Label;
             }
-            if (this.LabelJustification != GraphvizLabelJustification.C)
+            if (LabelJustification != GraphvizLabelJustification.C)
             {
-                pairs["labeljust"] = this.LabelJustification.ToString().ToLower();
+                pairs["labeljust"] = LabelJustification.ToString().ToLower();
             }
-            if (this.LabelLocation != GraphvizLabelLocation.B)
+            if (LabelLocation != GraphvizLabelLocation.B)
             {
-                pairs["labelloc"] = this.LabelLocation.ToString().ToLower();
+                pairs["labelloc"] = LabelLocation.ToString().ToLower();
             }
-            if (this.Layers.Count != 0)
+            if (Layers.Count != 0)
             {
-                pairs["layers"] = this.Layers.ToDot();
+                pairs["layers"] = Layers.ToDot();
             }
-            if (this.McLimit != 1)
+            if (McLimit != 1)
             {
-                pairs["mclimit"] = this.McLimit;
+                pairs["mclimit"] = McLimit;
             }
-            if (this.NodeSeparation != 0.25)
+            if (NodeSeparation != 0.25)
             {
-                pairs["nodesep"] = this.NodeSeparation;
+                pairs["nodesep"] = NodeSeparation;
             }
-            if (this.IsNormalized)
+            if (IsNormalized)
             {
-                pairs["normalize"] = this.IsNormalized;
+                pairs["normalize"] = IsNormalized;
             }
-            if (this.NsLimit > 0)
+            if (NsLimit > 0)
             {
-                pairs["nslimit"] = this.NsLimit;
+                pairs["nslimit"] = NsLimit;
             }
-            if (this.NsLimit1 > 0)
+            if (NsLimit1 > 0)
             {
-                pairs["nslimit1"] = this.NsLimit1;
+                pairs["nslimit1"] = NsLimit1;
             }
-            if (this.OutputOrder != GraphvizOutputMode.BreadthFirst)
+            if (OutputOrder != GraphvizOutputMode.BreadthFirst)
             {
-                pairs["outputorder"] = this.OutputOrder.ToString().ToLower();
+                pairs["outputorder"] = OutputOrder.ToString().ToLower();
             }
-            if (!this.PageSize.IsEmpty)
+            if (!PageSize.IsEmpty)
             {
-                pairs["page"] = string.Format("{0},{1}", this.PageSize.Width, this.PageSize.Height);
+                pairs["page"] = string.Format("{0},{1}", PageSize.Width, PageSize.Height);
             }
-            if (this.PageDirection != GraphvizPageDirection.BL)
+            if (PageDirection != GraphvizPageDirection.BL)
             {
-                pairs["pagedir"] = this.PageDirection.ToString().ToLower();
+                pairs["pagedir"] = PageDirection.ToString().ToLower();
             }
-            if (this.Quantum > 0)
+            if (Quantum > 0)
             {
-                pairs["quantum"] = this.Quantum;
+                pairs["quantum"] = Quantum;
             }
-            if (this.RankSeparation != 0.5)
+            if (RankSeparation != 0.5)
             {
-                pairs["ranksep"] = this.RankSeparation;
+                pairs["ranksep"] = RankSeparation;
             }
-            if (this.Ratio != GraphvizRatioMode.Auto)
+            if (Ratio != GraphvizRatioMode.Auto)
             {
-                pairs["ratio"] = this.Ratio.ToString().ToLower();
+                pairs["ratio"] = Ratio.ToString().ToLower();
             }
-            if (this.IsReMinCross)
+            if (IsReMinCross)
             {
-                pairs["remincross"] = this.IsReMinCross;
+                pairs["remincross"] = IsReMinCross;
             }
-            if (this.Resolution != 0.96)
+            if (Resolution != 0.96)
             {
-                pairs["resolution"] = this.Resolution;
+                pairs["resolution"] = Resolution;
             }
-            if (this.Rotate != 0)
+            if (Rotate != 0)
             {
-                pairs["rotate"] = this.Rotate;
+                pairs["rotate"] = Rotate;
             }
-            else if (this.IsLandscape)
+            else if (IsLandscape)
             {
                 pairs["orientation"] = "[1L]*";
             }
-            if (this.SamplePoints != 8)
+            if (SamplePoints != 8)
             {
-                pairs["samplepoints"] = this.SamplePoints;
+                pairs["samplepoints"] = SamplePoints;
             }
-            if (this.SearchSize != 30)
+            if (SearchSize != 30)
             {
-                pairs["searchsize"] = this.SearchSize;
+                pairs["searchsize"] = SearchSize;
             }
-            if (!this.Size.IsEmpty)
+            if (!Size.IsEmpty)
             {
-                pairs["size"] = string.Format("{0},{1}", this.Size.Width, this.Size.Height);
+                pairs["size"] = string.Format("{0},{1}", Size.Width, Size.Height);
             }
-            if (this.StyleSheet != null)
+            if (StyleSheet != null)
             {
-                pairs["stylesheet"] = this.StyleSheet;
+                pairs["stylesheet"] = StyleSheet;
             }
-            if (this.RankDirection != GraphvizRankDirection.TB)
+            if (RankDirection != GraphvizRankDirection.TB)
             {
-                pairs["rankdir"] = this.RankDirection;
+                pairs["rankdir"] = RankDirection;
             }
             return pairs.GenerateDotForGraph();
         }
 
         public override string ToString()
         {
-            return this.ToDot();
+            return ToDot();
         }
 
         public string Name
         {
-            get { return this.name; }
-            set { this.name = value; }
+            get { return name; }
+            set { name = value; }
         }
 
         public Color BackgroundColor
         {
             get
             {
-                return this.backgroundColor;
+                return backgroundColor;
             }
             set
             {
-                this.backgroundColor = value;
+                backgroundColor = value;
             }
         }
 
@@ -249,11 +249,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.clusterRank;
+                return clusterRank;
             }
             set
             {
-                this.clusterRank = value;
+                clusterRank = value;
             }
         }
 
@@ -261,23 +261,23 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.comment;
+                return comment;
             }
             set
             {
-                this.comment = value;
+                comment = value;
             }
         }
 
-        public System.Drawing.Font Font
+        public Font Font
         {
             get
             {
-                return this.font;
+                return font;
             }
             set
             {
-                this.font = value;
+                font = value;
             }
         }
 
@@ -285,11 +285,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.fontColor;
+                return fontColor;
             }
             set
             {
-                this.fontColor = value;
+                fontColor = value;
             }
         }
 
@@ -297,11 +297,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.isCentered;
+                return isCentered;
             }
             set
             {
-                this.isCentered = value;
+                isCentered = value;
             }
         }
 
@@ -309,11 +309,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.isCompounded;
+                return isCompounded;
             }
             set
             {
-                this.isCompounded = value;
+                isCompounded = value;
             }
         }
 
@@ -321,11 +321,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.isConcentrated;
+                return isConcentrated;
             }
             set
             {
-                this.isConcentrated = value;
+                isConcentrated = value;
             }
         }
 
@@ -333,11 +333,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.isLandscape;
+                return isLandscape;
             }
             set
             {
-                this.isLandscape = value;
+                isLandscape = value;
             }
         }
 
@@ -345,11 +345,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.isNormalized;
+                return isNormalized;
             }
             set
             {
-                this.isNormalized = value;
+                isNormalized = value;
             }
         }
 
@@ -357,11 +357,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.isReMinCross;
+                return isReMinCross;
             }
             set
             {
-                this.isReMinCross = value;
+                isReMinCross = value;
             }
         }
 
@@ -369,11 +369,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.label;
+                return label;
             }
             set
             {
-                this.label = value;
+                label = value;
             }
         }
 
@@ -381,11 +381,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.labelJustification;
+                return labelJustification;
             }
             set
             {
-                this.labelJustification = value;
+                labelJustification = value;
             }
         }
 
@@ -393,11 +393,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.labelLocation;
+                return labelLocation;
             }
             set
             {
-                this.labelLocation = value;
+                labelLocation = value;
             }
         }
 
@@ -405,7 +405,7 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.layers;
+                return layers;
             }
         }
 
@@ -413,11 +413,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.mcLimit;
+                return mcLimit;
             }
             set
             {
-                this.mcLimit = value;
+                mcLimit = value;
             }
         }
 
@@ -425,11 +425,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.nodeSeparation;
+                return nodeSeparation;
             }
             set
             {
-                this.nodeSeparation = value;
+                nodeSeparation = value;
             }
         }
 
@@ -437,11 +437,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.nsLimit;
+                return nsLimit;
             }
             set
             {
-                this.nsLimit = value;
+                nsLimit = value;
             }
         }
 
@@ -449,11 +449,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.nsLimit1;
+                return nsLimit1;
             }
             set
             {
-                this.nsLimit1 = value;
+                nsLimit1 = value;
             }
         }
 
@@ -461,11 +461,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.outputOrder;
+                return outputOrder;
             }
             set
             {
-                this.outputOrder = value;
+                outputOrder = value;
             }
         }
 
@@ -473,23 +473,23 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.pageDirection;
+                return pageDirection;
             }
             set
             {
-                this.pageDirection = value;
+                pageDirection = value;
             }
         }
 
-        public System.Drawing.SizeF PageSize
+        public SizeF PageSize
         {
             get
             {
-                return this.pageSize;
+                return pageSize;
             }
             set
             {
-                this.pageSize = value;
+                pageSize = value;
             }
         }
 
@@ -497,11 +497,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.quantum;
+                return quantum;
             }
             set
             {
-                this.quantum = value;
+                quantum = value;
             }
         }
 
@@ -509,11 +509,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.rankDirection;
+                return rankDirection;
             }
             set
             {
-                this.rankDirection = value;
+                rankDirection = value;
             }
         }
 
@@ -521,11 +521,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.rankSeparation;
+                return rankSeparation;
             }
             set
             {
-                this.rankSeparation = value;
+                rankSeparation = value;
             }
         }
 
@@ -533,11 +533,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.ratio;
+                return ratio;
             }
             set
             {
-                this.ratio = value;
+                ratio = value;
             }
         }
 
@@ -545,11 +545,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.resolution;
+                return resolution;
             }
             set
             {
-                this.resolution = value;
+                resolution = value;
             }
         }
 
@@ -557,11 +557,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.rotate;
+                return rotate;
             }
             set
             {
-                this.rotate = value;
+                rotate = value;
             }
         }
 
@@ -569,11 +569,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.samplePoints;
+                return samplePoints;
             }
             set
             {
-                this.samplePoints = value;
+                samplePoints = value;
             }
         }
 
@@ -581,23 +581,23 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.searchSize;
+                return searchSize;
             }
             set
             {
-                this.searchSize = value;
+                searchSize = value;
             }
         }
 
-        public System.Drawing.SizeF Size
+        public SizeF Size
         {
             get
             {
-                return this.size;
+                return size;
             }
             set
             {
-                this.size = value;
+                size = value;
             }
         }
 
@@ -605,11 +605,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.styleSheet;
+                return styleSheet;
             }
             set
             {
-                this.styleSheet = value;
+                styleSheet = value;
             }
         }
 
@@ -617,11 +617,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.url;
+                return url;
             }
             set
             {
-                this.url = value;
+                url = value;
             }
         }
     }

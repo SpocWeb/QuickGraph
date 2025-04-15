@@ -17,10 +17,10 @@ namespace QuickGraph.Serialization
             PropertyInfo property,
             string name)
         {
-            this.Property = property;
-            this.Name = name;
-            this._value = null;
-            this.hasValue = false;
+            Property = property;
+            Name = name;
+            _value = null;
+            hasValue = false;
         }
 
         public PropertySerializationInfo(
@@ -28,16 +28,16 @@ namespace QuickGraph.Serialization
             string name,
             object value)
         {
-            this.Property = property;
-            this.Name = name;
-            this._value = value;
-            this.hasValue = this._value != null;
+            Property = property;
+            Name = name;
+            _value = value;
+            hasValue = _value != null;
         }
 
         public bool TryGetDefaultValue(out object value)
         {
-            value = this._value;
-            return this.hasValue;
+            value = _value;
+            return hasValue;
         }
     }
 

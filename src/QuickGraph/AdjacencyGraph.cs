@@ -52,9 +52,9 @@ namespace QuickGraph
         {
             this.allowParallelEdges = allowParallelEdges;
             if (capacity > -1)
-                this.vertexEdges = new VertexEdgeDictionary<TVertex, TEdge>(capacity);
+                vertexEdges = new VertexEdgeDictionary<TVertex, TEdge>(capacity);
             else
-                this.vertexEdges = new VertexEdgeDictionary<TVertex, TEdge>();
+                vertexEdges = new VertexEdgeDictionary<TVertex, TEdge>();
             this.edgeCapacity = edgeCapacity;
         }
 
@@ -66,25 +66,25 @@ namespace QuickGraph
         {
             Contract.Requires(vertexEdgesDictionaryFactory != null);
             this.allowParallelEdges = allowParallelEdges;
-            this.vertexEdges = vertexEdgesDictionaryFactory(capacity);
+            vertexEdges = vertexEdgesDictionaryFactory(capacity);
             this.edgeCapacity = edgeCapacity;
         }
 
         public bool IsDirected
         {
-            get { return this.isDirected; }
+            get { return isDirected; }
         }
 
         public bool AllowParallelEdges
         {
             [Pure]
-            get { return this.allowParallelEdges; }
+            get { return allowParallelEdges; }
         }
 
         public int EdgeCapacity
         {
-            get { return this.edgeCapacity; }
-            set { this.edgeCapacity = value; }
+            get { return edgeCapacity; }
+            set { edgeCapacity = value; }
         }
 
         public static Type EdgeType
@@ -94,17 +94,17 @@ namespace QuickGraph
 
         public bool IsVerticesEmpty
         {
-            get { return this.vertexEdges.Count == 0; }
+            get { return vertexEdges.Count == 0; }
         }
 
         public int VertexCount
         {
-            get { return this.vertexEdges.Count; }
+            get { return vertexEdges.Count; }
         }
 
         public virtual IEnumerable<TVertex> Vertices
         {
-            get { return this.vertexEdges.Keys; }
+            get { return vertexEdges.Keys; }
         }
 
         [Pure]
@@ -121,23 +121,23 @@ namespace QuickGraph
 
         public bool IsOutEdgesEmpty(TVertex v)
         {
-            return this.vertexEdges[v].Count == 0;
+            return vertexEdges[v].Count == 0;
         }
 
         public int OutDegree(TVertex v)
         {
-            return this.vertexEdges[v].Count;
+            return vertexEdges[v].Count;
         }
 
         public virtual IEnumerable<TEdge> OutEdges(TVertex v)
         {
-            return this.vertexEdges[v];
+            return vertexEdges[v];
         }
 
         public virtual bool TryGetOutEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             IEdgeList<TVertex, TEdge> list;
-            if (this.vertexEdges.TryGetValue(v, out list))
+            if (vertexEdges.TryGetValue(v, out list))
             {
                 edges = list;
                 return true;
@@ -149,7 +149,7 @@ namespace QuickGraph
 
         public TEdge OutEdge(TVertex v, int index)
         {
-            return this.vertexEdges[v][index];
+            return vertexEdges[v][index];
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace QuickGraph
         public bool IsEdgesEmpty
         {
             [Pure]
-            get { return this.edgeCount == 0; }
+            get { return edgeCount == 0; }
         }
 
         /// <summary>
@@ -172,14 +172,14 @@ namespace QuickGraph
         {
             get 
             {
-                return this.edgeCount; 
+                return edgeCount; 
             }
         }
 
         [ContractInvariantMethod]
         void ObjectInvariant()
         {
-            Contract.Invariant(this.edgeCount >= 0);
+            Contract.Invariant(edgeCount >= 0);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace QuickGraph
             [Pure]
             get
             {
-                foreach (var edges in this.vertexEdges.Values)
+                foreach (var edges in vertexEdges.Values)
                     foreach (var edge in edges)
                         yield return edge;
             }
@@ -201,7 +201,7 @@ namespace QuickGraph
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             IEnumerable<TEdge> outEdges;
-            if (!this.TryGetOutEdges(source, out outEdges))
+            if (!TryGetOutEdges(source, out outEdges))
                 return false;
             foreach (var outEdge in outEdges)
                 if (outEdge.Target.Equals(target))
@@ -214,7 +214,7 @@ namespace QuickGraph
         {
             IEdgeList<TVertex, TEdge> edges;
             return 
-                this.vertexEdges.TryGetValue(edge.Source, out edges) &&
+                vertexEdges.TryGetValue(edge.Source, out edges) &&
                 edges.Contains(edge);
         }
 
@@ -225,7 +225,7 @@ namespace QuickGraph
             out TEdge edge)
         {
             IEdgeList<TVertex, TEdge> edgeList;
-            if (this.vertexEdges.TryGetValue(source, out edgeList) &&
+            if (vertexEdges.TryGetValue(source, out edgeList) &&
                 edgeList.Count > 0)
             {
                 foreach (var e in edgeList)
@@ -247,7 +247,7 @@ namespace QuickGraph
             TVertex target,
             out IEnumerable<TEdge> edges)
         {
-            if (this.vertexEdges.TryGetValue(source, out var outEdges))
+            if (vertexEdges.TryGetValue(source, out var outEdges))
             {
                 List<TEdge> list = new List<TEdge>(outEdges.Count);
                 foreach (var edge in outEdges)
@@ -266,7 +266,7 @@ namespace QuickGraph
 
         public virtual bool AddVertex(TVertex v)
         {
-            if (this.ContainsVertex(v))
+            if (ContainsVertex(v))
                 return false;
             AddEdges(v);
             return true;
@@ -274,7 +274,7 @@ namespace QuickGraph
 
         protected IEdgeList<TVertex, TEdge> GetEdges(TVertex v)
         {
-            var edges = this.TryGetEdges(v);
+            var edges = TryGetEdges(v);
             if (edges != null)
                 return edges;
             return AddEdges(v);
@@ -282,11 +282,11 @@ namespace QuickGraph
 
         protected EdgeList<TVertex, TEdge> AddEdges(TVertex v)
         {
-            var edges = (this.EdgeCapacity > 0)
-                ? new EdgeList<TVertex,TEdge>(this.EdgeCapacity)
+            var edges = (EdgeCapacity > 0)
+                ? new EdgeList<TVertex,TEdge>(EdgeCapacity)
                 : new EdgeList<TVertex, TEdge>();
-            this.vertexEdges.Add(v, edges);
-            this.OnVertexAdded(v);
+            vertexEdges.Add(v, edges);
+            OnVertexAdded(v);
             return edges;
         }
 
@@ -294,7 +294,7 @@ namespace QuickGraph
         {
             int count = 0;
             foreach (var v in vertices)
-                if (this.AddVertex(v))
+                if (AddVertex(v))
                     count++;
             return count;
         }
@@ -304,29 +304,29 @@ namespace QuickGraph
         {
             Contract.Requires(args != null);
 
-            var eh = this.VertexAdded;
+            var eh = VertexAdded;
             if (eh != null)
                 eh(args);
         }
 
         public virtual bool RemoveVertex(TVertex v)
         {
-            if (!this.ContainsVertex(v))
+            if (!ContainsVertex(v))
                 return false;
             // remove outedges
             {
-                var edges = this.vertexEdges[v];
-                if (this.EdgeRemoved != null) // lazily notify
+                var edges = vertexEdges[v];
+                if (EdgeRemoved != null) // lazily notify
                 {
                     foreach (var edge in edges)
-                        this.OnEdgeRemoved(edge);
+                        OnEdgeRemoved(edge);
                 }
-                this.edgeCount -= edges.Count;
+                edgeCount -= edges.Count;
                 edges.Clear();
             }
 
             // iterage over edges and remove each edge touching the vertex
-            foreach (var kv in this.vertexEdges)
+            foreach (var kv in vertexEdges)
             {
                 if (kv.Key.Equals(v)) continue; // we've already 
                 // collect edge to remove
@@ -335,15 +335,15 @@ namespace QuickGraph
                     if (edge.Target.Equals(v))
                     {
                         kv.Value.Remove(edge);
-                        this.OnEdgeRemoved(edge);
-                        this.edgeCount--;
+                        OnEdgeRemoved(edge);
+                        edgeCount--;
                     }
                 }
             }
 
-            Contract.Assert(this.edgeCount >= 0);
-            this.vertexEdges.Remove(v);
-            this.OnVertexRemoved(v);
+            Contract.Assert(edgeCount >= 0);
+            vertexEdges.Remove(v);
+            OnVertexRemoved(v);
 
             return true;
         }
@@ -353,7 +353,7 @@ namespace QuickGraph
         {
             Contract.Requires(args != null);
 
-            var eh = this.VertexRemoved;
+            var eh = VertexRemoved;
             if (eh != null)
                 eh(args);
         }
@@ -361,21 +361,21 @@ namespace QuickGraph
         public int RemoveVertexIf(VertexPredicate<TVertex> predicate)
         {
             var vertices = new VertexList<TVertex>();
-            foreach (var v in this.Vertices)
+            foreach (var v in Vertices)
                 if (predicate(v))
                     vertices.Add(v);
 
             foreach (var v in vertices)
-                this.RemoveVertex(v);
+                RemoveVertex(v);
 
             return vertices.Count;
         }
 
         public virtual bool AddVerticesAndEdge(TEdge e)
         {
-            this.AddVertex(e.Source);
-            this.AddVertex(e.Target);
-            return this.AddEdge(e);
+            AddVertex(e.Source);
+            AddVertex(e.Target);
+            return AddEdge(e);
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace QuickGraph
         {
             int count = 0;
             foreach (var edge in edges)
-                if (this.AddVerticesAndEdge(edge))
+                if (AddVerticesAndEdge(edge))
                     count++;
             return count;
         }
@@ -402,20 +402,20 @@ namespace QuickGraph
             Contract.Assert(e != null);
             if (e == null)
             {
-                throw new System.ArgumentException("Edge can not be null.");
+                throw new ArgumentException("Edge can not be null.");
                 //return false;
             }
-            if (!this.AllowParallelEdges)
+            if (!AllowParallelEdges)
             {
-                if (this.ContainsEdge(e.Source, e.Target))
+                if (ContainsEdge(e.Source, e.Target))
                     return false;
             }
 
             var edges = GetEdges(e.Source);
             edges.Add(e);
-            this.edgeCount++;
+            edgeCount++;
 
-            this.OnEdgeAdded(e);
+            OnEdgeAdded(e);
 
             return true;
         }
@@ -424,7 +424,7 @@ namespace QuickGraph
         {
             int count = 0;
             foreach (var edge in edges)
-                if (this.AddEdge(edge))
+                if (AddEdge(edge))
                     count++;
             return count;
         }
@@ -432,7 +432,7 @@ namespace QuickGraph
         public event EdgeAction<TVertex, TEdge> EdgeAdded;
         protected virtual void OnEdgeAdded(TEdge args)
         {
-            var eh = this.EdgeAdded;
+            var eh = EdgeAdded;
             if (eh != null)
                 eh(args);
         }
@@ -440,12 +440,12 @@ namespace QuickGraph
         public virtual bool RemoveEdge(TEdge e)
         {
             IEdgeList<TVertex, TEdge> edges;
-            if (this.vertexEdges.TryGetValue(e.Source, out edges) &&
+            if (vertexEdges.TryGetValue(e.Source, out edges) &&
                 edges.Remove(e))
             {
-                this.edgeCount--;
-                Contract.Assert(this.edgeCount >= 0);
-                this.OnEdgeRemoved(e);
+                edgeCount--;
+                Contract.Assert(edgeCount >= 0);
+                OnEdgeRemoved(e);
                 return true;
             }
             else
@@ -455,7 +455,7 @@ namespace QuickGraph
         public event EdgeAction<TVertex, TEdge> EdgeRemoved;
         protected virtual void OnEdgeRemoved(TEdge args)
         {
-            var eh = this.EdgeRemoved;
+            var eh = EdgeRemoved;
             if (eh != null)
                 eh(args);
         }
@@ -463,37 +463,37 @@ namespace QuickGraph
         public int RemoveEdgeIf(EdgePredicate<TVertex, TEdge> predicate)
         {
             var edges = new EdgeList<TVertex, TEdge>();
-            foreach (var edge in this.Edges)
+            foreach (var edge in Edges)
                 if (predicate(edge))
                     edges.Add(edge);
 
             foreach (var edge in edges)
             {
-                this.OnEdgeRemoved(edge);
-                this.vertexEdges[edge.Source].Remove(edge);
+                OnEdgeRemoved(edge);
+                vertexEdges[edge.Source].Remove(edge);
             }
 
-            this.edgeCount -= edges.Count;
+            edgeCount -= edges.Count;
 
             return edges.Count;
         }
 
         public void ClearOutEdges(TVertex v)
         {
-            var edges = this.vertexEdges[v];
+            var edges = vertexEdges[v];
             int count = edges.Count;
-            if (this.EdgeRemoved != null) // call only if someone is listening
+            if (EdgeRemoved != null) // call only if someone is listening
             {
                 foreach (var edge in edges)
-                    this.OnEdgeRemoved(edge);
+                    OnEdgeRemoved(edge);
             }
             edges.Clear();
-            this.edgeCount -= count;
+            edgeCount -= count;
         }
 
         public int RemoveOutEdgeIf(TVertex v, EdgePredicate<TVertex, TEdge> predicate)
         {
-            var edges = this.vertexEdges[v];
+            var edges = vertexEdges[v];
             var edgeToRemove = new EdgeList<TVertex,TEdge>(edges.Count);
             foreach (var edge in edges)
                 if (predicate(edge))
@@ -502,23 +502,23 @@ namespace QuickGraph
             foreach (var edge in edgeToRemove)
             {
                 edges.Remove(edge);
-                this.OnEdgeRemoved(edge);
+                OnEdgeRemoved(edge);
             }
-            this.edgeCount -= edgeToRemove.Count;
+            edgeCount -= edgeToRemove.Count;
 
             return edgeToRemove.Count;
         }
 
         public void TrimEdgeExcess()
         {
-            foreach (var edges in this.vertexEdges.Values)
+            foreach (var edges in vertexEdges.Values)
                 edges.TrimExcess();
         }
 
         public void Clear()
         {
-            this.vertexEdges.Clear();
-            this.edgeCount = 0;
+            vertexEdges.Clear();
+            edgeCount = 0;
         }
 
         public static AdjacencyGraph<TVertex, TEdge> LoadDot(string dotSource,
@@ -553,17 +553,17 @@ namespace QuickGraph
         public AdjacencyGraph<TVertex, TEdge> Clone()
         {
             return new AdjacencyGraph<TVertex, TEdge>(
-                this.vertexEdges.Clone(),
-                this.edgeCount,
-                this.edgeCapacity,
-                this.allowParallelEdges
+                vertexEdges.Clone(),
+                edgeCount,
+                edgeCapacity,
+                allowParallelEdges
                 );
         }
         
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 #endif
         #endregion

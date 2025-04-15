@@ -173,11 +173,11 @@ namespace QuickGraph.Algorithms.TSP
                 return false;
             }
 
-            TEdge edgeForSplit = this.chooseEdgeForSplit();
+            TEdge edgeForSplit = chooseEdgeForSplit();
             var v1 = edgeForSplit.Source;
             var v2 = edgeForSplit.Target;
 
-            var graphTake = this._graph.Clone();
+            var graphTake = _graph.Clone();
             var weightsTake = new Dictionary<EquatableEdge<TVertex>, double>(_weight);
             var reverseEdge = new EquatableEdge<TVertex>(edgeForSplit.Target, edgeForSplit.Source);
             weightsTake.Remove(reverseEdge);
@@ -200,7 +200,7 @@ namespace QuickGraph.Algorithms.TSP
             taskTake = new Task<TVertex, TEdge>(graphTake, weightsTake, pathTake, MinCost);
             taskTake.TaskName = "Take" + edgeForSplit.ToString();
 
-            var graphDrop = this._graph.Clone();
+            var graphDrop = _graph.Clone();
             var weightsDrop = new Dictionary<EquatableEdge<TVertex>, double>(_weight);
             weightsDrop.Remove(edgeForSplit);
             graphDrop.RemoveEdge(edgeForSplit);

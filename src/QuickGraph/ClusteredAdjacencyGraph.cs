@@ -27,10 +27,10 @@ namespace QuickGraph
         {
             if (wrapped == null)
                 throw new ArgumentNullException("parent");
-            this.parent = null;
+            parent = null;
             this.wrapped = wrapped;
-            this.clusters = new ArrayList();
-            this.colapsed = false;
+            clusters = new ArrayList();
+            colapsed = false;
         }
 
 
@@ -39,8 +39,8 @@ namespace QuickGraph
             if (parent == null)
                 throw new ArgumentNullException("parent");
             this.parent = parent;
-            this.wrapped = new AdjacencyGraph<TVertex, TEdge>(parent.AllowParallelEdges);
-            this.clusters = new ArrayList();
+            wrapped = new AdjacencyGraph<TVertex, TEdge>(parent.AllowParallelEdges);
+            clusters = new ArrayList();
         }
 
 
@@ -260,7 +260,7 @@ namespace QuickGraph
 
         IClusteredGraph IClusteredGraph.AddCluster()
         {
-            return this.AddCluster();
+            return AddCluster();
         }
 
 
@@ -286,7 +286,7 @@ namespace QuickGraph
         {
             int count = 0;
             foreach (var v in vertices)
-                if (this.AddVertex(v))
+                if (AddVertex(v))
                     count++;
             return count;
         }
@@ -321,15 +321,15 @@ namespace QuickGraph
                 if (predicate(v))
                     vertices.Add(v);
             foreach (var v in vertices)
-                this.RemoveVertex(v);
+                RemoveVertex(v);
             return vertices.Count;
         }
 
         public virtual bool AddVerticesAndEdge(TEdge e)
         {
-            this.AddVertex(e.Source);
-            this.AddVertex(e.Target);
-            return this.AddEdge(e);
+            AddVertex(e.Source);
+            AddVertex(e.Target);
+            return AddEdge(e);
         }
 
 
@@ -337,7 +337,7 @@ namespace QuickGraph
         {
             int count = 0;
             foreach (var edge in edges)
-                if (this.AddVerticesAndEdge(edge))
+                if (AddVerticesAndEdge(edge))
                     count++;
             return count;
         }
@@ -354,7 +354,7 @@ namespace QuickGraph
         {
             int count = 0;
             foreach (var edge in edges)
-                if (this.AddEdge(edge))
+                if (AddEdge(edge))
                     count++;
             return count;
         }
@@ -389,7 +389,7 @@ namespace QuickGraph
                 if (predicate(edge))
                     edges.Add(edge);
             foreach (var edge in edges)
-                this.RemoveEdge(edge);
+                RemoveEdge(edge);
             return edges.Count;
         }
 
@@ -410,7 +410,7 @@ namespace QuickGraph
         public void Clear()
         {
             wrapped.Clear();
-            this.clusters.Clear();
+            clusters.Clear();
         }
     }
 }

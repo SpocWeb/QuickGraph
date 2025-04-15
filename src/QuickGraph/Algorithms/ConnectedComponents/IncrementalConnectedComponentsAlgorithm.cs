@@ -22,28 +22,28 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 
         protected override void InternalCompute()
         {
-            this.ds = new ForestDisjointSet<TVertex>(this.VisitedGraph.VertexCount);
+            ds = new ForestDisjointSet<TVertex>(VisitedGraph.VertexCount);
             // initialize 1 set per vertex
-            foreach (var v in this.VisitedGraph.Vertices)
-                this.ds.MakeSet(v);
+            foreach (var v in VisitedGraph.Vertices)
+                ds.MakeSet(v);
 
             // join existing edges
-            foreach (var e in this.VisitedGraph.Edges)
-                this.ds.Union(e.Source, e.Target);
+            foreach (var e in VisitedGraph.Edges)
+                ds.Union(e.Source, e.Target);
 
             // unhook/hook to graph event
-            this.VisitedGraph.EdgeAdded += VisitedGraph_EdgeAdded;
-            this.VisitedGraph.EdgeRemoved += VisitedGraph_EdgeRemoved;
-            this.VisitedGraph.VertexAdded += VisitedGraph_VertexAdded;
-            this.VisitedGraph.VertexRemoved += VisitedGraph_VertexRemoved;
+            VisitedGraph.EdgeAdded += VisitedGraph_EdgeAdded;
+            VisitedGraph.EdgeRemoved += VisitedGraph_EdgeRemoved;
+            VisitedGraph.VertexAdded += VisitedGraph_VertexAdded;
+            VisitedGraph.VertexRemoved += VisitedGraph_VertexRemoved;
         }
 
         public int ComponentCount
         {
             get
             {
-                Contract.Assert(this.ds != null);
-                return this.ds.SetCount;
+                Contract.Assert(ds != null);
+                return ds.SetCount;
             }
         }
 
@@ -56,35 +56,35 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         public KeyValuePair<int, IDictionary<TVertex, int>> GetComponents()
         {
             Contract.Ensures(
-                Contract.Result<KeyValuePair<int, IDictionary<TVertex, int>>>().Key == this.ComponentCount);
+                Contract.Result<KeyValuePair<int, IDictionary<TVertex, int>>>().Key == ComponentCount);
             Contract.Ensures(
-                Contract.Result<KeyValuePair<int, IDictionary<TVertex, int>>>().Value.Count == this.VisitedGraph.VertexCount);
+                Contract.Result<KeyValuePair<int, IDictionary<TVertex, int>>>().Value.Count == VisitedGraph.VertexCount);
             // TODO: more contracts
-            Contract.Assert(this.ds != null);
+            Contract.Assert(ds != null);
             
-            var representatives = new Dictionary<TVertex, int>(this.ds.SetCount);
-            if (this.components == null)
-                this.components = new Dictionary<TVertex, int>(this.VisitedGraph.VertexCount);
-            foreach (var v in this.VisitedGraph.Vertices)
+            var representatives = new Dictionary<TVertex, int>(ds.SetCount);
+            if (components == null)
+                components = new Dictionary<TVertex, int>(VisitedGraph.VertexCount);
+            foreach (var v in VisitedGraph.Vertices)
             {
-                var representative = this.ds.FindSet(v);
+                var representative = ds.FindSet(v);
                 int index;
                 if (!representatives.TryGetValue(representative, out index))
                     representatives[representative] = index = representatives.Count;
                 components[v] = index;
             }
 
-            return new KeyValuePair<int, IDictionary<TVertex, int>>(this.ds.SetCount, components);
+            return new KeyValuePair<int, IDictionary<TVertex, int>>(ds.SetCount, components);
         }
 
         void VisitedGraph_VertexAdded(TVertex v)
         {
-            this.ds.MakeSet(v);
+            ds.MakeSet(v);
         }
 
         void VisitedGraph_EdgeAdded(TEdge e)
         {
-            this.ds.Union(e.Source, e.Target);
+            ds.Union(e.Source, e.Target);
         }
 
         static void VisitedGraph_VertexRemoved(TVertex e)

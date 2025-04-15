@@ -24,7 +24,7 @@ namespace QuickGraph.Collections
 
         public static BinaryHeap<int, int> ExampleHeap01()
         {
-            var heap = BinaryHeapFactory.Create(20);
+            var heap = Create(20);
             heap.Add(1, 0);
             heap.Add(2, 1);
             heap.Add(1, 2);
@@ -49,7 +49,7 @@ namespace QuickGraph.Collections
 
         public static BinaryHeap<int, int> ExampleHeapFromTopologicalSortOfDCT8()
         {
-            var heap = BinaryHeapFactory.Create(20);
+            var heap = Create(20);
             heap.Add(0, 255);
             heap.Add(0, 256);
             heap.Add(0, 257);

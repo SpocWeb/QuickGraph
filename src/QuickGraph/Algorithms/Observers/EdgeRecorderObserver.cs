@@ -36,7 +36,7 @@ namespace QuickGraph.Algorithms.Observers
         {
             get
             {
-                return this.edges;
+                return edges;
             }
         }
 
@@ -50,7 +50,7 @@ namespace QuickGraph.Algorithms.Observers
         {
             Contract.Requires(args != null);
 
-            this.Edges.Add(args);
+            Edges.Add(args);
         }
     }
 }

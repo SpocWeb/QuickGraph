@@ -28,13 +28,13 @@ namespace QuickGraph
         {
             get
             {
-                return this.edgeEqualityComparer;
+                return edgeEqualityComparer;
             }
         }
 
         public IBidirectionalGraph<TVertex, TEdge> VisitedGraph
         {
-            get { return this.visitedGraph; }
+            get { return visitedGraph; }
         }
 
         #region IUndirectedGraph<Vertex,Edge> Members
@@ -42,9 +42,9 @@ namespace QuickGraph
         [Pure]
         public IEnumerable<TEdge> AdjacentEdges(TVertex v)
         {
-            foreach (var e in this.VisitedGraph.OutEdges(v))
+            foreach (var e in VisitedGraph.OutEdges(v))
                 yield return e;
-            foreach (var e in this.VisitedGraph.InEdges(v))
+            foreach (var e in VisitedGraph.InEdges(v))
             {
                 // we skip selfedges here since
                 // we already did those in the outedge run
@@ -57,13 +57,13 @@ namespace QuickGraph
         [Pure]
         public int AdjacentDegree(TVertex v)
         {
-            return this.VisitedGraph.Degree(v);
+            return VisitedGraph.Degree(v);
         }
 
         [Pure]
         public bool IsAdjacentEdgesEmpty(TVertex v)
         {
-            return this.VisitedGraph.IsOutEdgesEmpty(v) && this.VisitedGraph.IsInEdgesEmpty(v);
+            return VisitedGraph.IsOutEdgesEmpty(v) && VisitedGraph.IsInEdgesEmpty(v);
         }
 
         [Pure]
@@ -76,14 +76,14 @@ namespace QuickGraph
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             TEdge edge;
-            return this.TryGetEdge(source, target, out edge);
+            return TryGetEdge(source, target, out edge);
         }
 
         public bool TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
-            foreach (var e in this.AdjacentEdges(source))
+            foreach (var e in AdjacentEdges(source))
             {
-                if (this.edgeEqualityComparer(e, source, target))
+                if (edgeEqualityComparer(e, source, target))
                 {
                     edge = e;
                     return true;
@@ -99,23 +99,23 @@ namespace QuickGraph
 
         public bool IsVerticesEmpty
         {
-            get  { return this.VisitedGraph.IsVerticesEmpty; }
+            get  { return VisitedGraph.IsVerticesEmpty; }
         }
 
         public int VertexCount
         {
-            get { return this.VisitedGraph.VertexCount; }
+            get { return VisitedGraph.VertexCount; }
         }
 
         public IEnumerable<TVertex> Vertices
         {
-            get { return this.VisitedGraph.Vertices; }
+            get { return VisitedGraph.Vertices; }
         }
 
         [Pure]
         public bool ContainsVertex(TVertex vertex)
         {
-            return this.VisitedGraph.ContainsVertex(vertex);
+            return VisitedGraph.ContainsVertex(vertex);
         }
 
         #endregion
@@ -124,23 +124,23 @@ namespace QuickGraph
 
         public bool IsEdgesEmpty
         {
-            get { return this.VisitedGraph.IsEdgesEmpty; }
+            get { return VisitedGraph.IsEdgesEmpty; }
         }
 
         public int EdgeCount
         {
-            get { return this.VisitedGraph.EdgeCount; }
+            get { return VisitedGraph.EdgeCount; }
         }
 
         public IEnumerable<TEdge> Edges
         {
-            get { return this.VisitedGraph.Edges; }
+            get { return VisitedGraph.Edges; }
         }
 
         [Pure]
         public bool ContainsEdge(TEdge edge)
         {
-            return this.VisitedGraph.ContainsEdge(edge);
+            return VisitedGraph.ContainsEdge(edge);
         }
 
         #endregion
@@ -154,7 +154,7 @@ namespace QuickGraph
 
         public bool AllowParallelEdges
         {
-            get { return this.VisitedGraph.AllowParallelEdges; }
+            get { return VisitedGraph.AllowParallelEdges; }
         }
 
         #endregion

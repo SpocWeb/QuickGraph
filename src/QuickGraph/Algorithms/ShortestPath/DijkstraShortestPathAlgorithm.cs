@@ -61,41 +61,41 @@ namespace QuickGraph.Algorithms.ShortestPath
         public event EdgeAction<TVertex,TEdge> EdgeNotRelaxed;
         private void OnEdgeNotRelaxed(TEdge e)
         {
-            var eh = this.EdgeNotRelaxed;
+            var eh = EdgeNotRelaxed;
             if (eh != null)
                 eh(e);
         }
 
         private void InternalExamineEdge(TEdge args)
         {
-            if (this.Weights(args) < 0)
+            if (Weights(args) < 0)
                 throw new NegativeWeightException();
         }
 
         private void InternalTreeEdge(TEdge args)
         {
-            bool decreased = this.Relax(args);
+            bool decreased = Relax(args);
             if (decreased)
             {
-                this.OnTreeEdge(args);
-                this.AssertHeap();
+                OnTreeEdge(args);
+                AssertHeap();
             }
             else
-                this.OnEdgeNotRelaxed(args);
+                OnEdgeNotRelaxed(args);
         }
 
         private void InternalGrayTarget(TEdge edge)
         {
-            bool decreased = this.Relax(edge);
+            bool decreased = Relax(edge);
             if (decreased)
             {
-                this.vertexQueue.Update(edge.Target);
-                this.AssertHeap();
-                this.OnTreeEdge(edge);
+                vertexQueue.Update(edge.Target);
+                AssertHeap();
+                OnTreeEdge(edge);
             }
             else
             {
-                this.OnEdgeNotRelaxed(edge);
+                OnEdgeNotRelaxed(edge);
             }
         }
 
@@ -104,47 +104,47 @@ namespace QuickGraph.Algorithms.ShortestPath
             base.Initialize();
 
             // init color, distance
-            var initialDistance = this.DistanceRelaxer.InitialDistance;
+            var initialDistance = DistanceRelaxer.InitialDistance;
             foreach (var u in VisitedGraph.Vertices)
             {
-                this.VertexColors.Add(u, GraphColor.White);
-                this.Distances.Add(u, initialDistance);
+                VertexColors.Add(u, GraphColor.White);
+                Distances.Add(u, initialDistance);
             }
-            this.vertexQueue = new FibonacciQueue<TVertex, double>(this.DistancesIndexGetter());
+            vertexQueue = new FibonacciQueue<TVertex, double>(DistancesIndexGetter());
         }
         
         protected override void  InternalCompute()
         {
             TVertex rootVertex;
-            if (this.TryGetRootVertex(out rootVertex))
-                this.ComputeFromRoot(rootVertex);
+            if (TryGetRootVertex(out rootVertex))
+                ComputeFromRoot(rootVertex);
             else
             {
-                foreach (var v in this.VisitedGraph.Vertices)
-                    if (this.VertexColors[v] == GraphColor.White)
-                        this.ComputeFromRoot(v);
+                foreach (var v in VisitedGraph.Vertices)
+                    if (VertexColors[v] == GraphColor.White)
+                        ComputeFromRoot(v);
             }
         }
 
         private void ComputeFromRoot(TVertex rootVertex)
         {
             Contract.Requires(rootVertex != null);
-            Contract.Requires(this.VisitedGraph.ContainsVertex(rootVertex));
-            Contract.Requires(this.VertexColors[rootVertex] == GraphColor.White);
+            Contract.Requires(VisitedGraph.ContainsVertex(rootVertex));
+            Contract.Requires(VertexColors[rootVertex] == GraphColor.White);
 
-            this.VertexColors[rootVertex] = GraphColor.Gray;
-            this.Distances[rootVertex] = 0;
-            this.ComputeNoInit(rootVertex);
+            VertexColors[rootVertex] = GraphColor.Gray;
+            Distances[rootVertex] = 0;
+            ComputeNoInit(rootVertex);
         }
 
         [Conditional("DEBUG")]
         private void AssertHeap()
         {
-            if (this.vertexQueue.Count == 0) return;
-            var top = this.vertexQueue.Peek();
-            var vertices = this.vertexQueue.ToArray();
+            if (vertexQueue.Count == 0) return;
+            var top = vertexQueue.Peek();
+            var vertices = vertexQueue.ToArray();
             for (int i = 1; i < vertices.Length; ++i)
-                if (this.Distances[top] > this.Distances[vertices[i]])
+                if (Distances[top] > Distances[vertices[i]])
                     Contract.Assert(false);
         }
 
@@ -156,24 +156,24 @@ namespace QuickGraph.Algorithms.ShortestPath
             {
                 bfs = new BreadthFirstSearchAlgorithm<TVertex, TEdge>(
                     this,
-                    this.VisitedGraph,
-                    this.vertexQueue,
+                    VisitedGraph,
+                    vertexQueue,
                     VertexColors
                     );
 
-                bfs.InitializeVertex += this.InitializeVertex;
-                bfs.DiscoverVertex += this.DiscoverVertex;
-                bfs.StartVertex += this.StartVertex;
-                bfs.ExamineEdge += this.ExamineEdge;
+                bfs.InitializeVertex += InitializeVertex;
+                bfs.DiscoverVertex += DiscoverVertex;
+                bfs.StartVertex += StartVertex;
+                bfs.ExamineEdge += ExamineEdge;
 #if SUPERDEBUG
                 bfs.ExamineEdge += e => this.AssertHeap();
 #endif
-                bfs.ExamineVertex += this.ExamineVertex;
-                bfs.FinishVertex += this.FinishVertex;
+                bfs.ExamineVertex += ExamineVertex;
+                bfs.FinishVertex += FinishVertex;
 
-                bfs.ExamineEdge += this.InternalExamineEdge;
-                bfs.TreeEdge += this.InternalTreeEdge;
-                bfs.GrayTarget += this.InternalGrayTarget;
+                bfs.ExamineEdge += InternalExamineEdge;
+                bfs.TreeEdge += InternalTreeEdge;
+                bfs.GrayTarget += InternalGrayTarget;
 
                 bfs.Visit(s);
             }
@@ -181,17 +181,17 @@ namespace QuickGraph.Algorithms.ShortestPath
             {
                 if (bfs != null)
                 {
-                    bfs.InitializeVertex -= this.InitializeVertex;
-                    bfs.DiscoverVertex -= this.DiscoverVertex;
-                    bfs.StartVertex -= this.StartVertex;
-                    bfs.ExamineEdge -= this.ExamineEdge;
+                    bfs.InitializeVertex -= InitializeVertex;
+                    bfs.DiscoverVertex -= DiscoverVertex;
+                    bfs.StartVertex -= StartVertex;
+                    bfs.ExamineEdge -= ExamineEdge;
 
-                    bfs.ExamineVertex -= this.ExamineVertex;
-                    bfs.FinishVertex -= this.FinishVertex;
+                    bfs.ExamineVertex -= ExamineVertex;
+                    bfs.FinishVertex -= FinishVertex;
 
-                    bfs.ExamineEdge -= this.InternalExamineEdge;
-                    bfs.TreeEdge -= this.InternalTreeEdge;
-                    bfs.GrayTarget -= this.InternalGrayTarget;
+                    bfs.ExamineEdge -= InternalExamineEdge;
+                    bfs.TreeEdge -= InternalTreeEdge;
+                    bfs.GrayTarget -= InternalGrayTarget;
                 }
             }
         }

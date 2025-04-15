@@ -27,9 +27,9 @@ namespace QuickGraph.Algorithms.Services
         {
             get 
             {
-                if (this._cancelManager == null)
-                    this._cancelManager = this.host.GetService<ICancelManager>();
-                return this._cancelManager; 
+                if (_cancelManager == null)
+                    _cancelManager = host.GetService<ICancelManager>();
+                return _cancelManager; 
             }
         }
     }

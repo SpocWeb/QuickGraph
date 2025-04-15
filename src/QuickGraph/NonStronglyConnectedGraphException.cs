@@ -12,7 +12,7 @@ namespace QuickGraph
     {
         public NonStronglyConnectedGraphException() { }
         public NonStronglyConnectedGraphException(string message) : base( message ) { }
-        public NonStronglyConnectedGraphException(string message, System.Exception inner) : base( message, inner ) { }
+        public NonStronglyConnectedGraphException(string message, Exception inner) : base( message, inner ) { }
 #if !SILVERLIGHT
         protected NonStronglyConnectedGraphException(
           System.Runtime.Serialization.SerializationInfo info,

@@ -38,12 +38,12 @@ namespace QuickGraph.Graphviz
             Contract.Requires(g != null);
             Contract.Requires(!string.IsNullOrEmpty(path));
 
-            this.clusterCount = 0;
-            this.visitedGraph = g;
+            clusterCount = 0;
+            visitedGraph = g;
             this.imageType = imageType;
-            this.graphFormat = new GraphvizGraph();
-            this.commonVertexFormat = new GraphvizVertex();
-            this.commonEdgeFormat = new GraphvizEdge();
+            graphFormat = new GraphvizGraph();
+            commonVertexFormat = new GraphvizVertex();
+            commonEdgeFormat = new GraphvizEdge();
         }
 
         public string Escape(string value)
@@ -145,7 +145,7 @@ namespace QuickGraph.Graphviz
         public event FormatVertexEventHandler<TVertex> FormatVertex;
         private void OnFormatVertex(TVertex v)
         {
-            Output.Write("{0} ", this.vertexIds[v]);
+            Output.Write("{0} ", vertexIds[v]);
             if (FormatVertex != null)
             {
                 var gv = new GraphvizVertex();
@@ -173,19 +173,19 @@ namespace QuickGraph.Graphviz
         public string Generate()
         {
             ClusterCount = 0;
-            this.vertexIds.Clear();
-            this.output = new StringWriter();
+            vertexIds.Clear();
+            output = new StringWriter();
             // build vertex id map
             int i = 0;
-            foreach (TVertex v in this.VisitedGraph.Vertices)
-                this.vertexIds.Add(v, i++);
+            foreach (TVertex v in VisitedGraph.Vertices)
+                vertexIds.Add(v, i++);
 
-            if (this.VisitedGraph.IsDirected)
-                this.Output.Write("digraph ");
+            if (VisitedGraph.IsDirected)
+                Output.Write("digraph ");
             else
-                this.Output.Write("graph ");
-            this.Output.Write(this.GraphFormat.Name);
-            this.Output.WriteLine(" {");
+                Output.Write("graph ");
+            Output.Write(GraphFormat.Name);
+            Output.WriteLine(" {");
 
             string gf = GraphFormat.ToDot();
             if (gf.Length > 0)
@@ -220,7 +220,7 @@ namespace QuickGraph.Graphviz
             Contract.Requires(dot != null);
             Contract.Requires(!string.IsNullOrEmpty(outputFileName));
 
-            var output = this.Generate();
+            var output = Generate();
             return dot.Run(ImageType, Output.ToString(), outputFileName);
         }
         internal void WriteClusters (
@@ -283,15 +283,15 @@ namespace QuickGraph.Graphviz
             {
                 if (edgeColors[e] != GraphColor.White)
                     continue;
-                if (this.VisitedGraph.IsDirected)
+                if (VisitedGraph.IsDirected)
                     Output.Write("{0} -> {1} [",
-                        this.vertexIds[e.Source],
-                        this.vertexIds[e.Target]
+                        vertexIds[e.Source],
+                        vertexIds[e.Target]
                     );
                 else
                     Output.Write("{0} -- {1} [",
-                       this.vertexIds[e.Source],
-                       this.vertexIds[e.Target]
+                       vertexIds[e.Source],
+                       vertexIds[e.Target]
                    );
 
                 OnFormatEdge(e);

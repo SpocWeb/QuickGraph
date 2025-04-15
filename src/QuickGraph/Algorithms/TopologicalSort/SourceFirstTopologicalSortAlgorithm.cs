@@ -22,14 +22,14 @@ namespace QuickGraph.Algorithms.TopologicalSort
             )
             :base(visitedGraph)
         {
-            this.heap = new BinaryQueue<TVertex,int>(e => this.inDegrees[e]);
+            heap = new BinaryQueue<TVertex,int>(e => inDegrees[e]);
         }
 
         public ICollection<TVertex> SortedVertices
         {
             get
             {
-                return this.sortedVertices;
+                return sortedVertices;
             }
         }
 
@@ -37,7 +37,7 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             get
             {
-                return this.heap;
+                return heap;
             }
         }
 
@@ -45,14 +45,14 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             get
             {
-                return this.inDegrees;
+                return inDegrees;
             }
         }
 
         public event VertexAction<TVertex> AddVertex;
         private void OnAddVertex(TVertex v)
         {
-            var eh = this.AddVertex;
+            var eh = AddVertex;
             if (eh != null)
                 eh(v);
         }
@@ -61,57 +61,57 @@ namespace QuickGraph.Algorithms.TopologicalSort
         {
             Contract.Requires(vertices != null);
 
-            this.sortedVertices = vertices;
+            sortedVertices = vertices;
             Compute();
         }
 
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
-            this.InitializeInDegrees();
+            var cancelManager = Services.CancelManager;
+            InitializeInDegrees();
 
-            while (this.heap.Count != 0)
+            while (heap.Count != 0)
             {
                 if (cancelManager.IsCancelling) break;
 
-                TVertex v = this.heap.Dequeue();
-                if (this.inDegrees[v] != 0)
+                TVertex v = heap.Dequeue();
+                if (inDegrees[v] != 0)
                     throw new NonAcyclicGraphException();
 
-                this.sortedVertices.Add(v);
-                this.OnAddVertex(v);
+                sortedVertices.Add(v);
+                OnAddVertex(v);
 
                 // update the count of it's adjacent vertices
-                foreach (var e in this.VisitedGraph.OutEdges(v))
+                foreach (var e in VisitedGraph.OutEdges(v))
                 {
                     if (e.Source.Equals(e.Target))
                         continue;
 
-                    this.inDegrees[e.Target]--;
-                    Contract.Assert(this.inDegrees[e.Target] >= 0);
-                    this.heap.Update(e.Target);
+                    inDegrees[e.Target]--;
+                    Contract.Assert(inDegrees[e.Target] >= 0);
+                    heap.Update(e.Target);
                 }
             }
         }
 
         private void InitializeInDegrees()
         {
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
-                this.inDegrees.Add(v, 0);         
+                inDegrees.Add(v, 0);         
             }
 
-            foreach (var e in this.VisitedGraph.Edges)
+            foreach (var e in VisitedGraph.Edges)
             {
                 if (e.Source.Equals(e.Target))
                     continue;
-                this.inDegrees[e.Target]++;
+                inDegrees[e.Target]++;
             }
 
-            foreach (var v in this.VisitedGraph.Vertices)
+            foreach (var v in VisitedGraph.Vertices)
             {
-                this.heap.Enqueue(v);
+                heap.Enqueue(v);
             }
 
         }

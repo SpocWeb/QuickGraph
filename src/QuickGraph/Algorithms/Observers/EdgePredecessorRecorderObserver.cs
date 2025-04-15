@@ -56,14 +56,14 @@ namespace QuickGraph.Algorithms.Observers
 
         public IDisposable Attach(IEdgePredecessorRecorderAlgorithm<TVertex, TEdge> algorithm)
         {
-            algorithm.DiscoverTreeEdge += this.DiscoverTreeEdge;
-            algorithm.FinishEdge += this.FinishEdge;
+            algorithm.DiscoverTreeEdge += DiscoverTreeEdge;
+            algorithm.FinishEdge += FinishEdge;
 
             return new DisposableAction(
                 () =>
                 {
-                    algorithm.DiscoverTreeEdge -= this.DiscoverTreeEdge;
-                    algorithm.FinishEdge -= this.FinishEdge;
+                    algorithm.DiscoverTreeEdge -= DiscoverTreeEdge;
+                    algorithm.FinishEdge -= FinishEdge;
                 });
         }
 
@@ -139,16 +139,16 @@ namespace QuickGraph.Algorithms.Observers
         private void DiscoverTreeEdge(TEdge edge, TEdge targetEdge)
         {
             if (!edge.Equals(targetEdge))
-                this.EdgePredecessors[targetEdge] = edge;
+                EdgePredecessors[targetEdge] = edge;
         }
 
         private void FinishEdge(TEdge args)
         {
-            foreach (var edge in this.EdgePredecessors.Values)
+            foreach (var edge in EdgePredecessors.Values)
                 if (edge.Equals(args))
                     return;
 
-            this.EndPathEdges.Add(args);
+            EndPathEdges.Add(args);
         }
     }
 }

@@ -61,14 +61,14 @@ namespace QuickGraph.Predicates
 
         protected bool TestEdge(TEdge edge)
         {
-            return this.VertexPredicate(edge.Source)
-                    && this.VertexPredicate(edge.Target)
-                    && this.EdgePredicate(edge);
+            return VertexPredicate(edge.Source)
+                    && VertexPredicate(edge.Target)
+                    && EdgePredicate(edge);
         }
 
         public bool IsDirected
         {
-            get { return this.BaseGraph.IsDirected; }
+            get { return BaseGraph.IsDirected; }
         }
 
         public bool AllowParallelEdges

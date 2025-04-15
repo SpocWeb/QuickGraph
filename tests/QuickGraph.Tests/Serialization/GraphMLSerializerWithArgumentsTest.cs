@@ -24,13 +24,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._string;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _string;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._string = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _string = value;
                 }
             }
             int _int;
@@ -40,13 +40,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._int;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _int;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._int = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _int = value;
                 }
             }
             long _long;
@@ -56,13 +56,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._long;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _long;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._long = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _long = value;
                 }
             }
 
@@ -72,13 +72,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._bool;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _bool;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._bool = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _bool = value;
                 }
             }
 
@@ -88,13 +88,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._float;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _float;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._float = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _float = value;
                 }
             }
 
@@ -104,13 +104,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._double;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _double;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._double = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _double = value;
                 }
             }
 
@@ -120,13 +120,13 @@ namespace QuickGraph.Serialization
             {
                 get 
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._stringarray; 
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _stringarray; 
                 }
                 set 
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._stringarray = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _stringarray = value;
                 }
             }
             int[] _intarray;
@@ -135,13 +135,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._intarray;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _intarray;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._intarray = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _intarray = value;
                 }
             }
             long[] _longarray;
@@ -150,13 +150,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._longarray;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _longarray;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._longarray = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _longarray = value;
                 }
             }
 
@@ -166,13 +166,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._boolarray;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _boolarray;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._boolarray = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _boolarray = value;
                 }
             }
 
@@ -182,13 +182,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._floatarray;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _floatarray;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._floatarray = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _floatarray = value;
                 }
             }
 
@@ -198,13 +198,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._doublearray;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _doublearray;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._doublearray = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _doublearray = value;
                 }
             }
 
@@ -213,12 +213,12 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
                     return null;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
                     Assert.IsNull(value);
                 }
             }
@@ -231,13 +231,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._stringilist;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _stringilist;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._stringilist = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _stringilist = value;
                 }
             }
             IList<int> _intilist;
@@ -246,13 +246,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._intilist;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _intilist;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._intilist = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _intilist = value;
                 }
             }
             IList<long> _longilist;
@@ -261,13 +261,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._longilist;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _longilist;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._longilist = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _longilist = value;
                 }
             }
 
@@ -277,13 +277,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._boolilist;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _boolilist;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._boolilist = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _boolilist = value;
                 }
             }
 
@@ -293,13 +293,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._floatilist;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _floatilist;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._floatilist = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _floatilist = value;
                 }
             }
 
@@ -309,13 +309,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._doubleilist;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _doubleilist;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._doubleilist = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _doubleilist = value;
                 }
             }
 
@@ -334,7 +334,7 @@ namespace QuickGraph.Serialization
 
             public string ID
             {
-                get { return this.id; }
+                get { return id; }
             }
 
             string _stringd;
@@ -344,13 +344,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._stringd;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _stringd;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._stringd = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _stringd = value;
                 }
             }
 
@@ -361,13 +361,13 @@ namespace QuickGraph.Serialization
             {
                 get 
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._string; 
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _string; 
                 }
                 set 
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._string = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _string = value;
                 }
             }
             int _int;
@@ -377,13 +377,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._int;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _int;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._int = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _int = value;
                 }
             }
             long _long;
@@ -393,13 +393,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._long;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _long;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._long = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _long = value;
                 }
             }
 
@@ -409,13 +409,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._bool;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _bool;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._bool = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _bool = value;
                 }
             }
 
@@ -425,13 +425,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._float;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _float;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._float = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _float = value;
                 }
             }
 
@@ -441,13 +441,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._double;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _double;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._double = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _double = value;
                 }
             }
 
@@ -457,13 +457,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._intArray;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _intArray;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._intArray = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _intArray = value;
                 }
             }
 
@@ -473,13 +473,13 @@ namespace QuickGraph.Serialization
             {
                 get
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    return this._intIList;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    return _intIList;
                 }
                 set
                 {
-                    Console.WriteLine(MethodInfo.GetCurrentMethod());
-                    this._intIList = value;
+                    Console.WriteLine(MethodBase.GetCurrentMethod());
+                    _intIList = value;
                 }
             }
         }
@@ -510,17 +510,17 @@ namespace QuickGraph.Serialization
                 )
                 : this(source, target, id)
             {
-                this.String = _string;
-                this.Int = _int;
-                this.Long = _long;
-                this.Float = _float;
-                this.Double = _double;
-                this.Bool = _bool;
+                String = _string;
+                Int = _int;
+                Long = _long;
+                Float = _float;
+                Double = _double;
+                Bool = _bool;
             }
 
             public string ID
             {
-                get { return this.id; }
+                get { return id; }
             }
 
             [XmlAttribute("e_string")]

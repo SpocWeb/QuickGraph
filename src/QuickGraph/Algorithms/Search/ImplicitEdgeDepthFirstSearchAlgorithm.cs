@@ -48,7 +48,7 @@ namespace QuickGraph.Algorithms.Search
         {
             get
             {
-                return this.edgeColors;
+                return edgeColors;
             }
         }
 
@@ -66,11 +66,11 @@ namespace QuickGraph.Algorithms.Search
         {
             get
             {
-                return this.maxDepth;
+                return maxDepth;
             }
             set
             {
-                this.maxDepth = value;
+                maxDepth = value;
             }
         }
 
@@ -119,7 +119,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="e"></param>
         private void OnDiscoverTreeEdge(TEdge se, TEdge e)
         {
-            var eh = this.DiscoverTreeEdge;
+            var eh = DiscoverTreeEdge;
             if (eh != null)
                 eh(se, e);
         }
@@ -137,7 +137,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="e"></param>
         private void OnTreeEdge(TEdge e)
         {
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(e);
         }
@@ -153,7 +153,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="e"></param>
         private void OnBackEdge(TEdge e)
         {
-            var eh = this.BackEdge;
+            var eh = BackEdge;
             if (eh != null)
                 eh(e);
         }
@@ -198,22 +198,22 @@ namespace QuickGraph.Algorithms.Search
         protected override void  InternalCompute()
         {
             TVertex rootVertex;
-            if (!this.TryGetRootVertex(out rootVertex))
+            if (!TryGetRootVertex(out rootVertex))
                 throw new InvalidOperationException("root vertex not set");
 
             // initialize algorithm
-            this.Initialize();
+            Initialize();
 
             // start whith him:
             OnStartVertex(rootVertex);
 
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             // process each out edge of v
-            foreach (var e in this.VisitedGraph.OutEdges(rootVertex))
+            foreach (var e in VisitedGraph.OutEdges(rootVertex))
             {
                 if (cancelManager.IsCancelling) return;
 
-                if (!this.EdgeColors.ContainsKey(e))
+                if (!EdgeColors.ContainsKey(e))
                 {
                     OnStartEdge(e);
                     Visit(e, 0);
@@ -232,24 +232,24 @@ namespace QuickGraph.Algorithms.Search
             Contract.Requires(se != null);
             Contract.Requires(depth >= 0);
 
-            if (depth > this.maxDepth)
+            if (depth > maxDepth)
                 return;
 
             // mark edge as gray
-            this.EdgeColors[se] = GraphColor.Gray;
+            EdgeColors[se] = GraphColor.Gray;
             // add edge to the search tree
             OnTreeEdge(se);
 
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             // iterate over out-edges
-            foreach (var e in this.VisitedGraph.OutEdges(se.Target))
+            foreach (var e in VisitedGraph.OutEdges(se.Target))
             {
                 if (cancelManager.IsCancelling) return;
 
                 // check edge is not explored yet,
                 // if not, explore it.
                 GraphColor c;
-                if (!this.EdgeColors.TryGetValue(e, out c))
+                if (!EdgeColors.TryGetValue(e, out c))
                 {
                     OnDiscoverTreeEdge(se, e);
                     Visit(e, depth + 1);
@@ -264,7 +264,7 @@ namespace QuickGraph.Algorithms.Search
             }
 
             // all out-edges have been explored
-            this.EdgeColors[se] = GraphColor.Black;
+            EdgeColors[se] = GraphColor.Black;
             OnFinishEdge(se);
         }
 
@@ -275,7 +275,7 @@ namespace QuickGraph.Algorithms.Search
         {
             base.Initialize();
 
-            this.EdgeColors.Clear();
+            EdgeColors.Clear();
         }
    }
 }

@@ -10,7 +10,7 @@ namespace QuickGraph
     {
         public ParallelEdgeNotAllowedException() { }
         public ParallelEdgeNotAllowedException(string message) : base( message ) { }
-        public ParallelEdgeNotAllowedException(string message, System.Exception inner) : base( message, inner ) { }
+        public ParallelEdgeNotAllowedException(string message, Exception inner) : base( message, inner ) { }
 #if !SILVERLIGHT
         protected ParallelEdgeNotAllowedException(
           System.Runtime.Serialization.SerializationInfo info,

@@ -48,7 +48,7 @@ namespace QuickGraph
         /// <value></value>
         public TVertex Source
         {
-            get { return this.source; }
+            get { return source; }
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace QuickGraph
         /// <value></value>
         public TVertex Target
         {
-            get { return this.target; }
+            get { return target; }
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace QuickGraph
         {
             return string.Format(
                 EdgeExtensions.UndirectedEdgeFormatString,
-                this.Source,
-                this.Target);
+                Source,
+                Target);
         }
 
         /// <summary>
@@ -85,13 +85,13 @@ namespace QuickGraph
         {
             Contract.Ensures(
                 Contract.Result<bool>() ==
-                (this.Source.Equals(other.Source) &&
-                this.Target.Equals(other.Target))
+                (Source.Equals(other.Source) &&
+                Target.Equals(other.Target))
                 );
 
             return
-                this.source.Equals(other.source) &&
-                this.target.Equals(other.target);
+                source.Equals(other.source) &&
+                target.Equals(other.target);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace QuickGraph
         {
             return
                 obj is SEquatableUndirectedEdge<TVertex> edge &&
-                this.Equals(edge);
+                Equals(edge);
         }
 
         /// <summary>
@@ -117,8 +117,8 @@ namespace QuickGraph
         public override int GetHashCode()
         {
             return HashCodeHelper.Combine(
-                this.source.GetHashCode(), 
-                this.target.GetHashCode());
+                source.GetHashCode(), 
+                target.GetHashCode());
         }
     }
 }

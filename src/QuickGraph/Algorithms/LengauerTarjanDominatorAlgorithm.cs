@@ -34,16 +34,16 @@ namespace QuickGraph.Algorithms
 
         protected override void InternalCompute()
         {
-            var cancelManager = this.Services.CancelManager;
-            var vertexCount = this.VisitedGraph.VertexCount;
-            var vertices = this.VisitedGraph.Vertices;
+            var cancelManager = Services.CancelManager;
+            var vertexCount = VisitedGraph.VertexCount;
+            var vertices = VisitedGraph.Vertices;
 
             var timeStamps = new Dictionary<TVertex, int>(vertexCount);
             var stamps = new List<TVertex>(vertexCount);
             var predecessors = new Dictionary<TVertex, TEdge>(vertexCount);
 
             // phase 1: DFS over the graph and record vertex indices
-            var dfs = new DepthFirstSearchAlgorithm<TVertex, TEdge>(this, this.VisitedGraph);
+            var dfs = new DepthFirstSearchAlgorithm<TVertex, TEdge>(this, VisitedGraph);
             using (new TimeStampObserver(stamps).Attach(dfs))
             using (new VertexTimeStamperObserver<TVertex, TEdge>(timeStamps).Attach(dfs))
             using (new VertexPredecessorRecorderObserver<TVertex, TEdge>(predecessors).Attach(dfs))
@@ -66,7 +66,7 @@ namespace QuickGraph.Algorithms
                 if(!timeStamps.TryGetValue(dominator, out dominatorTime))
                     continue;
 
-                foreach (var e in this.VisitedGraph.InEdges(v))
+                foreach (var e in VisitedGraph.InEdges(v))
                 {
                     var u = e.Source;
                     int utime;
@@ -96,7 +96,7 @@ namespace QuickGraph.Algorithms
         }
 
         class TimeStampObserver
-            : QuickGraph.Algorithms.Observers.IObserver<IVertexTimeStamperAlgorithm<TVertex>>
+            : Observers.IObserver<IVertexTimeStamperAlgorithm<TVertex>>
 
         {
             public readonly List<TVertex> Vertices;
@@ -104,7 +104,7 @@ namespace QuickGraph.Algorithms
             {
                 Contract.Requires(vertices != null);
 
-                this.Vertices = vertices;
+                Vertices = vertices;
             }
 
             public IDisposable Attach(IVertexTimeStamperAlgorithm<TVertex> algorithm)
@@ -117,7 +117,7 @@ namespace QuickGraph.Algorithms
 
             void algorithm_DiscoverVertex(TVertex v)
             {
-                this.Vertices.Add(v);
+                Vertices.Add(v);
             }
         }
     }

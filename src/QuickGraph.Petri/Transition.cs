@@ -15,11 +15,11 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.condition;
+				return condition;
 			}
 			set
 			{
-				this.condition=value;
+				condition=value;
 			}
 		}
 
@@ -30,7 +30,7 @@ namespace QuickGraph.Petri
 
 		public override string ToString()
 		{
-			return string.Format("T({0})",this.name);
+			return string.Format("T({0})",name);
 		}
 	}
 }

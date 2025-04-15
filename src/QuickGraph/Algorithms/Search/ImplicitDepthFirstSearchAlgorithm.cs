@@ -45,7 +45,7 @@ namespace QuickGraph.Algorithms.Search
         {
             get
             {
-                return this.vertexColors;
+                return vertexColors;
             }
         }
 
@@ -63,11 +63,11 @@ namespace QuickGraph.Algorithms.Search
         {
             get
             {
-                return this.maxDepth;
+                return maxDepth;
             }
             set
             {
-                this.maxDepth = value;
+                maxDepth = value;
             }
         }
 
@@ -82,7 +82,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="v">vertex that raised the event</param>
         private void OnStartVertex(TVertex v)
         {
-            var eh = this.StartVertex;
+            var eh = StartVertex;
             if (eh != null)
                 eh(v);
         }
@@ -99,7 +99,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="v">vertex that raised the event</param>
         private void OnDiscoverVertex(TVertex v)
         {
-            var eh = this.DiscoverVertex;
+            var eh = DiscoverVertex;
             if (eh != null)
                 eh(v);
         }
@@ -116,7 +116,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="e">edge that raised the event</param>
         private void OnExamineEdge(TEdge e)
         {
-            var eh = this.ExamineEdge;
+            var eh = ExamineEdge;
             if (eh != null)
                 eh(e);
         }
@@ -135,7 +135,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="e">edge that raised the event</param>
         private void OnTreeEdge(TEdge e)
         {
-            var eh = this.TreeEdge;
+            var eh = TreeEdge;
             if (eh != null)
                 eh(e);
         }
@@ -152,7 +152,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="e">edge that raised the event</param>
         private void OnBackEdge(TEdge e)
         {
-            var eh = this.BackEdge;
+            var eh = BackEdge;
             if (eh != null)
                 eh(e);
         }
@@ -170,7 +170,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="e">edge that raised the event</param>
         private void OnForwardOrCrossEdge(TEdge e)
         {
-            var eh = this.ForwardOrCrossEdge;
+            var eh = ForwardOrCrossEdge;
             if (eh != null)
                 eh(e);
         }
@@ -188,7 +188,7 @@ namespace QuickGraph.Algorithms.Search
         /// <param name="v">vertex that raised the event</param>
         private void OnFinishVertex(TVertex v)
         {
-            var eh = this.FinishVertex;
+            var eh = FinishVertex;
             if (eh != null)
                 eh(v);
         }
@@ -196,29 +196,29 @@ namespace QuickGraph.Algorithms.Search
         protected override void InternalCompute()
         {
             TVertex rootVertex;
-            if (!this.TryGetRootVertex(out rootVertex))
+            if (!TryGetRootVertex(out rootVertex))
                 throw new InvalidOperationException("root vertex not set");
 
-            this.Initialize();
-            this.Visit(rootVertex, 0);
+            Initialize();
+            Visit(rootVertex, 0);
         }
 
         protected override void Initialize()
         {
             base.Initialize();
 
-            this.VertexColors.Clear();
+            VertexColors.Clear();
         }
 
         private void Visit(TVertex u, int depth)
         {
-            if (depth > this.MaxDepth)
+            if (depth > MaxDepth)
                 return;
 
             VertexColors[u] = GraphColor.Gray;
             OnDiscoverVertex(u);
 
-            var cancelManager = this.Services.CancelManager;
+            var cancelManager = Services.CancelManager;
             foreach (var e in VisitedGraph.OutEdges(u))
             {
                 if (cancelManager.IsCancelling) return;
@@ -227,7 +227,7 @@ namespace QuickGraph.Algorithms.Search
                 TVertex v = e.Target;
 
                 GraphColor c;
-                if (!this.VertexColors.TryGetValue(v, out c))
+                if (!VertexColors.TryGetValue(v, out c))
                 {
                     OnTreeEdge(e);
                     Visit(v, depth + 1);

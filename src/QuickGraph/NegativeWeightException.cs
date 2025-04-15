@@ -3,7 +3,7 @@
 namespace QuickGraph
 {
 #if !SILVERLIGHT
-    [System.Serializable]
+    [Serializable]
 #endif
     public class NegativeWeightException 
         : QuickGraphException

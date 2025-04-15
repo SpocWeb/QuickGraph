@@ -16,12 +16,12 @@ namespace QuickGraph.Graphviz.Dot
         public GraphvizEdgeExtremity(bool isHead)
         {
             this.isHead = isHead;
-            this.url = null;
-            this.isClipped = true;
-            this.label = null;
-            this.tooltip = null;
-            this.logical = null;
-            this.same = null;
+            url = null;
+            isClipped = true;
+            label = null;
+            tooltip = null;
+            logical = null;
+            same = null;
         }
 
         public void AddParameters(IDictionary dic)
@@ -29,7 +29,7 @@ namespace QuickGraph.Graphviz.Dot
             Contract.Requires(dic != null);
             
             string text = null;
-            if (this.IsHead)
+            if (IsHead)
             {
                 text = "head";
             }
@@ -37,29 +37,29 @@ namespace QuickGraph.Graphviz.Dot
             {
                 text = "tail";
             }
-            if (this.Url != null)
+            if (Url != null)
             {
-                dic.Add(text + "URL", this.Url);
+                dic.Add(text + "URL", Url);
             }
-            if (!this.IsClipped)
+            if (!IsClipped)
             {
-                dic.Add(text + "clip", this.IsClipped);
+                dic.Add(text + "clip", IsClipped);
             }
-            if (this.Label != null)
+            if (Label != null)
             {
-                dic.Add(text + "label", this.Label);
+                dic.Add(text + "label", Label);
             }
-            if (this.ToolTip != null)
+            if (ToolTip != null)
             {
-                dic.Add(text + "tooltip", this.ToolTip);
+                dic.Add(text + "tooltip", ToolTip);
             }
-            if (this.Logical != null)
+            if (Logical != null)
             {
-                dic.Add("l" + text, this.Logical);
+                dic.Add("l" + text, Logical);
             }
-            if (this.Same != null)
+            if (Same != null)
             {
-                dic.Add("same" + text, this.Same);
+                dic.Add("same" + text, Same);
             }
         }
 
@@ -67,11 +67,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.isClipped;
+                return isClipped;
             }
             set
             {
-                this.isClipped = value;
+                isClipped = value;
             }
         }
 
@@ -79,7 +79,7 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.isHead;
+                return isHead;
             }
         }
 
@@ -87,11 +87,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.label;
+                return label;
             }
             set
             {
-                this.label = value;
+                label = value;
             }
         }
 
@@ -99,11 +99,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.logical;
+                return logical;
             }
             set
             {
-                this.logical = value;
+                logical = value;
             }
         }
 
@@ -111,11 +111,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.same;
+                return same;
             }
             set
             {
-                this.same = value;
+                same = value;
             }
         }
 
@@ -123,11 +123,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.tooltip;
+                return tooltip;
             }
             set
             {
-                this.tooltip = value;
+                tooltip = value;
             }
         }
 
@@ -135,11 +135,11 @@ namespace QuickGraph.Graphviz.Dot
         {
             get
             {
-                return this.url;
+                return url;
             }
             set
             {
-                this.url = value;
+                url = value;
             }
         }
     }

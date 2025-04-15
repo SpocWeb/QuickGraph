@@ -23,19 +23,19 @@ namespace QuickGraph
         {
             return
                 (object)other != null &&
-                this.Source.Equals(other.Source) &&
-                this.Target.Equals(other.Target);
+                Source.Equals(other.Source) &&
+                Target.Equals(other.Target);
         }
 
         public override bool Equals(object obj)
         {
-            return this.Equals(obj as EquatableEdge<TVertex>);
+            return Equals(obj as EquatableEdge<TVertex>);
         }
 
         public override int GetHashCode()
         {
             return
-                HashCodeHelper.Combine(this.Source.GetHashCode(), this.Target.GetHashCode());
+                HashCodeHelper.Combine(Source.GetHashCode(), Target.GetHashCode());
         }
     }
 }

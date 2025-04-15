@@ -27,12 +27,12 @@ namespace QuickGraph
             Contract.Requires(baseGraph != null);
 
             this.baseGraph = baseGraph;
-            this.inEdges = new Dictionary<TVertex, EdgeList<TVertex, TEdge>>(this.baseGraph.VertexCount);
+            inEdges = new Dictionary<TVertex, EdgeList<TVertex, TEdge>>(this.baseGraph.VertexCount);
             foreach (var edge in this.baseGraph.Edges)
             {
                 EdgeList<TVertex, TEdge> list;
-                if (!this.inEdges.TryGetValue(edge.Target, out list))
-                    this.inEdges.Add(edge.Target, list = new EdgeList<TVertex, TEdge>());
+                if (!inEdges.TryGetValue(edge.Target, out list))
+                    inEdges.Add(edge.Target, list = new EdgeList<TVertex, TEdge>());
                 list.Add(edge);
             }
         }
@@ -40,14 +40,14 @@ namespace QuickGraph
         [Pure]
         public bool IsInEdgesEmpty(TVertex v)
         {
-            return this.InDegree(v) == 0;
+            return InDegree(v) == 0;
         }
 
         [Pure]
         public int InDegree(TVertex v)
         {
             EdgeList<TVertex, TEdge> edges;
-            if (this.inEdges.TryGetValue(v, out edges))
+            if (inEdges.TryGetValue(v, out edges))
                 return edges.Count;
             else
                 return 0;
@@ -58,7 +58,7 @@ namespace QuickGraph
         public IEnumerable<TEdge> InEdges(TVertex v)
         {
             EdgeList<TVertex, TEdge> edges;
-            if (this.inEdges.TryGetValue(v, out edges))
+            if (inEdges.TryGetValue(v, out edges))
                 return edges;
             else
                 return emptyEdges;
@@ -68,7 +68,7 @@ namespace QuickGraph
         public bool TryGetInEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             EdgeList<TVertex, TEdge> es;
-            if (this.inEdges.TryGetValue(v, out es))
+            if (inEdges.TryGetValue(v, out es))
             {
                 edges = es;
                 return true;
@@ -81,113 +81,113 @@ namespace QuickGraph
         [Pure]
         public TEdge InEdge(TVertex v, int index)
         {
-            return this.inEdges[v][index];
+            return inEdges[v][index];
         }
 
         [Pure]
         public int Degree(TVertex v)
         {
-            return this.InDegree(v) + this.OutDegree(v);
+            return InDegree(v) + OutDegree(v);
         }
 
         [Pure]
         public bool ContainsEdge(TVertex source, TVertex target)
         {
-            return this.baseGraph.ContainsEdge(source, target);
+            return baseGraph.ContainsEdge(source, target);
         }
 
         [Pure]
         public bool TryGetEdges(TVertex source, TVertex target, out IEnumerable<TEdge> edges)
         {
-            return this.baseGraph.TryGetEdges(source, target, out edges);
+            return baseGraph.TryGetEdges(source, target, out edges);
         }
 
         [Pure]
         public bool TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
-            return this.baseGraph.TryGetEdge(source, target, out edge);
+            return baseGraph.TryGetEdge(source, target, out edge);
         }
 
         [Pure] // InterfacePureBug
         public bool IsOutEdgesEmpty(TVertex v)
         {
-            return this.baseGraph.IsOutEdgesEmpty(v);
+            return baseGraph.IsOutEdgesEmpty(v);
         }
 
         [Pure]
         public int OutDegree(TVertex v)
         {
-            return this.baseGraph.OutDegree(v);
+            return baseGraph.OutDegree(v);
         }
 
         [Pure]
         public IEnumerable<TEdge> OutEdges(TVertex v)
         {
-            return this.baseGraph.OutEdges(v);
+            return baseGraph.OutEdges(v);
         }
 
         [Pure]
         public bool TryGetOutEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
-            return this.baseGraph.TryGetOutEdges(v, out edges);
+            return baseGraph.TryGetOutEdges(v, out edges);
         }
 
         [Pure]
         public TEdge OutEdge(TVertex v, int index)
         {
-            return this.baseGraph.OutEdge(v, index);
+            return baseGraph.OutEdge(v, index);
         }
 
         public bool IsDirected
         {
-            get { return this.baseGraph.IsDirected; }
+            get { return baseGraph.IsDirected; }
         }
 
         public bool AllowParallelEdges
         {
-            get { return this.baseGraph.AllowParallelEdges; }
+            get { return baseGraph.AllowParallelEdges; }
         }
 
         public bool IsVerticesEmpty
         {
-            get { return this.baseGraph.IsVerticesEmpty; }
+            get { return baseGraph.IsVerticesEmpty; }
         }
 
         public int VertexCount
         {
-            get { return this.baseGraph.VertexCount; }
+            get { return baseGraph.VertexCount; }
         }
 
         public IEnumerable<TVertex> Vertices
         {
-            get { return this.baseGraph.Vertices; }
+            get { return baseGraph.Vertices; }
         }
 
         [Pure]
         public bool ContainsVertex(TVertex vertex)
         {
-            return this.baseGraph.ContainsVertex(vertex);
+            return baseGraph.ContainsVertex(vertex);
         }
 
         public bool IsEdgesEmpty
         {
-            get { return this.baseGraph.IsEdgesEmpty; }
+            get { return baseGraph.IsEdgesEmpty; }
         }
 
         public int EdgeCount
         {
-            get { return this.baseGraph.EdgeCount; }
+            get { return baseGraph.EdgeCount; }
         }
 
         public virtual IEnumerable<TEdge> Edges
         {
-            get { return this.baseGraph.Edges; }
+            get { return baseGraph.Edges; }
         }
 
         [Pure]
         public bool ContainsEdge(TEdge edge)
         {
-            return this.baseGraph.ContainsEdge(edge);
+            return baseGraph.ContainsEdge(edge);
         }
     }
 }

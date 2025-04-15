@@ -16,17 +16,17 @@ namespace QuickGraph.Data
 
         public DataRelation Relation
         {
-            get { return this.relation; }
+            get { return relation; }
         }
 
         public DataTable Source
         {
-            get { return this.relation.ParentTable;}
+            get { return relation.ParentTable;}
         }
 
         public DataTable Target
         {
-            get { return this.relation.ChildTable; }
+            get { return relation.ChildTable; }
         }
     }
 }

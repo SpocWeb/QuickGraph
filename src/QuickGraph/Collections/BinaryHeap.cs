@@ -45,23 +45,23 @@ namespace QuickGraph.Collections
             Contract.Requires(capacity >= 0);
             Contract.Requires(priorityComparison != null);
 
-            this.items = new KeyValuePair<TPriority, TValue>[capacity];
-            this.priorityComparsion = priorityComparison;
+            items = new KeyValuePair<TPriority, TValue>[capacity];
+            priorityComparsion = priorityComparison;
         }
 
         public Comparison<TPriority> PriorityComparison
         {
-            get { return this.priorityComparsion; }
+            get { return priorityComparsion; }
         }
 
         public int Capacity
         {
-            get { return this.items.Length; }
+            get { return items.Length; }
         }
 
         public int Count
         {
-            get { return this.count; }
+            get { return count; }
         }
 
         public void Add(TPriority priority, TValue value)
@@ -69,10 +69,10 @@ namespace QuickGraph.Collections
 #if BINARY_HEAP_DEBUG
             Console.WriteLine("Add({0}, {1})", priority, value);
 #endif
-            this.version++;
-            this.ResizeArray();
-            this.items[this.count++] = new KeyValuePair<TPriority, TValue>(priority, value);
-            this.MinHeapifyDown(this.count - 1);
+            version++;
+            ResizeArray();
+            items[count++] = new KeyValuePair<TPriority, TValue>(priority, value);
+            MinHeapifyDown(count - 1);
 #if BINARY_HEAP_DEBUG
             Console.WriteLine("Add: {0}", ToString2());
 #endif
@@ -86,9 +86,9 @@ namespace QuickGraph.Collections
 #endif
             int current = start;
             int parent = (current - 1) / 2;
-            while (current > 0 && this.Less(current, parent))
+            while (current > 0 && Less(current, parent))
             {
-                this.Swap(current, parent);
+                Swap(current, parent);
                 current = parent;
                 parent = (current - 1) / 2;
             }
@@ -96,17 +96,17 @@ namespace QuickGraph.Collections
 
         public TValue[] ToValueArray()
         {
-            var values = new TValue[this.items.Length];
+            var values = new TValue[items.Length];
             for (int i = 0; i < values.Length; ++i)
-                values[i] = this.items[i].Value;
+                values[i] = items[i].Value;
             return values;
         }
 
         public KeyValuePair<TPriority, TValue>[] ToPriorityValueArray()
         {
-            var array = new KeyValuePair<TPriority, TValue>[this.items.Length];
+            var array = new KeyValuePair<TPriority, TValue>[items.Length];
             for (int i = 0; i < array.Length; ++i)
-                array[i] = this.items[i];
+                array[i] = items[i];
             return array;
         }
 
@@ -114,13 +114,13 @@ namespace QuickGraph.Collections
         {
             int wrong = -1;
 
-            for (int i = 0; i < this.count; i++)
+            for (int i = 0; i < count; i++)
             {
                 var l = 2 * i + 1;
                 var r = 2 * i + 2;
-                if (l < this.count && !this.LessOrEqual(i, l))
+                if (l < count && !LessOrEqual(i, l))
                     wrong = i;
-                if (r < this.count && !this.LessOrEqual(i, r))
+                if (r < count && !LessOrEqual(i, r))
                     wrong = i;
             }
 
@@ -130,10 +130,10 @@ namespace QuickGraph.Collections
 
         private string EntryToString(int i)
         {
-            if (i < 0 || i >= this.count)
+            if (i < 0 || i >= count)
                 return "null";
 
-            var kvp = this.items[i];
+            var kvp = items[i];
             var k = kvp.Key;
             var v = kvp.Value;
 
@@ -149,7 +149,7 @@ namespace QuickGraph.Collections
             var status = IsConsistent();
             var str = status.ToString() + ": ";
 
-            for (int i = 0; i < this.items.Length; i++)
+            for (int i = 0; i < items.Length; i++)
             {
                 str += EntryToString(i);
                 str += ", ";
@@ -162,7 +162,7 @@ namespace QuickGraph.Collections
             var status = IsConsistent();
             var str = "Consistent? " + status.ToString();
 
-            for (int i = 0; i < this.count; i++)
+            for (int i = 0; i < count; i++)
             {
                 var l = 2 * i + 1;
                 var r = 2 * i + 2;
@@ -183,19 +183,19 @@ namespace QuickGraph.Collections
 
         private void ResizeArray()
         {
-            if (this.count == this.items.Length)
+            if (count == items.Length)
             {
-                var newItems = new KeyValuePair<TPriority, TValue>[this.count * 2 + 1];
-                Array.Copy(this.items, newItems, this.count);
-                this.items = newItems;
+                var newItems = new KeyValuePair<TPriority, TValue>[count * 2 + 1];
+                Array.Copy(items, newItems, count);
+                items = newItems;
             }
         }
 
         public KeyValuePair<TPriority, TValue> Minimum()
         {
-            if (this.count == 0)
+            if (count == 0)
                 throw new InvalidOperationException();
-            return this.items[0];
+            return items[0];
         }
 
         public KeyValuePair<TPriority, TValue> RemoveMinimum()
@@ -203,19 +203,19 @@ namespace QuickGraph.Collections
 #if BINARY_HEAP_DEBUG
             Console.WriteLine("RemoveMinimum");
 #endif
-            if (this.count == 0)
+            if (count == 0)
                 throw new InvalidOperationException("heap is empty");
 
             // shortcut for heap with 1 element.
-            if (this.count == 1)
+            if (count == 1)
             {
-                this.version++;
-                return this.items[--this.count];
+                version++;
+                return items[--count];
             }
-            this.Swap(0, this.count - 1);
-            this.count--;
-            this.MinHeapifyUp(0);
-            return this.items[this.count];
+            Swap(0, count - 1);
+            count--;
+            MinHeapifyUp(0);
+            return items[count];
         }
 
         /// <summary>
@@ -230,21 +230,21 @@ namespace QuickGraph.Collections
 #if BINARY_HEAP_DEBUG
             Console.WriteLine("RemoveAt({0})", index);
 #endif
-            if (this.count == 0)
+            if (count == 0)
                 throw new InvalidOperationException("heap is empty");
-            if (index < 0 | index >= this.count)
+            if (index < 0 | index >= count)
                 throw new ArgumentOutOfRangeException("index");
 
-            this.version++;
+            version++;
             // shortcut for heap with 1 element.
-            if (this.count == 1)
-                return this.items[--this.count];
+            if (count == 1)
+                return items[--count];
 
-            this.Swap(index, this.count - 1);
-            this.count--;
-            this.MinHeapifyUp(index);
+            Swap(index, count - 1);
+            count--;
+            MinHeapifyUp(index);
 
-            return this.items[this.count];
+            return items[count];
         }
 
         // TODO: MinHeapifyUp is really MinHeapifyDown.  Do the renaming
@@ -258,24 +258,24 @@ namespace QuickGraph.Collections
                 var left = 2 * index + 1;
                 var right = 2 * index + 2;
                 var smallest = index;
-                if (left < this.count && this.Less(left, smallest))
+                if (left < count && Less(left, smallest))
                     smallest = left;
-                if (right < this.count && this.Less(right, smallest))
+                if (right < count && Less(right, smallest))
                     smallest = right;
                 
                 if (smallest == index)
                     break;
 
-                this.Swap(smallest, index);
+                Swap(smallest, index);
                 index = smallest;
             }
         }
 
         public int IndexOf(TValue value)
         {
-            for (int i = 0; i < this.count; i++)
+            for (int i = 0; i < count; i++)
             {
-                if (object.Equals(value, this.items[i].Value))
+                if (Equals(value, items[i].Value))
                     return i;
             }
             return -1;
@@ -288,16 +288,16 @@ namespace QuickGraph.Collections
 
             if (index >= 0)
             {
-                if (this.priorityComparsion(priority, this.items[index].Key) <= 0)
+                if (priorityComparsion(priority, items[index].Key) <= 0)
                 {
-                    this.Update(priority, value);
+                    Update(priority, value);
                     return true;
                 }
                 return false;
             }
 
             // not in collection
-            this.Add(priority, value);
+            Add(priority, value);
             return true;
         }
 
@@ -307,23 +307,23 @@ namespace QuickGraph.Collections
             Console.WriteLine("Update({0}, {1})", priority, value);
 #endif
             // find index
-            var index = this.IndexOf(value);
+            var index = IndexOf(value);
             
             // if it exists, update, else add
             if (index > -1)
             {
                 var neww = priority;
-                var oldd = this.items[index].Key;
-                this.items[index] = new KeyValuePair<TPriority,TValue>(neww, value);
+                var oldd = items[index].Key;
+                items[index] = new KeyValuePair<TPriority,TValue>(neww, value);
 
-                if (this.priorityComparsion(neww, oldd) > 0)
+                if (priorityComparsion(neww, oldd) > 0)
                     MinHeapifyUp(index);
-                else if (this.priorityComparsion(neww, oldd) < 0)
+                else if (priorityComparsion(neww, oldd) < 0)
                     MinHeapifyDown(index);
             }
             else
             {
-                this.Add(priority, value);
+                Add(priority, value);
             }
         }
 
@@ -331,37 +331,37 @@ namespace QuickGraph.Collections
         private bool LessOrEqual(int i, int j)
         {
             Contract.Requires(
-                i >= 0 & i < this.count &
-                j >= 0 & j < this.count &
+                i >= 0 & i < count &
+                j >= 0 & j < count &
                 i != j);
 
-            return this.priorityComparsion(this.items[i].Key, this.items[j].Key) <= 0;
+            return priorityComparsion(items[i].Key, items[j].Key) <= 0;
         }
 
         [Pure]
         private bool Less(int i, int j)
         {
             Contract.Requires(
-                i >= 0 & i < this.count &
-                j >= 0 & j < this.count);
+                i >= 0 & i < count &
+                j >= 0 & j < count);
 
-            return this.priorityComparsion(this.items[i].Key, this.items[j].Key) < 0;
+            return priorityComparsion(items[i].Key, items[j].Key) < 0;
         }
 
         private void Swap(int i, int j)
         {
             Contract.Requires(
-                i >= 0 && i < this.count &&
-                j >= 0 && j < this.count);
+                i >= 0 && i < count &&
+                j >= 0 && j < count);
 
             if (i == j)
             {
                 return;
             }
 
-            var kv = this.items[i];
-            this.items[i] = this.items[j];
-            this.items[j] = kv;
+            var kv = items[i];
+            items[i] = items[j];
+            items[j] = kv;
         }
 
 #if DEEP_INVARIANT
@@ -402,54 +402,54 @@ namespace QuickGraph.Collections
             public Enumerator(BinaryHeap<TPriority, TValue> owner)
             {
                 this.owner = owner;
-                this.items = owner.items;
-                this.count = owner.count;
-                this.version = owner.version;
-                this.index = -1;
+                items = owner.items;
+                count = owner.count;
+                version = owner.version;
+                index = -1;
             }
 
             public KeyValuePair<TPriority, TValue> Current
             {
                 get
                 {
-                    if (this.version != this.owner.version)
+                    if (version != owner.version)
                         throw new InvalidOperationException();
-                    if (this.index < 0 | this.index == this.count)
+                    if (index < 0 | index == count)
                         throw new InvalidOperationException();
-                    Contract.Assert(this.index <= this.count);
-                    return this.items[this.index];
+                    Contract.Assert(index <= count);
+                    return items[index];
                 }
             }
 
             void IDisposable.Dispose()
             {
-                this.owner = null;
-                this.items = null;
+                owner = null;
+                items = null;
             }
 
             object IEnumerator.Current
             {
-                get { return this.Current; }
+                get { return Current; }
             }
 
             public bool MoveNext()
             {
-                if (this.version != this.owner.version)
+                if (version != owner.version)
                     throw new InvalidOperationException();
-                return ++this.index < this.count;
+                return ++index < count;
             }
 
             public void Reset()
             {
-                if (this.version != this.owner.version)
+                if (version != owner.version)
                     throw new InvalidOperationException();
-                this.index = -1;
+                index = -1;
             }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
         #endregion
 

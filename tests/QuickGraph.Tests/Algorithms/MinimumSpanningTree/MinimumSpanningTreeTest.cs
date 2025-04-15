@@ -43,7 +43,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyPrim(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Prim50()
@@ -54,7 +54,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyPrim(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Prim100()
@@ -65,7 +65,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyPrim(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Prim200()
@@ -76,7 +76,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyPrim(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Prim300()
@@ -87,7 +87,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyPrim(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Prim400()
@@ -98,7 +98,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyPrim(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Kruskal10()
@@ -109,7 +109,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyKruskal(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Kruskal50()
@@ -120,7 +120,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyKruskal(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Kruskal100()
@@ -131,7 +131,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyKruskal(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Kruskal200()
@@ -142,7 +142,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyKruskal(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Kruskal300()
@@ -153,7 +153,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyKruskal(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
         [TestMethod]
         public void Kruskal400()
@@ -164,7 +164,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
             MyKruskal(graph, x => x.Tag);
             m += DateTime.Now.ToString() + " " + DateTime.Now.Millisecond + "\n";
-            System.Console.Write(m);
+            Console.Write(m);
         }
 
         [TestMethod]
@@ -323,7 +323,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
                 GraphConsoleSerializer.DisplayGraph(g);
                 Console.WriteLine("prim: {0}", string.Join(", ", Array.ConvertAll(prim.ToArray(), e => e.ToString() + ':' + distances[e])));
                 Console.WriteLine("krus: {0}", string.Join(", ", Array.ConvertAll(kruskal.ToArray(), e => e.ToString() + ':' + distances[e])));
-                System.Console.Write("cost do not match");
+                Console.Write("cost do not match");
             }
 
             return kruskalCost;

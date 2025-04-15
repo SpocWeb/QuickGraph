@@ -29,11 +29,11 @@ namespace QuickGraph.Algorithms.MaximumFlow
         {
             Contract.Requires(capacities != null);
             
-            this.Capacities = capacities;
-            this.Predecessors = new Dictionary<TVertex, TEdge>();
-            this.EdgeFactory = edgeFactory;
-            this.ResidualCapacities = new Dictionary<TEdge, double>();
-            this.VertexColors = new Dictionary<TVertex, GraphColor>();
+            Capacities = capacities;
+            Predecessors = new Dictionary<TVertex, TEdge>();
+            EdgeFactory = edgeFactory;
+            ResidualCapacities = new Dictionary<TEdge, double>();
+            VertexColors = new Dictionary<TVertex, GraphColor>();
         }
 
         #region Properties
@@ -52,26 +52,26 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         public GraphColor GetVertexColor(TVertex vertex)
         {
-            return this.VertexColors[vertex];
+            return VertexColors[vertex];
         }
 
         public TVertex Source
         {
-            get { return this.source; }
+            get { return source; }
             set 
             {
                 Contract.Requires(value != null);
-                this.source = value; 
+                source = value; 
             }
         }
 
         public TVertex Sink
         {
-            get { return this.sink; }
+            get { return sink; }
             set 
             {
                 Contract.Requires(value != null);
-                this.sink = value; 
+                sink = value; 
             }
         }
 
@@ -81,10 +81,10 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         public double Compute(TVertex source, TVertex sink)
         {
-            this.Source = source;
-            this.Sink = sink;
-            this.Compute();
-            return this.MaxFlow;
+            Source = source;
+            Sink = sink;
+            Compute();
+            return MaxFlow;
         }
     }
 

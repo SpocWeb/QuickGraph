@@ -57,12 +57,12 @@ namespace QuickGraph.Algorithms.ShortestPath
             )
             :base(host, visitedGraph, weights, distanceRelaxer)
         {
-            this.predecessors = new Dictionary<TVertex,TVertex>();
+            predecessors = new Dictionary<TVertex,TVertex>();
         }
 
         public bool FoundNegativeCycle
         {
-            get { return this.foundNegativeCycle;}
+            get { return foundNegativeCycle;}
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         /// <param name="v">vertex that raised the event</param>
         private void OnInitializeVertex(TVertex v)
         {
-            var eh = this.InitializeVertex;
+            var eh = InitializeVertex;
             if (eh != null)
                 eh(v);
         }
@@ -93,7 +93,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         /// <param name="e">edge that raised the event</param>
         private void OnExamineEdge(TEdge e)
         {
-            var eh = this.ExamineEdge;
+            var eh = ExamineEdge;
             if (eh != null)
                 eh(e);
         }
@@ -110,7 +110,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         /// <param name="e">edge that raised the event</param>
         private void OnEdgeNotRelaxed(TEdge e)
         {
-            var eh = this.EdgeNotRelaxed;
+            var eh = EdgeNotRelaxed;
             if (eh != null)
                 eh(e);
         }
@@ -130,7 +130,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         /// <param name="e">edge that raised the event</param>
         private void OnEdgeMinimized(TEdge e)
         {
-            var eh = this.EdgeMinimized;
+            var eh = EdgeMinimized;
             if (eh != null)
                 eh(e);
         }
@@ -151,7 +151,7 @@ namespace QuickGraph.Algorithms.ShortestPath
         /// <param name="e">edge that raised the event</param>
         private void OnEdgeNotMinimized(TEdge e)
         {
-            var eh = this.EdgeNotMinimized;
+            var eh = EdgeNotMinimized;
             if (eh != null)
                 eh(e);
         }
@@ -171,25 +171,25 @@ namespace QuickGraph.Algorithms.ShortestPath
         {
             base.Initialize();
 
-            this.foundNegativeCycle = false;
+            foundNegativeCycle = false;
             // init color, distance
-            this.VertexColors.Clear();
+            VertexColors.Clear();
             foreach (var u in VisitedGraph.Vertices)
             {
-                this.VertexColors[u] = GraphColor.White;
-                this.Distances[u] = double.PositiveInfinity;
-                this.OnInitializeVertex(u);
+                VertexColors[u] = GraphColor.White;
+                Distances[u] = double.PositiveInfinity;
+                OnInitializeVertex(u);
             }
 
             TVertex root;
-            if (!this.TryGetRootVertex(out root))
-                foreach (var v in this.VisitedGraph.Vertices)
+            if (!TryGetRootVertex(out root))
+                foreach (var v in VisitedGraph.Vertices)
                 {
                     root = v;
                     break;
                 }
 
-            this.Distances[root] = 0;
+            Distances[root] = 0;
         }
 
         /// <summary>
@@ -202,13 +202,13 @@ namespace QuickGraph.Algorithms.ShortestPath
         protected override void InternalCompute()
         {
             // getting the number of 
-            int N = this.VisitedGraph.VertexCount;
+            int N = VisitedGraph.VertexCount;
             for (int k = 0; k < N; ++k)
             {
                 bool atLeastOneTreeEdge = false;
-                foreach (var e in this.VisitedGraph.Edges)
+                foreach (var e in VisitedGraph.Edges)
                 {
-                    this.OnExamineEdge(e);
+                    OnExamineEdge(e);
 
                     if (Relax(e))
                     {
@@ -216,33 +216,33 @@ namespace QuickGraph.Algorithms.ShortestPath
                         OnTreeEdge(e);
                     }
                     else
-                        this.OnEdgeNotRelaxed(e);
+                        OnEdgeNotRelaxed(e);
                 }
                 if (!atLeastOneTreeEdge)
                     break;
             }
 
-            var relaxer = this.DistanceRelaxer;
-            foreach (var e in this.VisitedGraph.Edges)
+            var relaxer = DistanceRelaxer;
+            foreach (var e in VisitedGraph.Edges)
             {
                 var edgeWeight = Weights(e);
                 if (edgeWeight < 0)
                     throw new InvalidOperationException("non negative edge weight");
                 if (relaxer.Compare(
                         relaxer.Combine(
-                            this.Distances[e.Source], edgeWeight),
-                            this.Distances[e.Target]
+                            Distances[e.Source], edgeWeight),
+                            Distances[e.Target]
                         ) < 0
                     )
                 {
-                    this.OnEdgeMinimized(e);
-                    this.foundNegativeCycle = true;
+                    OnEdgeMinimized(e);
+                    foundNegativeCycle = true;
                     return;
                 }
                 else
-                    this.OnEdgeNotMinimized(e);
+                    OnEdgeNotMinimized(e);
             }
-            this.foundNegativeCycle = false;
+            foundNegativeCycle = false;
         }
     }
 }

@@ -5,8 +5,14 @@ using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.MaximumFlow
 {
-    /// <summary>
-    /// Routines to add and remove auxiliary edges when using <see cref="EdmondsKarpMaximumFlowAlgorithm{TVertex, TEdge}"/> 
+    public static class ReversedEdgeAugmentorAlgorithm
+    {
+        public static ReversedEdgeAugmentorAlgorithm<TVertex, TEdge> CreateReversedEdgeAugmentorAlgorithm<TVertex, TEdge>(
+            this IMutableVertexAndEdgeListGraph<TVertex, TEdge> graph,
+            EdgeFactory<TVertex, TEdge> edgeFactory, IAlgorithmComponent host = null) where TEdge : IEdge<TVertex>
+            => null;//new ReversedEdgeAugmentorAlgorithm<TVertex, TEdge>(graph, edgeFactory, host);
+    }
+    /// <summary> Routines to add and remove auxiliary edges when using <see cref="EdmondsKarpMaximumFlowAlgorithm{TVertex, TEdge}"/> 
     /// or <see cref="MaximumBipartiteMatchingAlgorithm{TVertex, TEdge}.InternalCompute()"/>. 
     /// Remember to call <see cref="RemoveReversedEdges()"/> to remove auxiliary edges.
     /// </summary>
@@ -29,17 +35,8 @@ namespace QuickGraph.Algorithms.MaximumFlow
         private IList<TEdge> augmentedEgdes = new List<TEdge>();
         private Dictionary<TEdge,TEdge> reversedEdges = new Dictionary<TEdge,TEdge>();
         private bool augmented = false;
-
-        public ReversedEdgeAugmentorAlgorithm(
-            IMutableVertexAndEdgeListGraph<TVertex, TEdge> visitedGraph,
-            EdgeFactory<TVertex, TEdge> edgeFactory)
-            : this(null, visitedGraph, edgeFactory)
-        { }
-
-        public ReversedEdgeAugmentorAlgorithm(
-            IAlgorithmComponent host,
-            IMutableVertexAndEdgeListGraph<TVertex,TEdge> visitedGraph,
-            EdgeFactory<TVertex,TEdge> edgeFactory)
+         ReversedEdgeAugmentorAlgorithm(IMutableVertexAndEdgeListGraph<TVertex, TEdge> visitedGraph,
+            EdgeFactory<TVertex, TEdge> edgeFactory, IAlgorithmComponent host = null)
         {
             Contract.Requires(visitedGraph != null);
             Contract.Requires(edgeFactory != null);
@@ -52,20 +49,20 @@ namespace QuickGraph.Algorithms.MaximumFlow
         {
             get
             {
-                return this.visitedGraph;
+                return visitedGraph;
             }
         }
 
         public EdgeFactory<TVertex, TEdge> EdgeFactory
         {
-            get { return this.edgeFactory; }
+            get { return edgeFactory; }
         }
 
         public ICollection<TEdge> AugmentedEdges
         {
             get
             {
-                return this.augmentedEgdes;
+                return augmentedEgdes;
             }
         }
 
@@ -73,7 +70,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
         {
             get
             {
-                return this.reversedEdges;
+                return reversedEdges;
             }
         }
 
@@ -81,14 +78,14 @@ namespace QuickGraph.Algorithms.MaximumFlow
         {
             get
             {
-                return this.augmented;
+                return augmented;
             }
         }
 
         public event EdgeAction<TVertex,TEdge> ReversedEdgeAdded;
         private void OnReservedEdgeAdded(TEdge e)
         {
-            var eh = this.ReversedEdgeAdded;
+            var eh = ReversedEdgeAdded;
             if (eh != null)
                 eh(e);
         }
@@ -102,24 +99,24 @@ namespace QuickGraph.Algorithms.MaximumFlow
         /// </remarks>
         public void AddReversedEdges()
         {
-            if (this.Augmented)
+            if (Augmented)
                 throw new InvalidOperationException("Graph already augmented");
             // step 1, find edges that need reversing
             IList<TEdge> notReversedEdges = new List<TEdge>();
-            foreach (var edge in this.VisitedGraph.Edges)
+            foreach (var edge in VisitedGraph.Edges)
             {
                 // if reversed already found, continue
-                if (this.reversedEdges.ContainsKey(edge))
+                if (reversedEdges.ContainsKey(edge))
                     continue;
 
-                TEdge reversedEdge = this.FindReversedEdge(edge);
+                TEdge reversedEdge = FindReversedEdge(edge);
                 if (reversedEdge != null)
                 {
                     // setup edge
-                    this.reversedEdges[edge] = reversedEdge;
+                    reversedEdges[edge] = reversedEdge;
                     // setup reversed if needed
-                    if (!this.reversedEdges.ContainsKey(reversedEdge))
-                        this.reversedEdges[reversedEdge] = edge;
+                    if (!reversedEdges.ContainsKey(reversedEdge))
+                        reversedEdges[reversedEdge] = edge;
                     continue;
                 }
 
@@ -130,47 +127,47 @@ namespace QuickGraph.Algorithms.MaximumFlow
             // step 2, go over each not reversed edge, add reverse
             foreach (var edge in notReversedEdges)
             {
-                if (this.reversedEdges.ContainsKey(edge))
+                if (reversedEdges.ContainsKey(edge))
                     continue;
 
                 // already been added
-                TEdge reversedEdge = this.FindReversedEdge(edge);
+                TEdge reversedEdge = FindReversedEdge(edge);
                 if (reversedEdge != null)
                 {
-                    this.reversedEdges[edge] = reversedEdge;
+                    reversedEdges[edge] = reversedEdge;
                     continue;
                 }
 
                 // need to create one
-                reversedEdge = this.edgeFactory(edge.Target, edge.Source);
-                if (!this.VisitedGraph.AddEdge(reversedEdge))
+                reversedEdge = edgeFactory(edge.Target, edge.Source);
+                if (!VisitedGraph.AddEdge(reversedEdge))
                     throw new InvalidOperationException("We should not be here");
-                this.augmentedEgdes.Add(reversedEdge);
-                this.reversedEdges[edge] = reversedEdge;
-                this.reversedEdges[reversedEdge] = edge;
-                this.OnReservedEdgeAdded(reversedEdge);
+                augmentedEgdes.Add(reversedEdge);
+                reversedEdges[edge] = reversedEdge;
+                reversedEdges[reversedEdge] = edge;
+                OnReservedEdgeAdded(reversedEdge);
             }
 
-            this.augmented = true;
+            augmented = true;
         }
 
         public void RemoveReversedEdges()
         {
-            if (!this.Augmented)
+            if (!Augmented)
                 throw new InvalidOperationException("Graph is not yet augmented");
 
-            foreach (var edge in this.augmentedEgdes)
-                this.VisitedGraph.RemoveEdge(edge);
+            foreach (var edge in augmentedEgdes)
+                VisitedGraph.RemoveEdge(edge);
 
-            this.augmentedEgdes.Clear();
-            this.reversedEdges.Clear();
+            augmentedEgdes.Clear();
+            reversedEdges.Clear();
 
-            this.augmented = false;
+            augmented = false;
         }
 
         private TEdge FindReversedEdge(TEdge edge)
         {
-            foreach (var redge in this.VisitedGraph.OutEdges(edge.Target))
+            foreach (var redge in VisitedGraph.OutEdges(edge.Target))
                 if (redge.Target.Equals(edge.Source))
                     return redge;
             return default(TEdge);
@@ -178,8 +175,8 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         void IDisposable.Dispose()
         {
-            if(this.Augmented)
-                this.RemoveReversedEdges();
+            if(Augmented)
+                RemoveReversedEdges();
         }
     }
 }

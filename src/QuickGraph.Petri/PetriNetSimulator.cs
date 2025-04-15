@@ -20,28 +20,28 @@ namespace QuickGraph.Petri
 		{
 			get
 			{
-				return this.net;
+				return net;
 			}
 		}
 
 		public void Initialize()
 		{
-			this.transitionBuffers.Clear();
-			foreach(ITransition<Token> tr in this.Net.Transitions)
+			transitionBuffers.Clear();
+			foreach(ITransition<Token> tr in Net.Transitions)
 			{
-				this.transitionBuffers.Add(tr, new TransitionBuffer());
+				transitionBuffers.Add(tr, new TransitionBuffer());
 			}
 		}
 
 		public void SimulateStep()
 		{
 			// first step, iterate over arc and gather tokens in transitions
-			foreach(IArc<Token> arc in this.Net.Arcs)
+			foreach(IArc<Token> arc in Net.Arcs)
 			{
 				if(!arc.IsInputArc)
 					continue;
 
-				IList<Token> tokens = this.transitionBuffers[arc.Transition].Tokens;
+				IList<Token> tokens = transitionBuffers[arc.Transition].Tokens;
 				// get annotated tokens
                 IList<Token> annotatedTokens = arc.Annotation.Eval(arc.Place.Marking);
                 //add annontated tokens
@@ -50,18 +50,18 @@ namespace QuickGraph.Petri
             }
 
 			// second step, see which transition was enabled
-			foreach(ITransition<Token> tr in this.Net.Transitions)
+			foreach(ITransition<Token> tr in Net.Transitions)
 			{
 				// get buffered tokens
-                IList<Token> tokens = this.transitionBuffers[tr].Tokens;
+                IList<Token> tokens = transitionBuffers[tr].Tokens;
                 // check if enabled, store value
-                this.transitionBuffers[tr].Enabled = tr.Condition.IsEnabled(tokens);
+                transitionBuffers[tr].Enabled = tr.Condition.IsEnabled(tokens);
             }
 
 			// third step, iterate over the arcs
-			foreach(IArc<Token> arc in this.Net.Arcs)
+			foreach(IArc<Token> arc in Net.Arcs)
 			{
-				if (!this.transitionBuffers[arc.Transition].Enabled)
+				if (!transitionBuffers[arc.Transition].Enabled)
 					continue;
 
 				if(arc.IsInputArc)
@@ -74,7 +74,7 @@ namespace QuickGraph.Petri
                 }
 				else
 				{
-                    IList<Token> tokens = this.transitionBuffers[arc.Transition].Tokens;
+                    IList<Token> tokens = transitionBuffers[arc.Transition].Tokens;
                     // get annotated tokens
                     IList<Token> annotatedTokens = arc.Annotation.Eval(tokens);
                     // IList<Token> annotated comments to target place
@@ -83,10 +83,10 @@ namespace QuickGraph.Petri
                 }
 			}
 			// step four, clear buffers
-			foreach(ITransition<Token> tr in this.Net.Transitions)
+			foreach(ITransition<Token> tr in Net.Transitions)
 			{
-				this.transitionBuffers[tr].Tokens.Clear();
-                this.transitionBuffers[tr].Enabled = false;
+				transitionBuffers[tr].Tokens.Clear();
+                transitionBuffers[tr].Enabled = false;
             }
 		}
 
@@ -97,12 +97,12 @@ namespace QuickGraph.Petri
 
             public IList<Token> Tokens
             {
-                get { return this.tokens;}
+                get { return tokens;}
             }
             public bool Enabled
             {
-                get { return this.enabled; }
-                set { this.enabled = value; }
+                get { return enabled; }
+                set { enabled = value; }
             }
         }
     }

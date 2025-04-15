@@ -27,8 +27,8 @@ namespace QuickGraph
         {
             Contract.Requires(source != null);
             Contract.Requires(target != null);
-            Contract.Ensures(this.Source.Equals(source));
-            Contract.Ensures(this.Target.Equals(target));
+            Contract.Ensures(Source.Equals(source));
+            Contract.Ensures(Target.Equals(target));
 
             this.source = source;
             this.target = target;
@@ -40,7 +40,7 @@ namespace QuickGraph
         /// <value></value>
         public TVertex Source
         {
-            get { return this.source; }
+            get { return source; }
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace QuickGraph
         /// <value></value>
         public TVertex Target
         {
-            get { return this.target; }
+            get { return target; }
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace QuickGraph
         /// </returns>
         public override string ToString()
         {
-            return this.Source + "->" + this.Target;
+            return Source + "->" + Target;
         }
     }
 }

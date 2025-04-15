@@ -25,7 +25,7 @@ namespace QuickGraph.Serialization
         public static IEnumerable<BidirectionalGraph<string, Edge<string>>> GetBidirectionalGraphs()
         {
             yield return new BidirectionalGraph<string, Edge<string>>();
-            foreach (var graphmlFile in TestGraphFactory.GetFileNames())
+            foreach (var graphmlFile in GetFileNames())
             {
                 var g = LoadBidirectionalGraph(graphmlFile);
                 yield return g;
@@ -53,7 +53,7 @@ namespace QuickGraph.Serialization
         public static IEnumerable<AdjacencyGraph<string, Edge<string>>> GetAdjacencyGraphs()
         {
             yield return new AdjacencyGraph<string, Edge<string>>(); //empty Graph
-            foreach (var graphmlFile in TestGraphFactory.GetFileNames())
+            foreach (var graphmlFile in GetFileNames())
             {
                 var g = LoadGraph(graphmlFile);
                 yield return g;
