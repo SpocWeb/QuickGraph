@@ -1,7 +1,6 @@
 namespace QuickGraph.Serialization
 {
-    public abstract class SerializerBase<TVertex,TEdge>
-        where TEdge :IEdge<TVertex>
+    public abstract class SerializerBase
     {
         public bool EmitDocumentDeclaration {get;set;}
     }

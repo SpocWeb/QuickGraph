@@ -1,7 +1,6 @@
 ﻿namespace QuickGraph.Algorithms
 {
-    public interface IVertexTimeStamperAlgorithm<TVertex,TEdge>
-        where TEdge : IEdge<TVertex>
+    public interface IVertexTimeStamperAlgorithm<TVertex>
     {
         event VertexAction<TVertex> DiscoverVertex;
         event VertexAction<TVertex> FinishVertex;

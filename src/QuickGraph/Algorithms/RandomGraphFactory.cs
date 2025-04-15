@@ -13,11 +13,10 @@ namespace QuickGraph.Algorithms
             Contract.Requires(rnd != null);
             Contract.Requires(g.VertexCount > 0);
 
-            return GetVertex<TVertex,TEdge>(g.Vertices, g.VertexCount, rnd);
+            return GetVertex<TVertex>(g.Vertices, g.VertexCount, rnd);
         }
 
-        public static TVertex GetVertex<TVertex,TEdge>(IEnumerable<TVertex> vertices, int count, Random rnd)
-            where TEdge : IEdge<TVertex>
+        public static TVertex GetVertex<TVertex>(IEnumerable<TVertex> vertices, int count, Random rnd)
         {
             Contract.Requires(vertices != null);
             Contract.Requires(rnd != null);

@@ -19,7 +19,7 @@ namespace QuickGraph.Algorithms.ShortestPath
 #endif
     public sealed class UndirectedDijkstraShortestPathAlgorithm<TVertex, TEdge> 
         : UndirectedShortestPathAlgorithmBase<TVertex, TEdge>
-        , IVertexColorizerAlgorithm<TVertex, TEdge>
+        , IVertexColorizerAlgorithm<TVertex>
         , IUndirectedVertexPredecessorRecorderAlgorithm<TVertex, TEdge>
         , IDistanceRecorderAlgorithm<TVertex, TEdge>
         where TEdge : IEdge<TVertex>

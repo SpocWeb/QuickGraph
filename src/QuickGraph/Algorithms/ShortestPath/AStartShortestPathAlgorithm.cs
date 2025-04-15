@@ -21,7 +21,7 @@ namespace QuickGraph.Algorithms.ShortestPath
 #endif
     public sealed class AStarShortestPathAlgorithm<TVertex, TEdge> 
         : ShortestPathAlgorithmBase<TVertex, TEdge, IVertexListGraph<TVertex, TEdge>>
-        , IVertexColorizerAlgorithm<TVertex, TEdge>
+        , IVertexColorizerAlgorithm<TVertex>
         , IVertexPredecessorRecorderAlgorithm<TVertex, TEdge>
         , IDistanceRecorderAlgorithm<TVertex, TEdge>
         where TEdge : IEdge<TVertex>

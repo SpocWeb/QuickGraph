@@ -1,7 +1,6 @@
 ﻿namespace QuickGraph.Algorithms
 {
-    public interface IVertexColorizerAlgorithm<TVertex,TEdge>
-        where TEdge : IEdge<TVertex>
+    public interface IVertexColorizerAlgorithm<TVertex>
     {
         GraphColor GetVertexColor(TVertex v);
     }

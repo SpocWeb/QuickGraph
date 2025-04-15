@@ -97,7 +97,7 @@ namespace QuickGraph.Serialization
     /// </para>
     /// </remarks>
     public sealed class GraphMLDeserializer<TVertex, TEdge, TGraph>
-        : SerializerBase<TVertex, TEdge>
+        : SerializerBase
         where TEdge : IEdge<TVertex>
         where TGraph : IMutableVertexAndEdgeSet<TVertex, TEdge>
     {

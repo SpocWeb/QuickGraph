@@ -16,7 +16,7 @@ namespace QuickGraph.Algorithms.Observers
     [Serializable]
 #endif
     public sealed class VertexRecorderObserver<TVertex, TEdge> :
-        IObserver<IVertexTimeStamperAlgorithm<TVertex, TEdge>>
+        IObserver<IVertexTimeStamperAlgorithm<TVertex>>
         where TEdge : IEdge<TVertex>
     {
         private readonly IList<TVertex> vertices;
@@ -39,7 +39,7 @@ namespace QuickGraph.Algorithms.Observers
             }
         }
 
-        public IDisposable Attach(IVertexTimeStamperAlgorithm<TVertex, TEdge> algorithm)
+        public IDisposable Attach(IVertexTimeStamperAlgorithm<TVertex> algorithm)
         {
             algorithm.DiscoverVertex += algorithm_DiscoverVertex;
             return new DisposableAction(() => algorithm.DiscoverVertex -= algorithm_DiscoverVertex);

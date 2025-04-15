@@ -16,7 +16,7 @@ namespace QuickGraph.Algorithms.Observers
     [Serializable]
 #endif
     public sealed class VertexTimeStamperObserver<TVertex, TEdge> :
-        IObserver<IVertexTimeStamperAlgorithm<TVertex, TEdge>>
+        IObserver<IVertexTimeStamperAlgorithm<TVertex>>
         where TEdge : IEdge<TVertex>
     {
         private readonly Dictionary<TVertex, int> discoverTimes;
@@ -57,7 +57,7 @@ namespace QuickGraph.Algorithms.Observers
             get { return this._finishTimes; }
         }
 
-        public IDisposable Attach(IVertexTimeStamperAlgorithm<TVertex, TEdge> algorithm)
+        public IDisposable Attach(IVertexTimeStamperAlgorithm<TVertex> algorithm)
         {
             algorithm.DiscoverVertex += DiscoverVertex;
             if (this._finishTimes != null)

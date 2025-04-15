@@ -20,9 +20,9 @@ namespace QuickGraph.Algorithms.Search
     public sealed class UndirectedDepthFirstSearchAlgorithm<TVertex, TEdge> :
         RootedAlgorithmBase<TVertex, IUndirectedGraph<TVertex, TEdge>>,
         IDistanceRecorderAlgorithm<TVertex, TEdge>,
-        IVertexColorizerAlgorithm<TVertex, TEdge>,
+        IVertexColorizerAlgorithm<TVertex>,
         IUndirectedVertexPredecessorRecorderAlgorithm<TVertex, TEdge>,
-        IVertexTimeStamperAlgorithm<TVertex, TEdge>,
+        IVertexTimeStamperAlgorithm<TVertex>,
         IUndirectedTreeBuilderAlgorithm<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
     {

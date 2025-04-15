@@ -6,7 +6,7 @@ namespace QuickGraph.Algorithms
 {
     public enum ComponentWithEdges { NoComponent, OneComponent, ManyComponents }
 
-    public class IsEulerianGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
+    public class IsEulerianGraphAlgorithm<TVertex>
     {
         private readonly UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph;
 

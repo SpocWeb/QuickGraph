@@ -13,7 +13,7 @@ namespace QuickGraph.Algorithms
         }
     }
 
-    public class IsHamiltonianGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
+    public class IsHamiltonianGraphAlgorithm<TVertex>
     {
         private readonly UndirectedGraph<TVertex, UndirectedEdge<TVertex>> graph;
         private readonly double threshold;

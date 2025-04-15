@@ -191,7 +191,7 @@ this
                 XmlResolver = GraphMlXmlResolver.GraphMlDtdResolver, 
                 Schemas = GraphMlXmlResolver.XmlSchemaSet,
             };
-            AddGraphMLSchema<TVertex, TEdge, TGraph>(settings);
+            AddGraphMLSchema(settings);
 
             try
             {
@@ -207,9 +207,7 @@ this
             }
         }
 
-        private static void AddGraphMLSchema<TVertex, TEdge,TGraph>(XmlReaderSettings settings)
-            where TEdge : IEdge<TVertex>
-            where TGraph : IEdgeListGraph<TVertex, TEdge>
+        private static void AddGraphMLSchema(XmlReaderSettings settings)
         {
             using (var xsdStream = typeof(GraphMlExtensions).Assembly.GetManifestResourceStream(typeof(GraphMlExtensions), "graphml.xsd"))
             using (var xsdReader = XmlReader.Create(xsdStream, settings))

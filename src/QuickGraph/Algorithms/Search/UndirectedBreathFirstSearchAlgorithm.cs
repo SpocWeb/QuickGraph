@@ -21,7 +21,7 @@ namespace QuickGraph.Algorithms.Search
         : RootedAlgorithmBase<TVertex, IUndirectedGraph<TVertex, TEdge>>
         , IUndirectedVertexPredecessorRecorderAlgorithm<TVertex, TEdge>
         , IDistanceRecorderAlgorithm<TVertex, TEdge>
-        , IVertexColorizerAlgorithm<TVertex, TEdge>
+        , IVertexColorizerAlgorithm<TVertex>
         , IUndirectedTreeBuilderAlgorithm<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
     {
