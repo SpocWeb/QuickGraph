@@ -227,8 +227,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
                         path, 
                         iedge, 
                         previousVertex, 
-                        previousWeight,
-                        pathVertices
+                        previousWeight
                         );
 
                 // update counter
@@ -251,8 +250,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             TEdge[] path, 
             int iedge, 
             TVertex previousVertex, 
-            double previousWeight,
-            Dictionary<TVertex, int> pathVertices
+            double previousWeight
             )
         {
             Contract.Requires(queue != null);

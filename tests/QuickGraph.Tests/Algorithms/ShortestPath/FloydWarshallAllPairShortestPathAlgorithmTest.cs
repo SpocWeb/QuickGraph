@@ -100,7 +100,7 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
         [TestMethod]
         public void FloydVsBellmannGraphML()
         {
-            Func<Edge<string>, double> distances = e => 1;
+            Func<Edge<string>, double> distances = _ => 1;
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
                 Compare(
                     g,
@@ -112,7 +112,7 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
         [TestMethod]
         public void FloydVsDijkstraGraphML()
         {
-            Func<Edge<string>, double> distances = e => 1;
+            Func<Edge<string>, double> distances = _ => 1;
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
                 Compare(
                     g, 

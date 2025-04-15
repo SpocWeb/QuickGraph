@@ -477,13 +477,7 @@ this
                     yield return v;
         }
 
-        /// <summary>
-        /// Gets the list of roots
-        /// </summary>
-        /// <typeparam name="TVertex">type of the vertices</typeparam>
-        /// <typeparam name="TEdge">type of the edges</typeparam>
-        /// <param name="visitedGraph"></param>
-        /// <returns></returns>
+        /// <summary> Gets the list of roots </summary>
         public static IEnumerable<TVertex> Roots<TVertex, TEdge>(
 #if !NET20
 this 
@@ -507,22 +501,13 @@ this
 
             foreach(var vertex in visitedGraph.Vertices)
             {
-                bool value;
-                if (!notRoots.TryGetValue(vertex, out value))
+                if (!notRoots.TryGetValue(vertex, out _))
                     yield return vertex;
             }
         }
 
-        /// <summary>
-        /// Creates a topological sort of a undirected
-        /// acyclic graph.
-        /// </summary>
-        /// <typeparam name="TVertex">type of the vertices</typeparam>
-        /// <typeparam name="TEdge">type of the edges</typeparam>
-        /// <param name="visitedGraph"></param>
-        /// <returns></returns>
-        /// <exception cref="NonAcyclicGraphException">the input graph
-        /// has a cycle</exception>
+        /// <summary> Creates a topological sort of an undirected acyclic graph. </summary>
+        /// <exception cref="NonAcyclicGraphException">the input graph has a cycle</exception>
         public static IEnumerable<TVertex> TopologicalSort<TVertex, TEdge>(
 #if !NET20
             this 

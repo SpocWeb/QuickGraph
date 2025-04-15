@@ -29,7 +29,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             var algo = new AStarShortestPathAlgorithm<TVertex, TEdge>(
                 g,
                 e => distances[e],
-                v => 0
+                _ => 0
                 );
             var predecessors = new VertexPredecessorRecorderObserver<TVertex, TEdge>();
             using (predecessors.Attach(algo))

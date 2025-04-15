@@ -26,12 +26,9 @@ namespace QuickGraph.Tests.Algorithms
             Assert.AreEqual("A", roots[0]);
         }
 
-        [TestMethod]
-        public void AllAdjacencyGraphRoots()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                Roots(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void AllAdjacencyGraphRoots(AdjacencyGraph<string, Edge<string>> g) => Roots(g);
 
         
         public static void Roots<T>(IVertexAndEdgeListGraph<T, Edge<T>> g)

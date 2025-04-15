@@ -45,7 +45,7 @@ namespace QuickGraph.Tests.Algorithms.MaximumFlow
             TryFunc<TVertex, TEdge> flowPredecessors;
             var flow = AlgorithmExtensions.MaximumFlowEdmondsKarp(
                 g,
-                e => 1,
+                _ => 1,
                 source, sink,
                 out flowPredecessors,
                 edgeFactory,

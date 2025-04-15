@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
 
 using System.Xml.XPath;
@@ -40,15 +41,17 @@ namespace QuickGraph.Serialization
                 g.DeserializeFromGraphML(
                     reader,
                     id => id,
-                    (source, target, id) => new Edge<string>(source, target)
+                    (source, target, _) => new Edge<string>(source, target)
                     );
             }
             return g;
         }
 
+        public static IEnumerable<object[]> GetAdjacencyGraphData() => GetAdjacencyGraphs().Select(g => new[] { g });
+
         public static IEnumerable<AdjacencyGraph<string, Edge<string>>> GetAdjacencyGraphs()
         {
-            yield return new AdjacencyGraph<string, Edge<string>>();
+            yield return new AdjacencyGraph<string, Edge<string>>(); //empty Graph
             foreach (var graphmlFile in TestGraphFactory.GetFileNames())
             {
                 var g = LoadGraph(graphmlFile);
@@ -65,7 +68,7 @@ namespace QuickGraph.Serialization
                 g.DeserializeFromGraphML(
                     reader,
                     id => id,
-                    (source, target, id) => new Edge<string>(source, target)
+                    (source, target, _) => new Edge<string>(source, target)
                     );
             }
             return g;
@@ -104,7 +107,7 @@ namespace QuickGraph.Serialization
                     g.DeserializeFromGraphML(
                         reader,
                         id => id,
-                        (source, target, id) => new Edge<string>(source, target)
+                        (source, target, _) => new Edge<string>(source, target)
                         );
                 }
                 Console.Write(": {0} vertices, {1} edges", g.VertexCount, g.EdgeCount);

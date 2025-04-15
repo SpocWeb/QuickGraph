@@ -84,7 +84,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             var algo =
                 new DagShortestPathAlgorithm<TVertex, TEdge>(
                     g,
-                    e => 1,
+                    _ => 1,
                     relaxer
                     );
             var predecessors = new VertexPredecessorRecorderObserver<TVertex, TEdge>();

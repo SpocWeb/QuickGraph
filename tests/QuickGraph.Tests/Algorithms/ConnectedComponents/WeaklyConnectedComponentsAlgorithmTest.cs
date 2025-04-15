@@ -6,14 +6,11 @@ namespace QuickGraph.Algorithms.ConnectedComponents
     [TestClass]
     public partial class WeaklyConnectedComponentsAlgorithmTest
     {
-        [TestMethod]
-        public void WeaklyConnectedComponentsAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                Compute(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void WeaklyConnectedComponentsAll(AdjacencyGraph<string, Edge<string>> g) => Compute(g);
 
-        
+
         public static void Compute<TVertex,TEdge>(IVertexListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {

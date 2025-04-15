@@ -9,7 +9,8 @@ namespace QuickGraph.Algorithms.Condensation
     
     public class WeaklyConnectedCondensationGraphAlgorithmTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
         public void WeaklyConnectedCondensatAll()
         {
             foreach (var g in TestGraphFactory.GetAdjacencyGraphs())

@@ -10,7 +10,7 @@ namespace QuickGraph.Perf
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // new TarjanOfflineLeastCommonAncestorAlgorithmTest().TarjanOfflineLeastCommonAncestorAlgorithmAll();
             // new DijkstraShortestPathAlgorithmTest().DijkstraAll();

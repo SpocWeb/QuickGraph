@@ -19,7 +19,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             g.AddEdge(new Edge<int>(1,2));
             g.AddEdge(new Edge<int>(2,3));
 
-            var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, e => 1);
+            var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, _ => 1);
             dij.Compute(1);
 
             Assert.AreEqual(0, dij.Distances[1]);
@@ -38,7 +38,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             Edge<int> e12 = new Edge<int>(1, 2); g.AddEdge(e12);
             Edge<int> e23 = new Edge<int>(2, 3); g.AddEdge(e23);
 
-            var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, e => 1);
+            var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, _ => 1);
             var vis = new VertexPredecessorRecorderObserver<int, Edge<int>>();
             using(vis.Attach(dij))
                 dij.Compute(1);
@@ -68,7 +68,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             Edge<int> e23 = new Edge<int>(2, 3); g.AddEdge(e23);
             Edge<int> e13 = new Edge<int>(1, 3); g.AddEdge(e13);
 
-            var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, e => 1);
+            var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, _ => 1);
             dij.Compute(1);
 
             Assert.AreEqual(0.0, dij.Distances[1]);
@@ -88,7 +88,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             Edge<int> e23 = new Edge<int>(2, 3); g.AddEdge(e23);
             Edge<int> e13 = new Edge<int>(1, 3); g.AddEdge(e13);
 
-            var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, e => 1);
+            var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, _ => 1);
             var vis = new VertexPredecessorRecorderObserver<int, Edge<int>>();
             using(vis.Attach(dij))
                 dij.Compute(1);

@@ -58,12 +58,12 @@ namespace QuickGraph.Algorithms.Search
                 discoverTimes[args] = time++;
             };
 
-            dfs.ExamineEdge += (sender, args) =>
+            dfs.ExamineEdge += (_, args) =>
             {
                 Assert.AreEqual(dfs.VertexColors[args.Source], GraphColor.Gray);
             };
 
-            dfs.TreeEdge += (sender, args) =>
+            dfs.TreeEdge += (_, args) =>
             {
                 var source = args.Source;
                 var target = args.Target;
@@ -71,12 +71,12 @@ namespace QuickGraph.Algorithms.Search
                 parents[target] = source;
             };
 
-            dfs.BackEdge += (sender, args) =>
+            dfs.BackEdge += (_, args) =>
             {
                 Assert.AreEqual(dfs.VertexColors[args.Target], GraphColor.Gray);
             };
 
-            dfs.ForwardOrCrossEdge += (sender, args) =>
+            dfs.ForwardOrCrossEdge += (_, args) =>
             {
                 Assert.AreEqual(dfs.VertexColors[args.Target], GraphColor.Black);
             };

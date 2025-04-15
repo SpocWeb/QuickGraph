@@ -372,7 +372,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
         {
             var ug = XmlReader.Create("GraphML/repro12273.xml").DeserializeFromXml(
                 "graph", "node", "edge", "",
-                reader => new UndirectedGraph<string, TaggedEdge<string, double>>(),
+                _ => new UndirectedGraph<string, TaggedEdge<string, double>>(),
                 reader => reader.GetAttribute("id"),
                 reader => new TaggedEdge<string, double>(
                     reader.GetAttribute("source"),

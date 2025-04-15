@@ -106,7 +106,7 @@ namespace QuickGraph.Tests.Regression
             graph.AddVerticesAndEdge(new TaggedEdge<int, int>(2761, 2759, ii++));
             graph.AddVerticesAndEdge(new TaggedEdge<int, int>(2759, 2761, ii++));
 
-            var test1 = new HoffmanPavleyRankedShortestPathAlgorithm<int, TaggedEdge<int, int>>(graph, e => 1.0);
+            var test1 = new HoffmanPavleyRankedShortestPathAlgorithm<int, TaggedEdge<int, int>>(graph, _ => 1.0);
             test1.ShortestPathCount = 5;
             test1.Compute(1626, 1965);
             Assert.AreEqual(4, test1.ComputedShortestPathCount);
@@ -143,7 +143,7 @@ namespace QuickGraph.Tests.Regression
             mvGraph2.AddVerticesAndEdge(new TaggedEdge<int, int>(0, 5, ii++));
             mvGraph2.AddVerticesAndEdge(new TaggedEdge<int, int>(5, 2, ii++));
 
-            var test1 = new HoffmanPavleyRankedShortestPathAlgorithm<int, TaggedEdge<int, int>>(mvGraph2, E => 1.0);
+            var test1 = new HoffmanPavleyRankedShortestPathAlgorithm<int, TaggedEdge<int, int>>(mvGraph2, _ => 1.0);
             test1.ShortestPathCount = 5;
             test1.Compute(5, 2);
             Console.WriteLine("path: {0}", test1.ComputedShortestPathCount);

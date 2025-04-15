@@ -7,15 +7,12 @@ namespace QuickGraph.Algorithms.Condensation
     [TestClass]
     public partial class StronglyConnectedCondensationGraphAlgorithmTest
     {
-        [TestMethod]
-        public void StronglyConnectedCondensateAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.StronglyConnectedCondensate(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void StronglyConnectedCondensateAll(AdjacencyGraph<string, Edge<string>> g) => StronglyConnectedCondensate(g);
 
-        
-        public void StronglyConnectedCondensate<TVertex, TEdge>(
+
+        public static void StronglyConnectedCondensate<TVertex, TEdge>(
             IVertexAndEdgeListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
@@ -24,10 +21,10 @@ namespace QuickGraph.Algorithms.Condensation
             CheckVertexCount(g, cg);
             CheckEdgeCount(g, cg);
             CheckComponentCount(g, cg);
-            CheckDAG(g, cg);
+            CheckDAG(cg);
         }
 
-        private void CheckVertexCount<TVertex, TEdge>(
+        private static void CheckVertexCount<TVertex, TEdge>(
             IVertexAndEdgeListGraph<TVertex, TEdge> g,
             IMutableBidirectionalGraph<AdjacencyGraph<TVertex, TEdge>, CondensedEdge<TVertex, TEdge, AdjacencyGraph<TVertex, TEdge>>> cg)
             where TEdge : IEdge<TVertex>
@@ -38,7 +35,7 @@ namespace QuickGraph.Algorithms.Condensation
             Assert.AreEqual(g.VertexCount, count, "VertexCount does not match");
         }
 
-        private void CheckEdgeCount<TVertex, TEdge>(
+        private static void CheckEdgeCount<TVertex, TEdge>(
             IVertexAndEdgeListGraph<TVertex, TEdge> g,
             IMutableBidirectionalGraph<AdjacencyGraph<TVertex, TEdge>, CondensedEdge<TVertex, TEdge, AdjacencyGraph<TVertex, TEdge>>> cg)
             where TEdge : IEdge<TVertex>
@@ -53,7 +50,7 @@ namespace QuickGraph.Algorithms.Condensation
         }
 
 
-        private void CheckComponentCount<TVertex, TEdge>(
+        private static void CheckComponentCount<TVertex, TEdge>(
             IVertexAndEdgeListGraph<TVertex, TEdge> g,
             IMutableBidirectionalGraph<AdjacencyGraph<TVertex, TEdge>, CondensedEdge<TVertex, TEdge, AdjacencyGraph<TVertex, TEdge>>> cg)
             where TEdge : IEdge<TVertex>
@@ -64,8 +61,7 @@ namespace QuickGraph.Algorithms.Condensation
             Assert.AreEqual(componentCount, cg.VertexCount, "ComponentCount does not match");
         }
 
-        private void CheckDAG<TVertex, TEdge>(
-            IVertexAndEdgeListGraph<TVertex, TEdge> g,
+        private static void CheckDAG<TVertex, TEdge>(
             IMutableBidirectionalGraph<AdjacencyGraph<TVertex, TEdge>, CondensedEdge<TVertex, TEdge, AdjacencyGraph<TVertex, TEdge>>> cg)
             where TEdge : IEdge<TVertex>
         {

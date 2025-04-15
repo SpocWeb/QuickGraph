@@ -152,7 +152,7 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
 
             int pathCount = 5;
             foreach (IEnumerable<Edge<int>> path in g1.RankedShortestPathHoffmanPavley(
-                e => 5, Source, Target, pathCount))
+                _ => 5, Source, Target, pathCount))
             {}
         }
     }
