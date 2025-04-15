@@ -9,15 +9,12 @@ namespace QuickGraph.Tests.Algorithms.MaximumFlow
     [TestClass]
     public partial class EdmondsKarpMaximumFlowAlgorithmTest
     {
-        [TestMethod]
-        public void EdmondsKarpMaxFlowAll()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void EdmondsKarpMaxFlowAll(AdjacencyGraph<string, Edge<string>> g)
         {
-
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-            {
-                if (g.VertexCount > 0)
-                    EdmondsKarpMaxFlow(g, (source, target) => new Edge<string>(source, target));
-            }
+            if (g.VertexCount > 0)
+                EdmondsKarpMaxFlow(g, (source, target) => new Edge<string>(source, target));
         }
 
 

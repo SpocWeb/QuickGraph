@@ -47,7 +47,8 @@ namespace QuickGraph.Serialization
             return g;
         }
 
-        public static IEnumerable<object[]> GetAdjacencyGraphData() => GetAdjacencyGraphs().Select(g => new[] { g });
+        public static IEnumerable<object[]> GetAdjacencyGraphData()
+            => GetAdjacencyGraphs().Select(g => new[] { g });
 
         public static IEnumerable<AdjacencyGraph<string, Edge<string>>> GetAdjacencyGraphs()
         {

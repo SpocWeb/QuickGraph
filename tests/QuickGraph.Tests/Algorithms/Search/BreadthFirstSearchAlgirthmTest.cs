@@ -8,12 +8,12 @@ namespace QuickGraph.Algorithms.Search
     [TestClass]
     public class BreadthFirstAlgorithmSearchTest
     {
-        [TestMethod]
-        public void BreadthFirstSearchAll()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void BreadthFirstSearchAll(AdjacencyGraph<string, Edge<string>> g)
         {
-            foreach(var g in TestGraphFactory.GetAdjacencyGraphs())
-                foreach(var v in g.Vertices)
-                    RunBfs(g,v);
+            foreach(var v in g.Vertices)
+                RunBfs(g,v);
         }
 
         

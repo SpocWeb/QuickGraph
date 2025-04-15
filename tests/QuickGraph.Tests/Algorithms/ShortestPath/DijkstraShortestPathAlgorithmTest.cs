@@ -10,10 +10,10 @@ namespace QuickGraph.Algorithms.ShortestPath
     public partial class DijkstraShortestPathAlgorithmTest
     {
         [TestMethod]
-        [DeploymentItem("GraphML/repro12359.graphml", "GraphML")]
+        //[DeploymentItem("slow_Graphs/repro12359.graphml", "GraphML")]
         public void Repro12359()
         {
-            var g = TestGraphFactory.LoadGraph("GraphML/repro12359.graphml");
+            var g = TestGraphFactory.LoadGraph("slow_Graphs/repro12359.graphml");
             int i = 0;
             foreach (var v in g.Vertices)
             {
@@ -22,12 +22,12 @@ namespace QuickGraph.Algorithms.ShortestPath
             }
         }
 
-        [TestMethod]
-        public void DijkstraAll()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void DijkstraAll(AdjacencyGraph<string, Edge<string>> g)
         {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                foreach (var root in g.Vertices)
-                    Dijkstra(g, root);
+            foreach (var root in g.Vertices)
+                Dijkstra(g, root);
         }
 
         

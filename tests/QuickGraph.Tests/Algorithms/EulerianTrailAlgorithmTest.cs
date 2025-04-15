@@ -11,19 +11,9 @@ namespace QuickGraph.Algorithms
     [TestClass]
     public class EulerianTrailAlgorithmTest
     {
-        //[TestMethod]
-        //[Ignore]
-        public void EulerianTrailAll()
-        {
-            IEnumerable<AdjacencyGraph<string, Edge<string>>> graphs = TestGraphFactory.GetAdjacencyGraphs();
-            foreach (var g in graphs)
-            {
-                ComputeTrail(g, (s, t) => new Edge<string>(s, t));
-            }
-        }
-
+        [DataTestMethod]
         [TestCaseSource(typeof(TestGraphFactory), nameof(TestGraphFactory.GetAdjacencyGraphs))]
-        public void EulerianTrail(AdjacencyGraph<string, Edge<string>> g)
+        public static void EulerianTrail(AdjacencyGraph<string, Edge<string>> g)
         {
             Console.WriteLine(g.ToString());
             ComputeTrail(g, (s, t) => new Edge<string>(s, t));

@@ -57,7 +57,7 @@ namespace QuickGraph.Algorithms
         }
 
         [TestMethod]
-        [DeploymentItem("GraphML/DCT8.graphml", "GraphML")]
+        //[DeploymentItem("GraphML/DCT8.graphml", "GraphML")]
         public void SortDCT()
         {
             var g = TestGraphFactory.LoadBidirectionalGraph("GraphML/DCT8.graphml");

@@ -26,12 +26,9 @@ namespace QuickGraph.Algorithms.Search
             return false;
         }
 
-        [TestMethod]
-        public void DepthFirstSearchAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                DepthFirstSearch(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void DepthFirstSearchAll(AdjacencyGraph<string, Edge<string>> g) => DepthFirstSearch(g);
 
         
         public static void DepthFirstSearch<TVertex,TEdge>(IVertexListGraph<TVertex, TEdge> g)

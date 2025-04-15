@@ -97,28 +97,22 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
                 );
         }
 
-        [TestMethod]
-        public void FloydVsBellmannGraphML()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void FloydVsBellmannGraphML(AdjacencyGraph<string, Edge<string>> g)
         {
             Func<Edge<string>, double> distances = _ => 1;
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                Compare(
-                    g,
-                    distances,
-                    (G, d) => new BellmanFordShortestPathAlgorithm<string, Edge<string>>(G, d)
-                    );
+            Compare(g, distances, (G, d)
+                => new BellmanFordShortestPathAlgorithm<string, Edge<string>>(G, d));
         }
 
-        [TestMethod]
-        public void FloydVsDijkstraGraphML()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void FloydVsDijkstraGraphML(AdjacencyGraph<string, Edge<string>> g)
         {
             Func<Edge<string>, double> distances = _ => 1;
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                Compare(
-                    g, 
-                    distances,
-                    (G, d) => new DijkstraShortestPathAlgorithm<string, Edge<string>>(G, d)
-                    );
+            Compare(g, distances, (G, d)
+                => new DijkstraShortestPathAlgorithm<string, Edge<string>>(G, d));
         }
 
         static void Compare<TVertex, TEdge, TGraph>(

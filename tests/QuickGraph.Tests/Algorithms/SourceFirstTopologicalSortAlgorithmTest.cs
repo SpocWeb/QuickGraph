@@ -7,12 +7,9 @@ namespace QuickGraph.Algorithms
     [TestClass]
     public partial class SourceFirstTopologicalSortAlgorithmTest
     {
-        [TestMethod]
-        public void SortAll()
-        {
-            foreach(var g in TestGraphFactory.GetAdjacencyGraphs())
-                Sort(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void SortAll(AdjacencyGraph<string, Edge<string>> g) => Sort(g);
 
         
         public static void Sort<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g)
@@ -44,7 +41,7 @@ namespace QuickGraph.Algorithms
         }
 
         [TestMethod]
-        [DeploymentItem("GraphML/DCT8.graphml", "GraphML")]
+        //[DeploymentItem("GraphML/DCT8.graphml", "GraphML")]
         public void SortDCT()
         {
             var g = TestGraphFactory.LoadBidirectionalGraph("GraphML/DCT8.graphml");

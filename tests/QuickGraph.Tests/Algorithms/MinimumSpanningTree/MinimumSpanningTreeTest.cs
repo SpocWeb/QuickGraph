@@ -367,7 +367,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
 
         [TestMethod]
         [WorkItem(12273)]
-        [DeploymentItem("GraphML/repro12273.xml", "GraphML")]
+        //[DeploymentItem("GraphML/repro12273.xml", "GraphML")]
         public void Prim12273()
         {
             var ug = XmlReader.Create("GraphML/repro12273.xml").DeserializeFromXml(

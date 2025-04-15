@@ -8,12 +8,9 @@ namespace QuickGraph.Algorithms.RandomWalks
     [TestClass]
     public class EdgeChainTest
     {
-        [TestMethod]
-        public void GenerateAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                Generate(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void GenerateAll(AdjacencyGraph<string, Edge<string>> g) => Generate(g);
 
         
         public static void Generate<TVertex, TEdge>(IVertexListGraph<TVertex, TEdge> g)

@@ -10,28 +10,26 @@ namespace QuickGraph.Tests.Algorithms
     [TestClass]
     public class TarjanOfflineLeastCommonAncestorAlgorithmTest
     {
-        [TestMethod]
-        public void TarjanOfflineLeastCommonAncestorAlgorithmAll()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void TarjanOfflineLeastCommonAncestorAlgorithmAll(AdjacencyGraph<string, Edge<string>> g)
         {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
+            if (g.VertexCount == 0) return;
+
+            var pairs = new List<SEquatableEdge<string>>();
+            foreach(var v in g.Vertices)
+            foreach(var w in g.Vertices)
+                if (!v.Equals(w))
+                    pairs.Add(new SEquatableEdge<string>(v,w));
+
+            int count = 0;
+            foreach (var root in g.Vertices)
             {
-                if (g.VertexCount == 0) continue;
-
-                var pairs = new List<SEquatableEdge<string>>();
-                foreach(var v in g.Vertices)
-                    foreach(var w in g.Vertices)
-                        if (!v.Equals(w))
-                            pairs.Add(new SEquatableEdge<string>(v,w));
-
-                int count = 0;
-                foreach (var root in g.Vertices)
-                {
-                    TarjanOfflineLeastCommonAncestorAlgorithm(
-                        g,
-                        root,
-                        pairs.ToArray());
-                    if (count++ > 10) break;
-                }
+                TarjanOfflineLeastCommonAncestorAlgorithm(
+                    g,
+                    root,
+                    pairs.ToArray());
+                if (count++ > 10) break;
             }
         }
 

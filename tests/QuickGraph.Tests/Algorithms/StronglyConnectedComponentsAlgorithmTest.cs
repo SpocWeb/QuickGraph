@@ -73,12 +73,9 @@ namespace QuickGraph.Algorithms
             checkStrong(strong);
         }
 
-        [TestMethod]
-        public void StronglyConnectedComponentAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                Compute(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void StronglyConnectedComponentAll(AdjacencyGraph<string, Edge<string>> g) => Compute(g);
 
         
         public static void Compute<TVertex,TEdge>(AdjacencyGraph<TVertex, TEdge> g)

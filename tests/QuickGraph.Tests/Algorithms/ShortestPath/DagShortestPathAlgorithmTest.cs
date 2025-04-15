@@ -37,14 +37,12 @@ namespace QuickGraph.Algorithms.ShortestPath
             }
         }
 
-        [TestMethod]
-        public void DagShortestPathAll()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void DagShortestPathAll(AdjacencyGraph<string, Edge<string>> g)
         {
-            foreach(var g in TestGraphFactory.GetAdjacencyGraphs())
-            {
-                Compute(g);
-                ComputeCriticalPath(g);
-            }
+            Compute(g);
+            ComputeCriticalPath(g);
         }
 
         

@@ -9,12 +9,9 @@ namespace QuickGraph.Algorithms
     [TestClass]
     public partial class TopologicalSortAlgorithmTest
     {
-        [TestMethod]
-        public void TopologicalSortAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                SortCyclic(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void TopologicalSortAll(AdjacencyGraph<string, Edge<string>> g) => SortCyclic(g);
 
         
         public static void SortCyclic<TVertex,TEdge>(
@@ -26,7 +23,7 @@ namespace QuickGraph.Algorithms
         }
 
         [TestMethod]
-        [DeploymentItem("GraphML/DCT8.graphml", "GraphML")]
+        //[DeploymentItem("GraphML/DCT8.graphml", "GraphML")]
         public void SortDCT8()
         {
             var g = TestGraphFactory.LoadGraph("GraphML/DCT8.graphml");

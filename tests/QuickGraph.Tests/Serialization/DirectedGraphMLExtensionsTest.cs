@@ -27,16 +27,14 @@ namespace QuickGraph.Tests.Serialization
                 .WriteXml(Console.Out);
         }
 
-        [TestMethod]
-        public void ToDirectedGraphML()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void ToDirectedGraphML(AdjacencyGraph<string, Edge<string>> g)
         {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-            {
-                var dg = g.ToDirectedGraphML();
-                Assert.IsNotNull(g);
-                Assert.AreEqual(dg.Nodes.Length, g.VertexCount);
-                Assert.AreEqual(dg.Links.Length, g.EdgeCount);
-            }
+            var dg = g.ToDirectedGraphML();
+            Assert.IsNotNull(g);
+            Assert.AreEqual(dg.Nodes.Length, g.VertexCount);
+            Assert.AreEqual(dg.Links.Length, g.EdgeCount);
         }
     }
 }

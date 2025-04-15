@@ -9,13 +9,13 @@ namespace QuickGraph.Algorithms.ShortestPath
     [TestClass]
     public partial class AStartShortestPathAlgorithmTest
     {
-        [TestMethod]
         [TestCategory(TestCategories.LongRunning)]
-        public void AStartAll()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void AStartAll(AdjacencyGraph<string, Edge<string>> g)
         {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                foreach (var root in g.Vertices)
-                    AStar(g, root);
+            foreach (var root in g.Vertices)
+                AStar(g, root);
         }
 
         

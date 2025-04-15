@@ -7,16 +7,14 @@ namespace QuickGraph.Algorithms.RandomWalks
     [TestClass]
     public class CyclePoppingRandomTreeAlgorithmTest
     {
-        [TestMethod]
-        public void CyclePoppingRandomTreeAll()
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void CyclePoppingRandomTreeAll(AdjacencyGraph<string, Edge<string>> g)
         {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
+            foreach (var v in g.Vertices)
             {
-                foreach (var v in g.Vertices)
-                {
-                    var target = new CyclePoppingRandomTreeAlgorithm<string, Edge<string>>(g);
-                    target.Compute(v);
-                }
+                var target = new CyclePoppingRandomTreeAlgorithm<string, Edge<string>>(g);
+                target.Compute(v);
             }
         }
 

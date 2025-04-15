@@ -8,12 +8,9 @@ namespace QuickGraph.Algorithms.RandomWalks
     [TestClass]
     public class RandomWalkAlgorithmTest
     {
-        [TestMethod]
-        public void RoundRobinAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                RoundRobinTest(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void RoundRobinAll(AdjacencyGraph<string, Edge<string>> g) => RoundRobinTest(g);
 
         
         public static void RoundRobinTest<TVertex, TEdge>(IVertexListGraph<TVertex, TEdge> g)

@@ -7,16 +7,12 @@ namespace QuickGraph.Algorithms.MaximumFlow
     [TestClass]
     public partial class AllVerticesGraphAugmentorAlgorithmTest
     {
-        [TestMethod]
-        public void AugmentAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                Augment(g);
-        }
+        [DataTestMethod]
+        [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
+        public void AugmentAll(AdjacencyGraph<string, Edge<string>> g) => Augment(g);
 
         
-        public static void Augment(
-            IMutableVertexAndEdgeListGraph<string, Edge<string>> g)
+        public static void Augment(IMutableVertexAndEdgeListGraph<string, Edge<string>> g)
         {
             int vertexCount = g.VertexCount;
             int edgeCount = g.EdgeCount;

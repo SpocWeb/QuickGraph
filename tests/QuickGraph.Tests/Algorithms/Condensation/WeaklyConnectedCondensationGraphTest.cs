@@ -11,14 +11,10 @@ namespace QuickGraph.Algorithms.Condensation
     {
         [DataTestMethod]
         [DynamicData(nameof(TestGraphFactory.GetAdjacencyGraphData), typeof(TestGraphFactory), DynamicDataSourceType.Method)]
-        public void WeaklyConnectedCondensatAll()
-        {
-            foreach (var g in TestGraphFactory.GetAdjacencyGraphs())
-                this.WeaklyConnectedCondensate(g);
-        }
+        public void WeaklyConnectedCondensatAll(AdjacencyGraph<string, Edge<string>> g) => WeaklyConnectedCondensate(g);
 
         
-        public void WeaklyConnectedCondensate<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g)
+        public static void WeaklyConnectedCondensate<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g)
             where TEdge : IEdge<TVertex>
         {
             var algo = new CondensationGraphAlgorithm<TVertex,TEdge, AdjacencyGraph<TVertex,TEdge>>(g);
@@ -29,7 +25,7 @@ namespace QuickGraph.Algorithms.Condensation
             CheckComponentCount(g, algo);
         }
 
-        private void CheckVertexCount<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g,
+        private static void CheckVertexCount<TVertex, TEdge>(IVertexAndEdgeListGraph<TVertex, TEdge> g,
             CondensationGraphAlgorithm<TVertex,TEdge, AdjacencyGraph<TVertex,TEdge>> algo)
             where TEdge : IEdge<TVertex>
         {
@@ -39,7 +35,7 @@ namespace QuickGraph.Algorithms.Condensation
             Assert.AreEqual(g.VertexCount, count, "VertexCount does not match");
         }
 
-        private void CheckEdgeCount<TVertex,TEdge>(IVertexAndEdgeListGraph<TVertex,TEdge> g,
+        private static void CheckEdgeCount<TVertex,TEdge>(IVertexAndEdgeListGraph<TVertex,TEdge> g,
             CondensationGraphAlgorithm<TVertex,TEdge, AdjacencyGraph<TVertex,TEdge>> algo)
             where TEdge : IEdge<TVertex>
         {
@@ -53,7 +49,7 @@ namespace QuickGraph.Algorithms.Condensation
         }
 
 
-        private void CheckComponentCount<TVertex,TEdge>(IVertexAndEdgeListGraph<TVertex,TEdge> g,
+        private static void CheckComponentCount<TVertex,TEdge>(IVertexAndEdgeListGraph<TVertex,TEdge> g,
             CondensationGraphAlgorithm<TVertex,TEdge, AdjacencyGraph<TVertex,TEdge>> algo)
             where TEdge : IEdge<TVertex>
         {

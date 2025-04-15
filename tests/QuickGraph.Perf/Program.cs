@@ -15,7 +15,7 @@ namespace QuickGraph.Perf
             // new TarjanOfflineLeastCommonAncestorAlgorithmTest().TarjanOfflineLeastCommonAncestorAlgorithmAll();
             // new DijkstraShortestPathAlgorithmTest().DijkstraAll();
             // new MinimumSpanningTreeTest().PrimKruskalMinimumSpanningTreeAll();
-            var g = TestGraphFactory.LoadBidirectionalGraph(@"graphml\repro12359.graphml");
+            var g = TestGraphFactory.LoadBidirectionalGraph(@"graphml\slow_Graphs\repro12359.graphml");
             var distances = new Dictionary<Edge<string>, double>(g.EdgeCount);
             foreach (var e in g.Edges)
                 distances[e] = g.OutDegree(e.Source) + 1;
