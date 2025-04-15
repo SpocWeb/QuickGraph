@@ -284,10 +284,10 @@ this
                 Enumerable.All(predecessors.Values, e => e != null));
             Contract.Ensures(
                 !Contract.Result<bool>() ||
-                (Contract.ValueAtReturn<IEnumerable<TEdge>>(out result) != null &&
+                (Contract.ValueAtReturn(out result) != null &&
                  (typeof(TEdge).IsValueType ||
                  Enumerable.All(
-                    Contract.ValueAtReturn<IEnumerable<TEdge>>(out result),
+                    Contract.ValueAtReturn(out result),
                     e => e != null))
                 )
             );
@@ -327,9 +327,9 @@ this
             where TEdge : IEdge<TVertex>
         {
             if (typeof(IUndirectedEdge<TVertex>).IsAssignableFrom(typeof(TEdge)))
-                return new EdgeEqualityComparer<TVertex, TEdge>(SortedVertexEquality<TVertex, TEdge>);
+                return new EdgeEqualityComparer<TVertex, TEdge>(SortedVertexEquality);
             else
-                return new EdgeEqualityComparer<TVertex, TEdge>(UndirectedVertexEquality<TVertex, TEdge>);
+                return new EdgeEqualityComparer<TVertex, TEdge>(UndirectedVertexEquality);
         }
 
         /// <summary>

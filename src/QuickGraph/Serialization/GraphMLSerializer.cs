@@ -12,32 +12,32 @@ namespace QuickGraph.Serialization
     {
         public static void WriteBooleanArray(XmlWriter xmlWriter, IList<bool> value)
         {
-            WriteArray<bool>(xmlWriter, value);
+            WriteArray(xmlWriter, value);
         }
 
         public static void WriteInt32Array(XmlWriter xmlWriter, IList<int> value)
         {
-            WriteArray<int>(xmlWriter, value);
+            WriteArray(xmlWriter, value);
         }
 
         public static void WriteInt64Array(XmlWriter xmlWriter, IList<long> value)
         {
-            WriteArray<long>(xmlWriter, value);
+            WriteArray(xmlWriter, value);
         }
         
         public static void WriteSingleArray(XmlWriter xmlWriter, IList<float> value)
         {
-            WriteArray<float>(xmlWriter, value);
+            WriteArray(xmlWriter, value);
         }
 
         public static void WriteDoubleArray(XmlWriter xmlWriter, IList<double> value)
         {
-            WriteArray<double>(xmlWriter, value);
+            WriteArray(xmlWriter, value);
         }
         
         public static void WriteStringArray(XmlWriter xmlWriter, IList<string> value)
         {
-            WriteArray<string>(xmlWriter, value);
+            WriteArray(xmlWriter, value);
         }
 
         /// <summary>

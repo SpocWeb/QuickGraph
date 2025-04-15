@@ -22,9 +22,9 @@ namespace QuickGraph.Algorithms.ShortestPath
             var dij = new DijkstraShortestPathAlgorithm<int, Edge<int>>(g, e => 1);
             dij.Compute(1);
 
-            Assert.AreEqual<double>(0, dij.Distances[1]);
-            Assert.AreEqual<double>(1, dij.Distances[2]);
-            Assert.AreEqual<double>(2, dij.Distances[3]);
+            Assert.AreEqual(0, dij.Distances[1]);
+            Assert.AreEqual(1, dij.Distances[2]);
+            Assert.AreEqual(2, dij.Distances[3]);
         }
 
         [TestMethod]

@@ -173,7 +173,7 @@ namespace QuickGraph.Algorithms
             where T : IService
         {
             T service;
-            if (!this.TryGetService<T>(out service))
+            if (!this.TryGetService(out service))
                 throw new InvalidOperationException("service not found");
             return service;
         }

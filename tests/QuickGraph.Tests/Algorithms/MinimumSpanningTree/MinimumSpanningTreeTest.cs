@@ -183,7 +183,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
                 distances[e] = g.AdjacentDegree(e.Source) + 1;
 
             var kruskal = new KruskalMinimumSpanningTreeAlgorithm<TVertex, TEdge>(g, e => distances[e]);
-            AssertMinimumSpanningTree<TVertex, TEdge>(g, kruskal);
+            AssertMinimumSpanningTree(g, kruskal);
         }
 
         
@@ -196,7 +196,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
                 distances[e] = edgeWeights(e);
 
             var prim = new PrimMinimumSpanningTreeAlgorithm<TVertex, TEdge>(g, e => distances[e]);
-            AssertMinimumSpanningTree<TVertex, TEdge>(g, prim);
+            AssertMinimumSpanningTree(g, prim);
         }
         
         public static void MyKruskal<TVertex, TEdge>(IUndirectedGraph<TVertex, TEdge> g, Func<TEdge, double> edgeWeights)
@@ -208,7 +208,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
                 distances[e] = edgeWeights(e);
 
             var prim = new KruskalMinimumSpanningTreeAlgorithm<TVertex, TEdge>(g, e => distances[e]);
-            AssertMinimumSpanningTree<TVertex, TEdge>(g, prim);
+            AssertMinimumSpanningTree(g, prim);
         }
 
         [TestMethod]
@@ -240,7 +240,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
                 algorithm.Compute();
 
             Console.WriteLine("tree cost: {0}", edgeRecorder.Edges.Count);
-            AssertSpanningTree<TVertex, TEdge>(g, edgeRecorder.Edges);
+            AssertSpanningTree(g, edgeRecorder.Edges);
         }
 
         private static void AssertSpanningTree<TVertex, TEdge>(

@@ -29,7 +29,7 @@ this
             Contract.Requires(dictionary != null);
             Contract.Requires(Enumerable.All(dictionary.Values, v => v != null));
 
-            return ToVertexAndEdgeListGraph<TVertex, TEdge, TValue>(dictionary, kv => kv.Value);
+            return ToVertexAndEdgeListGraph(dictionary, kv => kv.Value);
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ this
             Contract.Requires(dictionary != null);
             Contract.Requires(Enumerable.All(dictionary.Values, v => v != null));
 
-            return ToDelegateUndirectedGraph<TVertex, TEdge, TValue>(dictionary, kv => kv.Value);
+            return ToDelegateUndirectedGraph(dictionary, kv => kv.Value);
         }
 
         /// <summary>

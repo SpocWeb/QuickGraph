@@ -52,7 +52,7 @@ namespace QuickGraph.Tests.Algorithms
         }
 
         public static int CompareTwoLists<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
-            => CompareTwoLists<T>(list1, list2, null);
+            => CompareTwoLists(list1, list2, null);
 
         public static int CompareTwoLists<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2, Func<T, T, int> minus)// = null)
         {

@@ -13,7 +13,7 @@ namespace QuickGraph.Algorithms
             Contract.Requires(rnd != null);
             Contract.Requires(g.VertexCount > 0);
 
-            return GetVertex<TVertex>(g.Vertices, g.VertexCount, rnd);
+            return GetVertex(g.Vertices, g.VertexCount, rnd);
         }
 
         public static TVertex GetVertex<TVertex>(IEnumerable<TVertex> vertices, int count, Random rnd)

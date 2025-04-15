@@ -117,10 +117,10 @@ this
             Contract.Requires(visitedGraph != null);
             Contract.Ensures(Contract.Result<DirectedGraph>() != null);
 
-            return ToDirectedGraphML<TVertex, TEdge>(
+            return ToDirectedGraphML(
                 visitedGraph,
-                AlgorithmExtensions.GetVertexIdentity<TVertex>(visitedGraph),
-                AlgorithmExtensions.GetEdgeIdentity<TVertex, TEdge>(visitedGraph)
+                AlgorithmExtensions.GetVertexIdentity(visitedGraph),
+                AlgorithmExtensions.GetEdgeIdentity(visitedGraph)
                 );
         }
 
@@ -144,10 +144,10 @@ this
             Contract.Requires(vertexColors != null);
             Contract.Ensures(Contract.Result<DirectedGraph>() != null);
 
-            return ToDirectedGraphML<TVertex, TEdge>(
+            return ToDirectedGraphML(
                 visitedGraph,
-                AlgorithmExtensions.GetVertexIdentity<TVertex>(visitedGraph),
-                AlgorithmExtensions.GetEdgeIdentity<TVertex, TEdge>(visitedGraph),
+                AlgorithmExtensions.GetVertexIdentity(visitedGraph),
+                AlgorithmExtensions.GetEdgeIdentity(visitedGraph),
                 (v, n) =>
                 {
                     var color = vertexColors(v);
@@ -188,7 +188,7 @@ this
             Contract.Requires(edgeIdentities != null);
             Contract.Ensures(Contract.Result<DirectedGraph>() != null);
 
-            return ToDirectedGraphML<TVertex, TEdge>(
+            return ToDirectedGraphML(
                 visitedGraph, 
                 vertexIdentities,
                 edgeIdentities, null, null);

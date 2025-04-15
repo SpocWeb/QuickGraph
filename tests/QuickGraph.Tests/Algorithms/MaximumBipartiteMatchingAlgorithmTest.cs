@@ -146,7 +146,7 @@ namespace QuickGraph.Tests.Algorithms
 
             Assert.IsTrue(computeTime < TimeSpan.FromMinutes(5));
 
-            AssertThatMaxMatchEdgesAreValid<TVertex, TEdge>(vertexSetA, vertexSetB, maxMatch);
+            AssertThatMaxMatchEdgesAreValid(vertexSetA, vertexSetB, maxMatch);
 
             Assert.IsTrue(maxMatch.MatchedEdges.Count == expectedMatchSize);
 

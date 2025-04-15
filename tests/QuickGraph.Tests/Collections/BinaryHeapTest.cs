@@ -225,7 +225,7 @@ namespace QuickGraph.Collections
         public void Constructor()
         {
             var target = new BinaryHeap<int, int>();
-            AssertInvariant<int, int>(target);
+            AssertInvariant(target);
         }
 
         
@@ -233,7 +233,7 @@ namespace QuickGraph.Collections
         {
             var target = new BinaryHeap<TPriority, TValue>(capacity, Comparer<TPriority>.Default.Compare);
             Assert.AreEqual(target.Capacity, capacity);
-            AssertInvariant<TPriority, TValue>(target);
+            AssertInvariant(target);
         }
 
         
@@ -249,7 +249,7 @@ namespace QuickGraph.Collections
                 {
                     var min = target.RemoveMinimum();
                 }
-                AssertInvariant<TPriority, TValue>(target);
+                AssertInvariant(target);
             }
         }
 
@@ -261,7 +261,7 @@ namespace QuickGraph.Collections
             foreach (var kv in kvs)
             {
                 target.Add(kv.Key, kv.Value);
-                AssertInvariant<TPriority, TValue>(target);
+                AssertInvariant(target);
             }
             Assert.IsTrue(count + kvs.Length == target.Count);
         }
@@ -286,7 +286,7 @@ namespace QuickGraph.Collections
             var count = target.Count;
             var removed = target.RemoveAt(removeAtIndex);
             Assert.AreEqual(count - 1, target.Count);
-            AssertInvariant<TPriority, TValue>(target);
+            AssertInvariant(target);
         }
 
         public static void InsertAndEnumerate<TPriority, TValue>(
@@ -354,7 +354,7 @@ namespace QuickGraph.Collections
                 var kvMin = target.Minimum();
                 Assert.AreEqual(minimum, kvMin.Key);
             }
-            AssertInvariant<TPriority, TValue>(target);
+            AssertInvariant(target);
         }
 
         [TestMethod]

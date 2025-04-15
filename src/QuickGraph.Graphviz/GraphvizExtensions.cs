@@ -67,7 +67,7 @@ this
             Contract.Requires(graph != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return ToSvg(ToGraphviz<TVertex, TEdge>(graph));
+            return ToSvg(ToGraphviz(graph));
         }
 
 
@@ -90,7 +90,7 @@ this
             Contract.Requires(initialization != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return ToSvg(ToGraphviz<TVertex, TEdge>(graph, initialization));
+            return ToSvg(ToGraphviz(graph, initialization));
         }
 
 

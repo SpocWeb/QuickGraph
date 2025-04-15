@@ -407,7 +407,7 @@ this
             where TEdge : IEdge<TVertex>
         {
             Contract.Requires(visitedGraph != null);
-            return SinksIterator<TVertex, TEdge>(visitedGraph);
+            return SinksIterator(visitedGraph);
         }
 
         [DebuggerHidden]
@@ -492,7 +492,7 @@ this
             where TEdge : IEdge<TVertex>
         {
             Contract.Requires(visitedGraph != null);
-            return RootsIterator<TVertex, TEdge>(visitedGraph);
+            return RootsIterator(visitedGraph);
         }
 
         [DebuggerHidden]

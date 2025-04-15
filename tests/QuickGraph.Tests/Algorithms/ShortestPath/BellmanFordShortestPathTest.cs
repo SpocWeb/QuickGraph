@@ -17,7 +17,7 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
             testGraph.AddVerticesAndEdge(new Edge<int>(1, 3));
             testGraph.AddVerticesAndEdge(new Edge<int>(3, 4));
             testGraph.AddVerticesAndEdge(new Edge<int>(1, 4));
-            var testPath = testGraph.ShortestPathsBellmanFord<int, Edge<int>>(e => 1.0, 1);
+            var testPath = testGraph.ShortestPathsBellmanFord(e => 1.0, 1);
             foreach(var i in testGraph.Vertices)
             {
                 IEnumerable<Edge<int>> es;

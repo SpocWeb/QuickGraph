@@ -83,8 +83,8 @@ namespace QuickGraph.Algorithms
         {
             int n = graph.VertexCount;
             return n == 1
-                || (n >= 3 && graph.Vertices.All<TVertex>(satisfiesDiracsTheorem))
-                || GetPermutations().Any<List<TVertex>>(existsInGraph);
+                || (n >= 3 && graph.Vertices.All(satisfiesDiracsTheorem))
+                || GetPermutations().Any(existsInGraph);
         }
     }
 }

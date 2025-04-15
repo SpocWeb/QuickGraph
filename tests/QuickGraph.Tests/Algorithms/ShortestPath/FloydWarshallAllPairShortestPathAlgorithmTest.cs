@@ -155,16 +155,16 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
                     if (pathExists)
                     {
                         var fwedges = fwpath.ToArray();
-                        CheckPath<TVertex, TEdge>(source, target, fwedges);
+                        CheckPath(source, target, fwedges);
 
                         var dijedges = dijpath.ToArray();
-                        CheckPath<TVertex, TEdge>(source, target, dijedges);
+                        CheckPath(source, target, dijedges);
 
                         // all distances are usually 1 in this test, so it should at least
                         // be the same number
                         if (dijedges.Length != fwedges.Length)
                         {
-                            DumpPaths<TVertex, TEdge>(source, target, fwedges, dijedges);
+                            DumpPaths(source, target, fwedges, dijedges);
                             Assert.Fail("path do not have the same length");
                         }
 
@@ -173,7 +173,7 @@ namespace QuickGraph.Tests.Algorithms.ShortestPath
                         var dijlength = dijedges.Sum(distances);
                         if (fwlength != dijlength)
                         {
-                            DumpPaths<TVertex, TEdge>(source, target, fwedges, dijedges);
+                            DumpPaths(source, target, fwedges, dijedges);
                             Assert.Fail("path do not have the same length");
                         }
                     }

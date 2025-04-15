@@ -57,7 +57,7 @@ namespace QuickGraph.Algorithms.Condensation
             where TEdge : IEdge<TVertex>
         {
             // check number of vertices = number of storngly connected components
-            int components = g.WeaklyConnectedComponents<TVertex,TEdge>(new Dictionary<TVertex, int>());
+            int components = g.WeaklyConnectedComponents(new Dictionary<TVertex, int>());
             Assert.AreEqual(components, algo.CondensedGraph.VertexCount, "ComponentCount does not match");
         }
     }

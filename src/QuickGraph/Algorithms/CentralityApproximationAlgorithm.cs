@@ -71,7 +71,7 @@ namespace QuickGraph.Algorithms
             int n = this.VisitedGraph.VertexCount;
             for(int i = 0;i<this.MaxIterationCount;++i)
             {
-                TVertex v = RandomGraphFactory.GetVertex<TVertex, TEdge>(this.VisitedGraph, this.Rand);
+                TVertex v = RandomGraphFactory.GetVertex(this.VisitedGraph, this.Rand);
                 this.dijkstra.Compute(v);
 
                 foreach (var u in this.VisitedGraph.Vertices)

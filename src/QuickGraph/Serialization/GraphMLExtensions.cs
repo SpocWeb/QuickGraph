@@ -30,7 +30,7 @@ namespace QuickGraph.Serialization
 
             var settings = new XmlWriterSettings() { Indent = true, IndentChars = "    " };
             var writer = XmlWriter.Create(fileName, settings);
-            SerializeToGraphML<TVertex, TEdge, TGraph>(graph, writer, vertexIdentities, edgeIdentities);
+            SerializeToGraphML(graph, writer, vertexIdentities, edgeIdentities);
             writer.Flush();
             writer.Close();
         }
@@ -84,10 +84,10 @@ this
             Contract.Requires(graph != null);
             Contract.Requires(writer != null);
 
-            var vertexIdentity = AlgorithmExtensions.GetVertexIdentity<TVertex>(graph);
-            var edgeIdentity = AlgorithmExtensions.GetEdgeIdentity<TVertex, TEdge>(graph);
+            var vertexIdentity = AlgorithmExtensions.GetVertexIdentity(graph);
+            var edgeIdentity = AlgorithmExtensions.GetEdgeIdentity(graph);
 
-            SerializeToGraphML<TVertex, TEdge, TGraph>(
+            SerializeToGraphML(
                 graph,
                 writer,
                 vertexIdentity,
@@ -113,7 +113,7 @@ this
             Contract.Requires(fileName.Length > 0);
 
             var reader = new StreamReader(fileName);
-            DeserializeFromGraphML<TVertex, TEdge,TGraph>(graph, reader, vertexFactory, edgeFactory);
+            DeserializeFromGraphML(graph, reader, vertexFactory, edgeFactory);
         }
 
         public static void DeserializeFromGraphML<TVertex, TEdge,TGraph>(
@@ -143,7 +143,7 @@ this
             };
 
             using (var xreader = XmlReader.Create(reader, settings))
-                DeserializeFromGraphML<TVertex, TEdge,TGraph>(graph, xreader, vertexFactory, edgeFactory);
+                DeserializeFromGraphML(graph, xreader, vertexFactory, edgeFactory);
         }
 
         public static void DeserializeFromGraphML<TVertex, TEdge,TGraph>(

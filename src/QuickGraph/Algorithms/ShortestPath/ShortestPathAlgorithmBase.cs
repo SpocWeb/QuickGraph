@@ -73,7 +73,7 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         protected Func<TVertex, double> DistancesIndexGetter()
         {
-            return AlgorithmExtensions.GetIndexer<TVertex, double>(this.distances);
+            return AlgorithmExtensions.GetIndexer(this.distances);
         }
 
         public Func<TEdge, double> Weights

@@ -76,7 +76,7 @@ namespace QuickGraph.Algorithms
             switch (checkComponentsWithEdges())
             {
                 case ComponentWithEdges.OneComponent:
-                    return graph.Vertices.All<TVertex>(satisfiesEulerianCondition);
+                    return graph.Vertices.All(satisfiesEulerianCondition);
                 case ComponentWithEdges.NoComponent:
                     return graph.VertexCount == 1;
                 case ComponentWithEdges.ManyComponents:

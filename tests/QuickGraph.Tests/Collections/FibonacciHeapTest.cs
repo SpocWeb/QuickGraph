@@ -102,7 +102,7 @@ namespace QuickGraph.Tests.Collections
                 {
                     var min = target.Dequeue();
                 }
-                AssertInvariant<TPriority, TValue>(target);
+                AssertInvariant(target);
             }
         }
 

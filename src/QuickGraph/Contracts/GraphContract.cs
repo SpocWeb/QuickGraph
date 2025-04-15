@@ -56,8 +56,8 @@ namespace QuickGraph.Contracts
             Contract.Requires(g != null);
             Contract.Requires(e != null);
 
-            return InVertexSet<TVertex>(g, e.Source)
-                && InVertexSet<TVertex>(g, e.Target);
+            return InVertexSet(g, e.Source)
+                && InVertexSet(g, e.Target);
         }
 
         [Pure]

@@ -33,7 +33,7 @@ namespace QuickGraph.Tests.Algorithms.MaximumFlow
                 {
                     if (source.Equals(sink)) continue;
 
-                    RunMaxFlowAlgorithm<TVertex, TEdge>(g, edgeFactory, source, sink);
+                    RunMaxFlowAlgorithm(g, edgeFactory, source, sink);
                 }
         }
 
@@ -43,7 +43,7 @@ namespace QuickGraph.Tests.Algorithms.MaximumFlow
             reversedEdgeAugmentorAlgorithm.AddReversedEdges();
 
             TryFunc<TVertex, TEdge> flowPredecessors;
-            var flow = AlgorithmExtensions.MaximumFlowEdmondsKarp<TVertex, TEdge>(
+            var flow = AlgorithmExtensions.MaximumFlowEdmondsKarp(
                 g,
                 e => 1,
                 source, sink,
