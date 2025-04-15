@@ -36,7 +36,7 @@ namespace QuickGraph
             this.vertexEdges = new Dictionary<TVertex, TEdge[]>(graph.VertexCount);
             foreach (var v in graph.Vertices)
             {
-                var edges = Enumerable.ToArray(graph.AdjacentEdges(v));
+                var edges = graph.AdjacentEdges(v).ToArray();
                 this.vertexEdges.Add(v, edges);
             }
         }

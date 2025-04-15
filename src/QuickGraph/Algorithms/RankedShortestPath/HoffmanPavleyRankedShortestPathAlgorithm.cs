@@ -118,11 +118,11 @@ namespace QuickGraph.Algorithms.RankedShortestPath
                 int startEdge = path.Count;
                 this.AppendShortestPath(path, successors, deviation.DeviationEdge.Target);
 
-                Contract.Assert(deviation.Weight == Enumerable.Sum(path, e => edgeWeights(e)));
+                Contract.Assert(deviation.Weight == path.Sum(e => edgeWeights(e)));
                 Contract.Assert(path.Count > 0);
 
                 // add to list if loopless
-                if (!EdgeExtensions.HasCycles<TVertex, TEdge>(path))
+                if (!path.HasCycles<TVertex, TEdge>())
                     this.AddComputedShortestPath(path);
 
                 // append new deviation paths
@@ -158,7 +158,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             if (path.Count == 0)
                 return; // unreachable vertices
 
-            if (!EdgeExtensions.HasCycles<TVertex, TEdge>(path))
+            if (!path.HasCycles<TVertex, TEdge>())
                 this.AddComputedShortestPath(path);
 
             // create deviation paths
@@ -211,7 +211,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             Contract.Requires(successors != null);
             Contract.Requires(distances != null);
             Contract.Requires(path != null);
-            Contract.Requires(EdgeExtensions.IsAdjacent<TVertex, TEdge>(path[0], root));
+            Contract.Requires(path[0].IsAdjacent<TVertex, TEdge>(root));
             Contract.Requires(0 <= startEdge && startEdge < path.Length);
 
             TVertex previousVertex = root;
@@ -263,7 +263,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
                 // skip self edges,
                 // skip equal edges,
                 if (deviationEdge.Equals(edge) ||
-                    EdgeExtensions.IsSelfEdge<TVertex, TEdge>(deviationEdge)) continue;
+                    deviationEdge.IsSelfEdge<TVertex, TEdge>()) continue;
 
                 // any edge obviously creating a loop
                 var atarget = deviationEdge.Target;

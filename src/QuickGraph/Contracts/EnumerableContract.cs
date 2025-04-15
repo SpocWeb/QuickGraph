@@ -13,7 +13,7 @@ namespace QuickGraph
             Contract.Requires(elements != null);
 #if DEBUG
 
-            return Enumerable.All(elements, e => e != null);
+            return elements.All(e => e != null);
 #else
             return true;
 #endif

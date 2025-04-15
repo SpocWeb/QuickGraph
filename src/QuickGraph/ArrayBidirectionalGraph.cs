@@ -65,8 +65,8 @@ namespace QuickGraph
             this.edgeCount = visitedGraph.EdgeCount;
             foreach (var vertex in visitedGraph.Vertices)
             {
-                var outEdges = Enumerable.ToArray(visitedGraph.OutEdges(vertex));
-                var inEdges = Enumerable.ToArray(visitedGraph.InEdges(vertex));
+                var outEdges = visitedGraph.OutEdges(vertex).ToArray();
+                var inEdges = visitedGraph.InEdges(vertex).ToArray();
                 this.vertexEdges.Add(vertex, new InOutEdges(outEdges, inEdges));
             }
         }

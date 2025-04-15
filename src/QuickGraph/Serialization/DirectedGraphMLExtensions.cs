@@ -119,8 +119,8 @@ this
 
             return ToDirectedGraphML(
                 visitedGraph,
-                AlgorithmExtensions.GetVertexIdentity(visitedGraph),
-                AlgorithmExtensions.GetEdgeIdentity(visitedGraph)
+                visitedGraph.GetVertexIdentity(),
+                visitedGraph.GetEdgeIdentity()
                 );
         }
 
@@ -146,8 +146,8 @@ this
 
             return ToDirectedGraphML(
                 visitedGraph,
-                AlgorithmExtensions.GetVertexIdentity(visitedGraph),
-                AlgorithmExtensions.GetEdgeIdentity(visitedGraph),
+                visitedGraph.GetVertexIdentity(),
+                visitedGraph.GetEdgeIdentity(),
                 (v, n) =>
                 {
                     var color = vertexColors(v);

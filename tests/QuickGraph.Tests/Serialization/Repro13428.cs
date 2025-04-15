@@ -853,11 +853,9 @@ namespace QuickGraph.Tests.Serialization
             var settings = new XmlWriterSettings() { Indent = true, IndentChars = @"    " };
             using (var writer = XmlWriter.Create(Console.Out, settings))
             {
-                SerializationExtensions.SerializeToXml(
-                    graph,
-                    writer,
+                graph.SerializeToXml(writer,
                     v => v.Id,
-                    AlgorithmExtensions.GetEdgeIdentity(graph),
+                    graph.GetEdgeIdentity(),
                     "graph",
                     "person",
                     "relationship",

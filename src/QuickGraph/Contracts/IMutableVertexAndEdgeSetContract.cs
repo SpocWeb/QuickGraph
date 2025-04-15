@@ -25,7 +25,7 @@ namespace QuickGraph.Contracts
         {
             IMutableVertexAndEdgeSet<TVertex, TEdge> ithis = this;
             Contract.Requires(edges != null);
-            Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(edges, edge => edge != null));
+            Contract.Requires(typeof(TEdge).IsValueType || edges.All(edge => edge != null));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) + Contract.Result<int>());
 
             return default(int);

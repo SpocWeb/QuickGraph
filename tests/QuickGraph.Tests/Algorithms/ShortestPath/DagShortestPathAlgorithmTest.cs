@@ -15,7 +15,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             where TEdge : IEdge<TVertex>
         {
             // is this a dag ?
-            bool isDag = AlgorithmExtensions.IsDirectedAcyclicGraph(g);
+            bool isDag = g.IsDirectedAcyclicGraph();
 
             var relaxer = DistanceRelaxers.ShortestDistance;
             var vertices = new List<TVertex>(g.Vertices);

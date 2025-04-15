@@ -51,8 +51,8 @@ namespace QuickGraph.Tests.Algorithms
             foreach(var pair in pairs)
                 if (lca(pair, out ancestor))
                 {
-                    Assert.IsTrue(EdgeExtensions.IsPredecessor(predecessors.VertexPredecessors, root, pair.Source));
-                    Assert.IsTrue(EdgeExtensions.IsPredecessor(predecessors.VertexPredecessors, root, pair.Target));
+                    Assert.IsTrue(predecessors.VertexPredecessors.IsPredecessor(root, pair.Source));
+                    Assert.IsTrue(predecessors.VertexPredecessors.IsPredecessor(root, pair.Target));
                 }
         }
     }

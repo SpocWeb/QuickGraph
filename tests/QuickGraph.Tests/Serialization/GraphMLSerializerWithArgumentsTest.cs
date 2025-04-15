@@ -615,7 +615,7 @@ namespace QuickGraph.Serialization
             Assert.IsTrue(g.FloatIList.Equals1(sg.FloatIList, 0.001F));
             Assert.IsTrue(g.DoubleIList.Equals1(sg.DoubleIList, 0.0001));
 
-            var sv = Enumerable.First(sg.Vertices);
+            var sv = sg.Vertices.First();
             Assert.AreEqual(sv.StringDefault, "bla");
             Assert.AreEqual(v.String, sv.String);
             Assert.AreEqual(v.Int, sv.Int);
@@ -728,7 +728,7 @@ namespace QuickGraph.Serialization
                 g.AddEdge(e);
                 var sg = VerifySerialization(g);
 
-                var se = Enumerable.First(sg.Edges);
+                var se = sg.Edges.First();
                 Assert.AreEqual(e.ID, se.ID);
                 Assert.AreEqual(e.String, se.String);
                 Assert.AreEqual(e.Int, se.Int);

@@ -29,9 +29,7 @@ namespace QuickGraph.Contracts
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<IEnumerable<TEdge>>() != null);
             Contract.Ensures(
-                Enumerable.All(
-                    Contract.Result<IEnumerable<TEdge>>(),
-                    edge => 
+                Contract.Result<IEnumerable<TEdge>>().All(edge => 
                         edge != null && 
                         ithis.ContainsEdge(edge.Source, edge.Target) && 
                         (edge.Source.Equals(v) || edge.Target.Equals(v))
@@ -94,7 +92,7 @@ namespace QuickGraph.Contracts
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
             Contract.Requires(source != null);
             Contract.Requires(target != null);
-            Contract.Ensures(Contract.Result<bool>() == Enumerable.Any(ithis.AdjacentEdges(source), e => e.Target.Equals(target) || e.Source.Equals(target)));
+            Contract.Ensures(Contract.Result<bool>() == ithis.AdjacentEdges(source).Any(e => e.Target.Equals(target) || e.Source.Equals(target)));
 
             return default(bool);
         }

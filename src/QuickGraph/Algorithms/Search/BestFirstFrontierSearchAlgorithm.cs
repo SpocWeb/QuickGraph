@@ -83,7 +83,7 @@ namespace QuickGraph.Algorithms.Search
                 // compute their cost and delete node n
                 foreach (var edge in g.OutEdges(n))
                 {
-                    if (EdgeExtensions.IsSelfEdge<TVertex, TEdge>(edge)) 
+                    if (edge.IsSelfEdge<TVertex, TEdge>()) 
                         continue; // skip self-edges
 
                     GraphColor edgeColor;

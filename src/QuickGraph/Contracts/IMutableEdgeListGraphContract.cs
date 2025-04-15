@@ -34,14 +34,14 @@ namespace QuickGraph.Contracts
         {
             IMutableEdgeListGraph<TVertex, TEdge> ithis = this;
             Contract.Requires(edges != null);
-            Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(edges, edge => edge != null));
-            Contract.Requires(Enumerable.All(edges, edge =>
+            Contract.Requires(typeof(TEdge).IsValueType || edges.All(edge => edge != null));
+            Contract.Requires(edges.All(edge =>
                 ithis.ContainsVertex(edge.Source) &&
                 ithis.ContainsVertex(edge.Target)
                 ));
-            Contract.Ensures(Enumerable.All(edges, edge => ithis.ContainsEdge(edge)), "all edge from edges belong to the graph");
+            Contract.Ensures(edges.All(edge => ithis.ContainsEdge(edge)), "all edge from edges belong to the graph");
             Contract.Ensures(
-                Contract.Result<int>() == Contract.OldValue(Enumerable.Count(edges, edge => !ithis.ContainsEdge(edge))));
+                Contract.Result<int>() == Contract.OldValue(edges.Count(edge => !ithis.ContainsEdge(edge))));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) + Contract.Result<int>());
 
             return default(int);
@@ -68,8 +68,8 @@ namespace QuickGraph.Contracts
         {
             IMutableEdgeListGraph<TVertex, TEdge> ithis = this;
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<int>() == Contract.OldValue(Enumerable.Count(ithis.Edges, e => predicate(e))));
-            Contract.Ensures(Enumerable.All(ithis.Edges, e => !predicate(e)));
+            Contract.Ensures(Contract.Result<int>() == Contract.OldValue(ithis.Edges.Count(e => predicate(e))));
+            Contract.Ensures(ithis.Edges.All(e => !predicate(e)));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) - Contract.Result<int>());
 
             return default(int);

@@ -201,9 +201,9 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             Contract.Ensures(this.ComponentCount >= 0);
             Contract.Ensures(this.VisitedGraph.VertexCount == 0 || this.ComponentCount > 0);
-            Contract.Ensures(Enumerable.All(this.VisitedGraph.Vertices, v => this.Components.ContainsKey(v)));
+            Contract.Ensures(this.VisitedGraph.Vertices.All(v => this.Components.ContainsKey(v)));
             Contract.Ensures(this.VisitedGraph.VertexCount == this.Components.Count);
-            Contract.Ensures(Enumerable.All(this.Components.Values, c => c <= this.ComponentCount));
+            Contract.Ensures(this.Components.Values.All(c => c <= this.ComponentCount));
 
             diffBySteps = new List<int>();
             vertices = new List<TVertex>();

@@ -51,7 +51,7 @@ namespace QuickGraph
 
         public int AdjacentDegree(TVertex v)
         {
-            return Enumerable.Count(this.AdjacentEdges(v));
+            return this.AdjacentEdges(v).Count();
         }
 
         public IEnumerable<TEdge> AdjacentEdges(TVertex v)
@@ -69,7 +69,7 @@ namespace QuickGraph
 
         public TEdge AdjacentEdge(TVertex v, int index)
         {
-            return Enumerable.ElementAt(this.AdjacentEdges(v), index);
+            return this.AdjacentEdges(v).ElementAt(index);
         }
 
         public bool IsDirected

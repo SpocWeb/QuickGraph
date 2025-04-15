@@ -165,7 +165,7 @@ namespace QuickGraph.Algorithms
             if (g.EdgeCount < g.VertexCount)
                 return 0;
 
-            int odd = AlgorithmExtensions.OddVertices(g).Count;
+            int odd = g.OddVertices().Count;
             if (odd == 0)
                 return 1;
             else if (odd % 2 != 0)
@@ -227,7 +227,7 @@ namespace QuickGraph.Algorithms
 
             TVertex rootVertex;
             if (!this.TryGetRootVertex(out rootVertex))
-                rootVertex = Enumerable.First(this.VisitedGraph.Vertices);
+                rootVertex = this.VisitedGraph.Vertices.First();
 
             this.currentVertex = rootVertex;
             // start search
@@ -252,7 +252,7 @@ namespace QuickGraph.Algorithms
         public List<TEdge> AddTemporaryEdges(EdgeFactory<TVertex,TEdge> edgeFactory)
         {
             // first gather odd edges.
-            var oddVertices = AlgorithmExtensions.OddVertices(this.VisitedGraph);
+            var oddVertices = this.VisitedGraph.OddVertices();
 
             // check that there are an even number of them
             if (oddVertices.Count % 2 != 0)

@@ -27,7 +27,7 @@ this
             where TValue : IEnumerable<TEdge>
         {
             Contract.Requires(dictionary != null);
-            Contract.Requires(Enumerable.All(dictionary.Values, v => v != null));
+            Contract.Requires(dictionary.Values.All(v => v != null));
 
             return ToVertexAndEdgeListGraph(dictionary, kv => kv.Value);
         }
@@ -164,7 +164,7 @@ this
         {
             Contract.Requires(vertices != null);
             Contract.Requires(tryGetOutEdges != null);
-            Contract.Requires(Enumerable.All(vertices, v =>
+            Contract.Requires(vertices.All(v =>
             {
                 IEnumerable<TEdge> edges;
                 return tryGetOutEdges(v, out edges);
@@ -212,7 +212,7 @@ this
             where TValue : IEnumerable<TEdge>
         {
             Contract.Requires(dictionary != null);
-            Contract.Requires(Enumerable.All(dictionary.Values, v => v != null));
+            Contract.Requires(dictionary.Values.All(v => v != null));
 
             return ToDelegateUndirectedGraph(dictionary, kv => kv.Value);
         }
@@ -272,7 +272,7 @@ this
         {
             Contract.Requires(vertices != null);
             Contract.Requires(tryGetAdjacentEdges != null);
-            Contract.Requires(Enumerable.All(vertices, v =>
+            Contract.Requires(vertices.All(v =>
             {
                 IEnumerable<TEdge> edges;
                 return tryGetAdjacentEdges(v, out edges);
@@ -436,7 +436,7 @@ this
             where TEdge : IEdge<TVertex>
         {
             Contract.Requires(edges != null);
-            Contract.Requires(Enumerable.All(edges, e => e != null));
+            Contract.Requires(edges.All(e => e != null));
 
             return ToUndirectedGraph<TVertex, TEdge>(edges, true);
         }
@@ -458,7 +458,7 @@ this
             where TEdge : IEdge<TVertex>
         {
             Contract.Requires(edges != null);
-            Contract.Requires(Enumerable.All(edges, e => e != null));
+            Contract.Requires(edges.All(e => e != null));
 
             var g = new UndirectedGraph<TVertex, TEdge>(allowParralelEdges);
             g.AddVerticesAndEdgeRange(edges);

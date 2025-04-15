@@ -94,8 +94,7 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         protected override void InternalCompute()
         {
             Contract.Ensures(0 <= this.ComponentCount && this.ComponentCount <= this.VisitedGraph.VertexCount);
-            Contract.Ensures(Enumerable.All(this.VisitedGraph.Vertices,
-                v => 0 <= this.Components[v] && this.Components[v] < this.ComponentCount));
+            Contract.Ensures(this.VisitedGraph.Vertices.All(v => 0 <= this.Components[v] && this.Components[v] < this.ComponentCount));
 
             // shortcut for empty graph
             if (this.VisitedGraph.IsVerticesEmpty)

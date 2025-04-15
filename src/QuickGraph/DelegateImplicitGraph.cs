@@ -41,7 +41,7 @@ namespace QuickGraph
 
         public int OutDegree(TVertex v)
         {
-            return Enumerable.Count(this.OutEdges(v));
+            return this.OutEdges(v).Count();
         }
 
         public IEnumerable<TEdge> OutEdges(TVertex v)
@@ -59,7 +59,7 @@ namespace QuickGraph
 
         public TEdge OutEdge(TVertex v, int index)
         {
-            return Enumerable.ElementAt(this.OutEdges(v), index);
+            return this.OutEdges(v).ElementAt(index);
         }
 
         public bool IsDirected

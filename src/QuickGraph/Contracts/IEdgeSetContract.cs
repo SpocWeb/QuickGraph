@@ -25,7 +25,7 @@ namespace QuickGraph.Contracts
             get
             {
                 IEdgeSet<TVertex, TEdge> ithis = this;
-                Contract.Ensures(Contract.Result<int>() == Enumerable.Count(ithis.Edges));
+                Contract.Ensures(Contract.Result<int>() == ithis.Edges.Count());
 
                 return default(int);
             }
@@ -36,7 +36,7 @@ namespace QuickGraph.Contracts
             get 
             {
                 Contract.Ensures(Contract.Result<IEnumerable<TEdge>>() != null);
-                Contract.Ensures(Enumerable.All<TEdge>(Contract.Result<IEnumerable<TEdge>>(), e => e != null));
+                Contract.Ensures(Contract.Result<IEnumerable<TEdge>>().All<TEdge>(e => e != null));
 
                 return default(IEnumerable<TEdge>);            
             }

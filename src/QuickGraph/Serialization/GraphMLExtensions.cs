@@ -84,8 +84,8 @@ this
             Contract.Requires(graph != null);
             Contract.Requires(writer != null);
 
-            var vertexIdentity = AlgorithmExtensions.GetVertexIdentity(graph);
-            var edgeIdentity = AlgorithmExtensions.GetEdgeIdentity(graph);
+            var vertexIdentity = graph.GetVertexIdentity();
+            var edgeIdentity = graph.GetEdgeIdentity();
 
             SerializeToGraphML(
                 graph,

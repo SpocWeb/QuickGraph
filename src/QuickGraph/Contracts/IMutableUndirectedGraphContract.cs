@@ -19,8 +19,8 @@ namespace QuickGraph.Contracts
             IMutableUndirectedGraph<TVertex, TEdge> ithis = this;
             Contract.Requires(vertex != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<int>() == Contract.OldValue(Enumerable.Count(ithis.AdjacentEdges(vertex), e => predicate(e))));
-            Contract.Ensures(Enumerable.All(ithis.AdjacentEdges(vertex), v => !predicate(v)));
+            Contract.Ensures(Contract.Result<int>() == Contract.OldValue(ithis.AdjacentEdges(vertex).Count(e => predicate(e))));
+            Contract.Ensures(ithis.AdjacentEdges(vertex).All(v => !predicate(v)));
 
             return default(int);
         }

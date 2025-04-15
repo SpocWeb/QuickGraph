@@ -153,7 +153,7 @@ namespace QuickGraph.Algorithms.RandomWalks
         private bool TryGetSuccessor(Dictionary<TEdge, int> visited, TVertex u, out TEdge successor)
         {
             var outEdges = this.VisitedGraph.OutEdges(u);
-            var edges = Enumerable.Where(outEdges, e => !visited.ContainsKey(e));
+            var edges = outEdges.Where(e => !visited.ContainsKey(e));
             return this.EdgeChain.TryGetSuccessor(edges, u, out successor);
         }
 

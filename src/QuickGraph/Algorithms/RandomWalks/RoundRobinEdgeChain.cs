@@ -37,7 +37,7 @@ namespace QuickGraph.Algorithms.RandomWalks
 
         public bool TryGetSuccessor(IEnumerable<TEdge> edges, TVertex u, out TEdge successor)
         {
-            var edgeCount = Enumerable.Count(edges);
+            var edgeCount = edges.Count();
 
             if (edgeCount > 0)
             {
@@ -47,7 +47,7 @@ namespace QuickGraph.Algorithms.RandomWalks
                     index = 0;
                     outEdgeIndices.Add(u, index);
                 }
-                var e = Enumerable.ElementAt(edges, index);
+                var e = edges.ElementAt(index);
                 this.outEdgeIndices[u] = (++index) % edgeCount;
                 successor = e;
                 return true;

@@ -306,7 +306,7 @@ namespace QuickGraph
             }
 
             sourceEdges.Add(edge);
-            if (!EdgeExtensions.IsSelfEdge<TVertex, TEdge>(edge))
+            if (!edge.IsSelfEdge<TVertex, TEdge>())
                 targetEdges.Add(edge);
             this.edgeCount++;
             this.OnEdgeAdded(edge);
@@ -333,7 +333,7 @@ namespace QuickGraph
             }
 
             sourceEdges.Add(edge);
-            if (!EdgeExtensions.IsSelfEdge<TVertex, TEdge>(edge))
+            if (!edge.IsSelfEdge<TVertex, TEdge>())
             {
                 var targetEdges = this.adjacentEdges[edge.Target];
                 targetEdges.Add(edge);
@@ -366,7 +366,7 @@ namespace QuickGraph
             bool removed = this.adjacentEdges[edge.Source].Remove(edge);
             if (removed)
             {
-                if (!EdgeExtensions.IsSelfEdge<TVertex, TEdge>(edge))
+                if (!edge.IsSelfEdge<TVertex, TEdge>())
                     this.adjacentEdges[edge.Target].Remove(edge);
                 this.edgeCount--;
                 Contract.Assert(this.edgeCount >= 0);

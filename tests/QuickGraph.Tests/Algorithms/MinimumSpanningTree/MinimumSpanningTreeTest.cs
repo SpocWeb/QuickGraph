@@ -226,7 +226,7 @@ namespace QuickGraph.Tests.Algorithms.MinimumSpanningTree
             foreach (var e in g.Edges)
                 distances[e] = g.AdjacentDegree(e.Source) + 1;
 
-            var edges = AlgorithmExtensions.MinimumSpanningTreePrim(g, e => distances[e]);
+            var edges = g.MinimumSpanningTreePrim(e => distances[e]);
             AssertSpanningTree(g, edges);
         }
 

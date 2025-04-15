@@ -27,8 +27,8 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
                 HoffmanPavleyRankedShortestPath(
                     g, 
                     weights,
-                    Enumerable.First(g.Vertices),
-                    Enumerable.Last(g.Vertices),
+                    g.Vertices.First(),
+                    g.Vertices.Last(),
                     g.VertexCount
                     );                    
             }
@@ -120,12 +120,12 @@ namespace QuickGraph.Tests.Algorithms.RankedShortestPath
             double lastWeight = double.MinValue;
             foreach (var path in target.ComputedShortestPaths)
             {
-                Console.WriteLine("path: {0}", Enumerable.Sum(path, e => edgeWeights[e]));
-                double weight = Enumerable.Sum(path, e => edgeWeights[e]);
+                Console.WriteLine("path: {0}", path.Sum(e => edgeWeights[e]));
+                double weight = path.Sum(e => edgeWeights[e]);
                 Assert.IsTrue(lastWeight <= weight, "{0} <= {1}", lastWeight, weight);
-                Assert.AreEqual(rootVertex, Enumerable.First(path).Source);
-                Assert.AreEqual(goalVertex, Enumerable.Last(path).Target);
-                Assert.IsTrue(EdgeExtensions.IsPathWithoutCycles<TVertex, TEdge>(path));
+                Assert.AreEqual(rootVertex, path.First().Source);
+                Assert.AreEqual(goalVertex, path.Last().Target);
+                Assert.IsTrue(path.IsPathWithoutCycles<TVertex, TEdge>());
 
                 lastWeight = weight;
             }

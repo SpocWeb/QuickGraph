@@ -98,7 +98,7 @@ this
             where TEdge : IEdge<TVertex>
         {
             Contract.Requires(path != null);
-            Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(path, e => e != null));
+            Contract.Requires(typeof(TEdge).IsValueType || path.All(e => e != null));
 
             bool first = true;
             TVertex lastTarget = default(TVertex);
@@ -129,7 +129,7 @@ this
             where TEdge : IEdge<TVertex>
         {
             Contract.Requires(path != null);
-            Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(path, e => e != null));
+            Contract.Requires(typeof(TEdge).IsValueType || path.All(e => e != null));
 
             var vertices = new Dictionary<TVertex, int>();
             bool first = true;
@@ -163,7 +163,7 @@ this
             where TEdge : IEdge<TVertex>
         {
             Contract.Requires(path != null);
-            Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(path, e => e != null));
+            Contract.Requires(typeof(TEdge).IsValueType || path.All(e => e != null));
             Contract.Requires(IsPath<TVertex, TEdge>(path));
 
             var vertices = new Dictionary<TVertex, int>();
@@ -239,7 +239,7 @@ this
             Contract.Requires(vertex != null);
             Contract.Requires(
                 typeof(TEdge).IsValueType || 
-                Enumerable.All(predecessors.Values, e => e != null));
+                predecessors.Values.All(e => e != null));
 
             var current = vertex;
             if (root.Equals(current)) 
@@ -281,14 +281,12 @@ this
             Contract.Requires(v != null);
             Contract.Requires(
                 typeof(TEdge).IsValueType ||
-                Enumerable.All(predecessors.Values, e => e != null));
+                predecessors.Values.All(e => e != null));
             Contract.Ensures(
                 !Contract.Result<bool>() ||
                 (Contract.ValueAtReturn(out result) != null &&
                  (typeof(TEdge).IsValueType ||
-                 Enumerable.All(
-                    Contract.ValueAtReturn(out result),
-                    e => e != null))
+                 Contract.ValueAtReturn(out result).All(e => e != null))
                 )
             );
 
@@ -394,7 +392,7 @@ TEdge edge,
             where TEdge : IEdge<TVertex>
         {
             Contract.Requires(edges != null);
-            Contract.Requires(Enumerable.All(edges, e => e != null));
+            Contract.Requires(edges.All(e => e != null));
             Contract.Ensures(Contract.Result<IEnumerable<SReversedEdge<TVertex, TEdge>>>() != null);
 
             foreach (var edge in edges)

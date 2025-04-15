@@ -27,12 +27,12 @@ namespace QuickGraph.Algorithms.RandomWalks
 
         public override bool TryGetSuccessor(IEnumerable<TEdge> edges, TVertex u, out TEdge successor)
         {
-            var edgeCount = Enumerable.Count(edges);
+            var edgeCount = edges.Count();
 
             if (edgeCount > 0)
             {
                 int index = this.Rand.Next(0, edgeCount);
-                successor = Enumerable.ElementAt(edges, index);
+                successor = edges.ElementAt(index);
                 return true;
             }
 

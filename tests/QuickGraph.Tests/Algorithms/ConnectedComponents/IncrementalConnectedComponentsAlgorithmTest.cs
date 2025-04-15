@@ -11,7 +11,7 @@ namespace QuickGraph.Tests.Algorithms.ConnectedComponents
         {
             var g = new AdjacencyGraph<int, SEquatableEdge<int>>();
             g.AddVertexRange(new int[] { 0, 1, 2, 3 });
-            var components = AlgorithmExtensions.IncrementalConnectedComponents(g);
+            var components = g.IncrementalConnectedComponents();
 
             var current = components();
             Assert.AreEqual(4, current.Key);

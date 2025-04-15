@@ -30,9 +30,7 @@ namespace QuickGraph.Samples
             graph[4] = new int[] { };
 
             // interoping with quickgraph
-            var g = GraphExtensions.ToDelegateVertexAndEdgeListGraph(
-                Enumerable.Range(0, graph.Length),
-                v => Array.ConvertAll(graph[v], w => new SEquatableEdge<int>(v, w))
+            var g = Enumerable.Range(0, graph.Length).ToDelegateVertexAndEdgeListGraph(v => Array.ConvertAll(graph[v], w => new SEquatableEdge<int>(v, w))
                 );
 
             // it's ready to use!

@@ -31,7 +31,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
         {
             get
             {
-                Contract.Ensures(Contract.Result<int>() == Enumerable.Count(this.ComputedShortestPaths));
+                Contract.Ensures(Contract.Result<int>() == this.ComputedShortestPaths.Count());
 
                 return this.computedShortestPaths == null ? 0 : this.computedShortestPaths.Count;
             }
@@ -52,7 +52,7 @@ namespace QuickGraph.Algorithms.RankedShortestPath
         protected void AddComputedShortestPath(List<TEdge> path)
         {
             Contract.Requires(path != null);
-            Contract.Requires(Enumerable.All(path, e => e != null));
+            Contract.Requires(path.All(e => e != null));
 
             var pathArray = path.ToArray();
             this.computedShortestPaths.Add(pathArray);

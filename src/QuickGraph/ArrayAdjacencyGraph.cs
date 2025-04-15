@@ -47,7 +47,7 @@ namespace QuickGraph
         {
             Contract.Requires(vertexOutEdges != null);
             Contract.Requires(edgeCount >= 0);
-            Contract.Requires(edgeCount == Enumerable.Sum(vertexOutEdges, kv => (kv.Value == null) ? 0 : kv.Value.Length));
+            Contract.Requires(edgeCount == vertexOutEdges.Sum(kv => (kv.Value == null) ? 0 : kv.Value.Length));
 
             this.vertexOutEdges = vertexOutEdges;
             this.edgeCount = edgeCount;

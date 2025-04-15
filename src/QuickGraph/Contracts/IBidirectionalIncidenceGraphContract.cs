@@ -28,7 +28,7 @@ namespace QuickGraph.Contracts
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
-            Contract.Ensures(Contract.Result<int>() == Enumerable.Count(ithis.InEdges(v)));
+            Contract.Ensures(Contract.Result<int>() == ithis.InEdges(v).Count());
 
             return default(int);
         }
@@ -40,9 +40,7 @@ namespace QuickGraph.Contracts
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<IEnumerable<TEdge>>() != null);
-            Contract.Ensures(Enumerable.All(
-                Contract.Result<IEnumerable<TEdge>>(), 
-                edge => edge != null && edge.Target.Equals(v)
+            Contract.Ensures(Contract.Result<IEnumerable<TEdge>>().All(edge => edge != null && edge.Target.Equals(v)
                 )
             );
 
@@ -58,9 +56,7 @@ namespace QuickGraph.Contracts
             Contract.Ensures(Contract.Result<bool>() == ithis.ContainsVertex(v));
             Contract.Ensures(!Contract.Result<bool>() || Contract.ValueAtReturn(out edges) != null);
             Contract.Ensures(!Contract.Result<bool>() || 
-                Enumerable.All(
-                Contract.ValueAtReturn<IEnumerable<TEdge>>(out edges),
-                edge => edge != null && edge.Target.Equals(v)
+                Contract.ValueAtReturn<IEnumerable<TEdge>>(out edges).All(edge => edge != null && edge.Target.Equals(v)
                 )
             );
 
@@ -74,7 +70,7 @@ namespace QuickGraph.Contracts
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
-            Contract.Ensures(Contract.Result<TEdge>().Equals(Enumerable.ElementAt(ithis.InEdges(v), index)));
+            Contract.Ensures(Contract.Result<TEdge>().Equals(ithis.InEdges(v).ElementAt(index)));
 
             return default(TEdge);
         }

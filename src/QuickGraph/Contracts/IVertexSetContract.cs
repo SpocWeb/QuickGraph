@@ -25,7 +25,7 @@ namespace QuickGraph.Contracts
             get
             {
                 IVertexSet<TVertex> ithis = this;
-                Contract.Ensures(Contract.Result<int>() == Enumerable.Count(ithis.Vertices));
+                Contract.Ensures(Contract.Result<int>() == ithis.Vertices.Count());
 
                 return default(int);
             }

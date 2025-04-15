@@ -29,7 +29,7 @@ namespace QuickGraph
             : base(tryGetAdjacentEdges, allowParallelEdges)
         {
             Contract.Requires(vertices != null);
-            Contract.Requires(Enumerable.All(vertices, v =>
+            Contract.Requires(vertices.All(v =>
             {
                 IEnumerable<TEdge> edges;
                 return tryGetAdjacentEdges(v, out edges);
@@ -56,7 +56,7 @@ namespace QuickGraph
             get
             {
                 if (this._vertexCount < 0)
-                    this._vertexCount = Enumerable.Count(this.vertices);
+                    this._vertexCount = this.vertices.Count();
                 return this._vertexCount;
             }
         }
@@ -85,7 +85,7 @@ namespace QuickGraph
             get
             {
                 if (this._edgeCount < 0)
-                    this._edgeCount = Enumerable.Count(this.Edges);
+                    this._edgeCount = this.Edges.Count();
                 return this._edgeCount;
             }
         }

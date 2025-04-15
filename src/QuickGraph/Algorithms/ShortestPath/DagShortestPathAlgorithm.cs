@@ -129,7 +129,7 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         public void ComputeNoInit(TVertex s)
         {
-            var orderedVertices = AlgorithmExtensions.TopologicalSort(this.VisitedGraph);
+            var orderedVertices = this.VisitedGraph.TopologicalSort();
 
             OnDiscoverVertex(s);
             foreach (var v in orderedVertices)

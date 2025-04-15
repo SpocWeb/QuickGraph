@@ -40,9 +40,7 @@ namespace QuickGraph.Tests.Algorithms.MaximumFlow
             reversedEdgeAugmentorAlgorithm.AddReversedEdges();
 
             TryFunc<TVertex, TEdge> flowPredecessors;
-            var flow = AlgorithmExtensions.MaximumFlowEdmondsKarp(
-                g,
-                _ => 1,
+            var flow = g.MaximumFlowEdmondsKarp(_ => 1,
                 source, sink,
                 out flowPredecessors,
                 edgeFactory,

@@ -20,8 +20,8 @@ namespace QuickGraph.Contracts
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<int>() == Contract.OldValue(Enumerable.Count(ithis.OutEdges(v), ve => predicate(ve))));
-            Contract.Ensures(Enumerable.All(ithis.OutEdges(v), ve => !predicate(ve)));
+            Contract.Ensures(Contract.Result<int>() == Contract.OldValue(ithis.OutEdges(v).Count(ve => predicate(ve))));
+            Contract.Ensures(ithis.OutEdges(v).All(ve => !predicate(ve)));
 
             return default(int);
         }

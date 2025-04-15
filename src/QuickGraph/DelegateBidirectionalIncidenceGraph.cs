@@ -46,7 +46,7 @@ namespace QuickGraph
 
         public int InDegree(TVertex v)
         {
-            return Enumerable.Count(this.InEdges(v));
+            return this.InEdges(v).Count();
         }
 
         public IEnumerable<TEdge> InEdges(TVertex v)
@@ -64,7 +64,7 @@ namespace QuickGraph
 
         public TEdge InEdge(TVertex v, int index)
         {
-            return Enumerable.ElementAt(this.InEdges(v), index);
+            return this.InEdges(v).ElementAt(index);
         }
 
         public int Degree(TVertex v)

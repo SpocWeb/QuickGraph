@@ -50,8 +50,8 @@ namespace QuickGraph.Tests.Algorithms.Search
                 g,
                 edgeWeights,
                 distanceRelaxer);
-            var root = Enumerable.First(g.Vertices);
-            var target = Enumerable.Last(g.Vertices);
+            var root = g.Vertices.First();
+            var target = g.Vertices.Last();
             var recorder = new VertexPredecessorRecorderObserver<TVertex, TEdge>();
 
             using (recorder.Attach(search))

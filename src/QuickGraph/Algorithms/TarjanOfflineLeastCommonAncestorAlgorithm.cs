@@ -57,7 +57,7 @@ namespace QuickGraph.Algorithms
             Contract.Requires(root != null);
             Contract.Requires(pairs != null);
 
-            this.pairs = Enumerable.ToArray(pairs);
+            this.pairs = pairs.ToArray();
             this.Compute(root);
         }
 
@@ -82,7 +82,7 @@ namespace QuickGraph.Algorithms
             if (this.pairs == null)
                 throw new InvalidProgramException("pairs not set");
 
-            var gpair = GraphExtensions.ToAdjacencyGraph(this.pairs);
+            var gpair = this.pairs.ToAdjacencyGraph();
             var disjointSet = new ForestDisjointSet<TVertex>();
             var vancestors = new Dictionary<TVertex, TVertex>();
             var dfs = new DepthFirstSearchAlgorithm<TVertex, TEdge>(this, this.VisitedGraph, new Dictionary<TVertex, GraphColor>(this.VisitedGraph.VertexCount));
@@ -98,7 +98,7 @@ namespace QuickGraph.Algorithms
                 {
                     foreach (var e in gpair.OutEdges(v))
                         if (dfs.VertexColors[e.Target] == GraphColor.Black)
-                            this.ancestors[EdgeExtensions.ToVertexPair<TVertex, SEquatableEdge<TVertex>>(e)] = vancestors[disjointSet.FindSet(e.Target)];
+                            this.ancestors[e.ToVertexPair<TVertex, SEquatableEdge<TVertex>>()] = vancestors[disjointSet.FindSet(e.Target)];
                 };
 
             // go!

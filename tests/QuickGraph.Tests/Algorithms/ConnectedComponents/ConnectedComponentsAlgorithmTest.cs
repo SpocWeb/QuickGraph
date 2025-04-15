@@ -16,7 +16,7 @@ namespace QuickGraph.Algorithms.ConnectedComponents
                 while (g.EdgeCount > 0)
                 {
                     Compute(g);
-                    g.RemoveEdge(Enumerable.First(g.Edges));
+                    g.RemoveEdge(g.Edges.First());
                 }
             }
         }

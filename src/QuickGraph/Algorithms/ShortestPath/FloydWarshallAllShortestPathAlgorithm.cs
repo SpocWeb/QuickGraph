@@ -207,7 +207,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             // walk each edge and add entry in cost dictionary
             foreach (var edge in edges)
             {
-                var ij = EdgeExtensions.ToVertexPair<TVertex, TEdge>(edge);
+                var ij = edge.ToVertexPair<TVertex, TEdge>();
                 var cost = this.weights(edge);
                 VertexData value;
                 if (!data.TryGetValue(ij, out value))
